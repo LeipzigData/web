@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:ld="http://leipzig-data.de/Data/Model/"
+   xmlns:ldg="http://leipzig-data.de/Data/Group/"
+   xmlns:ldp="http://leipzig-data.de/Data/Person/"
+   xmlns:org="http://www.w3.org/ns/org#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/BOK">
+    <foaf:homepage rdf:resource="http://lsgm.de/tiki-index.php?page=BOK"/>
+    <foaf:name>Bezirkskomitee Leipzig zur Förderung mathematisch-naturwissenschaftlich begabter und interessierter Schülerinnen und Schüler</foaf:name>
+  </foaf:Group>
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/ChemKids">
+    <foaf:homepage rdf:resource="http://www.chemkids.de"/>
+    <foaf:name>Chemkids</foaf:name>
+  </foaf:Group>
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/Inspirata">
+    <foaf:homepage rdf:resource="http://inspirata.de"/>
+    <foaf:name>Inspirata</foaf:name>
+  </foaf:Group>
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/LSGM">
+    <foaf:homepage rdf:resource="http://lsgm.de"/>
+    <foaf:name>LSGM - Leipziger Schülergesellschaft für Mathematik</foaf:name>
+  </foaf:Group>
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/MINTLeipzig">
+    <foaf:homepage rdf:resource="http://mint-leipzig.de"/>
+    <foaf:name>MINT-Netzwerk Leipzig</foaf:name>
+  </foaf:Group>
+  <foaf:Group rdf:about="http://leipzig-data.de/Data/Group/SLK">
+    <foaf:homepage rdf:resource="http://lsgm.de/tiki-index.php?page=SLK"/>
+    <foaf:name>Sächsisches Landeskomitee zur Förderung mathematisch-naturwissenschaftlich interessierter Schüler</foaf:name>
+  </foaf:Group>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Bahrmann_Jeannette">
+    <org:hasFunction>Beauftragte für Chancengleichheit</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/AFA-Leipzig"/>
+    <foaf:mbox>Jeannette.Bahrmann@arbeitsagentur.de</foaf:mbox>
+    <foaf:name>Jeannette Bahrmann</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Baumann_Thomas">
+    <org:hasFunction>Beauftragter des Referats f. Beschäftigungsförderung</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/StadtLeipzig"/>
+    <foaf:mbox>thomas.baumann@leipzig.de</foaf:mbox>
+    <foaf:name>Thomas Baumann</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Biedermann_Alexander">
+    <org:hasFunction>Geschäftsführer des ZLS</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/ZLS"/>
+    <foaf:mbox>alexander.biedermann@uni-leipzig.de</foaf:mbox>
+    <foaf:name>Alexander Biedermann</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Dorsch_Andre">
+    <rdfs:comment>Aktueller Status unbekannt.</rdfs:comment>
+    <org:hasFunction>Doktorand Bereich Chemie, Koordination Chemkids</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/ChemKids"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/ChemFak"/>
+    <foaf:name>André Dorsch</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Fellgiebel_Antje">
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/VDE.LeipzigHalle"/>
+    <foaf:mbox>a.fellgiebel@vdi-leipzig.de</foaf:mbox>
+    <foaf:name>Antje Fellgiebel</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Gier_Nicola">
+    <org:hasFunction>Projekt "MINT und mehr"</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/ciT"/>
+    <foaf:mbox>NGier@cit-leipzig.de</foaf:mbox>
+    <foaf:name>Nicola Gier</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Glaser_Siegbert">
+    <rdfs:comment>Lehrer am Wiprecht-Gynmasium Groitzsch</rdfs:comment>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/BOK"/>
+    <foaf:mbox>schulleitung@wiprecht-gymnasium.de</foaf:mbox>
+    <foaf:name>Siegbert Glaser</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Graebe_HansGert">
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/BOK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/Inspirata"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/LSGM"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/SLK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/FMI"/>
+    <foaf:mbox>graebe@informatik.uni-leipzig.de</foaf:mbox>
+    <foaf:name>Hans-Gert Gräbe</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Gregor_Jana">
+    <org:hasFunction>Pressebeauftragte am MPI MIS, im Vorstand der Inspirata</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/Inspirata"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/MPI-MIS"/>
+    <foaf:mbox>jgregor@mis.mpg.de</foaf:mbox>
+    <foaf:name>Jana Gregor</foaf:name>
+    <foaf:phone>0341-9959650</foaf:phone>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Hauffe_Stefanie">
+    <org:hasFunction>Geschäftsführung "Hands on Technology"</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Ort/HandsOnTechnology"/>
+    <foaf:mbox>sh@hands-on-technology.org</foaf:mbox>
+    <foaf:name>Stefanie Hauffe</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Heumann_Beate">
+    <org:hasFunction>Referentin</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/StadtLeipzig"/>
+    <foaf:mbox>Beate.Heumann@leipzig.de</foaf:mbox>
+    <foaf:name>Beate Heumann</foaf:name>
+    <foaf:title>Dr. </foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Hunecke_Horst">
+    <org:hasFunction>Lehrer, inzwischen in Rente</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/BIP-Schule"/>
+    <foaf:mbox>dr.horst.hunecke@online.de</foaf:mbox>
+    <foaf:name>Horst Hunecke</foaf:name>
+    <foaf:title>Dr.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Jost_Steffen">
+    <org:hasFunction>Schulleiter am WOG</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/Ostwald-Gym"/>
+    <foaf:name>Steffen Jost</foaf:name>
+    <foaf:phone>0341-336440</foaf:phone>
+    <foaf:title>Dr.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Kotte_Markus">
+    <org:hasFunction>Geschäftsführer des LJBW</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/LJBW"/>
+    <foaf:mbox>info@ljbw.de</foaf:mbox>
+    <foaf:name>Markus Kotte</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Kuersten_KlausDetlef">
+    <rdfs:comment>War am Math. Institut. Rente seit April 2016</rdfs:comment>
+    <org:hasFunction>Universitätsprofessor</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/FMI"/>
+    <foaf:mbox>kuersten@math.uni-leipzig.de</foaf:mbox>
+    <foaf:name>Klaus-Detlef Kürsten</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Kujawa_Thomas">
+    <rdfs:comment>Prokurist der Familienfreund KG</rdfs:comment>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <foaf:name>Thomas Kujawa</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Kumpf_Michael">
+    <org:hasFunction>Referat Mittelschulen</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/SBA-L"/>
+    <foaf:mbox>Michael.Kumpf@sbal.smk.sachsen.de</foaf:mbox>
+    <foaf:name>Michael Kumpf</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Lange_Torsten">
+    <org:hasFunction>Leiter UFZ-Schülerlabor</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/UFZ"/>
+    <foaf:mbox>schuelerlabor@ufz.de</foaf:mbox>
+    <foaf:name>Torsten Lange</foaf:name>
+    <foaf:title>Dr. </foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Mehlhorn_Gerlinde">
+    <org:hasFunction>BIP Kreativitätszentrum gGmbH, Geschäftsführende Alleingesellschafterin</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/BIP-Schule"/>
+    <foaf:mbox>sekretariat@bipschulen.de</foaf:mbox>
+    <foaf:name>Gerlinde Mehlhorn</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Meiler_Monika">
+    <rdfs:comment>War am Institut f. Informatik. Inzwischen in Rente, Nachfolge nicht bekannt</rdfs:comment>
+    <org:hasFunction>Koordination Projekt- u Praktikumsarbeiten</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/FMI"/>
+    <foaf:mbox>meiler@informatik.uni-leipzig.de</foaf:mbox>
+    <foaf:name>Monika Meiler</foaf:name>
+    <foaf:title>Dr.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Meissner_Tino">
+    <org:hasFunction>Mitarbeiter Inspirata</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/Inspirata"/>
+    <foaf:mbox>tino.meissner@inspirata.de</foaf:mbox>
+    <foaf:name>Tino Meißner</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Messerschmidt_Elk">
+    <org:hasFunction>Leiter des technisch-ökologischen Projektzentrum Rabutz</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Ort/Rabutz.TOeP"/>
+    <foaf:mbox>drelk@rennstall-rabutz.de</foaf:mbox>
+    <foaf:name>Elk Messerschmidt</foaf:name>
+    <foaf:title>Dr. </foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Mueller_Ulrike">
+    <org:hasFunction>Leiterin SG 50.71</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/StadtLeipzig/AJFB/SG_50.71"/>
+    <foaf:mbox>Ulrike.Mueller@leipzig.de</foaf:mbox>
+    <foaf:name>Ulrike Müller</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Petzschler_Ines">
+    <rdfs:comment>Mathematiklehrerin, Abordnung an die Uni, stellv. Vorsitzende der Inspirata</rdfs:comment>
+    <org:hasFunction>stellv. Vorsitzende der Inspirata</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/Inspirata"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/Heisenberg-Gym"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/FMI"/>
+    <foaf:mbox>ipetzschler@aol.com</foaf:mbox>
+    <foaf:name>Ines Petzschler</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Petzschler_Uwe">
+    <org:hasFunction>Physiklehrer, Inspirata</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/Inspirata"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/Brockhaus-Gym"/>
+    <foaf:mbox>upetzschler@aol.com</foaf:mbox>
+    <foaf:name>Uwe Petzschler</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Quapp_Wolfgang">
+    <rdfs:comment>War am Math. Institut. Inzwischen in Rente, Nachfolge nicht bekannt</rdfs:comment>
+    <org:hasFunction>Koordination Projekt- u Praktikumsarbeiten</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/UniLeipzig/MI"/>
+    <foaf:name>Wolfgang Quapp</foaf:name>
+    <foaf:title>Dr.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Raue_Manfred">
+    <org:hasFunction>Leiter der Elektrotechnischen Sammlung am Umspannwerk Markkleeberg</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Ort/Umspannwerk"/>
+    <foaf:name>Manfred Raue</foaf:name>
+    <foaf:phone>0341-35022267</foaf:phone>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Riethmueller_Michael">
+    <org:hasFunction>Talentförderung, Referat Gymnasien</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/BOK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/SLK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/SBA-L"/>
+    <foaf:mbox>0341-494550</foaf:mbox>
+    <foaf:name>Michael Riethmüller</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Rode_Anja">
+    <org:hasFunction>Projekt "MINT und mehr"</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/ciT"/>
+    <foaf:mbox>AMRode@cit-leipzig.de</foaf:mbox>
+    <foaf:name>Anja Michele Rode</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schmidt_Rosmarie">
+    <org:hasFunction>Vorsitzende des MNU-Landesverbands Sachsen</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/MNU"/>
+    <foaf:mbox>R_Schmidt_Leipzig@web.de</foaf:mbox>
+    <foaf:name>Rosmarie Schmidt</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schoene_Silvia">
+    <org:hasFunction>Regionalbeauftragte des LJBW für die Region Leipzig</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/LJBW"/>
+    <foaf:mbox>info@ljbw.de</foaf:mbox>
+    <foaf:name>Sylvia Schöne</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schueler_Axel">
+    <rdfs:comment>Arbeitet am Institut für angewandte Trainingswissenschaft</rdfs:comment>
+    <org:hasFunction>Leiter der LSGM</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/BOK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/LSGM"/>
+    <foaf:mbox>schueler@iat.uni-leipzig.de</foaf:mbox>
+    <foaf:name>Axel Schüler</foaf:name>
+    <foaf:title>Dr. </foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schulze_Frank">
+    <rdfs:comment>Leiter des Instituts für Kunstpädagogik</rdfs:comment>
+    <org:hasFunction>Schulleiter BIP-Schule</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/BIP-Schule"/>
+    <foaf:mbox>fschulz@uni-leipzig.de</foaf:mbox>
+    <foaf:mbox>sekretariat@bipschulen.de</foaf:mbox>
+    <foaf:name>Frank Schulze</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schulze_Susanne">
+    <org:hasFunction>Referentin Marketing und Kommunikation, Koordination Öffentlichkeitsarbeit an der BA</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/BA-Leipzig"/>
+    <foaf:mbox>susanne.schulze@ba-leipzig.de</foaf:mbox>
+    <foaf:name>Susanne Schulze</foaf:name>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Schwarz_Sibylle">
+    <org:hasFunction>Beauftragte für Robotik an der HTWK</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/HTWK"/>
+    <foaf:mbox>sibylle.schwarz@htwk-leipzig.de</foaf:mbox>
+    <foaf:name>Sibylle Schwarz</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Wieland_Sabine">
+    <org:hasFunction>Leiterin der GI-Regionalgruppe Leipzig, Sprecherin des MINT-Netzwerks Leipzig</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/HfTL"/>
+    <foaf:mbox>wieland@hft-leipzig.de</foaf:mbox>
+    <foaf:name>Sabine Wieland</foaf:name>
+    <foaf:title>Prof.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Winne_Olaf">
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Traeger/VDE.LeipzigHalle"/>
+    <foaf:mbox>vde-leipzig-halle@vde-online.de</foaf:mbox>
+    <foaf:name>Olaf Winne</foaf:name>
+    <foaf:title>Dr.-Ing.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Winter_Bernd">
+    <org:hasFunction>Lehrer, Vorsitzender des BOK</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/BOK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/SLK"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Schule/Engelsdorf-Gym"/>
+    <foaf:mbox>MaNawiBezLeipzig@aol.com</foaf:mbox>
+    <foaf:name>Bernd Winter</foaf:name>
+    <foaf:title>Dr.</foaf:title>
+  </foaf:Person>
+  <foaf:Person rdf:about="http://leipzig-data.de/Data/Person/Zehl_Susann">
+    <org:hasFunction>Koordination FLL Wettbewerbe bei "Hands on Technology"</org:hasFunction>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Group/MINTLeipzig"/>
+    <org:memberOf rdf:resource="http://leipzig-data.de/Data/Ort/HandsOnTechnology"/>
+    <foaf:mbox>sz@hands-on-technology.org</foaf:mbox>
+    <foaf:name>Susann Zehl</foaf:name>
+  </foaf:Person>
+  <ld:Traeger rdf:about="http://leipzig-data.de/Data/Traeger/AFA-Leipzig">
+    <rdfs:label>Agentur für Arbeit Leipzig</rdfs:label>
+  </ld:Traeger>
+  <ld:Traeger rdf:about="http://leipzig-data.de/Data/Traeger/SBA-L">
+    <rdfs:label>Regionalstelle Leipzig der Sächsischen Bildungsagentur</rdfs:label>
+  </ld:Traeger>
+  <ld:Traeger rdf:about="http://leipzig-data.de/Data/Traeger/VDI-Leipzig">
+    <rdfs:label>VDI Verein Deutscher Ingenieure, Regionalgruppe Leipzig</rdfs:label>
+  </ld:Traeger>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/BioFak">
+    <rdfs:label>Fakultät für Biowissenschaften, Pharmazie und Psychologie</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/ChemFak">
+    <rdfs:label>Fakultät für Chemie und Mineralogie</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/ErzWissFak">
+    <rdfs:label>Erziehungswissenschaftliche Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/FMI">
+    <rdfs:label>Fakultät für Mathematik und Informatik</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/FakSozPhil">
+    <rdfs:label>Fakultät für Sozialwissenschaften und Philosophie</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/GKO">
+    <rdfs:label>Fakultät für Geschichte, Kunst- und Orientwissenschaften</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/JurFak">
+    <rdfs:label>Juristenfakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/MedFak">
+    <rdfs:label>Medizinische Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/PhilFak">
+    <rdfs:label>Philologische Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/PhysFak">
+    <rdfs:label>Fakultät für Biowissenschaften, Pharmazie und Psychologie</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/SpoFa">
+    <rdfs:label>Sportwissenschaftliche Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/TheoFak">
+    <rdfs:label>Theologische Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:UniFakultaet rdf:about="http://leipzig-data.de/Data/UniLeipzig/WiFa">
+    <rdfs:label>Wirtschaftswissenschaftliche Fakultät</rdfs:label>
+  </ld:UniFakultaet>
+  <ld:Einrichtung rdf:about="http://leipzig-data.de/Data/UniLeipzig/ZLS">
+    <rdfs:label>ZLS</rdfs:label>
+  </ld:Einrichtung>
+</rdf:RDF>

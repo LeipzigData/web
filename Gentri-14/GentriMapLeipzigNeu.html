@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gentrifizierung in Leipzig</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="js/jquery/jquery-ui.css" />
+  <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="css/local.css" />
+  <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="js/leaflet/leaflet.js"></script>
+  <!-- required for slider -->
+  <link href="js/jquery/jquery-ui.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>	
+  </head>
+<body>
+
+<div id="erklaerung">
+<h2> Gentrifizierungsprozesse in Leipzig </h2>
+
+Für die Jahre 2005, 2007, 2009, 2011, 2012 und 2013 werden
+&ndash; sofern wir entsprechende Daten gefunden haben &ndash; für die einzelnen
+Ortsteile angezeigt
+<ul>
+<li> Anzahl der Arbeitslosen (absolut) </li>
+<li> Durchschnittsmiete (in Euro) </li>
+<li> Kinderarmut (in Prozent) </li>
+<li> Durchschnittsalter </li>
+</ul>
+</div>
+
+<div id="map"></div>
+<p>Jahr auswählen:</p>
+<div id="slider"></div>
+<div id="value"></div>
+<script type="text/javascript" src="js/Ortsteildaten.js"></script>
+
+<script type="text/javascript">
+    var map = L.map('map').setView([51.34091, 12.37885], 11);
+
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' 
+	+'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' 
+	+'Imagery © <a href="http://mapbox.com">Mapbox</a>'
+	+'<br/>Ortsteilgrenzen Leipzig, © Amt für Statistik und Wahlen Leipzig',
+    id: 'examples.map-20v6611k'
+}).addTo(map);
+
+		
+
+/**
+ * Funktion die die Polygone entsprechend einem Merkmal  einfärbt
+ */
+function getColorArbeitslose(d) {
+			return d > 1000 ? '#810f7c' :
+			       d > 750  ? '#8856a7' :
+			       d > 500  ? '#8c96c6' :
+			       d > 250  ? '#b3cde3' :
+			       d > 0   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+		
+function getColorMiete(d) {
+			return d > 6.5 ? '#810f7c' :
+			       d > 6  ? '#8856a7' :
+			       d > 5.5  ? '#8c96c6' :
+			       d > 5  ? '#b3cde3' :
+			       d > 4   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+	
+function getColorKinderarmut(d) {
+			return d > 30 ? '#810f7c' :
+			       d > 20  ? '#8856a7' :
+			       d > 15  ? '#8c96c6' :
+			       d > 10  ? '#b3cde3' :
+			       d > 4  ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+		
+function getColorDurchschnittsalter(d) {
+			return d > 55 ? '#810f7c' :
+			       d > 50  ? '#8856a7' :
+			       d > 45  ? '#8c96c6' :
+			       d > 40  ? '#b3cde3' :
+			       d > 35   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+
+		/**
+ 		 * Regelt wie die Polygone dargestellt werden sollen
+		 */
+		function styleArbeitslose_2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2003)
+			};
+		}
+		 
+		function styleArbeitslose_2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2005)
+			};
+		}
+		
+		function styleArbeitslose_2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2007)
+			};
+		}
+		
+		function styleArbeitslose_2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2009)
+			};
+		}
+		
+		function styleArbeitslose_2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2011)
+			};
+		}
+		
+		function styleArbeitslose_2012(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2012)
+			};
+		}
+		
+		function styleArbeitslose_2013(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2013)
+			};
+		}
+		
+		function styleMiete2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12003)
+			};
+		}
+		
+		function styleMiete2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12005)
+			};
+		}
+		
+		function styleMiete2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12007)
+			};
+		}
+		
+		function styleMiete2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12009)
+			};
+		}
+		
+		function styleMiete2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12011)
+			};
+		}
+		
+		function styleMiete2012(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12012)
+			};
+		}
+		
+		function styleMiete2013(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorMiete(feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12013)
+			};
+		}
+		
+		function styleKinderarmut2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2003)
+			};
+		}
+		
+		function styleKinderarmut2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2005)
+			};
+		}
+		
+		function styleKinderarmut2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2007)
+			};
+		}
+		
+		function styleKinderarmut2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2009)
+			};
+		}
+		
+		function styleKinderarmut2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2011)
+			};
+		}
+		
+		function styleKinderarmut2012(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2012)
+			};
+		}
+		
+		function styleKinderarmut2013(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2013)
+			};
+		}
+		
+		function styleDurchschnittsalter_2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2003)
+			};
+		}
+		
+		function styleDurchschnittsalter_2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2005)
+			};
+		}
+		
+		function styleDurchschnittsalter_2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2007)
+			};
+		}
+		
+		function styleDurchschnittsalter_2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2009)
+			};
+		}
+		
+		function styleDurchschnittsalter_2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2011)
+			};
+		}
+		
+		function styleDurchschnittsalter_2012(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2012)
+			};
+		}
+		
+		function styleDurchschnittsalter_2013(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorDurchschnittsalter(feature.properties.Durchschnittsalter_2013)
+			};
+		}
+		
+		
+function change(id) {
+  map.removeLayer( geoJson );
+  	if (id == 'arbeitslose'){
+  		legendarb.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+				
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2011:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2012:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2012,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2013,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		}	
+	}else if (id == 'miete'){
+		legendmiet.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2011:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2012:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2012,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleMiete2013,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		}	
+	}else if (id == 'kinderarmut'){
+		legendkind.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2011:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2012:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2012,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2013,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		}	
+	}else {
+		legendalter.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2011:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2012:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2012,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleDurchschnittsalter_2013,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		}	
+	}
+		
+
+  }
+		
+
+
+
+
+		/**
+		 * Anlegen der Legende mit entsprechender Farbcodierung
+		 */
+		var aktuelleLegende;
+		
+        var legendarb = L.control({position: 'bottomright'});
+
+		legendarb.onAdd = function (map) {
+			aktuelleLegende = "legendarb";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [0, 250, 500, 750, 1000],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorArbeitslose(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+'));
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+
+		legendarb.addTo(map);
+		
+		var legendalter = L.control({position: 'bottomright'});
+
+		legendalter.onAdd = function (map) {
+			aktuelleLegende = "legendalter";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [35, 40, 45, 50, 55],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorDurchschnittsalter(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+'));
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+		
+	var legendkind = L.control({position: 'bottomright'});
+
+		legendkind.onAdd = function (map) {
+			aktuelleLegende = "legendkind";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [4, 10, 15, 20,30],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorKinderarmut(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+') + "%");
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+		
+	var legendmiet = L.control({position: 'bottomright'});
+
+		legendmiet.onAdd = function (map) {
+			aktuelleLegende = "legendmiet";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [4, 5, 5.5, 6, 6.5],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorMiete(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+') + "€/m²");
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+	
+	/**
+	 * Label
+	 */
+	var info = L.control();
+
+			info.onAdd = function (map) {
+				this._div2 = L.DomUtil.create('div2', 'info');
+				this.update();
+				return this._div2;
+			};
+
+			info.update = function (props) {
+				this._div2.innerHTML = '<h4>Gentrifizierung in Leipzig</h4> Bitte Merkmal auswählen'
+			};
+
+			info.addTo(map);
+
+	var year = 2005;
+ 	
+ 		
+ 	$(document).ready(function()
+	{
+		var values = [2005, 2007, 2009, 2011, 2012, 2013];
+		
+	
+		$("#slider").slider(
+		{
+		min: 2005,
+		max: values[values.length-1],
+		stepValues: values,
+		animate: "slow",
+		slide: function(event, ui)
+		{
+			var theSlider = $(this),
+				stepValues = theSlider.slider("option", "stepValues"),
+				distance = [],
+				minDistance = theSlider.slider("option", "max"),
+				minI;
+		
+			//Welcher erlaubte Wert ist der Position am nächsten? Hier wird einfach der kürzeste Abstand gesucht
+			$.each(stepValues, function(i, val)
+			{
+				distance[i] = Math.abs(ui.value - val);
+				if(distance[i] < minDistance)
+				{
+					minDistance = distance[i];
+					minI = i;
+				}
+			});
+		
+			//Wenn ein Wert gefunden wurde, wird dieser gesetzt
+			if(typeof minDistance === 'number' )
+			{
+				//Setzen des Wertes und schreiben des neuen Wertes in das 2. Div
+				theSlider.slider("value", stepValues[minI]);
+				$('#value').text(stepValues[minI]);
+				
+				return false;
+			}
+			//Ansonsten stimmt irgendwas nicht und der aktuelle Wert wird beibehalten
+			else
+			{
+				//Der Wert wird nicht neu gesetzt, muss aber trotzdem in das Div geschrieben werden.
+				$('#value').text(ui.value);
+			}
+		
+			return returnValue;
+		},
+		change: function( event, ui ) {
+				var pulldown = $('select').children(":selected").attr("id");
+				map.removeLayer( geoJson );
+				var slidevalue = ui.value;
+				year = slidevalue;
+				if (pulldown == 'arbeitslose'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2003,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2005:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2005,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2007:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2007,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2009:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2009,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2011:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2011,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2012:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2012,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				default:
+			  		geoJson = L.geoJson(states, {
+						style: styleArbeitslose_2013,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				}	
+			}else if (pulldown == 'miete'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2003,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2005:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2005,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2007:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2007,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2009:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2009,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2011:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2011,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2012:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2012,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				default:
+			  		geoJson = L.geoJson(states, {
+						style: styleMiete2013,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				}	
+			}else if (pulldown == 'kinderarmut'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2003,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2005:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2005,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2007:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2007,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2009:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2009,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2011:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2011,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2012:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2012,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				default:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2013,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				}	
+			}else {
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2003,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2005:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2005,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2007:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2007,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2009:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2009,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2011:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2011,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2012:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2012,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				default:
+			  		geoJson = L.geoJson(states, {
+						style: styleDurchschnittsalter_2013,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				}	
+			}
+		
+
+  }
+  
+  
+				
+				
+		});
+		
+		
+	});
+   var legend = L.control({position: 'topright'});
+		legend.onAdd = function (map) {
+		var div3 = L.DomUtil.create('div3', 'info legend');
+		div3.innerHTML = '<select><option id="arbeitslose">Arbeitslose</option><option id="durchschnittsalter">Durchschnittsalter</option><option id="miete">Miete</option><option id="kinderarmut">Kinderarmut</option></select>';
+		div3.firstChild.onmousedown = div3.firstChild.ondblclick = L.DomEvent.stopPropagation;
+		return div3;
+		};
+		legend.addTo(map);
+		
+	$('select').change(function(){
+ 			var id = $(this).children(":selected").attr("id");
+ 			switch(aktuelleLegende){
+ 			
+ 				case "legendarb": 
+ 					map.removeControl(legendarb); 
+ 				break;
+ 				
+ 				case "legendalter": 
+ 					map.removeControl(legendalter); 
+ 				break;
+ 				case "legendkind":
+ 					map.removeControl(legendkind); 
+ 				break;
+ 				case "legendmiet":
+	 				map.removeControl(legendmiet); 
+ 				break;
+ 				default:
+ 					//do nothing
+ 				break;
+ 				
+ 			}
+ 			
+ 		
+ 			change(id);
+ 		});
+ 		
+ 		/**
+		 * Ermöglicht die Popups
+		 */
+		function onEachFeature(feature, layer) {
+		
+    	if(year == 2005){
+        layer.bindPopup("Gentrimap, Jahr 2005:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2005 +"</i><br/>Miete (in €/m²): <i>keine Daten</i><br/>Kinderarmut (in %): <i>keine Daten</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2005 + "</i>");
+        }else if (year == 2007){
+        layer.bindPopup("Gentrimap, Jahr 2007:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2007 +"</i><br/>Miete (in €/m²): <i>keine Daten</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2007 +"</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2007 + "</i>");
+        }else if (year == 2009){
+        layer.bindPopup("Gentrimap, Jahr 2009:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2009 +"</i><br/>Miete (in €/m²): <i>keine Daten</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2009 +"</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2009 + "</i>");
+        }else if (year == 2011){
+        layer.bindPopup("Gentrimap, Jahr 20011:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2011 +"</i><br/>Miete (in €/m²): <i>keine Daten</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2011 +"</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2011 + "</i>");
+        }else if (year == 2012){
+        layer.bindPopup("Gentrimap, Jahr 2012:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>keine Daten</i><br/>Miete (in €/m²): <i>"+ feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12012 + "</i><br/>Kinderarmut (in %): <i>keine Daten</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2012 + "</i>");
+        }else{
+        layer.bindPopup("Gentrimap, Jahr 2013:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>keine Daten</i><br/>Miete (in €/m²): <i>"+ feature.properties.Miete_Euro_pro_Quadratmeter_Halbjahr_12013 + "</i><br/>Kinderarmut (in %): <i>keine Daten</i><br/>Durchschnittsalter: <i>"+ feature.properties.Durchschnittsalter_2013 + "</i>");
+        }
+    
+		}
+		
+		/**
+ * Fügt das Layer mit den Daten hinzu. Mit Style und Popup
+ */
+var geoJson;
+geoJson = L.geoJson(states, {
+    style: styleArbeitslose_2005,	
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+	</script>
+</body>
+</html

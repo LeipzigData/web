@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arbeitslosigkeit in Leipzig</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="js/jquery/jquery-ui.css" />
+  <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="css/local.css" />
+  <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="js/leaflet/leaflet.js"></script>
+  <!-- required for slider -->
+  <link href="js/jquery/jquery-ui.css" rel="stylesheet">
+  <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>	
+</head>
+<body>
+
+<div id="erklaerung">
+<h2> Arbeitslosigkeit in Leipzig </h2>
+
+Für die Jahre 2003, 2005, 2007, 2009 und 2011 werden
+&ndash; sofern wir entsprechende Daten gefunden haben &ndash; für die einzelnen
+Ortsteile angezeigt
+<ul>
+<li> Anzahl der Arbeitslosen (absolut) </li>
+<li> Anteil der Arbeitslosen an den Erwerbsfähigen (in Prozent) </li>
+<li> Kinderarmut (in Prozent) </li>
+<li> Anzahl der Sozialgeldempfänger (absolut) </li>
+</ul>
+</div>
+
+<div id="map"></div>
+<p>Jahr auswählen:</p>
+<div id="slider"></div>
+<div id="value"></div>
+	
+<script type="text/javascript" src="js/Ortsteildaten.js"></script>
+
+<script type="text/javascript">
+    var map = L.map('map').setView([51.34091, 12.37885], 11);
+    
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' 
+	+'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' 
+	+'Imagery © <a href="http://mapbox.com">Mapbox</a>'
+	+'<br/>Ortsteilgrenzen Leipzig, © Amt für Statistik und Wahlen Leipzig',
+    id: 'examples.map-20v6611k'
+}).addTo(map);
+
+/**
+ * Funktion die die Polygone entsprechend einem Merkmal  einfärbt
+ */
+function getColorArbeitslose(d) {
+			return d > 1000 ? '#810f7c' :
+			       d > 750  ? '#8856a7' :
+			       d > 500  ? '#8c96c6' :
+			       d > 250  ? '#b3cde3' :
+			       d > 0   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+		
+function getColorErwerbsfähige(d) {
+			return d > 20 ? '#810f7c' :
+			       d > 15  ? '#8856a7' :
+			       d > 10  ? '#8c96c6' :
+			       d > 5  ? '#b3cde3' :
+			       d > 2   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+	
+function getColorKinderarmut(d) {
+			return d > 30 ? '#810f7c' :
+			       d > 20  ? '#8856a7' :
+			       d > 15  ? '#8c96c6' :
+			       d > 10  ? '#b3cde3' :
+			       d > 3  ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+		
+function getColorSozialgeld_Empfaenger(d) {
+			return d > 250 ? '#810f7c' :
+			       d > 150  ? '#8856a7' :
+			       d > 100  ? '#8c96c6' :
+			       d > 50  ? '#b3cde3' :
+			       d > 0   ? '#edf8fb' :
+			                  '#FFEDA0';
+		}
+
+		/**
+ 		 * Regelt wie die Polygone dargestellt werden sollen
+		 */
+		function styleArbeitslose_2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2003)
+			};
+		}
+		 
+		function styleArbeitslose_2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2005)
+			};
+		}
+		
+		function styleArbeitslose_2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2007)
+			};
+		}
+		
+		function styleArbeitslose_2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2009)
+			};
+		}
+		
+		function styleArbeitslose_2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorArbeitslose(feature.properties.Arbeitslose_2011)
+			};
+		}
+		
+	
+		function styleErwerbsfähigeProz2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorErwerbsfähige(feature.properties.Erwerbsfaehige_in_Prozent_2003)
+			};
+		}
+		
+		function styleErwerbsfähigeProz2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorErwerbsfähige(feature.properties.Erwerbsfaehige_in_Prozent_2005)
+			};
+		}
+		
+		function styleErwerbsfähigeProz2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorErwerbsfähige(feature.properties.Erwerbsfaehige_in_Prozent_2007)
+			};
+		}
+		
+		function styleErwerbsfähigeProz2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorErwerbsfähige(feature.properties.Erwerbsfaehige_in_Prozent_2009)
+			};
+		}
+		
+		function styleErwerbsfähigeProz2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorErwerbsfähige(feature.properties.Erwerbsfaehige_in_Prozent_2011)
+			};
+		}
+		
+		function styleKinderarmut2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2003)
+			};
+		}
+		
+		function styleKinderarmut2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2005)
+			};
+		}
+		
+		function styleKinderarmut2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2007)
+			};
+		}
+		
+		function styleKinderarmut2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2009)
+			};
+		}
+		
+		function styleKinderarmut2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorKinderarmut(feature.properties.Kinderarmut2011)
+			};
+		}
+		
+		function styleSozialgeld_Empfaenger_2003(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorSozialgeld_Empfaenger(feature.properties.Sozialgeld_Empfaenger_2003)
+			};
+		}
+		
+		function styleSozialgeld_Empfaenger_2005(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorSozialgeld_Empfaenger(feature.properties.Sozialgeld_Empfaenger_2005)
+			};
+		}
+		
+		function styleSozialgeld_Empfaenger_2007(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorSozialgeld_Empfaenger(feature.properties.Sozialgeld_Empfaenger_2007)
+			};
+		}
+		
+		function styleSozialgeld_Empfaenger_2009(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorSozialgeld_Empfaenger(feature.properties.Sozialgeld_Empfaenger_2009)
+			};
+		}
+		
+		function styleSozialgeld_Empfaenger_2011(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColorSozialgeld_Empfaenger(feature.properties.Sozialgeld_Empfaenger_2011)
+			};
+		}
+		
+		
+		
+function change(id) {
+  map.removeLayer( geoJson );
+  	if (id == 'arbeitslose'){
+  		legend1.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+				
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		
+		}	
+	}else if (id == 'erwerbsfähige'){
+		legend2.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		}	
+	}else if (id == 'kinderarmut'){
+		legend3.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleKinderarmut2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		
+		}	
+	}else {
+		legend4.addTo(map);
+  		switch($("#slider").slider("value")){
+  		
+  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		
+		}	
+	}
+		
+
+  }
+		
+
+
+
+
+		/**
+		 * Anlegen der Legende mit entsprechender Farbcodierung
+		 */
+		var aktuelleLegende;
+		
+        var legend1 = L.control({position: 'bottomright'});
+
+		legend1.onAdd = function (map) {
+			aktuelleLegende = "1";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [0, 250, 500, 750, 1000],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorArbeitslose(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+'));
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+
+		legend1.addTo(map);
+		
+		var legend2 = L.control({position: 'bottomright'});
+
+		legend2.onAdd = function (map) {
+			aktuelleLegende = "2";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [2, 5, 10, 15, 20],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorErwerbsfähige(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+') + "%");
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+		
+	var legend3 = L.control({position: 'bottomright'});
+
+		legend3.onAdd = function (map) {
+			aktuelleLegende = "3";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [3, 10, 15, 20, 30],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorKinderarmut(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+') + "%");
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+		
+	var legend4 = L.control({position: 'bottomright'});
+
+		legend4.onAdd = function (map) {
+			aktuelleLegende = "4";
+			
+			var div1 = L.DomUtil.create('div1', 'info legend'),
+				grades = [0, 50, 100, 150, 250],
+				labels = [],
+				from, to;
+				
+				for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColorSozialgeld_Empfaenger(from + 1) + '"></i> ' +
+					from  + (to ? '&ndash;' + to : '+'));
+			
+			}
+			
+
+			div1.innerHTML = labels.join('<br/>');
+			return div1;
+		};
+	
+	/**
+	 * Label
+	 */
+	var info = L.control();
+
+			info.onAdd = function (map) {
+				this._div2 = L.DomUtil.create('div2', 'info');
+				this.update();
+				return this._div2;
+			};
+
+			info.update = function (props) {
+				this._div2.innerHTML = '<h4>Gentrifizierung in Leipzig</h4> Bitte Merkmal auswählen'
+			};
+
+			info.addTo(map);
+
+	
+ 	var year = 2003;
+ 		
+ 	$(document).ready(function()
+	{
+		var values = [2003, 2005, 2007, 2009, 2011];
+		
+	
+		$("#slider").slider(
+		{
+		min: 2003,
+		max: values[values.length-1],
+		stepValues: values,
+		animate: "slow",
+		slide: function(event, ui)
+		{
+			var theSlider = $(this),
+				stepValues = theSlider.slider("option", "stepValues"),
+				distance = [],
+				minDistance = theSlider.slider("option", "max"),
+				minI;
+		
+			//Welcher erlaubte Wert ist der Position am nächsten? Hier wird einfach der kürzeste Abstand gesucht
+			$.each(stepValues, function(i, val)
+			{
+				distance[i] = Math.abs(ui.value - val);
+				if(distance[i] < minDistance)
+				{
+					minDistance = distance[i];
+					minI = i;
+				}
+			});
+		
+			//Wenn ein Wert gefunden wurde, wird dieser gesetzt
+			if(typeof minDistance === 'number' )
+			{
+				//Setzen des Wertes und schreiben des neuen Wertes in das 2. Div
+				theSlider.slider("value", stepValues[minI]);
+				$('#value').text(stepValues[minI]);
+				
+				return false;
+			}
+			//Ansonsten stimmt irgendwas nicht und der aktuelle Wert wird beibehalten
+			else
+			{
+				//Der Wert wird nicht neu gesetzt, muss aber trotzdem in das Div geschrieben werden.
+				$('#value').text(ui.value);
+			}
+		
+			return returnValue;
+		},
+		change: function( event, ui ) {
+				var pulldown = $('select').children(":selected").attr("id");
+				map.removeLayer( geoJson );
+				var slidevalue = ui.value;
+				year = slidevalue;
+				if (pulldown == 'arbeitslose'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+				
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleArbeitslose_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+				}	
+			}else if (pulldown == 'erwerbsfähige'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleErwerbsfähigeProz2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+				}	
+			}else if (pulldown == 'kinderarmut'){
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2003,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2005:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2005,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2007:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2007,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				case 2009:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2009,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				default:
+			  		geoJson = L.geoJson(states, {
+						style: styleKinderarmut2011,	
+						onEachFeature: onEachFeature
+						}).addTo(map);
+			
+					break;
+				
+				}	
+			}else {
+				
+		  		switch(slidevalue){
+		  		
+		  		case 2003:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2003,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2005:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2005,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2007:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2007,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		case 2009:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2009,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+		default:
+	  		geoJson = L.geoJson(states, {
+				style: styleSozialgeld_Empfaenger_2011,	
+				onEachFeature: onEachFeature
+				}).addTo(map);
+			
+			break;
+				}	
+			}
+		
+
+  }
+  
+  
+				
+				
+		});
+	});
+   var legend = L.control({position: 'topright'});
+		legend.onAdd = function (map) {
+		var div3 = L.DomUtil.create('div3', 'info legend');
+		div3.innerHTML = '<select><option id="arbeitslose">Arbeitslose (absolut)</option><option id="erwerbsfähige">Arbeitslose (in Prozent)</option><option id="Sozialgeldempfänger">Sozialgeldempfänger</option><option id="kinderarmut">Kinderarmut</option></select>';
+		div3.firstChild.onmousedown = div3.firstChild.ondblclick = L.DomEvent.stopPropagation;
+		return div3;
+		};
+		legend.addTo(map);
+		
+	$('select').change(function(){
+ 			var id = $(this).children(":selected").attr("id");
+ 			switch(aktuelleLegende){
+ 			
+ 				case "1": 
+ 					map.removeControl(legend1); 
+ 				break;
+ 				
+ 				case "2": 
+ 					map.removeControl(legend2); 
+ 				break;
+ 				case "3":
+ 					map.removeControl(legend3); 
+ 				break;
+ 				case "4":
+	 				map.removeControl(legend4); 
+ 				break;
+ 				default:
+ 					//do nothing
+ 				break;
+ 				
+ 			}
+ 			
+ 	
+ 			change(id);
+ 		});
+ 		
+		/**
+		 * Ermöglicht die Popups
+		 */
+		function onEachFeature(feature, layer) {
+		
+    	if(year == 2003){
+        layer.bindPopup("AL-Map, Jahr 2003:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2003 +"</i><br/>Arbeitslosenanteil (in %): <i>" + feature.properties.Erwerbsfaehige_in_Prozent_2003 + "</i><br/>Kinderarmut (in %): <i>keine Daten</i></i><br/>Sozialgeldempfänger: <i>"+ feature.properties.Sozialgeld_Empfaenger_2003 + "</i>");
+        }else if (year == 2005){
+        layer.bindPopup("AL-Map, Jahr 2005:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2005 +"</i><br/>Arbeitslosenanteil (in %): <i>" + feature.properties.Erwerbsfaehige_in_Prozent_2005 + "</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2005 + "</i><br/>Sozialgeldempfänger: <i>"+ feature.properties.Sozialgeld_Empfaenger_2005 + "</i>");
+        }else if (year == 2007){
+        layer.bindPopup("AL-Map, Jahr 2007:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2007 +"</i><br/>Arbeitslosenanteil (in %): <i>" + feature.properties.Erwerbsfaehige_in_Prozent_2007 + "</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2007 + "</i><br/>Sozialgeldempfänger: <i>"+ feature.properties.Sozialgeld_Empfaenger_2007 + "</i>");
+        }else if (year == 2009){
+        layer.bindPopup("AL-Map, Jahr 2009:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2009 +"</i><br/>Arbeitslosenanteil (in %): <i>" + feature.properties.Erwerbsfaehige_in_Prozent_2009 + "</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2009 + "</i><br/>Sozialgeldempfänger: <i>"+ feature.properties.Sozialgeld_Empfaenger_2009 + "</i>");
+        }else{
+        layer.bindPopup("AL-Map, Jahr 2011:<br/><b>" + feature.properties.name +"</b><br/>Arbeitslose: <i>"+ feature.properties.Arbeitslose_2011 +"</i><br/>Arbeitslosenanteil (in %): <i>" + feature.properties.Erwerbsfaehige_in_Prozent_2011 + "</i><br/>Kinderarmut (in %): <i>"+ feature.properties.Kinderarmut2011 + "</i><br/>Sozialgeldempfänger: <i>"+ feature.properties.Sozialgeld_Empfaenger_2011 + "</i>");
+        }
+    
+		}
+		
+		
+/**
+ * Fügt das Layer mit den Daten hinzu. Mit Style und Popup
+ */
+var geoJson;
+geoJson = L.geoJson(states, {
+    style: styleArbeitslose_2003,	
+    onEachFeature: onEachFeature
+}).addTo(map);
+	</script>
+</body>
+</html
