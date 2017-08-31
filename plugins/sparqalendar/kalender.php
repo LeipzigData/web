@@ -12,16 +12,21 @@ function run_query($query,$type)
 	$format = ($type=='select') ? 'application%2Fsparql-results%2Bjson' : 'application%2Frdf%2Bjson'; //  -- application%2Fsparql-results%2Bjson for select requests
 	                                                                                                  //  -- application%2Frdf%2Bjson for construct requests
 																									  
-	$get_parameters = 		'?default-graph-uri=' .                         //probably have to change parameters when using another store than virtuoso
-							'&query=' . urlencode ($query) .
-							'&format='.$format .							//esp. format parameter may vary  
-							'&timeout=0' .																  
-							'&debug=on';
+	$get_parameters =
+        '?default-graph-uri=' .                         //probably have to change parameters when using another store than virtuoso
+        '&query=' . urlencode ($query) .
+        '&format='.$format .							//esp. format parameter may vary  
+        '&timeout=0' .																  
+        '&debug=on';
 
 	$req = $store . $get_parameters;
-	$result = wp_remote_get($req);
-	$r = json_decode($result['body'],true);
-	//print_r($r);
+    //echo $query;
+	//$result = wp_remote_get($req);
+	$result = file_get_contents($req);
+    print_r($result);
+	//$r = json_decode($result['body'],true);
+	$r = json_decode($result,true);
+	print_r($r);
 	return $r;
 }
 
@@ -298,4 +303,11 @@ function displayKalenderGet($atts) {
 	 }
 	 return $pageURL;
 }
+
+if (!defined('ABSPATH') ) {// for testing
+    $s=array('source' => 'LK20');
+    fetch_events("2017","06");
+    echo printEventsPerDay("2017-06-22"); 
+}
+
 ?>

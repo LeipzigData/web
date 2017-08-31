@@ -10,12 +10,6 @@ Author URI: http://leipzig-data.de
 include_once("kalender.php");
 include_once("rdfmapping.php");
 
-
-
-
-	//wp_enqueue_style( 'sparqalendar', plugins_url().'/sparqalendar/styles.css' );
-
-
 add_action( 'init', 'register_sparqalendar_style' );
 add_action( 'init', 'enqueue_sparqalendar_style' );
 add_shortcode( 'sparqalendar', 'displayKalenderGet' );
@@ -33,7 +27,5 @@ function enqueue_sparqalendar_style() {
 	wp_enqueue_style( 'sparqalendar' );
 	//echo plugins_url( 'sparqalendar/styles.css' );
 }
-
-	
 
 ?>
