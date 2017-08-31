@@ -1,6 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
 require_once 'helper.php';
 
 function getNameList($node,$type) 
@@ -34,33 +33,27 @@ function getNameList($node,$type)
 
 function getItemList($atts) 
 {
-    EasyRdf_Namespace::set('ld', 'http://leipzig-data.de/Data/Model/');
-    $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-    $result = $sparql->query(
-        'SELECT * WHERE {'.
-        '  ?u a ld:Ort; rdfs:label ?label .'.
-        '} ORDER BY ?label'
-    );
+    $store='http://leipzig-data.de:8890/sparql';
+    $query='
+PREFIX ld: <http://leipzig-data.de/Data/Model/>
+SELECT * 
+from <http://leipzig-data.de/Data/Orte/>
+WHERE {
+?u a ld:Ort; rdfs:label ?label } 
+ORDER BY ?label';
+    $result=sparqlQuery($query,$store);
     $a=array();
-    foreach ($result as $row) {
-        $a[]="<li>".$row->u.", ". $row->label."</li>";
+    foreach ($result['results']['bindings'] as $k => $v) {
+        $a[]="<li>".$v['u']['value'].", ". $v['label']['value']."</li>";
     }
-    
     return join("\n ",$a);
-}
-
-function uhu($atts) 
-{
-    $graph = new EasyRdf_Graph("http://leipzig-data.de/Data/Orte/");
-    $graph->parseFile("http://leipzig-data.de/RDFData/Orte.ttl");
-    print_r($graph);
 }
 
 
 if (defined('ABSPATH') ) { 
     add_shortcode('itemlist', 'getItemList');
 } else {
-    $s=array(); echo htmlEnv(uhu($s)); // for testing
+    $s=array(); echo getItemList($s); // for testing
 }
 
 ?>
