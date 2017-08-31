@@ -1,0 +1,17 @@
+{
+    "name": "ld-plugin",
+    "description": "RDF Plugin für Leipzig-Data Plattform",
+    "authors": [
+        {
+            "name": "Hans-Gert Gräbe",
+            "email": "graebe@informatik.uni-leipzig.de"
+        }
+    ],
+    "type": "project",
+    "require": {        
+      "easyrdf/easyrdf": "*"
+    },    
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "GPL-3.0"
+}
