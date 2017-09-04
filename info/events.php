@@ -13,7 +13,7 @@ $content='
 
 <div class="row">
 Die folgende Übersicht über Events ist aus
-dem <a href="http://leipzig.data.de/Data/Events/" >Leipzig Data Event
+dem <a href="http://leipzig.data.de/events/" >Leipzig Data Event
 Channel</a> generiert.  Events werden einen Monat nach Ablauf aus dem "Event
 Channel" in den "Alte Event Channel" übertragen.
 </div>

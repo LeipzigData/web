@@ -13,7 +13,7 @@ $content='
 
 <div class="row">
 Die folgende Übersicht über vergangene Events ist aus
-dem <a href="http://leipzig.data.de/Data/AlteEvents/" >Leipzig Data Alte Event
+dem <a href="http://leipzig.data.de/events/" >Leipzig Data Alte Event
 Channel</a> generiert.  Events verbleiben ein Jahr nach Ablauf im Alte Event
 Channel und werden danach gelöscht.
 </div>
