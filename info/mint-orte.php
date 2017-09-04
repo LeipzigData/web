@@ -13,7 +13,7 @@ $content='
 
 <div class="row">
 Die folgende Übersicht über Leipziger MINT-Orte ist aus der 
-<a href="http://leipzig-data.de/Data/MINTBroschuere2014/" >Leipzig Data MINT
+<a href="http://leipzig-data.de/MINTBroschuere/" >Leipzig Data MINT
 Übersicht</a> generiert.  
 </div>
 
