@@ -49,7 +49,7 @@ function displayEvent($v) {
     $description=$v->get('ical:description');
     $out='
 <div class="row">
-<h3> <a href="'.$a.'">'.$label.'</a></h3>
+<h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <dl><dt> Wann? '.$from.' </dt><dt> Wo? '.$loc.'.</dt>
 <dd> <strong>Kurzankündigung:</strong> '.$summary.'</dd>
 <dd> <strong>Beschreibung:</strong> '.$description.'</dd>
