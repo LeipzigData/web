@@ -8,7 +8,6 @@ Author URI: http://leipzig-data.de
 */
 
 include_once("kalender.php");
-include_once("rdfmapping.php");
 
 add_action( 'init', 'register_sparqalendar_style' );
 add_action( 'init', 'enqueue_sparqalendar_style' );
