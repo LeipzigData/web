@@ -2,7 +2,7 @@
 
 require_once("lib/EasyRdf.php");
 
-function events() {  
+function pass() {  
   EasyRdf_Namespace::set('ical', 'http://www.w3.org/2002/12/cal/ical#');
   EasyRdf_Namespace::set('ld', 'http://leipzig-data.de/Data/Model/');
 
@@ -13,11 +13,12 @@ construct {
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
 ical:location ?locname ; ical:summary ?sum; ical:url ?url. 
 }
-from <http://leipzig-data.de/Data/Events/>
+from <http://leipzig-data.de/Data//>
 from <http://leipzig-data.de/Data/Orte/>
 from <http://leipzig-data.de/Data/Treffpunkte/>
+from <http://leipzig-data.de/Data/Traeger/>
 Where { 
-?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ld:hatVeranstaltungsort ?loc .
+?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:location ?loc .
 optional { ?loc rdfs:label ?locname . } 
 optional { ?a ical:summary ?sum . } 
 optional { ?a ical:description ?d . } 
@@ -61,4 +62,4 @@ function displayEvent($v) {
 
 
 // ---- test ----
-echo events();
+//echo events();
