@@ -13,12 +13,11 @@ construct {
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
 ical:location ?locname ; ical:summary ?sum; ical:url ?url. 
 }
-from <http://leipzig-data.de/Data//>
+from <http://leipzig-data.de/Data/Zukunftspass/>
 from <http://leipzig-data.de/Data/Orte/>
 from <http://leipzig-data.de/Data/Treffpunkte/>
-from <http://leipzig-data.de/Data/Traeger/>
 Where { 
-?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:location ?loc .
+?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ld:hatVeranstaltungsort ?loc .
 optional { ?loc rdfs:label ?locname . } 
 optional { ?a ical:summary ?sum . } 
 optional { ?a ical:description ?d . } 
@@ -33,13 +32,13 @@ optional { ?a ical:url ?url . }
   foreach ($result->allOfType("ld:Event") as $v) {
     $a=$v->getUri();
     $date=$v->get('ical:dtstart');
-    $s["$date.$a"]=displayEvent($v);
+    $s["$date.$a"]=displayPassEvent($v);
   }
   ksort($s);
   return join($s,"\n") ; 		
 }
 
-function displayEvent($v) {
+function displayPassEvent($v) {
     $a=$v->getUri();
     $label=$v->get('rdfs:label'); 
     $date=$v->get('ical:dtstart');

@@ -61,4 +61,4 @@ function displayEvent($v) {
 
 
 // ---- test ----
-echo events();
+// echo events();
