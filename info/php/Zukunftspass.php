@@ -9,7 +9,7 @@ function pass() {
 
   $out='<h2> Die Partner </h2>';
   $out.=diePartner();
-  $out.'<h2> Relevante Events in den Sommerferien 2017 </h2>';
+  $out.='<h2> Relevante Events in den Sommerferien 2017 </h2>';
   $out.=dieEvents();
   return $out;
 }
@@ -41,11 +41,12 @@ Where {
 function displayPartner($v) {
     $a=$v->getUri();
     $label=$v->get('rdfs:label'); 
-    $loc=$v->get('ld:hasAddress');
+    $loc=$v->get('nl:Ferienpass');
+    $com=$v->get('rdfs:comment');
     $out='
 <div class="row">
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<dl><dt> Adresse '.$loc.' </dt>';
+<dl><dt> Kommentar: '.$loc.'. '.$com.' </dt>';
     return $out."</div>";
 }
 
@@ -55,7 +56,7 @@ PREFIX ld: <http://leipzig-data.de/Data/Model/>
 PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
 PREFIX ical: <http://www.w3.org/2002/12/cal/ical#>
 construct {
-?a a nl:Partner ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
+?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
 ical:location ?locname . 
 }
 from <http://leipzig-data.de/Data/Zukunftspass/>

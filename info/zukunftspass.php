@@ -9,7 +9,7 @@ include_once("php/Zukunftspass.php");
 
 $content='      
 <div class="container">
-<h2 align="center">Zukunftspass</h2>
+<h2 align="center">Erste Absprachen zum Zukunftspass</h2>
 
 <div class="row"> Die folgende Übersicht wurde aus Ferienpassdaten der
 Sommerferien 2017 erstellt. </div>
