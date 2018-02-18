@@ -65,9 +65,10 @@ from <http://leipzig-data.de/Data/Treffpunkte/>
 from <http://leipzig-data.de/Data/Adressen/>
 Where { 
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; 
-ld:hatVeranstaltungsort ?loc .
 optional { ?loc rdfs:label ?locname . } 
 optional { ?a ical:description ?d . } 
+optional { ?a ld:hatVeranstaltungsort ?loc . ?loc rdfs:label ?locname . } 
+optional { ?a ld:hatTreffpunkt ?loc . ?loc rdfs:label ?locname . } 
 }
 ';
   
@@ -95,11 +96,8 @@ function displayPassEvent($v) {
 <div class="row">
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <dl><dt> Wann? '.$from.' </dt><dt> Wo? '.$loc.'.</dt>
-<dd> <strong>Beschreibung:</strong> '.$description.'</dd>
+<dt> <strong>Beschreibung:</strong> '.$description.'</dt>
 ';
-    foreach($v->all('ical:url') as $url) {
-	$out.='<dd> URL: <a href="'.$url.'">'.$url.'</a></dd>' ;
-    }
     return $out."</div>";
 }
 
