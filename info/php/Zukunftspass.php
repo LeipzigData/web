@@ -44,10 +44,10 @@ function displayPartner($v) {
     $loc=$v->get('nl:Ferienpass');
     $com=$v->get('rdfs:comment');
     $out='
-<div class="row">
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<dl><dt> Kommentar: '.$loc.'. '.$com.' </dt>';
-    return $out."</div>";
+<div class="row">
+<dl><dd> Kommentar: '.$loc.'. '.$com.' </dd></div>';
+    return $out;
 }
 
 function dieEvents() {
@@ -92,12 +92,12 @@ function displayPassEvent($v) {
     $loc=$v->get('ical:location');
     $description=$v->get('ical:description');
     $out='
-<div class="row">
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<dl><dt> Wann? '.$from.' </dt><dt> Wo? '.$loc.'.</dt>
-<dt> <strong>Beschreibung:</strong> '.$description.'</dt>
+<div class="row">
+<dl><dd> Wann? '.$from.' </dd><dd> Wo? '.$loc.'.</dd>
+<dd> <strong>Beschreibung:</strong> '.$description.'</dd></dl></div>
 ';
-    return $out."</div>";
+    return $out;
 }
 
 
