@@ -46,7 +46,7 @@ function displayPartner($v) {
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <div class="row">
-<dl><dd> Kommentar: '.$loc.'. '.$com.' </dd></div>';
+<dl><dd> <strong>Kommentar:</strong> '.$loc.'. '.$com.' </dd></div>';
     return $out;
 }
 
@@ -94,7 +94,8 @@ function displayPassEvent($v) {
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <div class="row">
-<dl><dd> Wann? '.$from.' </dd><dd> Wo? '.$loc.'.</dd>
+<dl><dd> <strong>Wann?</strong> '.$from.' </dd>
+<dd> <strong>Wo?</strong> '.$loc.'.</dd>
 <dd> <strong>Beschreibung:</strong> '.$description.'</dd></dl></div>
 ';
     return $out;
