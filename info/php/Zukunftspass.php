@@ -64,8 +64,7 @@ from <http://leipzig-data.de/Data/Orte/>
 from <http://leipzig-data.de/Data/Treffpunkte/>
 from <http://leipzig-data.de/Data/Adressen/>
 Where { 
-?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; 
-optional { ?loc rdfs:label ?locname . } 
+?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin .
 optional { ?a ical:description ?d . } 
 optional { ?a ld:hatVeranstaltungsort ?loc . ?loc rdfs:label ?locname . } 
 optional { ?a ld:hatTreffpunkt ?loc . ?loc rdfs:label ?locname . } 
