@@ -56,7 +56,7 @@ PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#>
 PREFIX ical: <http://www.w3.org/2002/12/cal/ical#>
 construct {
 ?a a nl:Partner ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
-ical:location ?locname ; ical:summary ?sum; ical:url ?url. 
+ical:location ?locname . 
 }
 from <http://leipzig-data.de/Data/Zukunftspass/>
 from <http://leipzig-data.de/Data/Orte/>

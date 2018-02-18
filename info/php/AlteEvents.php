@@ -16,10 +16,10 @@ ical:location ?locname ; ical:summary ?sum; ical:url ?url.
 from <http://leipzig-data.de/Data/AlteEvents/>
 from <http://leipzig-data.de/Data/Orte/>
 from <http://leipzig-data.de/Data/Treffpunkte/>
-from <http://leipzig-data.de/Data/Traeger/>
+from <http://leipzig-data.de/Data/Adressen/>
 Where { 
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; 
-ld:Veranstaltungsort ?loc .
+ld:hatVeranstaltungsort ?loc .
 optional { ?loc rdfs:label ?locname . } 
 optional { ?a ical:summary ?sum . } 
 optional { ?a ical:url ?url . } 
