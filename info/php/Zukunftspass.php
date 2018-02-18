@@ -38,6 +38,17 @@ Where {
   return join($s,"\n") ; 		
 }
 
+function displayPartner($v) {
+    $a=$v->getUri();
+    $label=$v->get('rdfs:label'); 
+    $loc=$v->get('ld:hasAddress');
+    $out='
+<div class="row">
+<h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
+<dl><dt> Adresse '.$loc.' </dt>';
+    return $out."</div>";
+}
+
 function dieEvents() {
   $query = '
 PREFIX ld: <http://leipzig-data.de/Data/Model/> 

@@ -18,7 +18,8 @@ from <http://leipzig-data.de/Data/Orte/>
 from <http://leipzig-data.de/Data/Treffpunkte/>
 from <http://leipzig-data.de/Data/Traeger/>
 Where { 
-?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:location ?loc .
+?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; 
+ld:Veranstaltungsort ?loc .
 optional { ?loc rdfs:label ?locname . } 
 optional { ?a ical:summary ?sum . } 
 optional { ?a ical:url ?url . } 
@@ -59,4 +60,4 @@ function displayEvent($v) {
 
 
 // ---- test ----
-echo events();
+// echo alteEvents();
