@@ -26,7 +26,7 @@ optional { ?a ical:url ?url . }
 ';
   
   $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-  $result=$sparql->query($query); // a CONSTRUCT query returns an EasyRdf_Graph
+  $result=$sparql->query($query); // CONSTRUCT funktioniert nicht mit php-7
   // echo $result->dump("turtle");
   $s=array();
   foreach ($result->allOfType("ld:Event") as $v) {
