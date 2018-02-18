@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2015-07-26
+ * last update: 2018-02-18
  */
 
 function pageHeader() {
@@ -59,7 +59,7 @@ function pageFooter() {
 
       <div class="container">
     <div class="footer">
-        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> 2015 </p>
+        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> 2015-2018 </p>
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
