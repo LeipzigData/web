@@ -57,7 +57,7 @@ PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#>
 PREFIX ical: <http://www.w3.org/2002/12/cal/ical#>
 construct {
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin ; ical:description ?d ;
-ical:location ?locname . 
+ical:location ?locname; nl:Altersgruppe ?alter; nl:Tags ?tags . 
 }
 from <http://leipzig-data.de/Data/Zukunftspass/>
 from <http://leipzig-data.de/Data/Orte/>
@@ -65,6 +65,8 @@ from <http://leipzig-data.de/Data/Treffpunkte/>
 from <http://leipzig-data.de/Data/Adressen/>
 Where { 
 ?a a ld:Event ; rdfs:label ?l ; ical:dtstart ?begin .
+optional { ?a nl:Tags ?tags . } 
+optional { ?a nl:Altersgruppe ?alter . } 
 optional { ?a ical:description ?d . } 
 optional { ?a ld:hatVeranstaltungsort ?loc . ?loc rdfs:label ?locname . } 
 optional { ?a ld:hatTreffpunkt ?loc . ?loc rdfs:label ?locname . } 
@@ -90,12 +92,16 @@ function displayPassEvent($v) {
     $date=$v->get('ical:dtstart');
     $from=date_format(date_create($date),"d.m.Y H:i");
     $loc=$v->get('ical:location');
+    $alter=$v->get('nl:Altersgruppe');
+    $comment=join(", ",$v->all('nl:Tags'));
     $description=$v->get('ical:description');
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <div class="row">
 <dl><dd> <strong>Wann?</strong> '.$from.' </dd>
 <dd> <strong>Wo?</strong> '.$loc.'.</dd>
+<dd> <strong>Alter:</strong> '.$alter.'.</dd>
+<dd> <strong>Anmerkung:</strong> '.$comment.'.</dd>
 <dd> <strong>Beschreibung:</strong> '.$description.'</dd></dl></div>
 ';
     return $out;
