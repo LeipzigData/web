@@ -99,9 +99,9 @@ function displayPassEvent($v) {
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <div class="row">
 <dl><dd> <strong>Wann?</strong> '.$from.' </dd>
-<dd> <strong>Wo?</strong> '.$loc.'.</dd>
-<dd> <strong>Alter:</strong> '.$alter.'.</dd>
-<dd> <strong>Anmerkung:</strong> '.$comment.'.</dd>
+<dd> <strong>Wo?</strong> '.$loc.'</dd>
+<dd> <strong>Alter:</strong> '.$alter.'</dd>
+<dd> <strong>Anmerkung:</strong> '.$comment.'</dd>
 <dd> <strong>Beschreibung:</strong> '.$description.'</dd></dl></div>
 ';
     return $out;
