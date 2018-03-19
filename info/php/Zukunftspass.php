@@ -45,23 +45,17 @@ function displayPartner($v) {
     $veranstaltungen=$v->all('nl:Veranstaltung');
     $abschluss=$v->get('nl:Abschlussveranstaltung');
     $com=$v->get('rdfs:comment');
+    if (strpos($teilnahme,"bisher keine Antwort")!==false) { return ''; }
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<div class="row"><dl>
-<dd> <strong>Teilnahme:</strong> '.$teilnahme.' </dd>
-<dd> <strong>Ferienpass:</strong> '.$gelistet.' </dd>
-<dd> <strong>Kontakt:</strong> '.$contact.' </dd>
-<dd> <strong>Veranstaltungen:</strong> '.showEvents($veranstaltungen).' </dd>
-<dd> <strong>Vorschlag Abschlussveranstaltung:</strong> '.$abschluss.' </dd>
-<dd> <strong>Kommentar:</strong> '.$com.' </dd>
-</dl></div>';
+<div class="row">'.showEvents($veranstaltungen).' </div>';
     return $out;
 }
 
 function showEvents($a) {
     $b=array(); 
     foreach($a as $event) {
-        $b[]="<li> $event </li>" ;
+        $b[]='<li> '.str_replace("\n",'<br/>',$event).' </li>' ;
     }
     return "<ul>".join("\n",$b)."</ul>";
 }
@@ -126,4 +120,4 @@ function displayPassEvent($v) {
 
 
 // ---- test ----
-// echo pass();
+echo pass();
