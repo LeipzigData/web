@@ -39,7 +39,7 @@ function pageNavbar() {
             <li><a href="alteEvents.php">Übersicht vergangener Events</a></li> 
             <li><a href="mint-orte.php">MINT-Orte in Leipzig</a></li> 
             <!-- <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li> -->
-            <li><a href="zukunftspass.php">Zukunftspass 2017</a></li> 
+            <li><a href="zukunftspass.php">Zukunftsdiplom</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
