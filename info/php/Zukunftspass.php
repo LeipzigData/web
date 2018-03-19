@@ -120,4 +120,4 @@ function displayPassEvent($v) {
 
 
 // ---- test ----
-echo pass();
+// echo pass();
