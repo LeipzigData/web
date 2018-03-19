@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2015-07-26
+ * Date: 2018-03-19
  */
 
 include_once("layout.php");
@@ -11,10 +11,9 @@ $content='
 <div class="container">
 <h2 align="center">Erste Absprachen zum Zukunftspass</h2>
 
-<div class="row"> Die folgende Übersicht enthält Partner, die sich entweder
-während der Projektbörse 2017 zur Mitarbeit im Projekt "Zukunftsdiplom" bereit
-erklärt hatten oder auf den Aufruf der Zukunftsakademie Anfang 2018 reagiert
-haben. </div>
+<div class="row"> Die folgende Übersicht enthält Partner, die bisher
+Veranstaltungen für das Projekt "Zukunftsdiplom" im Rahmen des Leipziger
+Ferienpassprogramms im Sommer 2018 gemeldet haben. </div>
 
 '.pass().'
 </div>
