@@ -9,8 +9,8 @@ function pass() {
 
   $out='<h2> Die Partner </h2>';
   $out.=diePartner();
-  $out.='<h2> Relevante Events in den Sommerferien 2017 </h2>';
-  $out.=dieEvents();
+  /* $out.='<h2> Relevante Events in den Sommerferien 2017 </h2>';
+     $out.=dieEvents(); */
   return $out;
 }
 
@@ -21,8 +21,6 @@ PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#>
 PREFIX ical: <http://www.w3.org/2002/12/cal/ical#>
 construct { ?a ?p ?q . } 
 from <http://leipzig-data.de/Data/Zukunftspass/>
-from <http://leipzig-data.de/Data/Vereine/>
-from <http://leipzig-data.de/Data/Unternehmen/>
 Where { 
 ?a  a nl:Partner ; ?p ?q . 
 }
@@ -41,14 +39,33 @@ Where {
 function displayPartner($v) {
     $a=$v->getUri();
     $label=$v->get('rdfs:label'); 
-    $loc=$v->get('nl:Ferienpass');
+    $contact=$v->get('ld:contact'); 
+    $gelistet=$v->get('nl:Ferienpass');
+    $teilnahme=$v->get('nl:Teilnahme');
+    $veranstaltungen=$v->all('nl:Veranstaltung');
+    $abschluss=$v->get('nl:Abschlussveranstaltung');
     $com=$v->get('rdfs:comment');
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<div class="row">
-<dl><dd> <strong>Kommentar:</strong> '.$loc.'. '.$com.' </dd></div>';
+<div class="row"><dl>
+<dd> <strong>Teilnahme:</strong> '.$teilnahme.' </dd>
+<dd> <strong>Ferienpass:</strong> '.$gelistet.' </dd>
+<dd> <strong>Kontakt:</strong> '.$contact.' </dd>
+<dd> <strong>Veranstaltungen:</strong> '.showEvents($veranstaltungen).' </dd>
+<dd> <strong>Vorschlag Abschlussveranstaltung:</strong> '.$abschluss.' </dd>
+<dd> <strong>Kommentar:</strong> '.$com.' </dd>
+</dl></div>';
     return $out;
 }
+
+function showEvents($a) {
+    $b=array(); 
+    foreach($a as $event) {
+        $b[]="<li> $event </li>" ;
+    }
+    return "<ul>".join("\n",$b)."</ul>";
+}
+
 
 function dieEvents() {
   $query = '
