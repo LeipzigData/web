@@ -8,7 +8,7 @@ function pass() {
   EasyRdf_Namespace::set('nl', 'http://nachhaltiges-leipzig.de/Data/Model#');
 
   $out='<h2> Die Partner </h2>';
-  $out.=diePartner();
+  $out.=diePartnerNew();
   /* $out.='<h2> Relevante Events in den Sommerferien 2017 </h2>';
      $out.=dieEvents(); */
   return $out;
@@ -31,6 +31,17 @@ Where {
   // echo $result->dump("turtle");
   $s=array();
   foreach ($result->allOfType("nl:Partner") as $v) {
+      $s[$v->getUri()]=displayPartner($v);
+  }
+  return join($s,"\n") ; 		
+}
+
+function diePartnerNew() {
+    $graph=new EasyRdf_Graph();
+    $graph->parsefile("http://www.leipzig-data.de/RDFData/Zukunftspass.ttl");
+  // echo $result->dump("turtle");
+  $s=array();
+  foreach ($graph->allOfType("nl:Partner") as $v) {
       $s[$v->getUri()]=displayPartner($v);
   }
   return join($s,"\n") ; 		
