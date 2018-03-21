@@ -44,6 +44,7 @@ function diePartnerNew() {
   foreach ($graph->allOfType("nl:Partner") as $v) {
       $s[$v->getUri()]=displayPartner($v);
   }
+  sort($s);
   return join($s,"\n") ; 		
 }
 
