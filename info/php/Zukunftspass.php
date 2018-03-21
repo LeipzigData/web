@@ -60,7 +60,7 @@ function displayPartner($v) {
     if (strpos($teilnahme,"bisher keine Antwort")!==false) { return ''; }
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-<div class="row">Ferienpass: '.$gelistet.' </div>';
+<div class="row">Ferienpass: '.$gelistet.' </div>
 <div class="row">'.showEvents($veranstaltungen).' </div>';
     return $out;
 }
