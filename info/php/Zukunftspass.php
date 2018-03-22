@@ -61,6 +61,7 @@ function displayPartner($v) {
     $out='
 <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
 <div class="row">Ferienpass: '.$gelistet.' </div>
+<div class="row">Anmerkungen: '.$teilnahme.' </div>
 <div class="row">'.showEvents($veranstaltungen).' </div>';
     return $out;
 }
