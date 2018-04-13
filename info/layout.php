@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2018-02-18
+ * last update: 2018-04-13
  */
 
 function pageHeader() {
@@ -39,7 +39,8 @@ function pageNavbar() {
             <li><a href="alteEvents.php">Übersicht vergangener Events</a></li> 
             <li><a href="mint-orte.php">MINT-Orte in Leipzig</a></li> 
             <!-- <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li> -->
-            <li><a href="zukunftspass.php">Zukunftsdiplom</a></li> 
+            <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
+            <li><a href="zukunftsdiplom.php">Zukunftsdiplom</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
