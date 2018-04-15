@@ -14,9 +14,7 @@ function katalog() {
   EasyRdf_Namespace::set('dcat', 'http://www.w3.org/ns/dcat#');
   EasyRdf_Namespace::set('', 'http://leipzig-data.de/Data/MINT-Katalog/');
 
-  $out='<h2>Liste der MINT-Kataloge mit mitteldeutschen Einträgen</h2>';
-  $out.=dieDatasets();
-  return $out;
+  return dieDatasets();
 }
 
 function dieDatasets() {
@@ -24,7 +22,7 @@ function dieDatasets() {
     $graph->parsefile("http://www.leipzig-data.de/RDFData/MINT-Katalog.ttl");
   // echo $result->dump("turtle");
   $s=array();
-  foreach ($graph->allOfType("dcat:DataSet") as $v) {
+  foreach ($graph->allOfType("dcat:Dataset") as $v) {
       $s[$v->getUri()]=displayDataset($v);
   }
   sort($s);
@@ -43,15 +41,15 @@ function displayDataset($v) {
     <div class="row"><strong>Beschreibung:</strong> '.$description.' </div>
 ';
     if (isset($landingPage)) {
-        $out.='<div class="row"><strong>Webseite:</strong> '
-            .$landingPage.' </div>';
+        $out.='<div class="row"><strong>Landing Page:</strong> '
+            .highlightLink($landingPage).' </div>';
     }
     if (isset($url)) {
         $out.='<div class="row"><strong>Weitere URL:</strong> '.$url.' </div>';
     }
     if (!empty($datensaetze)) {
-        $out.='<div class="row"><h5>Datensätze<h5><ul>'
-            .$datensaetze.'</ul></div>';
+        $out.='<h4>Datensätze</h4><dl>'
+            .$datensaetze.'</dl>';
     }
     return $out;
 }
@@ -59,12 +57,24 @@ function displayDataset($v) {
 function displayDistributions($v) {
     $out='';
     foreach($v->all('dcat:distribution') as $u) {
-        $out.='<li>'.$u->getURI().'</li>';
+        $a=$u->getURI();
+        $label=$u->get('dct:title'); 
+        $mediatype=$u->get('dcat:mediaType'); 
+        $durl=$u->get('dcat:downloadURL'); 
+        $aurl=$u->get('dcat:accessURL'); 
+        $out.='<dt> <a href="getdata.php?show='.$a.'">'.$label.'</a></dt><ul>';
+        if (isset($mediatype)) { $out.='<li><strong>MediaType:</strong> '.$mediatype.' </li>'; }
+        if (isset($durl)) { $out.='<li><strong>DownloadURL:</strong> '.highlightLink($durl).' </li>'; }
+        if (isset($aurl)) { $out.='<li><strong>AccessURL:</strong> '.highlightLink($aurl).' </li>'; }
+        $out.='</ul>';
     }
     return $out;
 }
 
-
+function highlightLink($u) {
+    $u=preg_replace(".(\S+//\S+).","<a href=\"$1\">$1</a>",$u);
+    return $u;
+}
 
 // ---- test ----
 // echo katalog();

@@ -9,7 +9,7 @@ include_once("php/MINT-Katalog.php");
 
 $content='      
 <div class="container">
-<h2 align="center">Katalog bundesweiter MINT-Kataloge</h2>
+<h2 align="center">Katalog bundesweiter MINT-Kataloge mit Einträgen aus dem mitteldeutschen Raum</h2>
 
 <div class="row"> Im Zuge der Erfassung regionaler MINT-Angebote durch die
 Initiativgruppe "MINT Mitteldeutschland" versuchen wir, uns einen Überblick
