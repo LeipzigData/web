@@ -10,12 +10,39 @@ function pass() {
   $out='<h2> Die Module </h2>';
   $out.=dieModule();
 
+  $out.='<h2> Die Themenbereiche </h2>';
+  $out.=dieThemenbereiche();
+
   $out.='<h2> Die Veranstaltungen </h2>';
   $out.=dieVeranstaltungen();
 
   $out.='<h2> Die Partner </h2>';
   $out.=diePartner();
   return $out;
+}
+
+function listeVeranstaltungen($praedikat,$objekt) {
+  $query = '
+PREFIX ld: <http://leipzig-data.de/Data/Model/> 
+PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
+select  ?a 
+from <http://leipzig-data.de/Data/Zukunftsdiplom/>
+Where { 
+  ?a a nl:Event; '.$praedikat.' '.$objekt.' . 
+}
+';
+  
+  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
+  $result=$sparql->query($query);
+  $s=array();
+  foreach ($result as $row) {
+      $s[]=zdtrim($row->a);
+  } 
+  return join(", ",$s);
+}
+
+function zdtrim($s) {
+    return str_replace("http://leipzig-data.de/Data/",'',$s);
 }
 
 function dieModule() {
@@ -34,10 +61,37 @@ Where {
   // echo $result->dump("turtle");
   $s=array();
   foreach ($result as $row) {
-      $s[]='<tr><td>'.$row->a.'</td><td>'.$row->l.'</td><td>'.$row->ziele.'</td></tr>';
+      $u=listeVeranstaltungen("ld:Einordnung","<$row->a>"); 
+      $s[]='<tr><td>'.$row->a.'</td><td>'.$row->l.'</td><td>'.$row->ziele.
+          '</td><td>'.$u.'</td></tr>';
   }
   return '<table align="center" border="3" width="70%">
-<tr><th>Modul</th><th>Thema</th><th>Lernziele</th></tr>
+<tr><th>Modul</th><th>Thema</th><th>Lernziele</th><th>Veranstaltungen</th></tr>
+'.join($s,"\n").'
+</table>' ; 		
+}
+
+function dieThemenbereiche() {
+  $query = '
+PREFIX ld: <http://leipzig-data.de/Data/Model/> 
+PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
+select  ?a ?l 
+from <http://leipzig-data.de/Data/Zukunftsdiplom/>
+Where { 
+  ?a a nl:Themenbereich ; rdfs:label ?l . 
+}
+';
+  
+  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
+  $result=$sparql->query($query); 
+  // echo $result->dump("turtle");
+  $s=array();
+  foreach ($result as $row) {
+      $u=listeVeranstaltungen("ld:Einordnung","<$row->a>"); 
+      $s[]='<tr><td>'.$row->a.'</td><td>'.$row->l.'</td><td>'.$u.'</td></tr>';
+  }
+  return '<table align="center" border="3" width="70%">
+<tr><th>Themenbereich</th><th>Thema</th><th>Veranstaltungen</th></tr>
 '.join($s,"\n").'
 </table>' ; 		
 }
@@ -99,7 +153,6 @@ optional { ?a ical:description ?desc . }
 optional { ?a ld:Altersgruppe ?ag . }
 optional { ?a ld:Veranstaltungsmodus ?wie . }
 optional { ?a ld:Veranstaltungsort ?wo . }
-optional { ?a ld:zumModul ?mod . }
 optional { ?a ld:Veranstalter ?wer . }
 optional { ?a ld:Kosten ?ko . }
 optional { ?a ld:Anmerkung ?an . }
@@ -124,7 +177,6 @@ function displayEvent($v) {
 <h3> <a href="getdata.php?show='.$v->a.'">'.$v->l.'</a></h3>
 <div class="row">
 <dl><dd> <strong>Beschreibung:</strong> '.str_replace("\n",'<br/>',$description).' </dd>
-<dd> <strong>Zum Modul:</strong> '.$v->mod.'</dd>
 <dd> <strong>Wie angeboten:</strong> '.$v->wie.'</dd>
 <dd> <strong>Wo angeboten:</strong> '.$v->wo.'</dd>
 <dd> <strong>Altersgruppe:</strong> '.$v->ag.'</dd>
