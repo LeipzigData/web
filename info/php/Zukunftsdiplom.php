@@ -89,7 +89,7 @@ function displayOrt($v) {
 <h3> <a href="getdata.php?show='.$v->a.'">'.$v->l.'</a></h3>
 <div class="row"> <dl>';
     if (isset($v->adr))   { $out.='<dd> <strong>Adresse:</strong> '.$v->adr.' </dd>'; }
-    if (isset($v->e))   { $out.='<dd> <strong>Erreichbarkeit:</strong> '.$v->wie.'</dd>'; }
+    if (isset($v->e))   { $out.='<dd> <strong>Erreichbarkeit:</strong> '.$v->e.'</dd>'; }
     if (isset($v->url))   { $out.='<dd> <strong>URL:</strong> '.$v->url.'</dd>'; }
     $out.='</dl></div>';
     return $out;
