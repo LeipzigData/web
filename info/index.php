@@ -10,9 +10,11 @@ $content='
 <div class="container">
 <div class="row">
 <div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
+
 <p>Hier wird demonstriert, welche Art von Webseiten sich aus den im Rahmen des
 Leipzig Data Projekts zusammengetragenen RDF-Quellen mit kleinen PHP-Skripten
-erstellen lassen.  </p> 
+erstellen lassen.  Die Site dient wissenschaftlichen Zwecken im Sinne von § 27
+BDSG (neu). </p>
 
 <p>Die Beispiele nutzen das <a href="http://getbootstrap.com" >Bootstrap
 Framework</a> sowie die <a href="http://www.easyrdf.org/" >EasyRdf PHP
