@@ -12,9 +12,6 @@ function pass() {
   $out='<h2> Die Module </h2>';
   $out.=dieModule();
 
-  $out.='<h2> Die Themenbereiche </h2>';
-  $out.=dieThemenbereiche();
-
   $out.='<h2> Die Veranstaltungen </h2>';
   $out.=dieVeranstaltungen();
 
@@ -28,14 +25,13 @@ function pass() {
 
 // --- Hilfsfunktionen
 
-function listeVeranstaltungen($praedikat,$objekt) {
+function getAddress($adr) {
   $query = '
 PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
-select  ?a 
-from <http://leipzig-data.de/Data/Zukunftsdiplom/>
+select ?l 
+from <http://leipzig-data.de/Data/Adressen/>
 Where { 
-  ?a a nl:Event; '.$praedikat.' '.$objekt.' . 
+  <'.$adr.'> rdfs:label ?l . 
 }
 ';
   
@@ -43,7 +39,7 @@ Where {
   $result=$sparql->query($query);
   $s=array();
   foreach ($result as $row) {
-      $s[]=zdtrim($row->a);
+      $s[]=$row->l;
   } 
   return join(", ",$s);
 }
@@ -58,6 +54,10 @@ function mehrzeilig($a) {
         $b[]='<li> '.str_replace("\n",'<br/>',$event).' </li>' ;
     }
     return "<ul>".join("\n",$b)."</ul>";
+}
+
+function showURL($url) {
+    return '<a href="'.$url.'">'.$url.'</a>';
 }
 
 
@@ -89,9 +89,9 @@ function displayOrt($v) {
     $out='
 <h3> <a href="getdata.php?show='.$v->wo.'">'.$v->l.'</a></h3>
 <div class="row"> <dl>';
-    if (isset($v->adr))   { $out.='<dd> <strong>Adresse:</strong> '.$v->adr.' </dd>'; }
+    if (isset($v->adr))   { $out.='<dd> <strong>Adresse:</strong> '.getAddress($v->adr).' </dd>'; }
     if (isset($v->e))   { $out.='<dd> <strong>Erreichbarkeit:</strong> '.$v->e.'</dd>'; }
-    if (isset($v->url))   { $out.='<dd> <strong>URL:</strong> '.$v->url.'</dd>'; }
+    if (isset($v->url))   { $out.='<dd> <strong>URL:</strong> '.showURL($v->url).'</dd>'; }
     $out.='</dl></div>';
     return $out;
 }
@@ -112,37 +112,11 @@ Where {
   // echo $result->dump("turtle");
   $s=array();
   foreach ($result as $row) {
-      $u=listeVeranstaltungen("ld:Einordnung","<$row->a>"); 
       $s[]='<tr><td>'.zdtrim($row->a).'</td><td>'.$row->l.'</td><td>'.$row->ziele.
-          '</td><td>'.$u.'</td></tr>';
+          '</td></tr>';
   }
   return '<table align="center" border="3" width="70%">
-<tr><th>Modul</th><th>Thema</th><th>Lernziele</th><th>Veranstaltungen</th></tr>
-'.join($s,"\n").'
-</table>' ; 		
-}
-
-function dieThemenbereiche() {
-  $query = '
-PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
-select  ?a ?l 
-from <http://leipzig-data.de/Data/Zukunftsdiplom/>
-Where { 
-  ?a a nl:Themenbereich ; rdfs:label ?l . 
-}
-';
-  
-  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-  $result=$sparql->query($query); 
-  // echo $result->dump("turtle");
-  $s=array();
-  foreach ($result as $row) {
-      $u=listeVeranstaltungen("ld:Einordnung","<$row->a>"); 
-      $s[]='<tr><td>'.zdtrim($row->a).'</td><td>'.$row->l.'</td><td>'.$u.'</td></tr>';
-  }
-  return '<table align="center" border="3" width="70%">
-<tr><th>Themenbereich</th><th>Thema</th><th>Veranstaltungen</th></tr>
+<tr><th>Modul</th><th>Thema</th><th>Lernziele</th></tr>
 '.join($s,"\n").'
 </table>' ; 		
 }
@@ -160,7 +134,6 @@ optional { ?a nl:Teilnahme ?tn . }
 optional { ?a ld:contact ?contact . }
 optional { ?a ld:hasAddress ?address . }
 optional { ?a foaf:homepage ?url . }
-optional { ?a owl:sameAs ?nl . }
 }
 ';
   
@@ -179,16 +152,9 @@ function displayPartner($v) {
     $out='
 <h3> <a href="getdata.php?show='.$v->a.'">'.$v->l.'</a></h3>';
     if (isset($v->contact))   { $out.='<div class="row">Kontakt: '.$v->contact.' </div>'; }
-    if (isset($v->address))   { $out.='<div class="row">Adresse: '.$v->address.' </div>'; }
-    if (isset($v->url))   { $out.='<div class="row">URL: <a href='.$v->url.'>'.$v->url.'</a> </div>'; }
-    if (isset($v->nl))   { $out.='<div class="row">'.EintragNL($v->nl).'</div>'; }
+    if (isset($v->address))   { $out.='<div class="row">Adresse: '.getAddress($v->address).' </div>'; }
+    if (isset($v->url))   { $out.='<div class="row">URL: '.showURL($v->url).' </div>'; }
     return $out;
-}
-
-function EintragNL($uri) {
-    preg_match("/(\d+)/",$uri,$s);
-    return '<a href="http://daten.nachhaltiges-leipzig.de/api/v1/users/'.$s[0].'.json">Eintrag</a> bei '
-        .'<a href="http://nachhaltiges-leipzig.de/">Nachhaltiges Leipzig</a>.';
 }
 
 function dieVeranstaltungen() {
@@ -200,13 +166,15 @@ select *
 from <http://leipzig-data.de/Data/Zukunftsdiplom/>
 Where { 
 ?a  a nl:Event ; rdfs:label ?l . 
+optional { ?a ical:summary ?sum . }
 optional { ?a ical:description ?desc . }
 optional { ?a ld:Altersgruppe ?ag . }
 optional { ?a ld:Veranstaltungsmodus ?wie . }
-optional { ?a ld:Veranstaltungsort ?wo . }
-optional { ?a ld:Veranstalter ?wer . }
+optional { ?a ld:Veranstaltungsort ?wo . ?wo rdfs:label ?wol . }
+optional { ?a ld:Veranstalter ?wer . ?wer rdfs:label ?werl . }
 optional { ?a ld:Kosten ?ko . }
 optional { ?a ld:Anmerkung ?an . }
+optional { ?a ld:Einordnung ?ein . ?ein rdfs:label ?einl . }
 optional { ?a ical:url ?url . }
 } order by ?a 
 ';
@@ -242,49 +210,22 @@ Extra:
 
 function displayEvent($v) {
     $out='
-<h3> '.zdtrim($v->a).': <a href="getdata.php?show='.$v->a.'">'.$v->l.'</a></h3>
+<h3> <a href="getdata.php?show='.$v->a.'">'.$v->l.'</a></h3>
 <div class="row"> <dl>';
-    if (isset($v->desc))   { $out.='<dd> <strong>Beschreibung:</strong> '.str_replace("\n",'<br/>',$v->desc).' </dd>'; }
-    $out.=Einordnung($v->a); 
+    if (isset($v->einl))   { $out.='<dd> <strong>Zum Modul:</strong> '.$v->einl.'</dd>'; }
+    if (isset($v->sum))   { $out.='<dd> <strong>Kurzbeschreibung:</strong> '.str_replace("\n",'<br/>',$v->sum).' </dd>'; }
+    if (isset($v->desc))   { $out.='<dd> <strong>Langbeschreibung:</strong> '.str_replace("\n",'<br/>',$v->desc).' </dd>'; }
     if (isset($v->wie))   { $out.='<dd> <strong>Veranstaltungsmodus:</strong> '.$v->wie.'</dd>'; }
-    if (isset($v->wo))   { $out.='<dd> <strong>Veranstaltungsort:</strong> '.$v->wo.'</dd>'; }
+    if (isset($v->wol))   { $out.='<dd> <strong>Veranstaltungsort:</strong> '.$v->wol.'</dd>'; }
     if (isset($v->ag))   { $out.='<dd> <strong>Altersgruppe:</strong> '.$v->ag.'</dd>'; }
     if (isset($v->ko))   { $out.='<dd> <strong>Kosten:</strong> '.$v->ko.'</dd>'; }
     if (isset($v->an))   { $out.='<dd> <strong>Anmerkungen:</strong> '.$v->an.'</dd>'; }
-    if (isset($v->wer))   { $out.='<dd> <strong>Veranstalter:</strong> '.$v->wer.'</dd>'; }
-    if (isset($v->url))   { $out.='<dd> <strong>URL:</strong> '.$v->url.'</dd>'; }
+    if (isset($v->werl))   { $out.='<dd> <strong>Veranstalter:</strong> '.$v->werl.'</dd>'; }
+    if (isset($v->url))   { $out.='<dd> <strong>URL:</strong> '.showURL($v->url).'</dd>'; }
     $out.='</dl></div>';
     return $out;
 }
 
-
-function Einordnung($a) {
-    /* In der Version zu langsam, da zu viele Anfragen gestellt werden */
-  $query = '
-PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-select ?e ?l
-from <http://leipzig-data.de/Data/Zukunftsdiplom/>
-Where { 
-<'.$a.'> ld:Einordnung ?e .
-?e rdfs:label ?l .
-}
-';
-  
-  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-  //echo $query;
-  $result=$sparql->query($query); 
-  //echo $result->dump("turtle");
-  $s=array();
-  foreach ($result as $row) {
-      if (preg_match("/Modul/",$row->e)) {
-          $s[]='<dd><strong>Leitidee:</strong> '.$row->l.'</dd>';
-      } else {
-          $s[]='<dd><strong>Themenbereich:</strong> '.$row->l.'</dd>';
-      }
-  }
-  return join("\n",$s);
-}
-
-  
+ 
 // ---- test ----
 // echo pass();
