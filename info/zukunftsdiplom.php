@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-03-19
+ * Date: 2018-06-30
  */
 
 include_once("layout.php");
@@ -10,15 +10,16 @@ include_once("php/Zukunftsdiplom.php");
 $content='      
 <div class="container"> 
 
-<h2 align="center">Aktueller Stand zum Angebotsaufbau für das <br/>  Leipziger
-Zukunftsdiplom im Sommer 2018</h2>
+<h2 align="center">Leipziger Zukunftsdiplom im Sommer 2018</h2>
 
-<div class="row"> Die folgende Übersicht enthält die Module und
-Veranstaltungsangebote für das Leipziger Zukunftsdiplom, das in den
-Sommerferien 2018 in enger Abstimmung mit dem Ferienpassprogramm der Stadt
-Leipzig erstmals vergeben wird. </div>
+<div class="row"> Siehe 
+<ul>
+<li> <a href="https://www.zukunftsakademie-leipzig.de/ziele/zukunftsdiplom/">die Webseiten des Veranstalters</a></li>
+<li> <a href="http://pcai042.informatik.uni-leipzig.de/~zd18/zd-web/">den Pitch einer alternativen Webpräsenz auf RDF-Basis</a></li>
+<li> eine <a href="http://leipzig-netz.de/index.php5/ZAK.Zukunftsdiplom">Darstellung der Hintergründe</a> auf den Seiten des Leizig-Wikis</li>
+</ul>
+</div>
 
-'.pass().'
 </div>
 ';
 echo showPage($content);
