@@ -16,7 +16,7 @@ $content='
 <ul>
 <li> <a href="https://www.zukunftsakademie-leipzig.de/ziele/zukunftsdiplom/">die Webseiten des Veranstalters</a></li>
 <li> <a href="http://pcai042.informatik.uni-leipzig.de/~zd18/zd-web/">den Pitch einer alternativen Webpräsenz auf RDF-Basis</a></li>
-<li> eine <a href="http://leipzig-netz.de/index.php5/ZAK.Zukunftsdiplom">Darstellung der Hintergründe</a> auf den Seiten des Leizig-Wikis</li>
+<li> eine <a href="http://leipzig-netz.de/index.php5/ZAK.Zukunftsdiplom">Darstellung der Hintergründe</a> auf den Seiten des Leipzig-Wikis</li>
 </ul>
 </div>
 
