@@ -41,6 +41,7 @@ function pageNavbar() {
             <!-- <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li> -->
             <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
             <li><a href="zukunftsdiplom.php">Zukunftsdiplom</a></li> 
+            <li><a href="gebaeudenavigator.php">Gebäudenavigator</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
