@@ -9,7 +9,7 @@ include_once("header.html");
   <p>Wir haben uns mit verschiedenen Aspekten dieser Gentrifizierungsprozesse in Leipzig beschäftigt, dazu Daten auf Ortsteilebene für verschiedene Jahre gesammelt,  und diese in zwei Karten visualisiert.</p>
   <h2>Weitere Ergebnisse</h2>
 <ul>
-<li> <a href="http://www.leipzig-data.de/RDFData/Gentri-14/">Daten</a> des Projekts als RDF Data Cube </li>
+<li> Daten des Projekts als RDF Data Cube im <a href="https://github.com/LeipzigData/Projekte">Leipzig Data Projekte git Repo</a> </li>
 <li> <a href="Berichte/Brunnert.pdf">Bericht</a> zu Aspekten der Datentransformation von Marius Brunnert </li>
 <li> <a href="Berichte/Obraczka.pdf">Bericht</a> zur Umsetzung der Datenvisualisierung von Daniel Obraczka </li>
 </div>
