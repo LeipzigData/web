@@ -41,6 +41,7 @@ function pageNavbar() {
             <!-- <li><a href="Event-Widget">Event-Widget</a></li> -->
             <li><a href="IHR-15">Interaktiver Haushalt</a></li> 
             <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
+            <li><a href="NachhaltigesLeipzig">Nachhaltigkeit in Leipzig</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
