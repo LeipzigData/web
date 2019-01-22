@@ -17,6 +17,8 @@ nicht geleistet werden kann.</p>
 lokal aufsetzen und ausprobieren.  Die dazu erforderlichen Daten werden weiter
 in unserem RDF Store bereitgestellt. </p>
 
+<div style="text-align:center; margin-top:5em"><img src="http://www.leipzig-data.de/Upload/images/IHR-15.png" alt="Eingangsbild des Haushaltsrechners"/></div>
+
  ';
 
 echo myHeader().($content).myFooter();
