@@ -30,7 +30,7 @@ function myHeader() {
             <li><a href="index.php">Projekt</a></li>
             <li><a href="hintergrund.php">Hintergrund</a></li>
             <li><a href="verlauf.php">Projektverlauf</a></li>
-            <li><a href="http://www.leipzig-data.de/drupal/" target="_blank">Prototyp</a></li>
+            <li><a href="prototyp.php">Prototyp</a></li>
             <li><a href="dokumente.php">Dokumente</a></li>
             <li><a href="impressum.php">Impressum</a></li>
           </ul>
