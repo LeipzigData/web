@@ -26,7 +26,7 @@ sind Teil dieser Distribution.
 ## Event Widget
 
 Mit dem Event Widget werden Daten aus der [Leipzig Data Event
-Ontologie](http://leipzig-data.de/ontology/events] visualisiert, wobei das
+Ontologie](http://leipzig-data.de/ontology/events) visualisiert, wobei das
 Exhibit-Framework zum Einsatz kam.  Da momentan wenig Daten im Leipzig Data
 Event Projekt verfügbar sind und auch das Exhibit-Framework sowohl
 weiterentwickelt wurde als auch an Bedeutung verloren hat, sind die hier
@@ -74,8 +74,8 @@ die als RDF in die [Datenbasis des Leipzig Data
 Projekts](http://www.leipzig-data.de/RDFData) integriert wurden.  Die
 Visualisierung der Daten muss an die weiteren Entwicklungen der Google Maps API angepasst werden und ist aktuell nicht verfügbar.
 
-Mehr dazu (auf den Leipzig Data
-Webseiten)[http://leipzig-data.de/jugendstadtplan].
+Mehr dazu [auf den Leipzig Data
+Webseiten](http://leipzig-data.de/jugendstadtplan).
 
 ## MINT-15
 
