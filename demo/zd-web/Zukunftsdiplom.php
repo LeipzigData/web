@@ -142,6 +142,7 @@ function displayEvent($v) {
     $veranstalter=getUser($v["user_id"]);
     $ort=$v["full_address"];
     $termin=$v["start_at"];
+    $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
@@ -154,6 +155,9 @@ function displayEvent($v) {
     }
     if (isset($veranstalter)) {
         $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
+    }
+    if (isset($zielgruppe)) {
+        $out.='<dd> <strong>Zielgruppe:</strong> '.$zielgruppe.' </dd>';
     }
     $out.='<dd> <strong>Zum Modul:</strong> '.getModul($nr).'</dd>'; 
     if (isset($beschreibung)) {
