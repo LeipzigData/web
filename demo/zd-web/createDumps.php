@@ -28,7 +28,6 @@ function createDumps() {
     foreach($res as $row) {
         if (($row["type"]=="Event")
         and ($row["start_at"]>="2019")
-        and ($row["first_root_category"]=="55")
         ) {
             $s[$row["id"]]=$row;
         }
