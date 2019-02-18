@@ -269,7 +269,22 @@ function getModul($nr) {
 }
 
 function getVeranstaltungen() { // ein Mock
-    return array(1552, 1553, 1554, 1555);
+    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $src="activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $s=array();
+    foreach($res as $row) {
+        if (($row["type"]=="Event")
+        and ($row["start_at"]>="2019")
+        and ($row["first_root_category"]=="55")
+        ) {
+            $s[]=$row["id"];
+        }
+    }
+    return $s;
+
+    // return array(1552, 1553, 1554, 1555);
 }
 
 // ---- test ----
@@ -284,3 +299,4 @@ function getVeranstaltungen() { // ein Mock
 // echo displayPartner("55");
 // echo displayEvent("1556");
 // echo getCategory("55");
+// print_r(getVeranstaltungen());
