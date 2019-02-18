@@ -10,6 +10,11 @@ require_once("inc.php");
 
 // --- Hilfsfunktionen
 
+function getDatum($d) {
+// Verwandelt 2019-08-11T15:00:00.000+02:00 in Lesbares
+    return date("d. M Y, H:i",strtotime($d)); 
+}
+
 function getAddress($adr) {
   $query = '
 PREFIX ld: <http://leipzig-data.de/Data/Model/> 
@@ -46,21 +51,13 @@ function mehrzeilig($a) {
 function dieOrte() {
     $orte=array();
     foreach (getVeranstaltungen() as $row) {
-        $orte=getOrt($orte,$row);
+        $orte[$row["full_address"]]=$row;
     }
     $s=array();
     foreach ($orte as $row) {
         $s[]=displayOrt($row);
     }
     return join($s,"\n") ; 		
-}
-
-function getOrt($orte,$nr) {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$nr.json";
-    $string = file_get_contents($src);
-    $v = json_decode($string, true);
-    $orte[$v["full_address"]]=$v;
-    return $orte;
 }
 
 function displayOrt($v) { 
@@ -99,17 +96,14 @@ Where {
 
 function diePartner() {
     $partner=array();
-    foreach (getVeranstaltungen() as $nr) {
-        $partner=getPartner($partner,$nr);
+    foreach (getVeranstaltungen() as $row) {
+        $partner=getPartner($partner,$row);
     }
     return join("\n",$partner) ; 		
 }
 
-function getPartner($partner,$nr) {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$nr.json";
-    $string = file_get_contents($src);
-    $v = json_decode($string, true);
-    $user=$v["user_id"];
+function getPartner($partner,$row) {
+    $user=$row["user_id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$user.json";
     $string = file_get_contents($src);
     $v = json_decode($string, true);
@@ -142,27 +136,28 @@ function dieVeranstaltungen() {
   return join($s,"\n") ; 		
 }
 
-function displayEvent($nr) {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$nr.json";
-    $string = file_get_contents($src);
-    $v = json_decode($string, true);
+function displayEvent($v) {
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=getUser($v["user_id"]);
     $ort=$v["full_address"];
     $termin=$v["start_at"];
+    $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <dl>';
     if (isset($termin)) {
-        $out.='<dd> <strong>Tag und Zeit:</strong> '.$termin.' </dd>';
+        $out.='<dd> <strong>Tag und Zeit:</strong> '.getDatum($termin).' </dd>';
     }
     if (isset($ort)) {
         $out.='<dd> <strong>Veranstaltungsort:</strong> '.$ort.' </dd>';
     }
     if (isset($veranstalter)) {
         $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
+    }
+    if (isset($zielgruppe)) {
+        $out.='<dd> <strong>Zielgruppe:</strong> '.$zielgruppe.' </dd>';
     }
     $out.='<dd> <strong>Zum Modul:</strong> '.getModul($nr).'</dd>'; 
     if (isset($beschreibung)) {
@@ -242,21 +237,6 @@ function TeilnehmerProVeranstaltung($id) {
     foreach ($res as $row) { return $row['uhu']; }
 }
 
-function getCategory($nr) {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/categories/$nr.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    return '<a href="'.$src.'">'.$res["name"].'</a>';
-}
-
-function getCategories($a) {
-    $b=array();
-    foreach ($a as $u) {
-        $b[]=getCategory($u);
-    }
-    return "\n".join("\n",$b);
-}
-
 function getUser($nr) {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$nr.json";
     $string = file_get_contents($src);
@@ -269,22 +249,14 @@ function getModul($nr) {
 }
 
 function getVeranstaltungen() { // ein Mock
-    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $src="activities.json";
+    $src="http://leipzig-data.de/demo/zd-web/Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
     foreach($res as $row) {
-        if (($row["type"]=="Event")
-        and ($row["start_at"]>="2019")
-        and ($row["first_root_category"]=="55")
-        ) {
-            $s[]=$row["id"];
-        }
+        $s[$row["id"]]=$row;
     }
     return $s;
-
-    // return array(1552, 1553, 1554, 1555);
 }
 
 // ---- test ----
@@ -295,8 +267,5 @@ function getVeranstaltungen() { // ein Mock
 // echo TeilnehmerProVeranstaltung("Veranstaltung.14");
 // echo diePartner();
 // echo dieOrte();
-// echo dieVeranstaltungen();
-// echo displayPartner("55");
-// echo displayEvent("1556");
-// echo getCategory("55");
-// print_r(getVeranstaltungen());
+
+echo getDatum("2019-08-11T15:00:00.000+02:00");
