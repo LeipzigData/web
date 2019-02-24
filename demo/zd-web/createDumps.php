@@ -20,8 +20,8 @@ function showTargetGroups() {
 }
 
 function createZDDump() { 
-    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $src="activities.json";
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
