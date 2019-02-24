@@ -33,10 +33,7 @@ function createZDDump() {
 
 function isZDListed($row) {
     return (
-        (($row["user_id"]==14)
-        or ($row["user_id"]==16)
-        or ($row["user_id"]==26)
-        or ($row["user_id"]==97)
+        (($row["user_id"]==214)
         or ($row["user_id"]==181))
         and ($row["type"]=="Event") 
         and ($row["start_at"]>="2019") 
