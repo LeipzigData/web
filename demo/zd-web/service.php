@@ -8,11 +8,11 @@
 include_once("Zukunftsdiplom.php");
 
 if (isset($_GET['teilnehmer'])) {
-    return derTeilnehmer();
+    echo derTeilnehmer();
 } else if (isset($_GET['veranstaltungen'])) {
-    return dieVeranstaltungen();
+    echo dieVeranstaltungen();
 } else if (isset($_GET['ranking'])) {
-    return dasRanking();
-} else return "Fehler 404";
+    echo dasRanking();
+} else echo "Fehler 404";
 
 

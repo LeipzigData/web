@@ -15,6 +15,15 @@ Veranstaltungen sind fest vorgegebenen Modulen zuzuordnen. Das wird aktuell
 ebenfalls in Zukunftsdiplom.ttl abgebildet, da entsprechende Strukturen in der
 Nachhaltigkeitsdatenbank noch fehlen.
 
+Die einzelnen Bestandteile können über das Skript service.php und
+entsprechende GET-Parameter ausgelesen werden. Es wird jeweils ein
+HTML-Schnipsel zurückgegeben, das zum Beispiel als Shortcode in Wordpress
+eingebunden werden kann.
+
+* service.php?teilnehmer&id=<id> - Information zu einem einzelnen Teilnehmer
+* service.php?veranstaltungen - Information zu den Veranstaltungen
+* service.php?ranking - Das Ranking
+
 ## Installation
 
 Die Applikation ist im Demobereich von Leipzig-Data ausgerollt, kann aber auch

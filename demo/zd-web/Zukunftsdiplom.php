@@ -172,15 +172,19 @@ function displayEvent($v) {
 }
 
 function derTeilnehmer() {
-    $hash=$_GET['id'];
-    $text='Die ID '.$hash.' ist nicht vergeben.'; 
-    if(isset($hash)) {
-        $u=Teilnehmerinfo($hash);
-        if(!empty($u)) { $text=$u; }
+    $text='';
+    if (isset($_GET['id'])) {
+        $hash=$_GET['id'];
+        $text='Die ID '.$hash.' ist nicht vergeben.'; 
+        if(isset($hash)) {
+            $u=Teilnehmerinfo($hash);
+            if(!empty($u)) { $text=$u; }
+        }
         return '
 <h3>Informationen zum Teilnehmer</h3>
-<div class="row"> <p>'.$text.'</p></div>' ; }
-    else return '' ;
+<div class="row"> <p>'.$text.'</p></div>' ;
+    }
+    else return 'Keine ID angegeben.' ;
 }
 
 function Teilnehmerinfo($hash) {
@@ -261,8 +265,7 @@ function getVeranstaltungen() { // ein Mock
 }
 
 // ---- test ----
-// echo checkTeilnehmer('12');
-// echo checkTeilnehmer('thaexaedaiweuvi5ceiphu4hoh6Yi3');
+// echo derTeilnehmer();
 // echo dasRanking();
 // echo TeilnehmerProVeranstaltung("Veranstaltung.13");
 // echo TeilnehmerProVeranstaltung("Veranstaltung.14");
