@@ -249,8 +249,8 @@ function getModul($nr) {
 }
 
 function getVeranstaltungen() { // ein Mock
-    // $src="http://leipzig-data.de/demo/zd-web/Dumps/Zukunftsdiplom.json";
-    $src="Dumps/Zukunftsdiplom.json";
+    $src="http://leipzig-data.de/demo/zd-web/Dumps/Zukunftsdiplom.json";
+    // $src="Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
