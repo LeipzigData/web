@@ -38,8 +38,8 @@ function pageNavbar() {
             <li><a href="index.php">Startseite</a></li> 
             <li><a href="teilnehmer.php">Teilnehmer</a></li> 
             <li><a href="events.php">Die Veranstaltungen</a></li> 
-            <li><a href="akteure.php">Die Veranstalter</a></li> 
-            <li><a href="orte.php">Die Veranstaltungsorte</a></li> 
+            <!-- <li><a href="akteure.php">Die Veranstalter</a></li> 
+            <li><a href="orte.php">Die Veranstaltungsorte</a></li> --> 
             <li><a href="ranking.php">Ranking</a></li> 
           </ul>
         </div><!-- navbar end -->

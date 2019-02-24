@@ -19,20 +19,35 @@ function showTargetGroups() {
     }
 }
 
-function createDumps() { 
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    //$src="activities.json";
+function createZDDump() { 
+    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
     foreach($res as $row) {
-        if (($row["type"]=="Event")
-        and ($row["start_at"]>="2019")
-        ) {
-            $s[$row["id"]]=$row;
-        }
+        if (isZDListed($row)) { $s[$row["id"]]=$row; }
     }
     jsonDump("Dumps/Zukunftsdiplom.json",$s);
+}
+
+function isZDListed($row) {
+    return (
+        (($row["user_id"]==14)
+        or ($row["user_id"]==16)
+        or ($row["user_id"]==26)
+        or ($row["user_id"]==97)
+        or ($row["user_id"]==181))
+        and ($row["type"]=="Event") 
+        and ($row["start_at"]>="2019") 
+    );
+}
+
+function createAdditionalDumps() { 
+    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $src="activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
     // -----------------------------------
     $s=array();
     foreach($res as $row) {
@@ -75,6 +90,6 @@ function jsonDump($fn,$s) {
 }
 
 // ---- test ----
-createDumps();
+createZDDump();
 // showTargetGroups();
 
