@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-01-13
+ * Last Update: 2019-02-24
  */
 
 require_once("lib/EasyRdf.php");
@@ -250,6 +250,7 @@ function getModul($nr) {
 
 function getVeranstaltungen() { // ein Mock
     $src="http://leipzig-data.de/demo/zd-web/Dumps/Zukunftsdiplom.json";
+    // $src="Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -267,5 +268,5 @@ function getVeranstaltungen() { // ein Mock
 // echo TeilnehmerProVeranstaltung("Veranstaltung.14");
 // echo diePartner();
 // echo dieOrte();
+// echo dieVeranstaltungen();
 
-echo getDatum("2019-08-11T15:00:00.000+02:00");
