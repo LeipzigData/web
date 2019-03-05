@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-02-24
+ * Last Update: 2019-03-05
  */
 
 require_once("lib/EasyRdf.php");
@@ -34,16 +34,16 @@ Where {
   return join(", ",$s);
 }
 
+function createLink($s) {
+    return "<a href=\"$s\">$s</a>";
+}
+
 function zdtrim($s) {
     return str_replace("http://leipzig-data.de/Data/",'',$s);
 }
 
 function mehrzeilig($a) {
-    $b=array(); 
-    foreach($a as $event) {
-        $b[]='<li> '.str_replace("\n",'<br/>',$event).' </li>' ;
-    }
-    return "<ul>".join("\n",$b)."</ul>";
+    return str_replace("\n",'<br/>',$a);
 }
 
 // --- Die Hauptmodule
@@ -95,11 +95,27 @@ Where {
 }
 
 function diePartner() {
-    $partner=array();
-    foreach (getVeranstaltungen() as $row) {
-        $partner=getPartner($partner,$row);
+    $query = '
+PREFIX ld: <http://leipzig-data.de/Data/Model/> 
+PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
+select  ?a ?l ?k ?c ?n
+from <http://leipzig-data.de/Data/Zukunftsdiplom/>
+Where { 
+  ?a a nl:Partner ; rdfs:label ?l .
+optional { ?a nl:contact ?k . } 
+optional { ?a nl:hasLink ?n . } 
+optional { ?a rdfs:comment ?c . } 
+} order by ?l
+';
+  
+    $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
+    $result=$sparql->query($query); 
+    // echo $result->dump("turtle");
+    $s=array();
+    foreach ($result as $row) {
+        $s[]=displayPartner($row);
     }
-    return join("\n",$partner) ; 		
+    return join("\n",$s) ; 		
 }
 
 function getPartner($partner,$row) {
@@ -112,19 +128,16 @@ function getPartner($partner,$row) {
 }
 
 function displayPartner($v) {
-    $name=$v['name'];
-    $id=$v['id'];
-    $adresse=$v['full_address'];
-    $email=$v['email'];
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$id.json";
-    if (!isset($name)) { return ''; }
-    $out='
-<h3> <a href="'.$src.'">'.$name.'</a></h3>';
-    if (isset($adresse)) {
-        $out.="\n".'<div class="row">Adresse: '.$adresse.' </div>';
-    } else { $out.="\n".'<div class="row">Adresse nicht eingetragen</div>'; }
-    if (isset($email)) { $out.="\n".'<div class="row">Email: '.$email.' </div>'; }
-    return $out;
+    $out="<h3>$v->l</h3> <ul><li>Id: $v->a</li>";
+    if (isset($v->k)) { $out.="<li>Kontakt: $v->k</li>" ; }
+    if (isset($v->n)) {
+        $out.="<li>Link in der Nachhaltigkeitsdatenbank: "
+            .createLink($v->n)."</li>" ;
+    }
+    if (isset($v->c)) {
+        $out.="<li>Kommentar: ".mehrzeilig($v->c)."</li>" ;
+    }
+    return $out."</ul>";  
 }
 
 function dieVeranstaltungen() {
