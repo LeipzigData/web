@@ -10,9 +10,13 @@ include_once("Zukunftsdiplom.php");
 
 $content='      
 <div class="container">
-<h2 align="center">Die Partner und ihre Angebote</h2>
+<h2 align="center">Die Themenbereiche</h2>
 
-'.diePartner().'
+'.dieModule().'
+
+<h2 align="center">Angebote nach Themenbereichen sortiert</h2>
+
+'.dieVeranstaltungen().'
 </div>
 ';
 echo showPage($content);
