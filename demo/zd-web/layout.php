@@ -36,11 +36,8 @@ function pageNavbar() {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 
-            <li><a href="teilnehmer.php">Teilnehmer</a></li> 
-            <li><a href="events.php">Die Veranstaltungen</a></li> 
-            <li><a href="akteure.php">Die Veranstalter</a></li> 
-            <!-- <li><a href="orte.php">Die Veranstaltungsorte</a></li> --> 
-            <li><a href="ranking.php">Ranking</a></li> 
+            <li><a href="module.php">Die Themenbereiche</a></li> 
+            <li><a href="akteure.php">Die Anbieter</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->

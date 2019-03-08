@@ -34,8 +34,8 @@ Where {
   return join(", ",$s);
 }
 
-function createLink($s) {
-    return "<a href=\"$s\">$s</a>";
+function createLink($s,$text) {
+    return "<a href=\"$s\">$text</a>";
 }
 
 function zdtrim($s) {
@@ -128,16 +128,14 @@ function getPartner($partner,$row) {
 }
 
 function displayPartner($v) {
-    $out="<h3>$v->l</h3> <ul><li>Id: $v->a</li>";
+    $head=$v->l;
+    if (isset($v->n)) { $head=createLink($v->n,$head) ; }
+    $out="<h3>$head</h3> <ul><li>Id: $v->a</li>";
     if (isset($v->k)) { $out.="<li>Kontakt: $v->k</li>" ; }
-    if (isset($v->n)) {
-        $out.="<li>Link in der Nachhaltigkeitsdatenbank: "
-            .createLink($v->n)."</li>" ;
-    }
     if (isset($v->c)) {
         $out.="<li>Kommentar: ".mehrzeilig($v->c)."</li>" ;
     }
-    return $out."</ul>";  
+    return $out."</ul> <p>Hier sind noch die Angebote zu ergänzen.</p>";  
 }
 
 function dieVeranstaltungen() {
@@ -222,7 +220,7 @@ function getInfo($id) {
     $res=db_query('select distinct * from veranstaltungen, besuche where tid="'.$id.'" and vid=id');
     $out='';
     foreach ($res as $row) {
-        $out.='<li>'.createLink($row['uri']).": ".$row['title'].' im '.$row['modul'].'</li>';
+        $out.='<li>'.createLink($row['uri'],$row['uri']).": ".$row['title'].' im '.$row['modul'].'</li>';
     }
     if (!empty($out)) $s[]='Besuchte Veranstaltungen:<ul>'.$out.'</ul>';
     return join("<br/>",$s);
@@ -235,7 +233,7 @@ function dasRanking() {
         $query="select * from besuche, veranstaltungen where tid='".$row['id']."' and vid=id";
         $res1=db_query($query);
         $t=array();
-        foreach ($res1 as $row1) { $t[]=createLink($row1['uri']); }
+        foreach ($res1 as $row1) { $t[]=createLink($row1['uri'],$row1['uri']); }
         $s[$row['id']]=join(", ",$t);
     }
     $out='
