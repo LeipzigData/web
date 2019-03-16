@@ -33,10 +33,8 @@ function createZDDump() {
 
 function isZDListed($row) {
     return (
-        (($row["user_id"]==214)
-        or ($row["user_id"]==181))
-        and ($row["type"]=="Event") 
-        and ($row["start_at"]>="2019") 
+        ($row["type"]=="Service") 
+        and ($row["service_type"]=="Bildungsangebot") 
     );
 }
 

@@ -16,6 +16,9 @@ $content='
 
 <h2 align="center">Angebote nach Themenbereichen sortiert</h2>
 
+<p>Noch zu implementgieren, derezeit werden alle in der
+Nachhaltigkeitsdatenbank gelisteten Bildungsangebote aufgelistet. </p>
+
 '.dieVeranstaltungen().'
 </div>
 ';
