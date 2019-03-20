@@ -181,7 +181,7 @@ function getVeranstaltungen() { // ein Mock
 }
 
 // ---- test ----
- echo dieModule();
- echo dieVeranstaltungen();
- echo diePartner();
+// echo dieModule();
+// echo dieVeranstaltungen();
+// echo diePartner();
 
