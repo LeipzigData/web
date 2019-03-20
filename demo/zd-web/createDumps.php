@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
- * Last Update: 2019-02-18
+ * Last Update: 2019-02-20
  */
 
 function showTargetGroups() { 
@@ -32,9 +32,13 @@ function createZDDump() {
 }
 
 function isZDListed($row) {
+    $goals='';
+    if (array_key_exists("goals",$row)) {
+        $goals=join(", ",$row['goals']);
+        }
     return (
         ($row["type"]=="Service") 
-        and ($row["service_type"]=="Bildungsangebot") 
+        and (strpos(" $goals","Zukunfts-Diplom"))
     );
 }
 
@@ -85,6 +89,5 @@ function jsonDump($fn,$s) {
 }
 
 // ---- test ----
-createZDDump();
+ createZDDump();
 // showTargetGroups();
-

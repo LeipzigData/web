@@ -2,12 +2,11 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-03-20
-
- * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
+ * Last Update: 2019-03-05
  */
 
 require_once("lib/EasyRdf.php");
+require_once("inc.php");
 
 // --- Hilfsfunktionen
 
@@ -48,6 +47,31 @@ function mehrzeilig($a) {
 }
 
 // --- Die Hauptmodule
+
+function dieOrte() {
+    $orte=array();
+    foreach (getVeranstaltungen() as $row) {
+        $orte[$row["full_address"]]=$row;
+    }
+    $s=array();
+    foreach ($orte as $row) {
+        $s[]=displayOrt($row);
+    }
+    return join($s,"\n") ; 		
+}
+
+function displayOrt($v) { 
+    return '<h3>'.$v["full_address"].'</h3> <p>Weitere Informationen sind zu ergänzen</p>';
+    // Das NL-Ortskonzept muss noch mit LD verschränkt werden 
+    $out='
+<h3> <a href="getdata.php?show='.$v->wo.'">'.$v->l.'</a></h3>
+<div class="row"> <dl>';
+    if (isset($v->adr)) { $out.='<dd> <strong>Adresse:</strong> '.getAddress($v->adr).' </dd>'; }
+    if (isset($v->e)) { $out.='<dd> <strong>Erreichbarkeit:</strong> '.$v->e.'</dd>'; }
+    if (isset($v->url)) { $out.='<dd> <strong>URL:</strong> '.showURL($v->url).'</dd>'; }
+    $out.='</dl></div>';
+    return $out;
+}
 
 function dieModule() {
   $query = '
@@ -153,8 +177,79 @@ function displayEvent($v) {
     if (isset($url)) {
         $out.='<dd> <a href="'.$url.'">Link des Veranstalters</a> </dd>';
     }
+    $out.='<dd> <strong>Teilnehmeranzahl: </strong> '.TeilnehmerProVeranstaltung($nr).'</dd>'; 
     $out.='</dl></div>';
     return $out;
+}
+
+function derTeilnehmer() {
+    $text='';
+    if (isset($_GET['id'])) {
+        $hash=$_GET['id'];
+        $text='Die ID '.$hash.' ist nicht vergeben.'; 
+        if(isset($hash)) {
+            $u=Teilnehmerinfo($hash);
+            if(!empty($u)) { $text=$u; }
+        }
+        return '
+<h3>Informationen zum Teilnehmer</h3>
+<div class="row"> <p>'.$text.'</p></div>' ;
+    }
+    else return 'Keine ID angegeben.' ;
+}
+
+function Teilnehmerinfo($hash) {
+    $res=db_query('select * from teilnehmer where hash="'.$hash.'"');
+    $s=array();
+    foreach ($res as $row) {
+        $s[]=getInfo($row['id']);
+    }
+    return join("<br/>==========<br/>",$s);
+}
+
+function getInfo($id) {
+    $s=array();
+    $res=db_query('select * from teilnehmer where id="'.$id.'"');
+    foreach ($res as $row) {
+        $s[]='Teilnehmerkennung: '.$row['id'];
+        $s[]='Name: '.$row['name'];
+        $s[]='Adresse: '.$row['adresse'];
+        $s[]='E-Mail: '.$row['email'];
+        $s[]='Kontaktinformationen: '.$row['info'];
+    }
+    $res=db_query('select distinct * from veranstaltungen, besuche where tid="'.$id.'" and vid=id');
+    $out='';
+    foreach ($res as $row) {
+        $out.='<li>'.createLink($row['uri'],$row['uri']).": ".$row['title'].' im '.$row['modul'].'</li>';
+    }
+    if (!empty($out)) $s[]='Besuchte Veranstaltungen:<ul>'.$out.'</ul>';
+    return join("<br/>",$s);
+}
+
+function dasRanking() {
+    $s=array();
+    $res=db_query('select * from teilnehmer');
+    foreach ($res as $row) {
+        $query="select * from besuche, veranstaltungen where tid='".$row['id']."' and vid=id";
+        $res1=db_query($query);
+        $t=array();
+        foreach ($res1 as $row1) { $t[]=createLink($row1['uri'],$row1['uri']); }
+        $s[$row['id']]=join(", ",$t);
+    }
+    $out='
+<table border="2" align="center">
+<tr><th>Teilnehmer</th><th>Veranstaltungen</th></tr>';
+    foreach ($s as $key => $value) {
+        $out.='
+<tr><td>'.$key.'</td><td>'.$value.'</td></tr>';
+    }
+    return $out.'</table>' ; 		
+}
+
+function TeilnehmerProVeranstaltung($id) {
+    $query="select count(*) as uhu from besuche, veranstaltungen where uri='".$id."' and vid=id";
+    $res=db_query($query);
+    foreach ($res as $row) { return $row['uhu']; }
 }
 
 function getUser($nr) {
@@ -181,7 +276,11 @@ function getVeranstaltungen() { // ein Mock
 }
 
 // ---- test ----
- echo dieModule();
- echo dieVeranstaltungen();
- echo diePartner();
+// echo derTeilnehmer();
+// echo dasRanking();
+// echo TeilnehmerProVeranstaltung("Veranstaltung.13");
+// echo TeilnehmerProVeranstaltung("Veranstaltung.14");
+// echo diePartner();
+// echo dieOrte();
+// echo dieVeranstaltungen();
 
