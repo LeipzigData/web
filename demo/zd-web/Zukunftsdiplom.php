@@ -124,21 +124,19 @@ function dieVeranstaltungen() {
 }
 
 function displayEvent($v) {
+    $id=$v["id"];
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=getUser($v["user_id"]);
     $ort=$v["full_address"];
-    $termin=$v["start_at"];
     $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <dl>';
-    if (isset($termin)) {
-        $out.='<dd> <strong>Tag und Zeit:</strong> '.getDatum($termin).' </dd>';
-    }
     if (isset($ort)) {
-        $out.='<dd> <strong>Veranstaltungsort:</strong> '.$ort.' </dd>';
+        $out.='<dd> <strong>Ort:</strong> '.$ort.' </dd>';
     }
     if (isset($veranstalter)) {
         $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
