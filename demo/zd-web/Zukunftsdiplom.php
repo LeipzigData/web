@@ -125,6 +125,7 @@ function dieVeranstaltungen() {
 
 function displayEvent($v) {
     $id=$v["id"];
+    $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $title=$v["name"];
     $beschreibung=$v["description"];
