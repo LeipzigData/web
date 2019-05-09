@@ -10,8 +10,6 @@ $content='
 <ul>
   <li><a href="./Material/Projektbericht_Stadt.pdf">Projektbericht</a></li>
   <li><a href="./Material/FinalesRelease.zip">Finales Release</a> (25 MB)</li>
-  <li><a href="http://www.leipzig-data.de/drupal/">Demo-Installation</a></li>
-  <li><a href="http://www.leipzig-data.de/IHR-Data/">RDF Store</a> auf der Basis von OntoWiki und Virtuoso.</li>
   <li><a href="http://www.leipzig-data.de:8891/sparql">SPARQL Endpunkt</a>.</li>
 </ul>
 
