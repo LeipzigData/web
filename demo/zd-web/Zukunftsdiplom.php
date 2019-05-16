@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-03-20
+ * Last Update: 2019-05-16
 
  * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
@@ -124,9 +124,11 @@ function dieVeranstaltungen() {
 }
 
 function displayEvent($v) {
+    if ($v["type"]=="Event") { return displayEventEvent($v); }
     $id=$v["id"];
     $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    // sonst ist es ein Bildungsangebot
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=getUser($v["user_id"]);
@@ -136,6 +138,46 @@ function displayEvent($v) {
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <dl>';
+    $out.='<dd> <strong>Angebotstyp:</strong> Bildungsangebot </dd>';
+    if (isset($ort)) {
+        $out.='<dd> <strong>Ort:</strong> '.$ort.' </dd>';
+    }
+    if (isset($veranstalter)) {
+        $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
+    }
+    if (isset($zielgruppe)) {
+        $out.='<dd> <strong>Zielgruppe:</strong> '.$zielgruppe.' </dd>';
+    }
+    $out.='<dd> <strong>Zum Modul:</strong> '.getModul($nr).'</dd>'; 
+    if (isset($beschreibung)) {
+        $out.='<dd> <strong>Beschreibung:</strong> '.$beschreibung.' </dd>';
+    }
+    if (isset($url)) {
+        $out.='<dd> <a href="'.$url.'">Link des Veranstalters</a> </dd>';
+    }
+    $out.='</dl></div>';
+    return $out;
+}
+
+function displayEventEvent($v) {
+    $id=$v["id"];
+    $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    $title=$v["name"];
+    $beschreibung=$v["description"];
+    $veranstalter=getUser($v["user_id"]);
+    $ort=$v["full_address"];
+    $zielgruppe=$v["target_group"];
+    $url=$v["info_url"];
+    $von=$v["start_at"];
+    $bis=$v["end_at"];
+    $out='
+<h3> <a href="'.$src.'">'.$title.'</a></h3>
+<div class="row"> <dl>';
+    $out.='<dd> <strong>Angebotstyp:</strong> Veranstaltung </dd>';
+    if (isset($von)) {
+        $out.='<dd> <strong>Beginn:</strong> '.getDatum($von).' </dd>';
+    }
     if (isset($ort)) {
         $out.='<dd> <strong>Ort:</strong> '.$ort.' </dd>';
     }
