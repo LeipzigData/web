@@ -115,20 +115,24 @@ function displayPartner($v) {
 }
 
 function dieVeranstaltungen() {
-    $s=array();
+    $b=array();
+    $e=array();
     foreach (getVeranstaltungen() as $row) {
-      $s[]=displayEvent($row);
+        if ($row["type"]=="Event") {
+            if ($row["start_at"]>"2019-05") { $e[]=displayEvent($row); }
+        }
+        else { $b[]=displayBA($row); }
   }
   //sort($s);
-  return join($s,"\n") ; 		
+  return "<h2> Die Bildungsangebote </h2> ".join($b,"\n")
+      ."<h2> Weitere Veranstaltungen </h2> ".join($e,"\n"); 		
 }
 
-function displayEvent($v) {
-    if ($v["type"]=="Event") { return displayEventEvent($v); }
+function displayBA($v) {
+    // ein Bildungsangebot
     $id=$v["id"];
     $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
-    // sonst ist es ein Bildungsangebot
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=getUser($v["user_id"]);
@@ -137,29 +141,29 @@ function displayEvent($v) {
     $url=$v["info_url"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
-<div class="row"> <dl>';
-    $out.='<dd> <strong>Angebotstyp:</strong> Bildungsangebot </dd>';
+<div class="row"> <ul>';
     if (isset($ort)) {
-        $out.='<dd> <strong>Ort:</strong> '.$ort.' </dd>';
+        $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
     if (isset($veranstalter)) {
-        $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
+        $out.='<li> <strong>Veranstalter:</strong> '.$veranstalter.' </li>';
     }
     if (isset($zielgruppe)) {
-        $out.='<dd> <strong>Zielgruppe:</strong> '.$zielgruppe.' </dd>';
+        $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<dd> <strong>Zum Modul:</strong> '.getModul($nr).'</dd>'; 
+    $out.='<li> <strong>Zum Modul:</strong> '.getModul($nr).'</li>'; 
     if (isset($beschreibung)) {
-        $out.='<dd> <strong>Beschreibung:</strong> '.$beschreibung.' </dd>';
+        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
     if (isset($url)) {
-        $out.='<dd> <a href="'.$url.'">Link des Veranstalters</a> </dd>';
+        $out.='<li> <a href="'.$url.'">Link des Veranstalters</a> </li>';
     }
     $out.='</dl></div>';
     return $out;
 }
 
-function displayEventEvent($v) {
+function displayEvent($v) {
+    // ein Event
     $id=$v["id"];
     $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
@@ -173,28 +177,27 @@ function displayEventEvent($v) {
     $bis=$v["end_at"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
-<div class="row"> <dl>';
-    $out.='<dd> <strong>Angebotstyp:</strong> Veranstaltung </dd>';
+<div class="row"> <ul>';
     if (isset($von)) {
-        $out.='<dd> <strong>Beginn:</strong> '.getDatum($von).' </dd>';
+        $out.='<li> <strong>Beginn:</strong> '.getDatum($von).' </li>';
     }
     if (isset($ort)) {
-        $out.='<dd> <strong>Ort:</strong> '.$ort.' </dd>';
+        $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
     if (isset($veranstalter)) {
-        $out.='<dd> <strong>Veranstalter:</strong> '.$veranstalter.' </dd>';
+        $out.='<li> <strong>Veranstalter:</strong> '.$veranstalter.' </li>';
     }
     if (isset($zielgruppe)) {
-        $out.='<dd> <strong>Zielgruppe:</strong> '.$zielgruppe.' </dd>';
+        $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<dd> <strong>Zum Modul:</strong> '.getModul($nr).'</dd>'; 
+    $out.='<li> <strong>Zum Modul:</strong> '.getModul($nr).'</li>'; 
     if (isset($beschreibung)) {
-        $out.='<dd> <strong>Beschreibung:</strong> '.$beschreibung.' </dd>';
+        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
     if (isset($url)) {
-        $out.='<dd> <a href="'.$url.'">Link des Veranstalters</a> </dd>';
+        $out.='<li> <a href="'.$url.'">Link des Veranstalters</a> </li>';
     }
-    $out.='</dl></div>';
+    $out.='</ul></div>';
     return $out;
 }
 
@@ -219,6 +222,16 @@ function getVeranstaltungen() { // ein Mock
         $s[$row["id"]]=$row;
     }
     return $s;
+}
+
+function displayService($v) {
+    $id=$v["id"];
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    $title=$v["name"];
+    $stype=$v["servicetype"];
+    $out='
+<li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
+        return $out;
 }
 
 // ---- test ----
