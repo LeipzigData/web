@@ -228,7 +228,7 @@ function displayService($v) {
     $id=$v["id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $title=$v["name"];
-    $stype=$v["servicetype"];
+    $stype=$v["service_type"];
     $out='
 <li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
         return $out;
