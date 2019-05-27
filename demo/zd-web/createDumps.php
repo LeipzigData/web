@@ -5,6 +5,8 @@
  * Last Update: 2019-05-16
  */
 
+include_once("Zukunftsdiplom.php");
+
 function showTargetGroups() { 
     //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     $src="activities.json";
@@ -85,6 +87,33 @@ function jsonDump($fn,$s) {
     fclose($fp);
 }
 
+function createWebsiteDump($fn) { 
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $b=array();
+    $e=array();
+    foreach($res as $row) {
+        if (isZDListed($row)) {
+            if ($row["type"]=="Event") {
+                if ($row["start_at"]>"2019-05") {
+                    $e[$row["start_at"]]=displayEvent($row);
+                }
+            }
+            else { $b[]=displayBA($row); }
+        }
+    }
+    sort($e);
+    $out="<h2> Die Bildungsangebote </h2> "
+        .join($b,"\n")
+        ."<h2> Weitere Veranstaltungen </h2> "
+        .join($e,"\n"); 
+    $fp=fopen($fn, "w");
+    fwrite($fp, $out);
+    fclose($fp);		
+}
+
 // ---- test ----
-createZDDump();
+//createZDDump();
+createWebsiteDump("content.html");
 // showTargetGroups();
