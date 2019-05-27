@@ -6,7 +6,6 @@
  */
 
 include_once("layout.php");
-include_once("Zukunftsdiplom.php");
 
 $content='      
 <div class="container">
@@ -16,7 +15,7 @@ $content='
 Änderungen in der Nachhaltigekitsdatenbank sind also nicht sofort hier
 sichtbar. </p>
 
-'.dieVeranstaltungen().'
+'.file_get_contents("content.html").'
 </div>
 ';
 echo showPage($content);
