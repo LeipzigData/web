@@ -114,6 +114,6 @@ function createWebsiteDump($fn) {
 }
 
 // ---- test ----
-//createZDDump();
+createZDDump();
 createWebsiteDump("content.html");
 // showTargetGroups();
