@@ -115,17 +115,7 @@ function displayPartner($v) {
 }
 
 function dieVeranstaltungen() {
-    $b=array();
-    $e=array();
-    foreach (getVeranstaltungen() as $row) {
-        if ($row["type"]=="Event") {
-            if ($row["start_at"]>"2019-05") { $e[]=displayEvent($row); }
-        }
-        else { $b[]=displayBA($row); }
-  }
-  //sort($s);
-  return "<h2> Die Bildungsangebote </h2> ".join($b,"\n")
-      ."<h2> Weitere Veranstaltungen </h2> ".join($e,"\n"); 		
+    return file_get_contents("content.html"); 		
 }
 
 function displayBA($v) {
