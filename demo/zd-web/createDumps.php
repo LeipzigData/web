@@ -21,6 +21,37 @@ function showTargetGroups() {
     }
 }
 
+function showCategories() { 
+    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
+    $src="categories.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $s=array();
+    foreach($res as $row) {
+        $s=addCategory($s,$row);
+    }
+    return $s;
+}
+
+function addCategory($s,$row) {
+    $a=array();
+    $id=$row["id"];
+    $a["name"]=$row["name"];
+    $a["parent"]=$row["parent_id"];
+    $a["goals"]=extractGoals($row["goal_cloud"]);
+    $s[$id]=$a;
+    foreach($row["children"] as $v) { $s=addCategory($s,$v); }
+    return $s;
+}
+
+function extractGoals($v) {
+    $a=array();
+    foreach($v as $entry) {
+        $a[]=$entry["name"];
+    }
+    return join("; ",$a);
+}
+
 function createDumps() { 
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     //$src="activities.json";
@@ -111,6 +142,12 @@ function createWebsiteDump($fn) {
     fclose($fp);		
 }
 
+function dumpCategories() { 
+    $s=showCategories();
+    jsonDump("Dumps/Categories.json",$s);
+}
+
 // ---- test ----
 createDumps();
 createWebsiteDump("contents.php"); 
+dumpCategories();
