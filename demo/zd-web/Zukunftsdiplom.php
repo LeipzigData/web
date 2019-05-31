@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-05-16
+ * Last Update: 2019-05-31
 
  * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
@@ -13,26 +13,13 @@ require_once("lib/EasyRdf.php");
 
 function getDatum($d) {
 // Verwandelt 2019-08-11T15:00:00.000+02:00 in Lesbares
-    return date("d. M Y, H:i",strtotime($d)); 
-}
-
-function getAddress($adr) {
-  $query = '
-PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-select ?l 
-from <http://leipzig-data.de/Data/Adressen/>
-Where { 
-  <'.$adr.'> rdfs:label ?l . 
-}
-';
-  
-  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-  $result=$sparql->query($query);
-  $s=array();
-  foreach ($result as $row) {
-      $s[]=$row->l;
-  } 
-  return join(", ",$s);
+    $out=date("d. M Y, H:i",strtotime($d));
+    $out=str_replace('Jun','Juni',$out);
+    $out=str_replace('Jul','Juli',$out);
+    $out=str_replace('Aug','August',$out);
+    $out=str_replace('Sep','September',$out);
+    $out=str_replace('Oct','Oktober',$out);
+    return $out;
 }
 
 function createLink($s,$text) {
@@ -47,171 +34,170 @@ function mehrzeilig($a) {
     return str_replace("\n",'<br/>',$a);
 }
 
-// --- Die Hauptmodule
+// --- Die Hauptfunktionen
 
-function dieModule() {
-  $query = '
-PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
-select  ?a ?l ?ziele
-from <http://leipzig-data.de/Data/Zukunftsdiplom/>
-Where { 
-  ?a a nl:Modul ; rdfs:label ?l; ld:Lernziele ?ziele . 
-} order by ?l
-';
-  
-  $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-  $result=$sparql->query($query); 
-  // echo $result->dump("turtle");
-  $s=array();
-  foreach ($result as $row) {
-      $s[]='<dt>'.$row->l.'</dt><dd>'.$row->ziele.'</dd>';
-  }
-  return '<ul>'.join($s,"\n").'</ul>' ; 		
+function getThemes($a) {
+    $m=array();
+    if (strpos($a,"Energie")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Mobilität")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Klimaschutz")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Stadtraum")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Bauen")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Wohnen")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Ernährung")) { $m["Ernährung"]=1; }
+    if (strpos($a,"Gärtnern")) { $m["Ernährung"]=1; }
+    if (strpos($a,"Nachhaltiger Konsum")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Reparieren")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Wiederverwenden")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Recycling")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Soziale Nachhaltigkeit")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Zusammenleben")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Kunst")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Kultur")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Bildung")) { $m["Natur und Technik"]=1; }
+    if (strpos($a,"Forschung")) { $m["Natur und Technik"]=1; }
+    $out=join("; ",array_keys($m));
+    if (empty($out)) { return "Nicht zugeordnet"; }
+    return $out;
 }
 
 function diePartner() {
-    $query = '
-PREFIX ld: <http://leipzig-data.de/Data/Model/> 
-PREFIX nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
-select  ?a ?l ?k ?c ?n
-from <http://leipzig-data.de/Data/Zukunftsdiplom/>
-Where { 
-  ?a a nl:Partner ; rdfs:label ?l .
-optional { ?a nl:contact ?k . } 
-optional { ?a nl:hasLink ?n . } 
-optional { ?a rdfs:comment ?c . } 
-} order by ?l
-';
-  
-    $sparql = new EasyRdf_Sparql_Client('http://leipzig-data.de:8890/sparql');
-    $result=$sparql->query($query); 
-    // echo $result->dump("turtle");
+    $src="Dumps/Veranstalter.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
     $s=array();
-    foreach ($result as $row) {
-        $s[]=displayPartner($row);
+    foreach ($res as $row) {
+        $s[$row["name"]]=displayPartner($row);
     }
+    ksort($s);
     return join("\n",$s) ; 		
 }
 
-function getPartner($partner,$row) {
-    $user=$row["user_id"];
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$user.json";
-    $string = file_get_contents($src);
-    $v = json_decode($string, true);
-    $partner[$user]=displayPartner($v);
-    return $partner;
-}
-
 function displayPartner($v) {
-    $head=$v->l;
-    if (isset($v->n)) { $head=createLink($v->n,$head) ; }
-    $out="<h3>$head</h3> <ul><li>Id: $v->a</li>";
-    if (isset($v->k)) { $out.="<li>Kontakt: $v->k</li>" ; }
-    if (isset($v->c)) {
-        $out.="<li>Kommentar: ".mehrzeilig($v->c)."</li>" ;
+    $vid=$v["id"];
+    $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
+    $url=$v["organization_url"];
+    $adr=$v["full_address"];
+    $head=createLink($va,$v["name"]);
+    $out='<h3>'.$head.'</h3> <ul>'
+        .'<li>Id: '.$vid.'</li>'
+        .'<li>Name: '.$v["name"].'</li>';
+    if (!empty($adr)) {
+        $out.='<li>Adresse: '.$adr.'</li>';
     }
-    return $out."</ul> <p>Hier sind noch die Angebote zu ergänzen.</p>";  
+    if (!empty($url)) {
+        $out.='<li>URL: '.createLink($url,$url).'</li>';
+    }
+    return $out."</ul>";  
 }
 
 function dieVeranstaltungen() {
-    return file_get_contents("content.html"); 		
+    $src="Dumps/Veranstalter.json";
+    $string = file_get_contents($src);
+    $users = json_decode($string, true);
+    $src="Dumps/Zukunftsdiplom.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $b=array();
+    $e=array();
+    foreach($res as $row) {
+        if ($row["type"]=="Event") {
+            if ($row["start_at"]>"2019-06-02") {
+                $e[$row["start_at"]]=displayEvent($row,$users);
+            }
+        }
+        else { $b[]=displayBA($row,$users); }
+    }
+    ksort($e);
+    $out="<h2> Die Bildungsangebote </h2> "
+        .join($b,"\n")
+        ."<h2> Weitere Veranstaltungen </h2> "
+        .join($e,"\n"); 
+    return $out;
+    //return file_get_contents("content.php"); 		
 }
 
-function displayBA($v) {
+function displayBA($v,$users) {
     // ein Bildungsangebot
     $id=$v["id"];
-    $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
+    $vid=$v["user_id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
     $title=$v["name"];
     $beschreibung=$v["description"];
-    $veranstalter=getUser($v["user_id"]);
+    $veranstalter=$users[$v["user_id"]]["name"];
     $ort=$v["full_address"];
     $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
+    $goals=join(", ",$v["goals"]);
+    $themes=getThemes($goals);
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
-    if (isset($ort)) {
+    if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
-    if (isset($veranstalter)) {
-        $out.='<li> <strong>Veranstalter:</strong> '.$veranstalter.' </li>';
+    if (!empty($veranstalter)) {
+        $out.='<li> <strong>Veranstalter:</strong>'
+            .createLink($va,$veranstalter).'</li>';
     }
-    if (isset($zielgruppe)) {
+    if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Zum Modul:</strong> '.getModul($nr).'</li>'; 
-    if (isset($beschreibung)) {
+    $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
+    $out.='<li> <strong>Zum Thema:</strong> '.$themes.'</li>'; 
+    if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
-    if (isset($url)) {
-        $out.='<li> <a href="'.$url.'">Link des Veranstalters</a> </li>';
+    if (!empty($url)) { 
+        $out.='<li>'.createLink($url,'Link des Veranstalters').'</li>';
     }
     $out.='</dl></div>';
     return $out;
 }
 
-function displayEvent($v) {
+function displayEvent($v,$users) {
     // ein Event
     $id=$v["id"];
-    $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
+    $vid=$v["user_id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
     $title=$v["name"];
     $beschreibung=$v["description"];
-    $veranstalter=getUser($v["user_id"]);
+    $veranstalter=$users[$v["user_id"]]["name"];
     $ort=$v["full_address"];
     $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $von=$v["start_at"];
     $bis=$v["end_at"];
+    $goals=join(", ",$v["goals"]);
+    $themes=getThemes($goals);
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
-    if (isset($von)) {
+    if (!empty($von)) {
         $out.='<li> <strong>Beginn:</strong> '.getDatum($von).' </li>';
     }
-    if (isset($ort)) {
+    if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
-    if (isset($veranstalter)) {
-        $out.='<li> <strong>Veranstalter:</strong> '.$veranstalter.' </li>';
+    if (!empty($veranstalter)) {
+        $out.='<li> <strong>Veranstalter:</strong>'
+            .createLink($va,$veranstalter).'</li>';
     }
-    if (isset($zielgruppe)) {
+    if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Zum Modul:</strong> '.getModul($nr).'</li>'; 
-    if (isset($beschreibung)) {
+    $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
+    $out.='<li> <strong>Zum Thema:</strong> '.$themes.'</li>'; 
+    if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
-    if (isset($url)) {
-        $out.='<li> <a href="'.$url.'">Link des Veranstalters</a> </li>';
+    if (!empty($url)) {
+        $out.='<li>'.createLink($url,'Link des Veranstalters').'</li>';
     }
     $out.='</ul></div>';
     return $out;
-}
-
-function getUser($nr) {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$nr.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    return '<a href="'.$src.'">'.$res["name"].'</a>';
-}
-
-function getModul($nr) {
-    return "Noch nicht implementiert.";
-}
-
-function getVeranstaltungen() { // ein Mock
-    $src="http://leipzig-data.de/demo/zd-web/Dumps/Zukunftsdiplom.json";
-    // $src="Dumps/Zukunftsdiplom.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    $s=array();
-    foreach($res as $row) {
-        $s[$row["id"]]=$row;
-    }
-    return $s;
 }
 
 function displayService($v) {
@@ -225,7 +211,6 @@ function displayService($v) {
 }
 
 // ---- test ----
-// echo dieModule();
 // echo dieVeranstaltungen();
 // echo diePartner();
 

@@ -21,16 +21,33 @@ function showTargetGroups() {
     }
 }
 
-function createZDDump() { 
+function createDumps() { 
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
+    $users=array();
     foreach($res as $row) {
-        if (isZDListed($row)) { $s[$row["id"]]=$row; }
+        if (isZDListed($row)) {
+            $s[$row["id"]]=$row;
+            $users[$row["user_id"]]=1;
+        }
     }
     jsonDump("Dumps/Zukunftsdiplom.json",$s);
+    $s=getUsers(array_keys($users));
+    jsonDump("Dumps/Veranstalter.json",$s);
+}
+
+function getUsers($s) {
+    $a=array();
+    foreach($s as $id) {
+        $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$id.json";
+        $string = file_get_contents($src);
+        $res = json_decode($string, true);
+        $a[$id]=$res;
+    }
+    return $a;
 }
 
 function isZDListed($row) {
@@ -88,32 +105,12 @@ function jsonDump($fn,$s) {
 }
 
 function createWebsiteDump($fn) { 
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    $b=array();
-    $e=array();
-    foreach($res as $row) {
-        if (isZDListed($row)) {
-            if ($row["type"]=="Event") {
-                if ($row["start_at"]>"2019-05") {
-                    $e[$row["start_at"]]=displayEvent($row);
-                }
-            }
-            else { $b[]=displayBA($row); }
-        }
-    }
-    sort($e);
-    $out="<h2> Die Bildungsangebote </h2> "
-        .join($b,"\n")
-        ."<h2> Weitere Veranstaltungen </h2> "
-        .join($e,"\n"); 
+    $out=dieVeranstaltungen();
     $fp=fopen($fn, "w");
     fwrite($fp, $out);
     fclose($fp);		
 }
 
 // ---- test ----
-createZDDump();
-createWebsiteDump("content.php");
-// showTargetGroups();
+createDumps();
+createWebsiteDump("contents.php"); 
