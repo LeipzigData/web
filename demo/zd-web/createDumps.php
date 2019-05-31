@@ -8,8 +8,8 @@
 include_once("Zukunftsdiplom.php");
 
 function showTargetGroups() { 
-    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $src="activities.json";
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -22,8 +22,8 @@ function showTargetGroups() {
 }
 
 function showCategories() { 
-    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
-    $src="categories.json";
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
+    //$src="categories.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
