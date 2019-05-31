@@ -6,12 +6,13 @@
  */
 
 include_once("layout.php");
+include_once("Zukunftsdiplom.php");
 
 $content='      
 <div class="container">
 <h2 align="center">Die Angebote</h2>
 
-'.file_get_contents("content.php").'
+'.dieVeranstaltungen().'
 </div>
 ';
 echo showPage($content);
