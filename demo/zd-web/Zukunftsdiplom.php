@@ -7,8 +7,6 @@
  * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
 
-require_once("lib/EasyRdf.php");
-
 // --- Hilfsfunktionen
 
 function getDatum($d) {
@@ -37,6 +35,31 @@ function mehrzeilig($a) {
 // --- Die Hauptfunktionen
 
 function getThemes($a) {
+    $m=array();
+    if (strpos($a,"Energie")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Mobilität")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Klimaschutz")) { $m["Klimaschutz"]=1; }
+    if (strpos($a,"Stadtraum")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Bauen")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Wohnen")) { $m["Stadt, Natur und Wohnen"]=1; }
+    if (strpos($a,"Ernährung")) { $m["Ernährung"]=1; }
+    if (strpos($a,"Gärtnern")) { $m["Ernährung"]=1; }
+    if (strpos($a,"Nachhaltiger Konsum")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Reparieren")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Wiederverwenden")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Recycling")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Soziale Nachhaltigkeit")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Zusammenleben")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Kunst")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Kultur")) { $m["Soziales und Kultur"]=1; }
+    if (strpos($a,"Bildung")) { $m["Natur und Technik"]=1; }
+    if (strpos($a,"Forschung")) { $m["Natur und Technik"]=1; }
+    $out=join("; ",array_keys($m));
+    if (empty($out)) { return "Nicht zugeordnet"; }
+    return $out;
+}
+
+function getThemeByCategory($a) {
     $m=array();
     if (strpos($a,"Energie")) { $m["Klimaschutz"]=1; }
     if (strpos($a,"Mobilität")) { $m["Klimaschutz"]=1; }
@@ -95,18 +118,23 @@ function dieVeranstaltungen() {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $users = json_decode($string, true);
+    $src="Dumps/Categories.json";
+    $string = file_get_contents($src);
+    $cat = json_decode($string, true);
     $src="Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $b=array();
     $e=array();
     foreach($res as $row) {
+        $c=$cat[$row["first_root_category"]]["name"];
+        $t=getThemeByCategory($c);
         if ($row["type"]=="Event") {
             if ($row["start_at"]>"2019-06-02") {
-                $e[$row["start_at"]]=displayEvent($row,$users);
+                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
-        else { $b[]=displayBA($row,$users); }
+        else { $b[]=displayBA($row,$users,$c,$t); }
     }
     ksort($e);
     $out="<h2> Die Bildungsangebote </h2> "
@@ -117,7 +145,7 @@ function dieVeranstaltungen() {
     //return file_get_contents("content.php"); 		
 }
 
-function displayBA($v,$users) {
+function displayBA($v,$users,$c,$t) {
     // ein Bildungsangebot
     $id=$v["id"];
     $vid=$v["user_id"];
@@ -145,7 +173,9 @@ function displayBA($v,$users) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
     $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
-    $out.='<li> <strong>Zum Thema:</strong> '.$themes.'</li>'; 
+    $out.='<li> <strong>Zum Thema nach Goals:</strong> '.$themes.'</li>'; 
+    $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
+    $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
@@ -156,7 +186,7 @@ function displayBA($v,$users) {
     return $out;
 }
 
-function displayEvent($v,$users) {
+function displayEvent($v,$users,$c,$t) {
     // ein Event
     $id=$v["id"];
     $vid=$v["user_id"];
@@ -189,7 +219,9 @@ function displayEvent($v,$users) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
     $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
-    $out.='<li> <strong>Zum Thema:</strong> '.$themes.'</li>'; 
+    $out.='<li> <strong>Zum Thema nach Goals:</strong> '.$themes.'</li>'; 
+    $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
+    $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
