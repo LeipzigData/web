@@ -35,31 +35,7 @@ function mehrzeilig($a) {
 // --- Die Hauptfunktionen
 
 function getThemes($a) {
-    $m=array();
-    if (strpos($a,"Energie")) { $m["Klimaschutz"]=1; }
-    if (strpos($a,"Mobilität")) { $m["Klimaschutz"]=1; }
-    if (strpos($a,"Klimaschutz")) { $m["Klimaschutz"]=1; }
-    if (strpos($a,"Stadtraum")) { $m["Stadt, Natur und Wohnen"]=1; }
-    if (strpos($a,"Bauen")) { $m["Stadt, Natur und Wohnen"]=1; }
-    if (strpos($a,"Wohnen")) { $m["Stadt, Natur und Wohnen"]=1; }
-    if (strpos($a,"Ernährung")) { $m["Ernährung"]=1; }
-    if (strpos($a,"Gärtnern")) { $m["Ernährung"]=1; }
-    if (strpos($a,"Nachhaltiger Konsum")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Reparieren")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Wiederverwenden")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Recycling")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Soziale Nachhaltigkeit")) { $m["Soziales und Kultur"]=1; }
-    if (strpos($a,"Zusammenleben")) { $m["Soziales und Kultur"]=1; }
-    if (strpos($a,"Kunst")) { $m["Soziales und Kultur"]=1; }
-    if (strpos($a,"Kultur")) { $m["Soziales und Kultur"]=1; }
-    if (strpos($a,"Bildung")) { $m["Natur und Technik"]=1; }
-    if (strpos($a,"Forschung")) { $m["Natur und Technik"]=1; }
-    $out=join("; ",array_keys($m));
-    if (empty($out)) { return "Nicht zugeordnet"; }
-    return $out;
-}
-
-function getThemeByCategory($a) {
+    $a=" $a";
     $m=array();
     if (strpos($a,"Energie")) { $m["Klimaschutz"]=1; }
     if (strpos($a,"Mobilität")) { $m["Klimaschutz"]=1; }
@@ -128,7 +104,7 @@ function dieVeranstaltungen() {
     $e=array();
     foreach($res as $row) {
         $c=$cat[$row["first_root_category"]]["name"];
-        $t=getThemeByCategory($c);
+        $t=getThemes($c);
         if ($row["type"]=="Event") {
             if ($row["start_at"]>"2019-06-02") {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
@@ -172,8 +148,6 @@ function displayBA($v,$users,$c,$t) {
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
-    $out.='<li> <strong>Zum Thema nach Goals:</strong> '.$themes.'</li>'; 
     $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
     $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {
@@ -218,8 +192,6 @@ function displayEvent($v,$users,$c,$t) {
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Goals:</strong> '.$goals.'</li>'; 
-    $out.='<li> <strong>Zum Thema nach Goals:</strong> '.$themes.'</li>'; 
     $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
     $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {

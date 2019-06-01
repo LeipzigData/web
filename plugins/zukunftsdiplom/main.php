@@ -13,7 +13,7 @@
 require_once "helper.php";
 
 function zukunftsdiplom() {
-    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.html");
+    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php");
 }
     
 if (defined('ABSPATH') ) { 
