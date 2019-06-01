@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
- * Last Update: 2019-05-27
+ * Last Update: 2019-06-01
  */
 
 include_once("Zukunftsdiplom.php");
@@ -149,5 +149,4 @@ function dumpCategories() {
 
 // ---- test ----
 createDumps();
-createWebsiteDump("contents.php"); 
 dumpCategories();
