@@ -21,7 +21,7 @@ function getDatum($d) {
 }
 
 function createLink($s,$text) {
-    return "<a href=\"$s\">$text</a>";
+    return "<a href=\"$s\" target=\"_blank\">$text</a>";
 }
 
 function zdtrim($s) {
@@ -106,7 +106,7 @@ function dieVeranstaltungen() {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>"2019-06-02") {
+            if ($row["start_at"]>"2019-06-19") {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
@@ -142,19 +142,18 @@ function displayBA($v,$users,$c,$t) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
     if (!empty($veranstalter)) {
-        $out.='<li> <strong>Veranstalter:</strong>'
+        $out.='<li> <strong>Veranstalter: </strong>'
             .createLink($va,$veranstalter).'</li>';
     }
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
-    $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
+    $out.='<li> <strong>Modul:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
     if (!empty($url)) { 
-        $out.='<li>'.createLink($url,'Link des Veranstalters').'</li>';
+        $out.='<li>'.createLink($url,$url).'</li>';
     }
     $out.='</dl></div>';
     return $out;
@@ -186,19 +185,18 @@ function displayEvent($v,$users,$c,$t) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
     if (!empty($veranstalter)) {
-        $out.='<li> <strong>Veranstalter:</strong>'
+        $out.='<li> <strong>Veranstalter: </strong>'
             .createLink($va,$veranstalter).'</li>';
     }
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Root Category:</strong> '.$c.'</li>'; 
-    $out.='<li> <strong>Zum Thema nach Kategorien:</strong> '.$t.'</li>'; 
+    $out.='<li> <strong>Modul:</strong> '.$t.'</li>'; 
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
     if (!empty($url)) {
-        $out.='<li>'.createLink($url,'Link des Veranstalters').'</li>';
+        $out.='<li>'.createLink($url,$url).'</li>';
     }
     $out.='</ul></div>';
     return $out;
