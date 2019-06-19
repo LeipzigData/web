@@ -53,8 +53,8 @@ function getThemes($a) {
     if (strpos($a,"Zusammenleben")) { $m["Soziales und Kultur"]=1; }
     if (strpos($a,"Kunst")) { $m["Soziales und Kultur"]=1; }
     if (strpos($a,"Kultur")) { $m["Soziales und Kultur"]=1; }
-    if (strpos($a,"Bildung")) { $m["Natur und Technik"]=1; }
-    if (strpos($a,"Forschung")) { $m["Natur und Technik"]=1; }
+    if (strpos($a,"Bildung")) { $m["Technik, Energie, Mathematik"]=1; }
+    if (strpos($a,"Forschung")) { $m["Technik, Energie, Mathematik"]=1; }
     $out=join("; ",array_keys($m));
     if (empty($out)) { return "Nicht zugeordnet"; }
     return $out;
