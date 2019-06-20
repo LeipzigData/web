@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
@@ -7,7 +7,7 @@
 
 include_once("Zukunftsdiplom.php");
 
-function showTargetGroups() { 
+function showTargetGroups() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     //$src="activities.json";
     $string = file_get_contents($src);
@@ -21,7 +21,7 @@ function showTargetGroups() {
     }
 }
 
-function showCategories() { 
+function showCategories() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
     //$src="categories.json";
     $string = file_get_contents($src);
@@ -52,7 +52,7 @@ function extractGoals($v) {
     return join("; ",$a);
 }
 
-function createDumps() { 
+function createDumps() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     //$src="activities.json";
     $string = file_get_contents($src);
@@ -89,7 +89,7 @@ function isZDListed($row) {
     return strpos(" $goals","Zukunfts-Diplom");
 }
 
-function createAdditionalDumps() { 
+function createAdditionalDumps() {
     //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     $src="activities.json";
     $string = file_get_contents($src);
@@ -135,14 +135,14 @@ function jsonDump($fn,$s) {
     fclose($fp);
 }
 
-function createWebsiteDump($fn) { 
+function createWebsiteDump($fn) {
     $out=dieVeranstaltungen();
     $fp=fopen($fn, "w");
     fwrite($fp, $out);
-    fclose($fp);		
+    fclose($fp);
 }
 
-function dumpCategories() { 
+function dumpCategories() {
     $s=showCategories();
     jsonDump("Dumps/Categories.json",$s);
 }
