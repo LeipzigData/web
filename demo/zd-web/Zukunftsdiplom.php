@@ -130,7 +130,7 @@ function displayBA($v,$users,$c,$t) {
     $beschreibung=$v["description"];
     $veranstalter=$users[$v["user_id"]]["name"];
     $ort=$v["full_address"];
-//    $zielgruppe=$v["target_group"]; Laut Apache-log existiert das Feld im Bildungsangebot nicht
+    $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $goals=join(", ",$v["goals"]);
     $themes=getThemes($goals);
