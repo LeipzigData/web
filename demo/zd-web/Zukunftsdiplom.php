@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
@@ -69,7 +69,7 @@ function diePartner() {
         $s[$row["name"]]=displayPartner($row);
     }
     ksort($s);
-    return join("\n",$s) ; 		
+    return join("\n",$s) ;
 }
 
 function displayPartner($v) {
@@ -87,7 +87,7 @@ function displayPartner($v) {
     if (!empty($url)) {
         $out.='<li>URL: '.createLink($url,$url).'</li>';
     }
-    return $out."</ul>";  
+    return $out."</ul>";
 }
 
 function dieVeranstaltungen() {
@@ -106,7 +106,7 @@ function dieVeranstaltungen() {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>"2019-06-19") {
+            if ($row["start_at"]>date("Y-m-d")) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
@@ -116,9 +116,8 @@ function dieVeranstaltungen() {
     $out="<h2> Die Bildungsangebote </h2> "
         .join($b,"\n")
         ."<h2> Weitere Veranstaltungen </h2> "
-        .join($e,"\n"); 
+        .join($e,"\n");
     return $out;
-    //return file_get_contents("content.php"); 		
 }
 
 function displayBA($v,$users,$c,$t) {
@@ -131,7 +130,7 @@ function displayBA($v,$users,$c,$t) {
     $beschreibung=$v["description"];
     $veranstalter=$users[$v["user_id"]]["name"];
     $ort=$v["full_address"];
-    $zielgruppe=$v["target_group"];
+//    $zielgruppe=$v["target_group"]; Laut Apache-log existiert das Feld im Bildungsangebot nicht
     $url=$v["info_url"];
     $goals=join(", ",$v["goals"]);
     $themes=getThemes($goals);
@@ -148,12 +147,17 @@ function displayBA($v,$users,$c,$t) {
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Modul:</strong> '.$t.'</li>'; 
+    $out.='<li> <strong>Modul:</strong> '.$t.'</li>';
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
-    if (!empty($url)) { 
+    if (!empty($url)) {
         $out.='<li>'.createLink($url,$url).'</li>';
+    }
+    else{
+      $url = json_decode(file_get_contents("Dumps/Veranstalter.json"),true);
+      $url = $url[$vid]['organization_url'];
+      $out.='<li>'.createLink($url,$url).'</li>';
     }
     $out.='</dl></div>';
     return $out;
@@ -191,12 +195,17 @@ function displayEvent($v,$users,$c,$t) {
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
-    $out.='<li> <strong>Modul:</strong> '.$t.'</li>'; 
+    $out.='<li> <strong>Modul:</strong> '.$t.'</li>';
     if (!empty($beschreibung)) {
         $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     }
     if (!empty($url)) {
         $out.='<li>'.createLink($url,$url).'</li>';
+    }
+    else{
+      $url = json_decode(file_get_contents("Dumps/Veranstalter.json"),true);
+      $url = $url[$vid]['organization_url'];
+      $out.='<li>'.createLink($url,$url).'</li>';
     }
     $out.='</ul></div>';
     return $out;
@@ -215,4 +224,3 @@ function displayService($v) {
 // ---- test ----
 // echo dieVeranstaltungen();
 // echo diePartner();
-
