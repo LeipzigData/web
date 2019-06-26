@@ -12,11 +12,18 @@
 function getDatum($d) {
 // Verwandelt 2019-08-11T15:00:00.000+02:00 in Lesbares
     $out=date("d. M Y, H:i",strtotime($d));
+    $out=str_replace('Jan','Januar',$out);
+    $out=str_replace('Feb','Februar',$out);
+    $out=str_replace('Mar','März',$out);
+    $out=str_replace('Apr','April',$out);
+    $out=str_replace('May','Mai',$out);
     $out=str_replace('Jun','Juni',$out);
     $out=str_replace('Jul','Juli',$out);
     $out=str_replace('Aug','August',$out);
     $out=str_replace('Sep','September',$out);
     $out=str_replace('Oct','Oktober',$out);
+    $out=str_replace('Nov','November',$out);
+    $out=str_replace('Dec','Dezember',$out);
     return $out;
 }
 
