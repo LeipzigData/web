@@ -10,9 +10,9 @@ include_once("Zukunftsdiplom.php");
 
 $content='
 <div class="container">
-<h2 align="center">Die Angebote</h2>
-Vergange Verantaltung des aktuellen Monats finden Sie <a href="archiv.php">hier</a>
-'.dieVeranstaltungen().'
+<h2 align="center">Die vergangene Veranstaltungen des Monats</h2>
+Aktuelle Verantaltung finden Sie <a href="angebote.php">hier</a>.
+'.dasArchiv().'
 </div>
 ';
 echo showPage($content);

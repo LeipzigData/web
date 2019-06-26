@@ -90,7 +90,7 @@ function displayPartner($v) {
     return $out."</ul>";
 }
 
-function dieVeranstaltungen() {
+function dieVeranstaltungen($archiv=false) {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $users = json_decode($string, true);
@@ -106,17 +106,30 @@ function dieVeranstaltungen() {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>date("Y-m-d")) {
+            if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
+            else if ($row["start_at"]>date("Y-m-01") && $archiv == true && $row["start_at"]<date("Y-m-d") ){
+                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            }
         }
-        else { $b[]=displayBA($row,$users,$c,$t); }
+        else if($archiv==false)
+        {
+            $b[]=displayBA($row,$users,$c,$t);
+        }
     }
     ksort($e);
     $out="<h2> Die Bildungsangebote </h2> "
         .join($b,"\n")
         ."<h2> Weitere Veranstaltungen </h2> "
         .join($e,"\n");
+    return $out;
+}
+
+function dasArchiv(){
+    $out = dieVeranstaltungen($archiv=true);
+    $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
+    $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
 }
 
@@ -130,7 +143,7 @@ function displayBA($v,$users,$c,$t) {
     $beschreibung=$v["description"];
     $veranstalter=$users[$v["user_id"]]["name"];
     $ort=$v["full_address"];
-//    $zielgruppe=$v["target_group"]; Laut Apache-log existiert das Feld im Bildungsangebot nicht
+    $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $goals=join(", ",$v["goals"]);
     $themes=getThemes($goals);
