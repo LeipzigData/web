@@ -15,9 +15,14 @@ require_once "helper.php";
 function zukunftsdiplom() {
     return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php");
 }
-    
-if (defined('ABSPATH') ) { 
+
+function archiv(){
+  return file_get_contents("http://leipzig-data.de/demo/zd-web/contentArchive.php");
+}
+
+if (defined('ABSPATH') ) {
     add_shortcode('zukunftsdiplom', 'zukunftsdiplom');
+    add_shortcode('archiv', 'archiv');
 } else {
     $s=array(); echo htmlEnv(zukunftsdiplom($s)); // for testing
 }
