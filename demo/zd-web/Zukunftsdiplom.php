@@ -12,11 +12,18 @@
 function getDatum($d) {
 // Verwandelt 2019-08-11T15:00:00.000+02:00 in Lesbares
     $out=date("d. M Y, H:i",strtotime($d));
+    $out=str_replace('Jan','Januar',$out);
+    $out=str_replace('Feb','Februar',$out);
+    $out=str_replace('Mar','März',$out);
+    $out=str_replace('Apr','April',$out);
+    $out=str_replace('May','Mai',$out);
     $out=str_replace('Jun','Juni',$out);
     $out=str_replace('Jul','Juli',$out);
     $out=str_replace('Aug','August',$out);
     $out=str_replace('Sep','September',$out);
     $out=str_replace('Oct','Oktober',$out);
+    $out=str_replace('Nov','November',$out);
+    $out=str_replace('Dec','Dezember',$out);
     return $out;
 }
 
@@ -90,7 +97,7 @@ function displayPartner($v) {
     return $out."</ul>";
 }
 
-function dieVeranstaltungen() {
+function dieVeranstaltungen($archiv=false) {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $users = json_decode($string, true);
@@ -106,17 +113,30 @@ function dieVeranstaltungen() {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>date("Y-m-d")) {
+            if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
+            else if ($row["start_at"]>date("Y-m-01") && $archiv == true && $row["start_at"]<date("Y-m-d") ){
+                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            }
         }
-        else { $b[]=displayBA($row,$users,$c,$t); }
+        else if($archiv==false)
+        {
+            $b[]=displayBA($row,$users,$c,$t);
+        }
     }
     ksort($e);
     $out="<h2> Die Bildungsangebote </h2> "
         .join($b,"\n")
         ."<h2> Weitere Veranstaltungen </h2> "
         .join($e,"\n");
+    return $out;
+}
+
+function dasArchiv(){
+    $out = dieVeranstaltungen($archiv=true);
+    $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
+    $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
 }
 
