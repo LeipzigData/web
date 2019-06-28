@@ -28,16 +28,11 @@ function zukunftsdiplom() {
 
 function zd($atts) {
     $action=$atts["action"];
-    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php?action=$action");
-}
-
-function archiv(){
-  return file_get_contents("http://leipzig-data.de/demo/zd-web/contentArchive.php");
+    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php?$action");
 }
 
 if (defined('ABSPATH') ) {
     add_shortcode('zukunftsdiplom', 'zukunftsdiplom');
-    add_shortcode('archiv', 'archiv');
     add_shortcode('zd', 'zd');
 } else {
     $s=array("action" => "meier"); echo htmlEnv(zd($s)); // for testing
