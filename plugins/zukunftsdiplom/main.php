@@ -28,7 +28,7 @@ function zukunftsdiplom() {
 
 function zd($atts) {
     $action=$atts["action"];
-    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php?$action");
+    return file_get_contents("http://leipzig-data.de/demo/zd-web/content.php?action=$action");
 }
 
 function archiv(){
