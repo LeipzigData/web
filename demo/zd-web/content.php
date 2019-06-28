@@ -7,8 +7,8 @@
 
 include_once("Zukunftsdiplom.php");
 
-print_r($_GET);
-print_r(array_keys($_GET));
+//print_r($_GET);
+//print_r(array_keys($_GET));
 
 
 $action=$_GET["action"];
