@@ -7,10 +7,6 @@
 
 include_once("Zukunftsdiplom.php");
 
-//print_r($_GET);
-//print_r(array_keys($_GET));
-
-
 $action=$_GET["action"];
 
 if ($action=="archiv") { echo dasArchiv($archiv=true); }
