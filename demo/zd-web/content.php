@@ -7,9 +7,11 @@
 
 include_once("Zukunftsdiplom.php");
 
-$action=$_GET[0];
-
 print_r($_GET);
+print_r(array_keys($_GET));
+
+
+$action=$_GET["action"];
 
 if ($action=="archiv") { echo dasArchiv($archiv=true); }
 if ($action=="meier") { echo "Das ist ein Parameter zum Testen der Verbindung\n"; }
