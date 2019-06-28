@@ -7,6 +7,12 @@
 
 include_once("Zukunftsdiplom.php");
 
-echo dieVeranstaltungen();
+$action=$_GET["action"];
+
+echo "Action is $action\n";
+
+if ($action=="archiv") { echo dasArchiv($archiv=true); }
+if ($action=="meier") { echo "Das ist ein Parameter zum Testen der Verbindung\n"; }
+else { echo dieVeranstaltungen(); }
 
 ?>
