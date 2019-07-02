@@ -9,7 +9,7 @@ include_once("Zukunftsdiplom.php");
 
 $action=$_GET["action"];
 
-if ($action=="archiv") { echo dasArchiv($archiv=true); }
+if ($action=="archiv") { echo dasArchiv(); }
 if ($action=="meier") { echo "Das ist ein Parameter zum Testen der Verbindung\n"; }
 else { echo dieVeranstaltungen(); }
 
