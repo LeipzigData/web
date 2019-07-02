@@ -1,3 +1,7 @@
 *~
 vendor/
 composer.lock
+demo/zd-web/Dumps/Categories.json
+demo/zd-web/Dumps/Users.json
+demo/zd-web/Dumps/Veranstalter.json
+demo/zd-web/Dumps/Zukunftsdiplom.json
