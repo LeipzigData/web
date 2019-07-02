@@ -134,7 +134,7 @@ function dieVeranstaltungen($archiv=false) {
 }
 
 function dasArchiv(){
-    $out = dieVeranstaltungen($archiv=true);
+    $out = dieVeranstaltungen(true);
     $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
     $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
