@@ -116,7 +116,7 @@ function dieVeranstaltungen($archiv=false) {
             if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
-            else if ($row["start_at"]>date("Y-m-d",mktime(0, 0,0 , date("m")-3, 1, date("Y")))
+            else if ($row["start_at"]>date("Y-m-d",mktime(0, 0,0 , date("m")-1, 22, date("Y")))
                      && $archiv == true && $row["start_at"]<date("Y-m-d") ){
                  $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
