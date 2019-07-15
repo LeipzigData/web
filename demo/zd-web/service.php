@@ -8,9 +8,16 @@
 include_once("layout.php");
 include_once("Zukunftsdiplom.php");
 
-function getServices() { 
+/*
+Diese Funktion ist sehr langsam, da sie auf die URL zugreift.
+In der Dump/Zukunftsdiplom.json sind weniger Services vorhanden,
+da diese Datei nur Services des Zukunftsdiplom enthält.
+Einige Service existieren wahrscheinlich nicht mehr, da dass Datum
+in der Beschreibung überschritte ist.
+*/
+function getServices() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    //$src="activities.json";
+    //$src="Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s;
@@ -21,7 +28,8 @@ function getServices() {
     }
     return join("\n",$s);
 }
-$content='      
+
+$content='
 <div class="container">
 <h2 align="center">Die Services</h2>
 
