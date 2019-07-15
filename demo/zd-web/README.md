@@ -18,3 +18,5 @@ Kategoien der jeweiligen Angebote in der NL inferiert werden.  Die
 entsprechende thematische Zuordnung ist derzeit fest in der Funktion
 `getThemes($a)` in der Datei `Zukunftsdiplom.php` über einfaches
 String-Matching eingebrannt.
+
+## Lokal Testen
