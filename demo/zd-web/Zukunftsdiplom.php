@@ -71,12 +71,12 @@ function diePartner() {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
-    $s=array();
+    $partner=array();
     foreach ($res as $row) {
-        $s[$row["name"]]=displayPartner($row);
+        $partner[$row["name"]]=displayPartner($row);
     }
-    ksort($s);
-    return join("\n",$s) ;
+    ksort($partner);
+    return join("\n",$partner) ;
 }
 
 function displayPartner($v) {
@@ -132,8 +132,6 @@ function dieVeranstaltungen($archiv=false) {
         .join($e,"\n");
     return $out;
 }
-
-
 
 function dasArchiv(){
     $out = dieVeranstaltungen(true);
@@ -247,7 +245,7 @@ function displayService($v) {
     $title=$v["name"];
     $stype=$v["service_type"];
     $out='
-<li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
+        <li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
         return $out;
 }
 
