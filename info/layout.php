@@ -35,12 +35,8 @@ function pageNavbar() {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 
-            <li><a href="events.php">Übersicht aktueller Events</a></li> 
-            <li><a href="alteEvents.php">Übersicht vergangener Events</a></li> 
-            <li><a href="mint-orte.php">MINT-Orte in Leipzig</a></li> 
-            <!-- <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li> -->
+            <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li>
             <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
-            <li><a href="zukunftsdiplom.php">Zukunftsdiplom</a></li> 
             <li><a href="gebaeudenavigator.php">Gebäudenavigator</a></li> 
           </ul>
         </div><!-- navbar end -->
@@ -61,7 +57,7 @@ function pageFooter() {
 
       <div class="container">
     <div class="footer">
-        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> 2015-2018 </p>
+        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
         <p class="text-left">Leipzig Data gehört zum <a href="http://leipzig-data.de/impressum/">Netzprojekt</a> an der Universität Leipzig, dessen <a href="http://leipzig-data.de/impressum/">Datenschutzregeln</a> auch hier Anwendung finden. </p>
       </div>
     </div>

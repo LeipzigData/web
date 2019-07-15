@@ -62,7 +62,7 @@ function pageFooter() {
 
       <div class="container">
     <div class="footer">
-        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> 2015-2018 </p>
+        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
         <p class="text-left">Leipzig Data gehört zum <a href="http://leipzig-data.de/impressum/">Netzprojekt</a> an der Universität Leipzig, dessen <a href="http://leipzig-data.de/impressum/">Datenschutzregeln</a> auch hier Anwendung finden. </p>
       </div>
     </div>
