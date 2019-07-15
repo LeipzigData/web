@@ -116,13 +116,12 @@ function dieVeranstaltungen($archiv=false) {
             if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
-            else if ($row["start_at"]>date("Y-m-d",mktime(0, 0,0 , date("m")-1, 22, date("Y")))
-                     && $archiv == true && $row["start_at"]<date("Y-m-d") ){
+            else if ($row["start_at"]>calculateArchivDate() && $archiv == true
+                     && $row["start_at"]<date("Y-m-d") ){
                  $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
-        else if($archiv==false)
-        {
+        else if($archiv==false){
             $b[]=displayBA($row,$users,$c,$t);
         }
     }
@@ -134,11 +133,21 @@ function dieVeranstaltungen($archiv=false) {
     return $out;
 }
 
+
+
 function dasArchiv(){
     $out = dieVeranstaltungen(true);
     $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
     $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
+}
+
+function calculateArchivDate() {
+  $currentDate = date("Y-m-d");
+  if ($currentDate < date("Y-06-22")){
+    return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")-1));
+  }
+  return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")));
 }
 
 function displayBA($v,$users,$c,$t) {
@@ -241,6 +250,8 @@ function displayService($v) {
 <li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
         return $out;
 }
+
+
 
 // ---- test ----
 // echo dieVeranstaltungen();
