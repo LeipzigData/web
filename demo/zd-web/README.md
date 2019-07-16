@@ -19,6 +19,9 @@ entsprechende thematische Zuordnung ist derzeit fest in der Funktion
 `getThemes($a)` in der Datei `Zukunftsdiplom.php` über einfaches
 String-Matching eingebrannt.
 
+Die wichtigsten Codeteile aus dem Jahr 2018 sind im Verzeichnis `Code-2018` zu
+finden.
+
 ## Lokales Testen
 
 Damit es lokal ausgeführt werden kann, müssen die Dump-Dateien mit

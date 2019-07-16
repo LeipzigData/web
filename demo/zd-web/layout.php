@@ -36,7 +36,6 @@ function pageNavbar() {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
-            <!-- <li><a href="module.php">Die Themenbereiche</a></li> -->
             <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="akteure.php">Die Anbieter</a></li>
             <li><a href="service.php">Die Services</a></li>
