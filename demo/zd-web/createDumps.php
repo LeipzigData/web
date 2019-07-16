@@ -9,7 +9,6 @@ include_once("Zukunftsdiplom.php");
 
 function showTargetGroups() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -23,7 +22,6 @@ function showTargetGroups() {
 
 function showCategories() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
-    //$src="categories.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -40,7 +38,9 @@ function addCategory($s,$row) {
     $a["parent"]=$row["parent_id"];
     $a["goals"]=extractGoals($row["goal_cloud"]);
     $s[$id]=$a;
-    foreach($row["children"] as $v) { $s=addCategory($s,$v); }
+    foreach($row["children"] as $v){
+      $s=addCategory($s,$v);
+    }
     return $s;
 }
 
@@ -54,7 +54,6 @@ function extractGoals($v) {
 
 function createDumps() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -81,6 +80,9 @@ function getUsers($s) {
     return $a;
 }
 
+/*
+ Ueberprueft, ob das Angebot ein Teil des Zukunftsdiplom ist.
+*/
 function isZDListed($row) {
     $goals='';
     if (array_key_exists("goals",$row)) {

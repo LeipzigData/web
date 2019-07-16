@@ -18,3 +18,13 @@ Kategoien der jeweiligen Angebote in der NL inferiert werden.  Die
 entsprechende thematische Zuordnung ist derzeit fest in der Funktion
 `getThemes($a)` in der Datei `Zukunftsdiplom.php` über einfaches
 String-Matching eingebrannt.
+
+## Lokales Testen
+
+Damit es lokal ausgeführt werden kann, müssen die Dump-Dateien mit
+`php createDump.php` erzeugt werden.
+
+Um den Apache-Server lokal ausführen zu können, kann ein Docker Container
+mit `sudo docker-compose up` gestartet werden. Dadurch startet ein
+Apache-Server auf localhost:80. Bearbeitete PHP-Dateien werden automatisch
+nachgeladen, wodurch ein Neustart nicht nötig ist.

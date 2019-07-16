@@ -71,12 +71,12 @@ function diePartner() {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
-    $s=array();
+    $partner=array();
     foreach ($res as $row) {
-        $s[$row["name"]]=displayPartner($row);
+        $partner[$row["name"]]=displayPartner($row);
     }
-    ksort($s);
-    return join("\n",$s) ;
+    ksort($partner);
+    return join("\n",$partner) ;
 }
 
 function displayPartner($v) {
@@ -116,13 +116,12 @@ function dieVeranstaltungen($archiv=false) {
             if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
-            else if ($row["start_at"]>date("Y-m-d",mktime(0, 0,0 , date("m")-1, 22, date("Y")))
-                     && $archiv == true && $row["start_at"]<date("Y-m-d") ){
+            else if ($row["start_at"]>calculateArchivDate() && $archiv == true
+                     && $row["start_at"]<date("Y-m-d") ){
                  $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
-        else if($archiv==false)
-        {
+        else if($archiv==false){
             $b[]=displayBA($row,$users,$c,$t);
         }
     }
@@ -139,6 +138,14 @@ function dasArchiv(){
     $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
     $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
+}
+
+function calculateArchivDate() {
+  $currentDate = date("Y-m-d");
+  if ($currentDate < date("Y-06-22")){
+    return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")-1));
+  }
+  return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")));
 }
 
 function displayBA($v,$users,$c,$t) {
@@ -238,9 +245,11 @@ function displayService($v) {
     $title=$v["name"];
     $stype=$v["service_type"];
     $out='
-<li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
+        <li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
         return $out;
 }
+
+
 
 // ---- test ----
 // echo dieVeranstaltungen();
