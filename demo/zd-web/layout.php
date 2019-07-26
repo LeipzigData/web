@@ -39,6 +39,7 @@ function pageNavbar() {
             <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="akteure.php">Die Anbieter</a></li>
             <li><a href="service.php">Die Services</a></li>
+            <li><a href="alleAkteure.php">Alle Akteure</a></li>
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->

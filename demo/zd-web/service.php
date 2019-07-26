@@ -12,8 +12,8 @@ include_once("Zukunftsdiplom.php");
 Diese Funktion ist sehr langsam, da sie auf die URL zugreift.
 In der Dump/Zukunftsdiplom.json sind weniger Services vorhanden,
 da diese Datei nur Services des Zukunftsdiplom enthält.
-Einige Service existieren wahrscheinlich nicht mehr, da dass Datum
-in der Beschreibung überschritte ist.
+Einige Service existieren wahrscheinlich nicht mehr, da das Datum
+in der Beschreibung überschritten ist.
 */
 function getServices() {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
