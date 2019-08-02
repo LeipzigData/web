@@ -17,7 +17,7 @@ function getUsers() {
     $res = json_decode($string, true);
     $s;
     foreach($res as $row) {
-        $s[$row["name"]]=displayUser($row);
+        $s[trim($row["name"])]=displayUser($row); //Einige Namen hatten am Anfang ein Leerzeichen. Dadruch war die Sotierung fehlerhaft.
     }
     ksort($s);
     return join("\n",$s);

@@ -73,7 +73,7 @@ function diePartner() {
     $res = json_decode($string, true);
     $partner=array();
     foreach ($res as $row) {
-        $partner[$row["name"]]=displayPartner($row);
+        $partner[trim($row["name"])]=displayPartner($row);
     }
     ksort($partner);
     return join("\n",$partner) ;
