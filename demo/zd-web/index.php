@@ -5,7 +5,7 @@
  * Last Update: 2019-01-13
  */
 
-include_once("layout.php");
+include_once("layout-1.php");
 
 $content='      
 <div class="container">
