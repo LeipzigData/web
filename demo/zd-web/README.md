@@ -31,3 +31,11 @@ Um den Apache-Server lokal ausführen zu können, kann ein Docker Container
 mit `sudo docker-compose up` gestartet werden. Dadurch startet ein
 Apache-Server auf localhost:80. Bearbeitete PHP-Dateien werden automatisch
 nachgeladen, wodurch ein Neustart nicht nötig ist.
+
+
+## Abhängigenkeiten
+
+Diese Seite nutzt:
+* php 5 oder höher
+* bootstrap 3.5
+* jQuery v1.11.1
