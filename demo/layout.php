@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2018-10-14
+ * last update: 2019-08-05
  */
 
 function pageHeader() {
@@ -32,6 +32,9 @@ function pageNavbar() {
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
+	<button class="navbar-toggle  hidden-sm-up pull-right" type="button"
+		data-toggle="collapse" data-target="#navbar"> ☰
+	</button>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 

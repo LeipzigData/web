@@ -33,10 +33,10 @@ function pageNavbar() {
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
-  <button class="navbar-toggle  hidden-sm-up pull-right" type="button"
-    data-toggle="collapse" data-target="#navbarTogglerDemo01"> ☰
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+	<button class="navbar-toggle hidden-sm-up pull-right" type="button"
+		data-toggle="collapse" data-target="#navbar"> ☰
+	</button>
+	<div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
             <li><a href="angebote.php">Die Angebote</a></li>
@@ -44,8 +44,8 @@ function pageNavbar() {
             <li><a href="service.php">Die Services</a></li>
             <li><a href="alleAkteure.php">Alle Akteure</a></li>
           </ul>
-  </div><!-- collapse end -->
-      </div><!-- container-fluid end -->
+	</div><!-- collapse end -->
+      </div><!-- container end -->
     </nav>';
 }
 
