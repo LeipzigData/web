@@ -113,7 +113,9 @@ function dieVeranstaltungen($archiv=false) {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>date("Y-m-d") && $archiv == false) {
+            if ($row["start_at"]>date("Y-m-d") && $archiv == false &&
+                $row["start_at"]<date("Y-m-d",mktime(0, 0,0 , 8, 19, date("Y")))
+              ) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
             else if ($row["start_at"]>calculateArchivDate() && $archiv == true
