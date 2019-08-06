@@ -8,11 +8,12 @@
 include_once("layout.php");
 include_once("Zukunftsdiplom.php");
 
-$content='      
+$content='
 <div class="container">
 <h2 align="center">Die Orte</h2>
-
+<ul>
 '.dieOrte().'
+</ul>
 </div>
 ';
 echo showPage($content);

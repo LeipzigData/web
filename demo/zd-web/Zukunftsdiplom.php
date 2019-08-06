@@ -241,6 +241,22 @@ function displayEvent($v,$users,$c,$t) {
     return $out;
 }
 
+function dieOrte(){
+  $src="Dumps/Zukunftsdiplom.json";
+  $string = file_get_contents($src);
+  $res = json_decode($string, true);
+  $b=array();
+  foreach ($res as $row) {
+    array_push($b, $row["full_address"]);
+  }
+  $b = array_unique($b);
+  $result = "";
+  foreach ($b as $ort) {
+    $result =  $result."<li>".$ort."</li>";
+  }
+  return $result;
+}
+
 function displayService($v) {
     $id=$v["id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
