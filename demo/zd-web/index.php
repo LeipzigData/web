@@ -13,6 +13,12 @@ $content='
 <div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
 <h3>Mach mit beim Zukunftsdiplom!</h3>
 
+<p><strong>Das Zukunftsdiplom 2019 ist abgeschlossen, die
+Abschlussveranstaltung mit der Würdigung der aktivsten Teilnehmer und der
+Übergabe der Zukunftsdiplome findet am 6. September 2019 im Grassi-Museum
+statt.</strong></p>
+
+
 <p>Wo kommt deine Kleidung oder das Essen eigentlich her? Was hat unsere
   Fortbewegung mit dem Klimawandel zu tun? Was tun die Pflanzen und Tiere im
   Auwald eigentlich für uns? Und wie geht eine gerechte Welt im Kleinen?</p>
