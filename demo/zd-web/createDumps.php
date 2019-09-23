@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
- * Last Update: 2019-06-01
+ * Last Update: 2019-09-23
  */
 
 include_once("Zukunftsdiplom.php");
@@ -92,8 +92,8 @@ function isZDListed($row) {
 }
 
 function createAdditionalDumps() {
-    //$src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $src="activities.json";
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    //$src="activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     // -----------------------------------
@@ -129,6 +129,14 @@ function createAdditionalDumps() {
     }
     jsonDump("Dumps/Stores.json",$s);
     // -----------------------------------
+    $s=array();
+    foreach($res as $row) {
+        if ($row["service_type"]=="Bildungsangebot") {
+            $s[$row["id"]]=$row;
+        }
+    }
+    jsonDump("Dumps/Bildungsangebote.json",$s);
+    // -----------------------------------
 }
 
 function jsonDump($fn,$s) {
@@ -151,4 +159,5 @@ function dumpCategories() {
 
 // ---- test ----
 createDumps();
-dumpCategories();
+//dumpCategories();
+createAdditionalDumps();
