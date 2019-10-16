@@ -3,7 +3,7 @@
 /* 
 
 Author: Hans-Gert Graebe
-last modified: 2018-04-15
+last modified: 2019-10-16
 
  */
 
@@ -19,7 +19,7 @@ function katalog() {
 
 function dieDatasets() {
     $graph=new EasyRdf_Graph();
-    $graph->parsefile("http://www.leipzig-data.de/RDFData/MINT-Katalog.ttl");
+    $graph->parsefile("rdf/MINT-Katalog.rdf");
   // echo $result->dump("turtle");
   $s=array();
   foreach ($graph->allOfType("dcat:Dataset") as $v) {

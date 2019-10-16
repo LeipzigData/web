@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dcat="http://www.w3.org/ns/dcat#"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:dctype="http://purl.org/dc/dcmitype/"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+   xmlns="http://leipzig-data.de/Data/MINT-Katalog/">
+  <dcat:Catalog rdf:about="http://leipzig-data.de/Data/MINT-Katalog/">
+    <cc:attributionName>The Leipzig Open Data Project</cc:attributionName>
+    <cc:attributionURL rdf:resource="http://leipzig-data.de"/>
+    <dct:description xml:lang="de">Der Meta-Katalog listet bekannte MINT-Portale auf</dct:description>
+    <dct:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
+    <dct:title xml:lang="de">Der MINT-Kataloge Meta-Katalog</dct:title>
+    <rdfs:comment>Der Katalog wurde im Zusammenhang mit den Bemühungen von MINT Mitteldeutschland erstellt, sich einen Überblick über Datensammlungen zu verschaffen, in denen (u.a.) MINT-Angebote aus der Region Mitteldeutschland beschrieben werden. </rdfs:comment>
+  </dcat:Catalog>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-001">
+    <dct:description>Ziel der Initiative ist das Potential von Frauen für naturwissenschaftlich-technische Berufe zu nutzen, im einzelnen:
+- ein realistisches Bild der ingenieur- und naturwissenschaftlichen Berufe zu vermitteln und die Chancen für Frauen in diesen Feldern aufzuzeigen,
+- junge Frauen für naturwissenschaftlich-technische Studiengänge zu begeistern,
+- Hochschulabsolventinnen für Karrieren in technischen Unternehmen und Forschungseinrichtungen zu gewinnen.</dct:description>
+    <dct:title>Initiative "Komm mach MINT"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.komm-mach-mint.de/MINT-Projekte"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-002">
+    <dct:description>Gesamtübersicht über die Bildungsangebote in den Bereichen Mathematik, Informatik, Naturwissenschaften und Technik (MINT) sowie Umweltbildung in Leipzig.</dct:description>
+    <dct:title>Informationen zu Leipziger MINT-Orten</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-12"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-14"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-16"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-rdf-14"/>
+    <foaf:homepage rdf:resource="http://leipzig-data.de/MINT-Orte"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-12">
+    <dct:title>Informationen zu Leipziger MINT-Orten, Auflage 2012</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3286270</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://leipzig-netz.de/MINT/Broschueren/MINT-Broschuere-2012.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-14">
+    <dct:title>Informationen zu Leipziger MINT-Orten, Auflage 2014</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1287624</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://leipzig-netz.de/MINT/Broschueren/MINT-Broschuere-2014.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-pdf-16">
+    <dct:title>Informationen zu Leipziger MINT-Orten, Auflage 2014</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1691299</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://leipzig-netz.de/MINT/Broschueren/MINT-Broschuere-2016.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-002-rdf-14">
+    <dct:title>Informationen zu Leipziger MINT-Orten, Auflage 2014</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">187027</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://leipzig-data.de/RDFData/MINTBroschuere2014.ttl"/>
+    <dcat:mediaType>text/rdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003">
+    <dct:description>Der Jahresbericht 2016/17 enthält Wettbewerbsinformationen zu Organisation und Ergebnissen sowie einen Ausblick ins Schuljahr 2017/18 mit Terminen und Ansprechpartnern hin. Eine umfassende und beeindruckende Bilanz aktueller MINT-Aktivitäten in Sachsen auf 64 Seiten.</dct:description>
+    <dct:title>Jahresbericht des Sächsischen Landeskomitees zur Förderung mathematisch-naturwissenschaftlich begabter und interessierter Schüler</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-04"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-07"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-08"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-09"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-10"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-11"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-12"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-13"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-14"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-15"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-16"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-17"/>
+    <dcat:landingPage rdf:resource="http://lsgm.uni-leipzig.de/tiki-index.php?page=SLK"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-04">
+    <dct:title>SLK-Jahresbericht 2003/04</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">249518</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2003_04.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-07">
+    <dct:title>SLK-Jahresbericht 2006/07</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">630211</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2006_07.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-08">
+    <dct:title>SLK-Jahresbericht 2007/08</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">173728</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2007_08.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-09">
+    <dct:title>SLK-Jahresbericht 2008/09</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1225036</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2008_09.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-10">
+    <dct:title>SLK-Jahresbericht 2009/10</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">236068</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2009_10.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-11">
+    <dct:title>SLK-Jahresbericht 2010/11</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">204449</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2010_11.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-12">
+    <dct:title>SLK-Jahresbericht 2011/12</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1400317</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2011_12.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-13">
+    <dct:title>SLK-Jahresbericht 2012/13</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">298694</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2013.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-14">
+    <dct:title>SLK-Jahresbericht 2013/14</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">225677</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2014.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-15">
+    <dct:title>SLK-Jahresbericht 2014/15</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">463948</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2015.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-16">
+    <dct:title>SLK-Jahresbericht 2015/16</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1380847</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2015_16.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-003-17">
+    <dct:title>SLK-Jahresbericht 2016/17</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2033202</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://lsgm.uni-leipzig.de/Andere/SLK/SLK_Jahresbericht_2016_17.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-004">
+    <dct:description>Planungshilfe für Projekt- und fächerverbindenden Unterricht. Herausgegeben vom Dezernat Jugend, Soziales, Gesundheit und Schule Amt für Jugend, Familie und Bildung der Stadt Leipzig 2012</dct:description>
+    <dct:title>Lehrplanbezogene Umweltbildungsangebote in Leipzig</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-004-pdf"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-004-pdf">
+    <dct:title>Lehrplanbezogene Umweltbildungsangebote in Leipzig, Auflage 2012</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">632458</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="http://leipzig-netz.de/MINT/Broschueren/Lehrplanbezogene_Umweltbildung.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-005">
+    <dct:description>Der CLUB MAKER-Garage
+Die neue Initiative von »MINT Zukunft schaffen« bildet ein bundesweites Netzwerk für alle Einrichtungen, die nach dem Prinzip des »self-invented learning by doing« arbeiten. Der »CLUB MAKER-Garage« und die bundesweite »Vereinigung der Freunde und Förderer CLUB MAKER-Garage« werden anlässlich des Besuchs von Bundeskanzlerin Dr. Angela Merkel in der MAKER-Garage Buch am Erlbach am 4. September 2015 gemeinsam mit den Partnern der Vereinigung gegründet und offiziell vorgestellt. </dct:description>
+    <dct:title>Deutschland-Katalog der Maker-Garagen</dct:title>
+    <dcat:landingPage rdf:resource="https://www.mintzukunftschaffen.de/maker-garage.html"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-006">
+    <dct:description>Die MINT-freundlichen Schulen
+Seit 2011 ehren unsere bundesweiten Partner – u.a. wie die Wissensfabrik, große Stiftungen, VDE, GI – in Abstimmung oder gemeinsam mit Landesarbeitgebervereinigungen und den Bildungswerken der Wirtschaft Schulen, die einen nachhaltigen MINT-Schwerpunkt setzen, nach einem bundesweit einheitlichen Kriterienkatalog. Das Signet »MINT-freundliche Schule« ist eine Ehrung für Schulen im »MINT-Breitensport«. In diesem Jahr wurde die Marke von 1.000 Schulen überschritten. Zehn Prozent aller weiterführenden Schulen – 1.600 Schulen – wollen wir erreichen. Schirmherrin ist die Kultusministerkonferenz KMK. </dct:description>
+    <dct:title>Deutschland-Katalog der MINT-freundlichen Schulen</dct:title>
+    <dcat:landingPage rdf:resource="https://mintzukunftschaffen.de/mint-freundliche-schule-2/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-007">
+    <dct:description>Im MINT-Navigator können Sie z.B. nach MINT-Initiativen, MINT-Projekten, Unterrichtsmaterial zu MINT suchen.
+Geben Sie einfach Ihren Suchbegriff, z.B. „Unterricht“, genau wie bei Google ein. Der Unterschied zu Google ist, dass unsere Ergebnisse bereits qualitativ gefiltert sind. Sie finden einen für Sie passenden Eintrag schnell - Sie müssen also nicht mehr hunderttausend Ergebnisse durchsuchen.
+Sie können auch in unserem Bereich "Ergebnisse von mintzukunftschaffen.de" nach ausgewählten Empfehlungen suchen, zum Beispiel zum Thema Informatik oder Biologie oder Angeboten für Mädchen.
+</dct:description>
+    <dct:title>MINT Navigator von mintzukunftschaffen.de</dct:title>
+    <rdfs:comment>Beim Relaunch der Webseiten 2018 wurde der MINT-Navigator vom Netz genommen.</rdfs:comment>
+    <dcat:landingPage rdf:resource="http://www.mintzukunftschaffen.de/mintnavigator"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-008">
+    <dct:description>Der "MINT-Atlas 3-10 für Deutschland" wurde im Auftrag des Bundesministeriums für Bildung und Forschung (BMBF) vom ZNL TransferZentrum für Neurowissenschaften und Lernen erstellt und präsentiert allen an MINT (Mathematik - Informatik - Naturwissenschaften - Technik) Interessierten in einer Datenbank Projekte und Angebote aus diesen Fachbereichen. Die Arbeit des ZNL am "MINT-Atlas 3-10" endete am 29. Februar 2012. Bei Fragen zu den Projekten finden sich in den jeweiligen Projektbeschreibungen die entsprechenden Ansprechpartner. </dct:description>
+    <dct:title>MINT-Atlas 3 – 10 für Deutschland</dct:title>
+    <rdfs:comment>Das Projekt wird seit 2012 nicht weitergeführt.</rdfs:comment>
+    <dcat:landingPage rdf:resource="http://www.znl-mintatlas3-10.de/Bundesland/Sachsen/sachsen.html"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-009">
+    <dct:description>Im think ING. MINT-Atlas sind alle Standorte von Technikmuseen, Kinderunis, Schülerlaboren und familienfreundlichen Hochschulen zusammengefasst. </dct:description>
+    <dct:title>think ING. MINT-Atlas</dct:title>
+    <dcat:landingPage rdf:resource="https://www.think-ing.de/paedagogen/mint-erleben/mint-atlas"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-010">
+    <dct:description>Die Junior-Ingenieur-Akademie ist als Wahlpflichtfach
+    mit zweijähriger Laufzeit fest im Lehrplan der Schulen verankert. Sie
+    basieren immer auf der Kooperation von Schulen mit Hochschulen,
+    wissenschaftlichen Einrichtungen und Un- ternehmen, die den Schülerinnen
+    und Schülern die Möglichkeit geben, die im Unterricht erworbenen Kenntnisse
+    praktisch anzuwenden.  Partner können zum Beispiel Unternehmen aus der
+    Region, Stadtwerke, Forschungszentren, Universitäten oder Fachhochschulen
+    sein. Das Angebot eigne sich hervorragend zur Nachwuchsförderung – mit
+    dieser Begründung zeichneten die Initiative Sachen machen! des Vereins
+    Deutscher Ingenieure (VDI) und die Initiative Zukunft durch Innovation.NRW
+    das Projekt aus. </dct:description>
+    <dct:title>Junior-Ingenieur-Akademien</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-010-01"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-010-02"/>
+    <dcat:landingPage rdf:resource="https://www.telekom-stiftung.de/projekte/junior-ingenieur-akademie"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-010-01">
+    <dct:title>Junior-Ingenieur-Akademien. Standorte</dct:title>
+    <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2660499</dcat:byteSize>
+    <dcat:downloadURL rdf:resource="https://www.telekom-stiftung.de/sites/default/files/jia_plakate_2017_1904_final.pdf"/>
+    <dcat:mediaType>text/pdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-010-02">
+    <dct:title>Junior-Ingenieur-Akademien, Interaktive Karte</dct:title>
+    <dcat:accessURL rdf:resource="https://www.telekom-stiftung.de/dts-karten/karte02/"/>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-011">
+    <dct:description>Die Leipziger Nachhaltigkeits-Datenbank ist eine Datenbank von lokalen Veranstaltern und Events im Bereich der MINT- und Umwelt-Bildung. </dct:description>
+    <dct:title>Leipziger Nachhaltigkeits-Datenbank</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-011-01"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-011-02"/>
+    <dcat:landingPage rdf:resource="https://www.nachhaltiges-leipzig.de/"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-011-01">
+    <dct:title>Leipziger Nachhaltigkeits-Datenbank, Demo der Inhalte, Stand November 2017</dct:title>
+    <dcat:accessURL rdf:resource="http://pcai042.informatik.uni-leipzig.de/~graebe/nl-rdf/"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-011-02">
+    <dct:title>Leipziger Nachhaltigkeits-Datenbank, Inhalte als RDF, Stand November 2017</dct:title>
+    <dcat:downloadURL rdf:resource="http://leipzig-data.de/RDFData/NL-Akteure.ttl"/>
+    <dcat:mediaType>text/rdf</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012">
+    <dct:description>MINT-Regionen sind regionale Netzwerke zur Stärkung der naturwissenschaftlich-technischen Bildung. In ihnen arbeiten wichtige Akteure – von Kindergärten über Schulen und Hochschulen bis zu Unternehmen, Stiftungen, Vereinen und Verwaltungen – eng zusammen und stimmen ihre Angebote aufeinander ab. </dct:description>
+    <dct:title>Datenbank der MINT-Regionen</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-01"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-02"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-03"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-04"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-05"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-06"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-07"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-08"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-09"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-10"/>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-11"/>
+    <dcat:landingPage rdf:resource="http://www.mint-regionen.de/"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-01">
+    <dct:title>MINT_Netzwerk Leipzig</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/mint-netzwerk-leipzig.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-02">
+    <dct:title>MINT-Netzwerk Chemnitz</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/mint-netzwerk-chemnitz.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-03">
+    <dct:title>SalineTechnikum</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/salinetechnikum.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-04">
+    <dct:title>Schülerforschungszentrum Gera</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/schuelerforschungszentrum-gera.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-05">
+    <dct:title>witelo e.V. - wissenschaftlich-technische Lernorte in Jena</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/witelo-ev-wissenschaftlich-technische-lernorte-in-jena.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-06">
+    <dct:title>Jungforscher Thüringen</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/jungforscher-thueringen.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-07">
+    <dct:title>Schülerforschungszentrum Erfurt</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/schuelerforschungszentrum-erfurt.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-08">
+    <dct:title>Schülerforschungszentrum Ilmenau</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/schuelerforschungszentrum-ilmenau.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-09">
+    <dct:title>Schülerforschungszentrum Schmalkalden</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/schuelerforschungszentrum-schmalkalden.html"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-10">
+    <dct:title>MINT-freundliche Stadt Sonneberg</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/?tx_mintdirectory_region%5Bregion%5D=173&amp;cHash=6725b4939b67067fdf50d53d5a2c7c61"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-012-11">
+    <dct:title>MINT-Region Nordthüringen</dct:title>
+    <dcat:accessURL rdf:resource="http://www.mint-regionen.de/mint-regionen/region/mint-region-nordthueringen.html"/>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-013">
+    <dct:description>Herzlich Willkommen bei den sächsischen Schülerlaboren, Orte zum Lernen, Experimentieren und staunen. Hier könnt ihr verschiedene Berufe kennenlernen und bekommt die Möglichkeit selbstständig zu forschen. Biologie, Physik und Chemie, aber auch Mathematik, Informatik und die Technikwissenschaften erscheinen hier nicht mehr als graue Theorie, sondern präsentieren sich als spannende Arbeitsfelder mit hohem Alltagsbezug. Die Schülerlabore ergänzen den Unterricht und eröffnen neue fachliche Perspektiven.</dct:description>
+    <dct:title>Sächsische Schülerlabore</dct:title>
+    <dcat:distribution rdf:resource="http://leipzig-data.de/Data/MINT-Katalog/dataset-013-01"/>
+    <dcat:landingPage rdf:resource="http://www.schuelerlabore-sachsen.de/public/"/>
+  </dcat:Dataset>
+  <dcat:Distribution rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-013-01">
+    <dct:title>Übersicht über die 16 Sächsischen Schülerlabore</dct:title>
+    <dcat:downloadURL rdf:resource="http://www.schuelerlabore-sachsen.de/public/schuelerlabore"/>
+    <dcat:mediaType>text/html</dcat:mediaType>
+  </dcat:Distribution>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-Katalog/dataset-014">
+    <dct:description>Das Portal bietet aktuelle News und SPECIALs rund um die Potenzialförderung und bündelt bundesweite Anbieter und Angebote im Bereich Talententwicklung und Begabungsförderung. Videos, Podcasts, Downloads und Bildergalerien veranschaulichen die Inhalte, orange hinterlegte Wörter und Pfeile verweisen auf Links zu weiterführenden Informationen.
+
+Bei allen Inhalten im Begabungslotsen steht die Qualitätssicherung an erster Stelle: Eigens entwickelte Qualitätskriterien gewährleisten die Qualität der eingestellten Angebote und Anbieter.</dct:description>
+    <dct:title>Begabungslotse</dct:title>
+    <dcat:landingPage rdf:resource="https://www.begabungslotse.de/angebote"/>
+  </dcat:Dataset>
+</rdf:RDF>
