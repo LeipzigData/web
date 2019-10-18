@@ -21,7 +21,7 @@ zugänglich und können über unseren <a
 href="http://leipzig-data.de:8890/sparql">SPARQL-Endpunkt</a> detaillierter
 abgefragt werden.  </div>
 
-'.katalog().'
+'.katalog("rdf/MINT-Katalog.rdf").'
 
 </div>
 ';

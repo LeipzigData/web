@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dcat="http://www.w3.org/ns/dcat#"
+   xmlns:dct="http://purl.org/dc/terms/"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/">
+  <dcat:Catalog rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/">
+    <cc:attributionName>The Leipzig Open Data Project</cc:attributionName>
+    <cc:attributionURL rdf:resource="http://leipzig-data.de"/>
+    <dct:description xml:lang="de">Meta-Katalog bekannter MINT-Portale von MINT-MD</dct:description>
+    <dct:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
+    <dct:title xml:lang="de">Der MINT-Metakatalog von MINT-MD</dct:title>
+    <rdfs:comment>Dies ist die offiziell von MINT Mitteldeutschland 2018 zusammengetragene Menge von Webverweisen zu Datensammlungen über MINT-Angebote. </rdfs:comment>
+  </dcat:Catalog>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_100">
+    <dct:description>Ziel der Initiative ist das Potential von Frauen für naturwissenschaftlich-technische Berufe zu nutzen, im einzelnen:
+- ein realistisches Bild der ingenieur- und naturwissenschaftlichen Berufe zu vermitteln und die Chancen für Frauen in diesen Feldern aufzuzeigen,
+- junge Frauen für naturwissenschaftlich-technische Studiengänge zu begeistern,
+- Hochschulabsolventinnen für Karrieren in technischen Unternehmen und Forschungseinrichtungen zu gewinnen.</dct:description>
+    <dct:title>Initiative "Komm mach MINT"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.komm-mach-mint.de/MINT-Projekte"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_101">
+    <dct:description>Online-Mentoring-Programm für Mädchen in MINT:
+- bis zu 800 Schülerinnen der 5. bis 12. Klassen werden ein Jahr von einer persönlichen Mentorin begleitet
+- soll Rollenvorbild zu MINT-Aktivitäten anregen und gibt Hinweise zu Studien- und Berufswahl
+- nach eigenen Angaben wählen 71% aller ehemaligen Teilnehmerinnen nach Verlassen desProgramms ein MINT-Fach als Studienfach oder Ausbildungsrichtung</dct:description>
+    <dct:title>CyberMentor - Die Online-MINT-Plattform nur für Mädchen!</dct:title>
+    <dcat:landingPage rdf:resource="https://www.cybermentor.de/index.php"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_102">
+    <dct:description>Ziel der Initiative ist die Profilierung zu einer positiven Einstellung von jungen Menschen, Eltern, Lehrkräften sowie einer breiten Öffentlichkeit zu MINT.
+- Hauptzielgruppen: Schüler der Sekundarstufen I und II, StudienanfängerInnen</dct:description>
+    <dct:title>Initiative "MINT Zukunft schaffen"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mintzukunftschaffen.de"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_103">
+    <dct:description>Das MINTforum Hamburg ist ein Bündnis von mehr als 50 Initiativen, Projekten und außerschulischen Lernorten, die Kinder und Jugendliche für Mathematik, Informatik, Naturwissenschaften und Terchnik begeistern und ihnen von der Kita über die weiterführende Schile bis hin zur Studien- und Berufswahl das vielfältige Spektrum von MINT näherbringen.</dct:description>
+    <dct:title>Initiative "MINTforum Hamburg"</dct:title>
+    <dcat:landingPage rdf:resource="http://mintforum.de"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_104">
+    <dct:description>MINTKids MV unterstützt Kitas bei der Suche nach dem passenden MINT-Bildungsangebot und ermöglicht dadurch Kindern einen frühen Zugang zu interessanten Themen aus den Bereichen der Mathematik, Informatik,Naturwissenschaften und Technik.</dct:description>
+    <dct:title>Initiative "MINTKids MV"</dct:title>
+    <dcat:landingPage rdf:resource="https://www.mintkidsmv.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_105">
+    <dct:description>Begeisterung für technisch-naturwissenschaftliche Themen in vielfältigen, praxisnahen Projekten und Angeboten für SchülerInnen ab Klasse 5</dct:description>
+    <dct:title>Projekt "Create MV"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.bildungswerk-wirtschaft.de/de/unsere_projekte/createmv"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_106">
+    <dct:description>Um SchülerInnen, Eltern, Unternehmen und Öffentlichkeit überdurchschnittliches MINT-Engagement von Schulen, die ihr Profil im MINT-Bereiche vertiefen, zu verdeutlichen, haben NORDMETALL-Stiftung, Vereinigung der Unternehmerverbände MV die Auszeichnung MINT-Schule-MV ins Leben gerufen.</dct:description>
+    <dct:title>Netzwerk "MINT-Schule MV"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mint-schule-mecklenburg-vorpommern.de/home/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_107">
+    <dct:description>Das SalineTechnikum versteht sich als außerschulische Bildungseinrichtung für technische Bildung. Ziel ist es, das Technikinteresse von Kindern und Jugendlichen aller Bildungsstufen zu fördern, zu stärken, sie für Technik zu begeistern.</dct:description>
+    <dct:title>Initiative "SALINETECHNIKUM"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.salinemuseum.de/halle-saale/salinetechnikum/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_108">
+    <dct:description>Das MINT-Netz Berlin-Brandenburg ist ein Zusammenschluss von Akteuren aus den Bereichen der MINT-Förderung und MINT-Bildung in der Hauptstadtregion.
+- Erfassen der vorhandenen außerschulischen MINT-Angebote
+- Unterstützung qualitativ hochwertiger Aus- und Weiterbildung von Lehrkräften für den MINT-Unterricht</dct:description>
+    <dct:title>Initiative "MINT Netz Berlin-Brandenburg"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mintnetz.de/mint-netz/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_109">
+    <dct:description>Es ist das Ziel des Vereins MINT im Werra-Meißner-Kreis e. V. schon in der frühkindlichen Erziehung und in der Schule die Begeisterung bei Kindern und Jugendlichen für Mathematik, Informatik, Naturwissenschaften und Technik zu wecken.</dct:description>
+    <dct:title>Initiative "MINTimWMK"</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mint-regionen.de/mint-regionen/region/mintimwmk-mint-im-werra-meissner-kreis-ev.html"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_110">
+    <dct:description>Das Ziel ist es, die vielfältigen MINT-Aktivitäten der Region zu vernetzen, sich gegenseitig zu unterstützen und alle MINT-Angebote einer größeren Öffentlichkeit bekannt zu machen.</dct:description>
+    <dct:title>MINT-Initiative Fulda</dct:title>
+    <dcat:landingPage rdf:resource="http://www2005.hs-fulda.de/index.php?id=12900&amp;L=1"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_111">
+    <dct:description>Das MINT-Netzwerk Leipzig ist die Regionalgruppe der Bundesinitiative „MINT – Zukunft schaffen“ in der Stadt Leipzig.
+Koordination Leipziger MINT-Aktivitäten von Hochschulen, Forschungseinrichtungen, öffentlichen Einrichtungen,
+Unternehmen, Vereinen und Privatpersonen.</dct:description>
+    <dct:title>MINT-Netzwerk-Leipzig</dct:title>
+    <dcat:landingPage rdf:resource="http://mint-leipzig.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_112">
+    <dct:description>Mit der Initiative "Jungforscher Thüringen" engagiert sich die STIFT mit dem Ziel, frühzeitige Interessen und Talente für Naturwissenschaften und Technik zu wecken, über den gesamten Bildungsweg auszubauen, für besonders Interessierte und Begabte spezielle Angebote zu etablieren und die MINT-Bimdungskette vom Kindergarten über die Grundschule bis hin zum MINT-Fachunterricht in den weiterführenden Schulen zu führen.</dct:description>
+    <dct:title>Initiative "Jungforscher Thüringen"</dct:title>
+    <dcat:landingPage rdf:resource="https://jungforscher-thueringen.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_113">
+    <dct:description>witelo gibt Lehrern, Schülern und Eltern einen Überblick über die Möglichkeiten außerschulischen Lernens und möchte sie gezielt bei der Suche nach Projekten und Themen unterstützen. Ein weiteres Ziel ist die Kooperation und Förderung bestehender Angebote sowie die Förderung und Begleitung neuer Initiativen. Weiterhin wird gemeinsam mit den Projektpartnern die Qualität der Angebote gesichert und weiterentwickelt.</dct:description>
+    <dct:title>Jenaer Kooperationsverbund "witelo"</dct:title>
+    <dcat:landingPage rdf:resource="http://witelo.de/lernorte/jena/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_114">
+    <dct:description>Der „MINT-Initiativkreis Trier“ ist ein räumlich konzentrierter Verbund von Akteuren zur MINT – Förderung vor Ort.</dct:description>
+    <dct:title>MINT-Initiativkreis Trier</dct:title>
+    <dcat:landingPage rdf:resource="http://www.trier.de/bildung-wissenschaft/kommunales-bildungsmanagement/bildungsnetzwerke/mint-initiativkreis/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_115">
+    <dct:description>Angebote zur Berufs- und Studienorientierung, um dem Fachkräftemangel im MINT-Bereich entgegenzuwirken. Eine enge Vernetzung des zdi-Netzwerks mit den attraktiven und leistungsfähigen Wirtschaftsunternehmen im Rhein-Kreis Neuss und der Region. Mit bestehenden, aber auch neuen spannenden Angeboten und Projekten junge Menschen für naturwissenschaftliche und technische Berufe und Studiengänge begeistern.</dct:description>
+    <dct:title>zdi-Netzwerk Rhein-Kreis Neuss</dct:title>
+    <dcat:landingPage rdf:resource="https://www.mint-machen.de/ueber-uns/zdi-netzwerk-rhein-kreis-neuss/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_116">
+    <dct:description>Schülerinnen und Schüler nachhaltig für Naturwissenschaften und Technik begeistern, niedersachsenweit sind 25 MINT-Kooperationsnetzwerke mit rund 180 Schulen, fast ebenso vielen Unternehmen und etlichen Hochschulen entstanden.</dct:description>
+    <dct:title>MINT-Kooperationsnetzwerke der Stiftung Niedersachsen-Metall</dct:title>
+    <dcat:landingPage rdf:resource="http://www.stiftung-niedersachsenmetall.de/mint-kooperationsnetzwerke.html"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_117">
+    <dct:description>Unter dem Motto "Entdecke, was dahinter steckt!" können Schüler der 9./10. Klassen von Gymnasien und Oberschulen in und um Leipzig die Welt der Naturwissenschaften in verschiedenen Modulen praxisnah kennenlernen und selbst beim Experimentieren aktiv werden. Leipzigs größter naturwissenschaftlicher Schülerwettbewerb experiNat findet jährlich im Frühjahr statt.
+- Experimentiere wie ein echter Profi
+- Entdecke die Welt der Naturwissenschaften – weg von der Schulbank, rein in die Praxis</dct:description>
+    <dct:title>experiNat: Entdecke, was dahinter steckt!</dct:title>
+    <dcat:landingPage rdf:resource="https://www.l.de/experinat"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_118">
+    <dct:description>Das Projekt Lernlandschaften Sachsen ist ein interdisziplinäres Vorhaben der Fachdidaktiken Chemie, Physik, Deutsch und Geschichte, in dem außerschulische Lernorte für fächerübergreifendes Lernen erschlossen und die gewonnenen Erkenntnisse sowie das aufgebaute Netzwerk für die Lehrerbildung nutzbar gemacht werden.</dct:description>
+    <dct:title>Lernlandschaft Sachsen. Lernen attraktiv gestalten durch außerschulische Lernorte</dct:title>
+    <dcat:landingPage rdf:resource="https://tu-dresden.de/zlsb/tud-sylber/test/schwerpunkt-regionale-vernetzung/tud-sylber-einzelvorhaben-5-1-lernlandschaft-sachsen-lernen-attraktiv-gestalten-durch-ausserschulische-lernorte"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_119">
+    <dct:description>Das ZNL TransferZentrum für Neurowissenschaften und Lernen wurde vom Bundesministerium für Bildung und Forschung (BMBF) mit der Erstellung des "MINT-Atlas 3-10 für Deutschland" beauftragt. Die Arbeit des ZNL am "MINTAtlas 3-10" endete am 29. Februar 2012.</dct:description>
+    <dct:title>MINTAtlas 3-10 für Deutschland (Grundschulalter)</dct:title>
+    <dcat:landingPage rdf:resource="http://www.znl-mintatlas3-10.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_120">
+    <dct:description>Auflistung aller Schülerlabore Deutschlands</dct:description>
+    <dct:title>Schülerlabor-Atlas</dct:title>
+    <dcat:landingPage rdf:resource="http://www.schuelerlabor-atlas.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_121">
+    <dct:description>Im think ING. MINT-Atlas sind alle Standorte von Technikmuseen, Kinderunis, Schülerlaboren und familienfreundlichen Hochschulen zusammengefasst.</dct:description>
+    <dct:title>think ING. MINT-Atlas</dct:title>
+    <dcat:landingPage rdf:resource="https://www.think-ing.de/paedagogen/mint-erleben/mint-atlas"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_122">
+    <dct:description>Der Landesverband Sächsischer Jugendbildungswerke e.V. vereint derzeit 43 persönliche und juristische Mitglieder. Alle diese Personen, Vereine oder Verbände sind im Themenfeld der außerschulischen Jugendbildung oder interkultureller Jugendarbeit tätig. Unser Landesverband ist mit seinen Strukturen in 9 Stadt- und Landkreisen vertreten. Das Spektrum unserer Mitglieder reicht dabei von offenen Freizeiteinrichtungen über themenspezifische Vereine der Jugendbildung ohne eigene Einrichtung bis hin zu Vereinen mit eigenen Unterbringungsmöglichkeiten. Auch alle MINT- Themenfelder Mathematik, Informatik, Naturwissenschaften, Technik - sind in der Mitgliedschaft vertreten.</dct:description>
+    <dct:title>Landesverband Sächsischer Jugendbildungswerke e. V.</dct:title>
+    <dcat:landingPage rdf:resource="http://www.ljbw.de/de/verband/mitglieder/mitgliederliste.html"/>
+    <dcat:landingPage rdf:resource="http://www.ljbw.de/files/ljbw_mint_2018_web.pdf"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_123">
+    <dct:description>Der Katalog bietet eine nach Themenschwerpunkten, Zielgruppen und Anbietern systematische Gesamtübersicht an Bildungsangeboten von 58 Einrichtungen und Anbieter in den Bereichen Mathematik, Informatik, Naturwissenschaften und Technik (MINT) sowie Umweltbildung.</dct:description>
+    <dct:title>Stadt Leipzig, Katalog Leipziger MINT- und Umweltbildungsangebote</dct:title>
+    <dcat:landingPage rdf:resource="http://www.uiz-foerderverein.de/downloads/Leipziger_MINT-_und_Umweltbildungsangebote_Katalog_2016.pdf"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_124">
+    <dct:description>- Gleichstellungsinitiative an der Hochschule Anhalt
+- Videos mit weiblichen Vorbildern
+- Schwerpunkt Sommerpraktikum, das MINT-Lab</dct:description>
+    <dct:title>Gleichstellungsinitiative „Make up your MINT“</dct:title>
+    <dcat:landingPage rdf:resource="https://www.make-up-your-mint.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_125">
+    <dct:description>- Zusammenschluss von außerschulischen Lernorten - Schülerlaboren - im Bereich Naturwissenschaften und Technik in Sachsen-Anhalt
+- Förderung von Schülerinnen und Schülern
+- Fortbildung für Lehrerinnen, Lehrer, und Lehramtsstudierenden</dct:description>
+    <dct:title>NaLOS! - Netzwerk außerschulische Lernorte</dct:title>
+    <dcat:landingPage rdf:resource="http://www.na-los-netzwerk.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_126">
+    <dct:description>- bietet bereits bestehenden Initiativen und Projekten die Möglichkeit, sich einer breiteren Öffentlichkeit zu präsentieren und einen intensiven Austausch anzuregen</dct:description>
+    <dct:title>MINT Angebote Partnerinitiativen &amp; Projekte Österreich</dct:title>
+    <dcat:landingPage rdf:resource="http://www.faszination-technik.at/plattform/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_127">
+    <dct:description>Der MINT Zirkel ist die Plattform zum fächerverbindendem Unterricht und Projekten mit Bezug zur Berufs- und Lebenswelt</dct:description>
+    <dct:title>MINT Zirkel der Klett MINT GmbH</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mint-zirkel.de"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_128">
+    <dct:description>- Expertennetzwerk im Bereich Technikwissenschaften in der Schweiz und im Kontakt mit den höchsten Schweizer Gremien für Wissenschaft, Politik und Industrie
+- fördert auch das Technikinteresse und -verständnis in der Bevölkerung, insbesondere bei Jugendlichen</dct:description>
+    <dct:title>Schweizerische Akademie der Technischen Wissenschaften SATW</dct:title>
+    <dcat:landingPage rdf:resource="https://www.satw.ch/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_129">
+    <dct:description>- Bildungs-Modell zur offensiven Nachwuchsförderung im naturwissenschaftlichen und technischen Bereich
+- neben eigenen Aktivitäten wird die IJF auch externe Nachwuchsförderungsangebote vernetzen
+- zentrale Anlaufstelle für Schulen, Hochschulen und Industrie
+- es sollen Förderungsangebote für alle Altersstufen vom Kindergarten bis zum Studienabschluss, auch den ländlich geprägten Regionen, angeboten und vernetzt werden</dct:description>
+    <dct:title>Mach die Zukunft zu Deiner Idee! Initiative junger Forscherinnen und Forscher e.V.</dct:title>
+    <dcat:landingPage rdf:resource="http://www.initiative-junge-forscher.de/start.html"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_130">
+    <dct:description>30 Institutionen, die sich für die Förderung der Bildung entlang der gesamten Bildungskette in den Bereichen Mathematik, Informatik, Naturwissenschaften und Technik einsetzen (MINT-Bildung)
+- von der frühkindlichen über die schulische, berufliche und akademische Bildung bis zur Weiterbildung und zum
+lebenslangen Lernen
+- unterstützt die Initiativen der einzelnen Mitglieder und fördert gemeinsame Aktivitäten
+- in den einzelnen Arbeitsgruppen werden zu Themen der MINT-Bildung bildungspolitische Empfehlungen, gemeinsame</dct:description>
+    <dct:title>Nationales MINT-Forum</dct:title>
+    <dcat:landingPage rdf:resource="http://www.nationalesmintforum.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_131">
+    <dct:description>- Zusammenschluss von Akteuren aus den Bereichen der MINT-Förderung und MINT-Bildung in der Hauptstadtregion
+- Zusammenschluss von Unternehmen, Verbändne, den Bildungsministerien der Länder Berlin und Brandenburg, Stiftungen, Vereinen, Schülerlaboren und Forschungs- und Hochschuleinrichtungen
+- Ziel: mehr Kinder und Schülerinnen und Schüler für MINT zu begeistern und dabei verstärkt auch junge Frauen für naturwissenschaftliche Berufe zu interessieren</dct:description>
+    <dct:title>MINT-Netz Berlin-Brandenburg</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mintnetz.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_132">
+    <dct:description>nationales Excellence-Netzwerk von Schulen mit Sekundarstufe II und ausgeprägtem Profil in Mathematik, Informatik, Naturwissenschaften und Technik</dct:description>
+    <dct:title>MINTec - Das nationale Excellence-Schulnetzwerk</dct:title>
+    <dcat:landingPage rdf:resource="https://www.mint-ec.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_133">
+    <dct:description>-fördert den produktiven Austausch zwischen wissenschaftlich interessierten jungen Menschen
+- Mitglieder sind sowohl Schüler, Studenten als auch Doktoranden aus den unterschiedlichsten natur- und ingenieurwissenschaftlichen Disziplinen
+- organisieren JungforscherCongresse, haben Mentorenprogramm</dct:description>
+    <dct:title>Das Deutsche Jungforschernetzwerk juFORUM e.V.</dct:title>
+    <dcat:landingPage rdf:resource="https://www.juforum.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_134">
+    <dct:description>- Veranstaltungen der Hochschule Merseburg für Schüler*innen und Studieninteressierte
+- vielfältige und praxisbezogene Veranstaltungen, die den individuellen Interessen und Talenten gerecht werden und einen passenden Weg zum Studium und ins Berufsleben aufzeigen</dct:description>
+    <dct:title>Schüler*Campus der Hochschule Merseburg</dct:title>
+    <dcat:landingPage rdf:resource="https://www.hs-merseburg.de/schuelercampus/schuelercampus/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_135">
+    <dct:description>- Initiative der Hochschule Merseburg und des Vereins Sachzeugen der Chemischen Industrie e.V.
+- Ziel des Schülerlabors ist es, bei Kindern und Jugendlichen das Interesse an Naturwissenschaften und Technik zu wecken und zu fördern sowie sie für eine Ausbildung bzw. ein Studium im MINT-Bereich zu begeistern</dct:description>
+    <dct:title>"Chemie zum Anfassen" Schülerlabor der Hochschule Merseburg</dct:title>
+    <dcat:landingPage rdf:resource="https://www.hs-merseburg.de/schuelerlabor/chemie-zum-anfassen/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_136">
+    <dct:description>- Projekt „Integratives, branchenorientiertes Bildungs- und Entwicklungskonzept für Ingenieurnachwuchs – BEanING“
+- Entwicklung eines systematischen Konzeptes zur Bildung, Berufsorientierung und individuellen Förderung von der Grundschule bis zum Bachelorabschluss, um Kinder und Jugendlicher gezielt an das Thema Ingenieurberuf heranzuführen und die Erfolgsaussichten für eine zielgerichtete Fachkräftegewinnung im MINT -Bereich zu verbessern</dct:description>
+    <dct:title>BEanING - Projekt zur Förderung von MINTInteressen der Hochschule Merseburg</dct:title>
+    <dcat:landingPage rdf:resource="https://www.hs-merseburg.de/beaning/aktuelles/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_137">
+    <dct:description>Projekt der Hochschule Merseburg gefördert aus Mitteln des Landes Sachsen-Anhalt und des Europoischen Sozialfonds</dct:description>
+    <dct:title>FEMININ- "Zukunft FEMININ – Frauen Entdecken Mathematik, Informatik, Natur- und Ingenieurwissenschaft"</dct:title>
+    <dcat:landingPage rdf:resource="https://www.hs-merseburg.de/feminin/feminin/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_138">
+    <dct:description>MeCoSa 4.0 ist ein Mentoring- und Coachingprogramm der Hochschulen des Landes Sachsen Anhalt; für Studentinnen, Absolventinnen und Nachwuchswissenschaftlerinnen im MINT-Bereich</dct:description>
+    <dct:title>MeCoSa4.0</dct:title>
+    <dcat:landingPage rdf:resource="http://www.kgc-sachsen-anhalt.de/home/MeCoSa.html"/>
+    <dcat:landingPage rdf:resource="https://www.hs-merseburg.de/mecosa/mecosa/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_139">
+    <dct:description>- junge Menschen frühzeitig für Wissenschaft und Technologie begeistern und ihnen die Berührungsängste vor komplexer Technik zu nehmen
+- verschiedene internationale Bildungsprogramme, um Jugendlichen den Zugang zu naturwissenschaftlichen Fächern zu erleichtern und sie frühzeitig für einen Ingenieurs- oder IT-Beruf zu motivieren (u.a. FIRST® LEGO® League FLL) 
+FLL-Regionalwettbewerb OvGU Magdeburg: http://fll.euk.cs.ovgu.de/thema_inc.php
+FLL-Regionalwettbewerb HS Merseburg: https://www.hs-merseburg.de/beaning/lego/first-lego-league-fll/</dct:description>
+    <dct:title>HANDS on TECHNOLOGY e.V.</dct:title>
+    <dcat:landingPage rdf:resource="https://www.hands-on-technology.org/de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_140">
+    <dct:description>- richtet sich an Schüler und Schul-Arbeitsgemeinschaften
+- Wettbewerbe bieten Gelegenheit, im Team zusammenzuarbeiten und dabei viel über Robotertechnologie und Informatik zu lernen</dct:description>
+    <dct:title>Roboterwettbewerb RoboCup</dct:title>
+    <dcat:landingPage rdf:resource="https://www.robocupgermanopen.de/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_141">
+    <dct:description>- außerschulische Bildungseinrichtung für technische Bildung
+- Technikinteresse von Kindern und Jugendlichen aller Bildungsstufen fördern, stärken, sie für Technik begeistern</dct:description>
+    <dct:title>SALINETechnikum</dct:title>
+    <dcat:landingPage rdf:resource="http://www.salinemuseum.de/halle-saale/salinetechnikum/"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_142">
+    <dct:description>keine Suchmaschine, bietet aber eine Übersicht über viele potentielle Arbeitgeber bzw. Praktikumsbetriebe -&gt; ggf. interessant auch für weitere Teilnehmer in der PG MINT seitens der Wirtschaft</dct:description>
+    <dct:title>MINTsax</dct:title>
+    <dcat:landingPage rdf:resource="http://www.mintsax.de"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_143">
+    <dct:description>praxisnahe Berufs- und Studienorientierung in MINT-Fächern</dct:description>
+    <dct:title>selectMINT</dct:title>
+    <dcat:landingPage rdf:resource="http://www.selectmint.com"/>
+  </dcat:Dataset>
+  <dcat:Dataset rdf:about="http://leipzig-data.de/Data/MINT-MD-MINT-Katalog/P_144">
+    <dct:description>Ziel des Projektes ist es Kinder und Jugendliche in Ihrer Freizeit spielerisch an technisch ökologische Fragen heranzuführen. Wir wollen das technische Denken durch aktive Auseinandersetzung mit realen Aufgaben entwickeln. Es geht uns darum junge Leute für technische Berufe und Studienrichtungen zu begeistern. Für diese Aufgabe wurden wir von der deutschen Akademie der Technikwissenschaften als Modellprojekt anerkannt. </dct:description>
+    <dct:title>Technisch ökologisches Jugendprojektzentrum Rabutz</dct:title>
+    <dcat:landingPage rdf:resource="http://www.rennstall-rabutz.de"/>
+  </dcat:Dataset>
+</rdf:RDF>

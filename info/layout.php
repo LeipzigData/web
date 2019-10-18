@@ -40,6 +40,7 @@ function pageNavbar() {
             <li><a href="index.php">Startseite</a></li> 
             <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li>
             <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
+            <li><a href="mint-md-katalog.php">MINT-MD-Katalog</a></li> 
             <li><a href="gebaeudenavigator.php">Gebäudenavigator</a></li> 
           </ul>
         </div><!-- navbar end -->

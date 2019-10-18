@@ -9,40 +9,46 @@ last modified: 2019-10-16
 
 require_once("lib/EasyRdf.php");
 
-function katalog() {  
+function multiline($a) {
+    return str_replace("\n", " <br/>", $a);
+}
+
+function katalog($quelle) {  
   EasyRdf_Namespace::set('dct', 'http://purl.org/dc/terms/');
   EasyRdf_Namespace::set('dcat', 'http://www.w3.org/ns/dcat#');
-  EasyRdf_Namespace::set('', 'http://leipzig-data.de/Data/MINT-Katalog/');
 
-  return dieDatasets();
+  return dieDatasets($quelle);
 }
 
-function dieDatasets() {
+function dieDatasets($quelle) {
     $graph=new EasyRdf_Graph();
-    $graph->parsefile("rdf/MINT-Katalog.rdf");
-  // echo $result->dump("turtle");
-  $s=array();
-  foreach ($graph->allOfType("dcat:Dataset") as $v) {
-      $s[$v->getUri()]=displayDataset($v);
-  }
-  sort($s);
-  return join($s,"\n") ; 		
+    $graph->parsefile($quelle);
+    // echo $result->dump("turtle");
+    $s=array();
+    foreach ($graph->allOfType("dcat:Dataset") as $v) {
+        $s[$v->getUri()]=displayDataset($quelle,$v);
+    }
+    sort($s);
+    return join($s,"\n") ; 		
 }
 
-function displayDataset($v) {
+function displayDataset($quelle,$v) {
     $a=$v->getUri();
     $label=$v->get('dct:title'); 
-    $landingPage=$v->get('dcat:landingPage'); 
+    $landingPage=$v->all('dcat:landingPage'); 
     $description=$v->get('dct:description');
     $datensaetze=displayDistributions($v);
     $url=$v->get('foaf:homepage');
     $out='
-    <h3> <a href="getdata.php?show='.$a.'">'.$label.'</a></h3>
-    <div class="row"><strong>Beschreibung:</strong> '.$description.' </div>
+<!--    <h3> <a href="getdata.php?src='.$quelle.'&show='.$a.'">'.$label.'</a></h3> -->
+    <h3> '.$label.'</h3>
+    <div class="row"><strong>Beschreibung:</strong> '.multiline($description).' </div>
 ';
     if (isset($landingPage)) {
-        $out.='<div class="row"><strong>Landing Page:</strong> '
-            .highlightLink($landingPage).' </div>';
+        foreach ($landingPage as $v) {
+            $out.='<div class="row"><strong>Landing Page:</strong> '
+                .highlightLink($v).' </div>';
+        }
     }
     if (isset($url)) {
         $out.='<div class="row"><strong>Weitere URL:</strong> '.$url.' </div>';
@@ -77,4 +83,5 @@ function highlightLink($u) {
 }
 
 // ---- test ----
-// echo katalog();
+//echo katalog("../rdf/MINT-Katalog.rdf");
+//echo katalog("../rdf/MINT-Katalog-MINT-MD.rdf");
