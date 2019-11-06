@@ -29,6 +29,7 @@ function displayUser($v) {
     $url=$v["organization_url"];
     $type=$v["organization_type"];
     $adr=$v["full_address"];
+    $geo=join(",",$v["latlng"]);
     $head=createLink($va,$v["name"]);
     $out='<h3>'.$head.'</h3> <ul>'
         .'<li>Id: '.$vid.'</li>'
@@ -36,6 +37,9 @@ function displayUser($v) {
         .'<li>Name: '.$v["name"].'</li>';
     if (!empty($adr)) {
         $out.='<li>Adresse: '.$adr.'</li>';
+    }
+    if (!empty($geo)) {
+        $out.='<li>Geokoordinaten: Point('.$geo.')</li>';
     }
     if (!empty($url)) {
         $out.='<li>URL: '.createLink($url,$url).'</li>';
