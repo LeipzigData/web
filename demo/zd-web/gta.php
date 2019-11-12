@@ -14,7 +14,7 @@ function getGTAServices() {
     $res = json_decode($string, true);
     $s;
     foreach($res as $row) {
-        if (($row["type"]=="Service") and ($row["service_type"]=="GTA")) {
+        if ($row["service_type"]=="GTA") {
             $s[$row["id"]]=displayService($row);
         }
     }
@@ -25,8 +25,8 @@ $content='
 <div class="container">
 <h2 align="center">Die GTA-Angebote</h2>
 
-<p>Auf dieser Seite werden alle Einträge gelistet, die in die Kategorie
-"Services" uns den Service-Type "GTA" fallen. </p>
+<p>Auf dieser Seite werden alle Einträge gelistet, die den Service-Type "GTA"
+haben. </p>
 
 '.getGTAServices().'
 </div>
