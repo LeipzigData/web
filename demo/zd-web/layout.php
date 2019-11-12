@@ -13,10 +13,10 @@ function pageHeader() {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Leipziger Zukunftsdiplom 2019"/>
+    <meta name="description" content="Forum Nachhaltiges Leipzig - Zukunftsakademie"/>
     <meta name="author" content="Leipzig Data Project"/>
 
-    <title>Leipziger Zukunftsdiplom 2019</title>
+    <title>Forum Nachhaltiges Leipzig - Zukunftsakademie</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -39,6 +39,7 @@ function pageNavbar() {
 	<div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
+            <li><a href="zd.php">Zukunftsdiplom</a></li>
             <!-- <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="akteure.php">Die Anbieter</a></li> -->
             <li><a href="bildungsangebote.php">Die Bildungsangebote</a></li>
@@ -53,7 +54,7 @@ function pageNavbar() {
 function generalContent() {
   return '
 <div class="container">
-  <h1 align="center">Leipziger Zukunftsdiplom 2019</h1>
+  <h1 align="center">Forum Nachhaltiges Leipzig - Zukunftsakademie</h1>
 </div>
 ';
 }
