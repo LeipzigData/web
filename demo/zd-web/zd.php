@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-07
- * Last Update: 2019-11-12
+ * Last Update: 2020-03-01
  */
 
 include_once("layout.php");
@@ -13,13 +13,8 @@ $content='
 <div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
 <h3>Mach mit beim Zukunftsdiplom!</h3>
 
-<p><strong>Das Zukunftsdiplom 2019 ist abgeschlossen, die
-Abschlussveranstaltung mit der Würdigung der aktivsten Teilnehmer und der
-Übergabe der Zukunftsdiplome hat während der Verleihung des Leipziger
-Zukunftspreises im Rathaus am 26. September 2019 stattgefunden.</p>  
-
-<p>Eine weitere Runde des Zukunftsdiploms ist für 2020 fest
-eingeplant.</strong></p>
+<p><strong>Das Zukunftsdiplom 2020 wird vom 11. April bis 31. August 2020
+angeboten. </strong></p>
 
 <h3>Und so funktioniert das Zukunftsdiploms</h3>
 
