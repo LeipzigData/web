@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-05-31
+ * Last Update: 2020-03-03
 
  * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
@@ -97,7 +97,8 @@ function displayPartner($v) {
     return $out."</ul>";
 }
 
-function dieVeranstaltungen($archiv=false) {
+function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
+    $currentDate=date("Y-m-d");
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $users = json_decode($string, true);
@@ -113,14 +114,13 @@ function dieVeranstaltungen($archiv=false) {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
         if ($row["type"]=="Event") {
-            if ($row["start_at"]>date("Y-m-d") && $archiv == false &&
-                $row["start_at"]<date("Y-m-d",mktime(0, 0,0 , 8, 19, date("Y")))
-              ) {
+            if ($row["start_at"]>$currentDate && $archiv == false &&
+            $row["start_at"]<$endDate) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
-            else if ($row["start_at"]>calculateArchivDate() && $archiv == true
-                     && $row["start_at"]<date("Y-m-d") ){
-                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            else if ($row["start_at"]>$startDate && $archiv == true
+            && $row["start_at"]<$currentDate ){
+                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
         else if($archiv==false){
@@ -135,8 +135,8 @@ function dieVeranstaltungen($archiv=false) {
     return $out;
 }
 
-function dasArchiv(){
-    $out = dieVeranstaltungen(true);
+function dasArchiv($startDate,$endDate){
+    $out = dieVeranstaltungen($startDate,$endDate,true);
     $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
     $out = str_replace("Weitere", "Vergangene", $out);
     return $out;
