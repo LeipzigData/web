@@ -69,6 +69,19 @@ function createDumps() {
     jsonDump("Dumps/Veranstalter.json",$s);
 }
 
+function createAusfall() {
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $s=array();
+    foreach($res as $row) {
+        if (faelltaus($row)) {
+            $s[$row["id"]]=$row;
+        }
+    }
+    jsonDump("Dumps/Ausfall.json",$s);
+}
+
 function getUsers($s) {
     $a=array();
     foreach($s as $id) {
@@ -89,6 +102,14 @@ function isZDListed($row) {
         $goals=join(", ",$row['goals']);
         }
     return strpos(" $goals","Zukunfts-Diplom");
+}
+
+/*
+ Ueberprueft, ob das Angebot ausfällt.
+*/
+function faelltaus($row) {
+    $goals=$row['name'];
+    return strpos("$goals","fällt aus");
 }
 
 function createAdditionalDumps() {
@@ -158,6 +179,7 @@ function dumpCategories() {
 }
 
 // ---- test ----
-createDumps();
+//createDumps();
+createAusfall();
 //dumpCategories();
-createAdditionalDumps();
+//createAdditionalDumps();

@@ -135,6 +135,38 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
     return $out;
 }
 
+function ausfall($startDate,$endDate) {
+    $currentDate=date("Y-m-d");
+    $src="Dumps/Zukunftsdiplom.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $b=array();
+    $e=array();
+    foreach($res as $row) {
+        $c=$cat[$row["first_root_category"]]["name"];
+        $t=getThemes($c);
+        if ($row["type"]=="Event") {
+            if ($row["start_at"]>$currentDate && $archiv == false &&
+            $row["start_at"]<$endDate) {
+                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            }
+            else if ($row["start_at"]>$startDate && $archiv == true
+            && $row["start_at"]<$currentDate ){
+                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            }
+        }
+        else if($archiv==false){
+            $b[]=displayBA($row,$users,$c,$t);
+        }
+    }
+    ksort($e);
+    $out="<h2> Die Bildungsangebote </h2> "
+        .join($b,"\n")
+        ."<h2> Weitere Veranstaltungen </h2> "
+        .join($e,"\n");
+    return $out;
+}
+
 function dasArchiv($startDate,$endDate){
     $out = dieVeranstaltungen($startDate,$endDate,true);
     $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
