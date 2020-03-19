@@ -2,13 +2,13 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
- * Last Update: 2019-09-23
+ * Last Update: 2020-03-18
  */
 
 include_once("Zukunftsdiplom.php");
 
 function showTargetGroups() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $src="Dump/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -52,8 +52,8 @@ function extractGoals($v) {
     return join("; ",$a);
 }
 
-function createDumps() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+function createZDDumps() {
+    $src="Dumps/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -67,19 +67,6 @@ function createDumps() {
     jsonDump("Dumps/Zukunftsdiplom.json",$s);
     $s=getUsers(array_keys($users));
     jsonDump("Dumps/Veranstalter.json",$s);
-}
-
-function createAusfall() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    $s=array();
-    foreach($res as $row) {
-        if (faelltaus($row)) {
-            $s[$row["id"]]=$row;
-        }
-    }
-    jsonDump("Dumps/Ausfall.json",$s);
 }
 
 function getUsers($s) {
@@ -104,17 +91,8 @@ function isZDListed($row) {
     return strpos(" $goals","Zukunfts-Diplom");
 }
 
-/*
- Ueberprueft, ob das Angebot ausfällt.
-*/
-function faelltaus($row) {
-    $goals=$row['name'];
-    return strpos("$goals","fällt aus");
-}
-
 function createAdditionalDumps() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    //$src="activities.json";
+    $src="Dump/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     // -----------------------------------
@@ -160,6 +138,13 @@ function createAdditionalDumps() {
     // -----------------------------------
 }
 
+function createDump() {
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    jsonDump("Dumps/activities.json",$res);
+}
+
 function jsonDump($fn,$s) {
     $fp=fopen($fn, "w");
     fwrite($fp, json_encode($s));
@@ -179,7 +164,7 @@ function dumpCategories() {
 }
 
 // ---- test ----
-//createDumps();
-createAusfall();
+createDump();
+createZDDumps();
 //dumpCategories();
 //createAdditionalDumps();

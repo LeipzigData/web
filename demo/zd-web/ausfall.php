@@ -13,8 +13,9 @@ $endDate=date("Y-m-d",strtotime("31.05.2020"));
 $content='
 <div class="container">
 
-<h2 align="center">Folgende Veranstaltungen fallen zwischen $startDate und
-$endDate aus</h2>
+<h2 align="center">Folgende Veranstaltungen fallen zwischen '
+    .date("d. M Y",strtotime($startDate)).' und '
+    .date("d. M Y",strtotime($endDate)).' aus</h2>
 
 '.ausfall($startDate,$endDate).'
 </div>

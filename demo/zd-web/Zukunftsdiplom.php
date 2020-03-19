@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2020-03-03
+ * Last Update: 2020-03-18
 
  * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
@@ -105,38 +105,6 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
     $src="Dumps/Categories.json";
     $string = file_get_contents($src);
     $cat = json_decode($string, true);
-    $src="Dumps/Zukunftsdiplom.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    $b=array();
-    $e=array();
-    foreach($res as $row) {
-        $c=$cat[$row["first_root_category"]]["name"];
-        $t=getThemes($c);
-        if ($row["type"]=="Event") {
-            if ($row["start_at"]>$currentDate && $archiv == false &&
-            $row["start_at"]<$endDate) {
-                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
-            }
-            else if ($row["start_at"]>$startDate && $archiv == true
-            && $row["start_at"]<$currentDate ){
-                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
-            }
-        }
-        else if($archiv==false){
-            $b[]=displayBA($row,$users,$c,$t);
-        }
-    }
-    ksort($e);
-    $out="<h2> Die Bildungsangebote </h2> "
-        .join($b,"\n")
-        ."<h2> Weitere Veranstaltungen </h2> "
-        .join($e,"\n");
-    return $out;
-}
-
-function ausfall($startDate,$endDate) {
-    $currentDate=date("Y-m-d");
     $src="Dumps/Zukunftsdiplom.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
@@ -299,6 +267,58 @@ function displayService($v) {
         return $out;
 }
 
+// --------  Veranstaltungsausfall
+
+function faelltaus($row) {
+    return (stripos($row['name'],"fällt")
+    || stripos($row['beschreibung'],"fällt"));
+}
+    
+function ausfall($startDate,$endDate) {
+    $currentDate=date("Y-m-d");
+    $src="Dumps/activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    $e=array();
+    foreach($res as $row) {
+        if ($row["type"]=="Event" && $row["start_at"]>$startDate
+        && $row["start_at"]<$endDate && faelltaus($row)) {
+            $e[$row["start_at"]]=shortDisplay($row);
+        }
+    }
+    ksort($e);
+    $out=join($e,"\n");
+    return $out;
+}
+
+function shortDisplay($v) {
+    // ein Event
+    $id=$v["id"];
+    $vid=$v["user_id"];
+    $title=$v["name"];
+    $beschreibung=$v["description"];
+    $ort=$v["full_address"];
+    $url=$v["info_url"];
+    $von=$v["start_at"];
+    $bis=$v["end_at"];
+    $out='
+<h3> '.$title.'</h3>
+<div class="row"> <ul>';
+    if (!empty($von)) {
+        $out.='<li> <strong>Beginn:</strong> '.getDatum($von).' </li>';
+    }
+    if (!empty($ort)) {
+        $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
+    }
+    if (!empty($beschreibung)) {
+        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
+    }
+    if (!empty($url)) {
+        $out.='<li>'.createLink($url,$url).'</li>';
+    }
+    $out.='</ul></div>';
+    return $out;
+}
 
 
 // ---- test ----
