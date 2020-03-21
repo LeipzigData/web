@@ -45,6 +45,7 @@ function pageNavbar() {
             <li><a href="bildungsangebote.php">Die Bildungsangebote</a></li>
             <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
             <li><a href="service.php">Die Services</a></li>
+            <li><a href="events.php">Die Events</a></li>
             <!-- <li><a href="gta.php">Die GTA-Angebote</a></li>
             <li><a href="alleAkteure.php">Alle Akteure</a></li> -->
           </ul>

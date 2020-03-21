@@ -3,8 +3,6 @@
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
  * Last Update: 2020-03-18
-
- * Bisherige Version nach Zukunftsdiplom-1.php ausgelagert.
  */
 
 // --- Hilfsfunktionen
