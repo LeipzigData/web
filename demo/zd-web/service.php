@@ -9,7 +9,7 @@ include_once("layout.php");
 include_once("Zukunftsdiplom.php");
 
 function getServices() {
-    $src="Dumps/Services.json";
+    $src="Dumps/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s;
