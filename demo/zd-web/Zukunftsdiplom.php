@@ -111,7 +111,8 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
     foreach($res as $row) {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
-        if ($row["type"]=="Event") {
+        if (faelltaus($row)) ;
+        else if ($row["type"]=="Event") {
             if ($row["start_at"]>$currentDate && $archiv == false &&
             $row["start_at"]<$endDate) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
@@ -121,7 +122,7 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
                 $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
             }
         }
-        else if($archiv==false){
+        else if ($archiv==false){
             $b[]=displayBA($row,$users,$c,$t);
         }
     }
@@ -268,8 +269,8 @@ function displayService($v) {
 // --------  Veranstaltungsausfall
 
 function faelltaus($row) {
-    return (stripos($row['name'],"fällt")
-    || stripos($row['beschreibung'],"fällt"));
+    return (stripos(strtolower($row['name']),"fällt")
+    || stripos(strtolower($row['beschreibung']),"fällt"));
 }
     
 function ausfall($startDate,$endDate) {
