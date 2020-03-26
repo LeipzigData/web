@@ -42,12 +42,15 @@ function pageNavbar() {
             <li><a href="zd.php">Zukunftsdiplom</a></li>
             <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="akteure.php">Die Anbieter</a></li>
-            <li><a href="bildungsangebote.php">Die Bildungsangebote</a></li>
             <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
-            <li><a href="service.php">Die Services</a></li>
             <li><a href="events.php">Die Events</a></li>
-            <!-- <li><a href="gta.php">Die GTA-Angebote</a></li>
-            <li><a href="alleAkteure.php">Alle Akteure</a></li> -->
+            <li><a href="locations.php">Die Orte</a></li>
+            <!-- 
+            <li><a href="gta.php">Die GTA-Angebote</a></li>
+            <li><a href="bildungsangebote.php">Die Bildungsangebote</a></li>
+            <li><a href="service.php">Die Services</a></li>
+            <li><a href="alleAkteure.php">Alle Akteure</a></li> 
+            -->
           </ul>
 	</div><!-- collapse end -->
       </div><!-- container end -->
@@ -69,7 +72,7 @@ function pageFooter() {
     <div class="footer">
       <p class="text-muted">&copy;
   <a href="https://zukunftsakademie-leipzig.de">Zukunftsakademie Leipzig
-        e.V.</a> 2019 </p>
+        e.V.</a> 2019-2020 </p>
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
