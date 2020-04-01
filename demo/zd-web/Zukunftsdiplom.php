@@ -37,6 +37,21 @@ function mehrzeilig($a) {
     return str_replace("\n",'<br/>',$a);
 }
 
+function geoData($v) {
+    if (array_key_exists("latlng",$v)) {
+        $l=$v["latlng"];
+        return "Point($l[1] $l[0])";
+    }
+}
+
+function akteursKontakt($v) {
+    if (array_key_exists("last_name",$v)) {
+        return $v["first_name"]." ".$v["last_name"].", "
+            .$v["organization_position"];
+    }
+}
+
+
 // --- Die Hauptfunktionen
 
 function getThemes($a) {
@@ -82,12 +97,20 @@ function displayPartner($v) {
     $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
     $url=$v["organization_url"];
     $adr=$v["full_address"];
+    $geo=geoData($v);
+    $kontakt=akteursKontakt($v);
     $head=createLink($va,$v["name"]);
     $out='<h3>'.$head.'</h3> <ul>'
         .'<li>Id: '.$vid.'</li>'
         .'<li>Name: '.$v["name"].'</li>';
     if (!empty($adr)) {
         $out.='<li>Adresse: '.$adr.'</li>';
+    }
+    if (!empty($geo)) {
+        $out.='<li>Geokoordinaten im WKT-Format: '.$geo.'</li>';
+    }
+    if (!empty($kontakt)) {
+        $out.='<li>Ansprechpartner: '.$kontakt.'</li>';
     }
     if (!empty($url)) {
         $out.='<li>URL: '.createLink($url,$url).'</li>';
@@ -158,7 +181,9 @@ function displayBA($v,$users,$c,$t) {
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=$users[$v["user_id"]]["name"];
+    $kontakt=akteursKontakt($users[$v["user_id"]]);
     $ort=$v["full_address"];
+    $geo=geoData($v);
     $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $goals=join(", ",$v["goals"]);
@@ -169,9 +194,15 @@ function displayBA($v,$users,$c,$t) {
     if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
+    if (!empty($geo)) {
+        $out.='<li>Geokoordinaten im WKT-Format: '.$geo.'</li>';
+    }
     if (!empty($veranstalter)) {
         $out.='<li> <strong>Veranstalter: </strong>'
             .createLink($va,$veranstalter).'</li>';
+    }
+    if (!empty($kontakt)) {
+        $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
     }
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
@@ -201,7 +232,9 @@ function displayEvent($v,$users,$c,$t) {
     $title=$v["name"];
     $beschreibung=$v["description"];
     $veranstalter=$users[$v["user_id"]]["name"];
+    $kontakt=akteursKontakt($users[$v["user_id"]]);
     $ort=$v["full_address"];
+    $geo=geoData($v);
     $zielgruppe=$v["target_group"];
     $url=$v["info_url"];
     $von=$v["start_at"];
@@ -217,9 +250,15 @@ function displayEvent($v,$users,$c,$t) {
     if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
+    if (!empty($geo)) {
+        $out.='<li>Geokoordinaten im WKT-Format: '.$geo.'</li>';
+    }
     if (!empty($veranstalter)) {
         $out.='<li> <strong>Veranstalter: </strong>'
             .createLink($va,$veranstalter).'</li>';
+    }
+    if (!empty($kontakt)) {
+        $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
     }
     if (!empty($zielgruppe)) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
