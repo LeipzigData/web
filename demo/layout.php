@@ -46,6 +46,7 @@ function pageNavbar() {
             <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
             <li><a href="zd-web">Zukunftsdiplom</a></li> 
             <li><a href="NachhaltigesLeipzig">Nachhaltigkeit in Leipzig</a></li> 
+            <li><a href="Corona-20">Analyse von Corona-Daten</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->

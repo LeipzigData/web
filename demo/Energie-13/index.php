@@ -60,4 +60,5 @@ switch ($_GET['s']) {
 
 include_once "templates/layout.phtml";
 
+// echo $stammSparql;
 ?>
