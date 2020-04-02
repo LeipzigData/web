@@ -102,7 +102,7 @@ an seine Grenzen kommt (und die Ergebnisse anderer CAS sehr genau zu
 analysieren sind, da die Fitting-Ergebnisse stark von Startwerten der dabei
 eingesetzten Verfahren abhängen).
 
-\emph{Maxima} kommt auch beim Fittung der Schar $f(t)$ zu keinem Ergebnis.
+\emph{Maxima} kommt auch beim Fitting der Schar $f(t)$ zu keinem Ergebnis.
 Einen einfacheren, nämlich quadratischen Zusammenhang
 $g(t)=c-\br{\frac{t-m}{s}}^2$ erhält man, wenn man zu Paaren $(t,\log(d_t))$
 übergeht.  Damit lassen sich dann die Fittingparameter weitgehend stabil
@@ -133,7 +133,9 @@ Die Rechnungen werden für jedes der Länder nun wie folgt ausgeführt:
   in verschiedenen Farben (rot für infected, grün für recovered, blau für
   dead) ausgibt.  
 \end{enumerate}
-Bei erfolgreichem Fitting ist eine gute Übereinstimmung der jeweiligen Kurve
+Bei erfolgreichem Fitting ist eine gute Übereinstimmung der jeweiligen
+Kurve\footnote{Für $x=\frac{m}{s}\approx 10$ kann $\erf(x)=1$ gesetzt werden.
+Ist dieser Wert im Fitting deutlich anders, ist das Fitting unbrauchbar.}
 \begin{gather*}
   h(t)=A\br{\erf\br{B(t-m)}+1}
 \end{gather*}
