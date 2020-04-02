@@ -59,55 +59,58 @@ createPlot(l,max):=block([G1,G2,G3],
   [color, red, red, green, green, blue, blue])
 )$
 
-/* ==== Italy ===== */
+/* ==== Italy, 60.48 Mio Einwohner ===== */
 
 l:getData(Italy);
 getFittingFunctions(l,50);
-createPlot(l,5*10^5);
+createPlot(l,2*10^5);
 
-[72446.77939732558 (erf(0.06799076073287293 (t - 85.26758010923094)) + 1.0),
- 19954.75123858321 (erf(0.05447733565402062 (t - 94.13429784558038)) + 1.0),
- 11446.53620856779 (erf(0.06432839216420218 (t - 89.96730170335502)) + 1.0)]
-
-/* ==== Spain ===== */
+/* ==== Spain, 46.66 Mio Einwohner ===== */
 
 l:getData(Spain);
 getFittingFunctions(l,50);
-createPlot(l,5*10^5);
+createPlot(l,2*10^5);
 
 G1:l[1]; G2:l[2]; G3:l[3];
 
-plot2d([[discrete, G1], h1(t)],
-[t,0,200], [y,0,1.5*10^4],
-[style, points, lines], [legend, false],
-[color, red, red]);
+plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
+[t,0,200], [y,0,2*10^5],
+[style, points, lines, points, points, lines], [legend, false],
+[color, red, red, green, blue, blue]);
 
-
-bad fitting for h2
-[78444.57631517828 (erf(0.08691988157660947 (t - 89.43091102808097)) + 1.0),
- 89251.4662590775 (erf(0.01077787846363871 (t - 29.63034168876397)) +
- 0.3484660619227326), 11689.03759638845 (erf(0.0810813440036071 (t -
- 94.7178929420294)) + 1.0)]
-
-/* ==== Germany ===== */
+/* ==== Germany, 82.79 Mio Einwohner ===== */
 
 l:getData(Germany);
 getFittingFunctions(l,50);
 createPlot(l,2*10^5);
 
-[85636.7778943634 (erf(0.06975466171038898 (t - 94.0781920706715)) + 1.0),
- 10365.01925718878 (erf(0.1892685639671348 (t - 90.16504258370512)) + 1.0),
- 1311.80981845294 (erf(0.1042031139604201 (t - 95.18435475991847)) + 1.0)]
-
-/* ==== Austria ===== */
+/* ==== Austria, 8.822 Mio Einwohner ===== */
 
 l:getData(Austria);
-getFittingFunctions(l,10);
-createPlot(l,3*10^4);
+getFittingFunctions(l,5);
+createPlot(l,2*10^4);
 
-good fitting only for h1
-[6873.439448181585 (erf(0.09167412601048296 (t - 87.64941516477582)) + 1.0),
- 115972.3432259248 (erf(0.02197867958311569 (t - 13.32239597896194)) +
- 0.3211947301828582), 1.375619727957205E+7 (erf(0.03953873232096636 (t -
- 7.709136631650753)) + 0.3335794106179681)]
+/* ==== China, Hubei, 58.5 Mio Einwohner ===== */
 
+l:getData(China);
+getFittingFunctions(l,30);
+createPlot(l,8*10^4);
+
+G1:l[1]; G2:l[2]; G3:l[3];
+
+plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
+[t,0,200], [y,0,8*10^4],
+[style, points, lines, points, points, lines], [legend, false],
+[color, red, red, green, blue, blue]);
+
+/* ==== France, 66.99 Mio Einwohner ===== */
+
+l:getData(France);
+getFittingFunctions(l,50);
+createPlot(l,2*10^5);
+
+/* ==== United Kingdom, 66.44 Mio Einwohner ===== */
+
+l:getData(UK);
+getFittingFunctions(l,20);
+createPlot(l,5*10^4);

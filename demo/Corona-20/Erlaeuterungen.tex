@@ -10,7 +10,7 @@
 
 \title{Analyse der Coronastatistiken} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 1. April 2020}
+\date{Version vom 2. April 2020}
 
 \begin{document}
 \maketitle
@@ -23,9 +23,28 @@ Dieser Text bezieht sich auf die im Verzeichnis
 Als Datenbasis werden die von der John Hopkins Universität (JHU) als
 Excel-Datei veröffentlichten Daten\footnote{Siehe deren github-Projekt
   \url{https://github.com/CSSEGISandData/COVID-19}.} zur Entwicklung der
-weltweit registrierten Covid-19-Fälle (Stand 28.03.2020) verwendet. Die
-Statistik listet pro Land und Tag die kumulierte Zahl der Infizierten, die
-Zahl der Genesenen und die Zahl der Todesfälle auf.
+weltweit registrierten Covid-19-Fälle verwendet. Die Statistik listet pro Land
+und Tag die kumulierte Zahl der Infizierten, der Genesenen und der Todesfälle
+auf.
+
+Die Statistiken sind natürlich zu hinterfragen, da sich jedem Physiker die
+Haare sträuben würden, wenn die Debatte auf die messmethodische Grundlage
+dieser Datenerhebungen, also die Einheitlichkeit des Modells, zu sprechen
+kommt.  Dennoch gibt es wohl derzeit nichts Besseres. Auch die Rolle der
+privaten (!)  JHU und deren enge Verflechtung mit dem „Datenadel“ aus dem
+Silicon Valley kann hinterfragt werden, siehe dazu (Rügemer 2020).  Spannend
+auf der anderen Seite, dass es genau dieser „Datenadel“ ist, der solche Daten
+zusammenträgt und der Allgemeinheit -- im Gegensatz etwa zu der im deutschen
+Sprachraum viel zitierten \url{https://statista.com} -- in einem
+maschinenlesbaren Format ohne Bezahlschranken zur Verfügung stellt.
+
+Eine solche kritische Würdigung muss diesem Text vorangestellt werden, um die
+folgenden Rechnungen ins rechte Licht zu rücken, denn sie sind nicht als
+Beitrag zur Corona-Debatte selbst gedacht, wie dies in den ersten Tagen
+mehrfach falsch verstanden wurde, sondern soll die Möglichkeiten aufzeigen,
+die fortgeschrittene Oberstufenschülerinnen und -schüler heute zu einer
+eigenen Analyse von Daten haben.  Der komplexe Gegenstand „CAS in der Schule“
+ist in meinem Buch (Gräbe 2018) genauer dargestellt. 
 
 \section{Installation} 
 
@@ -33,9 +52,7 @@ Zunächst muss das git Repo der JHU lokal geklont und der Pfad im Skript
 \texttt{extractData.pl} eingetragen werden.  Die Daten werden für ausgewählte
 Länder mit diesem Perl-Skript für die weitere Verarbeitung aufbereitet und in
 einer Datei \texttt{BasicData.txt} gespeichert, um dann mit dem freien CAS
-\emph{Maxima}\footnote{Siehe dazu \url{http://maxima.sourceforge.net/de/}, das
-  CAS ist in Linux-Distributionen über den Paketmanager leicht zu
-  installieren.} weiterverarbeitet zu werden.
+\emph{Maxima} weiterverarbeitet zu werden.
 
 \section{Datentransformation}
 
@@ -44,8 +61,8 @@ Länder in einem Array mit drei Einträgen (infected, recovered, dead)
 gespeichert, die im Maxima-Skript \texttt{skript.m}\footnote{Dies ist eine
   reine Textdatei mit Code-Schnipseln, die nicht für den Batchbetrieb
   konzipiert ist.} in einer Funktion \texttt{getland(Land)} zunächst einmal zu
-Paaren $(t,y_t)$ ergänzt werden, wobei $t$ für den Tag des Jahres
-($0=01.01.2020$) und $y_t$ für die Zahl der Fälle aus dem jeweiligen Record
+Paaren $(t,y_t)$ ergänzt werden, wobei $t$ für den Tag des Jahres 2020 
+($1=01.01.2020$) und $y_t$ für die Zahl der Fälle aus dem jeweiligen Record
 stehen.
 
 \section{Fitting}
@@ -54,7 +71,12 @@ Alle Grafiken zu Prognosen der Daten, die ich bisher gesehen habe, gehen von
 einer „Glockenkurve“ aus.  Das kann natürlich nur die Entwicklung der Zuwächse
 pro Tag abbilden, die aus den kumulierten Daten zunächst als $d_t=y_t-y_{t-1}$
 extrahiert werden müssen. Dies geschieht mit der im Skript definierten
-Maxima-Funktion \texttt{Delta}.
+Maxima-Funktion \texttt{Delta}\footnote{\texttt{reverse(rest(reverse(l)))}
+  entfernt das letzte Element der Liste, \texttt{append([0],...)} fügt vorn
+  eine $0$ an, womit eine Liste $l_1$ entsteht, in der alle Einträge um eine
+  Position nach rechts verschoben sind. $l-l_1$ berechnet die Differenz der
+  Listen, was in Maxima (und anderen CAS) als Subtraktion der entsprechenden
+  Vektoren implementiert ist.}.
 
 Zur Abschätzung des Verlaufs längs einer Glockenkurve wird üblicherweise die
 Statistikfunktion $C\m\exp\br{-\br{\frac{t-m}{s}}^2}$ verwendet, die ich als
@@ -83,16 +105,14 @@ eingesetzten Verfahren abhängen).
 \emph{Maxima} kommt auch beim Fittung der Schar $f(t)$ zu keinem Ergebnis.
 Einen einfacheren, nämlich quadratischen Zusammenhang
 $g(t)=c-\br{\frac{t-m}{s}}^2$ erhält man, wenn man zu Paaren $(t,\log(d_t))$
-übergeht.  Damit lassen sich dann die Fittingparameter stabil berechnen. Dafür
-müssen aber vorher Datenpunkte aussortiert werden, wo $d_t=0$ ist.
+übergeht.  Damit lassen sich dann die Fittingparameter weitgehend stabil
+berechnen. Dafür müssen aber vorher Datenpunkte aussortiert werden, wo $d_t=0$
+ist.
 
-Genrell kann es sinnvoll sein, für ein gutes Fitting Datenpunkte unterhalb
+Generell kann es sinnvoll sein, für ein gutes Fitting Datenpunkte unterhalb
 einer Schwelle auszusortieren. Eine solche Schwelle ist als weiterer Parameter
 im Skript in der Funktion \texttt{FittingDelta} vorgesehen. Für die meisten
-Datensätze ist die Schwelle 50 eine gute Wahl\footnote{Es ist zu beachten,
-  dass die Schwelle die Dateninkremente $d_t$ auswertet, nicht die kumulierten
-  Daten $y_t$.  Ein kleines Land wie Österreich bereitet hier besondere
-  Schwierigkeiten.}.
+Datensätze ist die Schwelle 50 eine gute Wahl.
 
 Details sind im Skript \texttt{skript.m} zu finden.
 
@@ -106,80 +126,110 @@ Die Rechnungen werden für jedes der Länder nun wie folgt ausgeführt:
 \item Fasse mit \texttt{getData} die drei Datensätze für das Land als Tripel
   von Listen $(t,y_t)$ zusammen. 
 \item Berechne für jeden der drei Datensätze mit \texttt{getFittingFunctions}
-  das Fitting auf $(t,\log(d_t))$ gegen die Funktion $g(t)$ und verwende das
-  gefundene Fitting, um Funktionen $h_1(t)$ (für infected), $h_2(t)$ (für
-  recovered) und $h_3(t)$ (für dead) zu schätzen. 
+  das Fitting auf $(t,\log(d_t))$ gegen die Funktion $g(t)$ und verwende die
+  berechneten drei Fittings, um Funktionen $h_1(t)$ (für infected), $h_2(t)$
+  (für recovered) und $h_3(t)$ (für dead) zu schätzen.
 \item Erzeuge daraus einen Plot, welcher die Datenpunkte und die drei Kurven
   in verschiedenen Farben (rot für infected, grün für recovered, blau für
   dead) ausgibt.  
 \end{enumerate}
 Bei erfolgreichem Fitting ist eine gute Übereinstimmung der jeweiligen Kurve
 \begin{gather*}
-  h(t)=A\br{\erf\br{B(t-m)+1}}
+  h(t)=A\br{\erf\br{B(t-m)}+1}
 \end{gather*}
 mit den Datenpunkten zu verzeichnen.  Die berechneten Parameter haben folgende
 Bedeutung:
 \begin{itemize}
 \item $m$ -- Tag, an dem die Spitze in den Inkrementdaten erreicht ist.
-\item $B=\frac{1}{s}$ -- $[m-s \ldots m+s]$ ist das kritische Intervall.
-\item $2*A$ -- Zahl der am Ende insgesamt betroffenen Personen. 
+\item $B=\frac{1}{s}$ -- $\sigma=\frac{s}{\sqrt{2}}$ ist die
+  Standardabweichung.
+\item $2A$ -- Zahl der am Ende insgesamt betroffenen Personen. 
 \end{itemize}
 
-Auf der Basis der Daten vom 29.03.2020 lassen sich folgende Szenarien (!) für
+Auf der Basis der Daten vom 02.04.2020 lassen sich folgende Szenarien (!) für
 die Länder Deutschland, Italien, Spanien und Österreich erstellen, siehe auch
 die Abbildungen.
 
+Alles begann in der chinesischen Provinz Hubei (mit 58.5 Mio. Einwohnern hat
+sie eine mit Italien vergleichbare Einwohnerzahl).  Auch die dortige
+Entwicklung ist dargestellt.
+
 \begin{center}
   \begin{tabular}{|l|r|r|r|}\hline
-    & $m$ & $s$ & $2A$ \\\hline
+    & \multicolumn{1}{|c|}{$m$} & \multicolumn{1}{|c|}{$s$}
+    & \multicolumn{1}{|c|}{$A$} \\\hline
     \multicolumn{4}{|c|}{\bf Deutschland}\\\hline
-    infected   & 94 & 14 & 171274\\
-    recovered  & 90 &  5 &  20730\\
-    dead       & 95 & 10 &   2624\\\hline
+    infected   & 93.76 & 14.22 &  82866\\
+    recovered  & 90.72 &  5.53 &  11767\\
+    dead       & 97.73 & 11.19 &   1848\\\hline
     \multicolumn{4}{|c|}{\bf Italien}\\\hline
-    infected   & 85 & 15 & 144893\\
-    recovered  & 94 & 18 &  39909\\
-    dead       & 90 & 15 &  22893\\\hline
+    infected   & 85.37 & 14.75 &  73032\\
+    recovered  & 93.61 & 18.12 &  19179\\
+    dead       & 89.39 & 15.18 &  10923\\\hline
     \multicolumn{4}{|c|}{\bf Spanien}\\\hline
-    infected   & 89 & 12 & 156889\\
+    infected   & 89.69 & 11.61 &  80836\\
     recovered  & \multicolumn{3}{|c|}{bad fitting}\\
-    dead       & 95 & 12 &  23378\\\hline
+    dead       & 94.05 & 12.04 &  10789\\\hline
     \multicolumn{4}{|c|}{\bf Österreich}\\\hline
-    infected   & 88 & 11 &  13747\\
+    infected   & 90.04 & 12.59 &   8085\\
+    recovered  & 108.53& 13.07 &  21802\\
+    dead       & 217.57& 49.79 & 535166\\\hline
+    \multicolumn{4}{|c|}{\bf China, Provinz Hubei}\\\hline
+    infected   & 41.46 & 13.23 &  26029\\
     recovered  & \multicolumn{3}{|c|}{bad fitting}\\
-    dead       & \multicolumn{3}{|c|}{bad fitting}\\\hline
+    dead       & 46.19 & 15.37 &   1669\\\hline
   \end{tabular}
 \end{center}
 Natürlich müsste am Ende die Zahl der Infizierten mit der Summe der Zahlen der
 Genesenen und der Verstorbenen übereinstimmen.  Die Schätzungen sind von einer
 solchen Invarianzforderung weit entfernt, was ein Licht auf die prognostische
 Qualität der Schätzungen für die weitere Zukunft (drei bis vier Wochen, also
-30 Tage) wirft.
+30 Tage) wirft.  Die Ergebnisse für Österreich zeigen, dass selbst einem ohne
+Fehlermeldung zurückgegebenen Fitting nicht zu trauen ist und die Güte des
+Fittings genauer analysiert werden muss.  Die Ergebnisse für die Provinz Hubei
+legen nahe, dass das verwendete Datenmodell für die Schätzung generell wenig
+geeignet ist, da die Zahl der Infektionen selbst im Nachgang zu klein
+geschätzt wird und für die Zahl der Genesenen kein brauchbares Fitting
+gefunden wird, obwohl sich die Zahlen in Bereichen bewegen, wie sie auch für
+europäische Länder charakteristisch sind.
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=.8\textwidth]{Germany.png}
-    \caption{Szenario für Deutschland (82.9 Mio. Einwohner)}
-  \end{center}
-\end{figure}
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=.8\textwidth]{Italy.png}
-    \caption{Szenario für Italien (60.4 Mio. Einwohner)}
-  \end{center}
-\end{figure}
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=.8\textwidth]{Spain.png}
-    \caption{Szenario für Spanien (46.7 Mio. Einwohner)}
-\end{center}
-\end{figure}
+Generell ist ein Modell auf der Basis einer \emph{Logistischen Funktion} die
+anerkanntere Form der Modellierung der Ausbreitung einer Infektion, siehe dazu
+den entsprechenden Wikipedia-Eintrag.  Diese lassen sich aber deutlich
+schlechter schätzen als Funktionen, die sich wie oben auf einfache Weise auf
+einen polynomialen Zusammenhang reduzieren lassen. 
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=.8\textwidth]{Austria.png}
-    \caption{Szenario für Österreich (8.85 Mio. Einwohner)}
+\section{Literatur}
+
+\begin{itemize}
+\item Hans-Gert Gräbe. Computeralgebra im Abitur. Reihe „Eagle Starthilfe“.
+  Eagle Verlag, Leipzig 2018.  Siehe
+  \url{https://hg-graebe.de/CAimAbitur/index.html}.
+\item Maxima. \url{http://maxima.sourceforge.net/de/}. Das CAS ist in
+  Linux-Distributionen über den Paketmanager leicht zu installieren.
+\item Werner Rügemer. „Die USA haben das sicherste Gesundheitssystem der Welt“
+  – Die Johns Hopkins University und das globale Pandemien-Management.
+  01.04.2020.\\ \url{https://www.nachdenkseiten.de/?p=59825}
+\end{itemize}
+
+\section{Grafiken}
+
+\begin{center}
+  \includegraphics[width=.8\textwidth]{Germany.png}\\[1em]
+  {Szenario für Deutschland (82.9 Mio. Einwohner)}
+  
+  \includegraphics[width=.8\textwidth]{Italy.png}\\[1em]
+  {Szenario für Italien (60.4 Mio. Einwohner)}
+
+  \includegraphics[width=.8\textwidth]{Spain.png}\\[1em]
+  {Szenario für Spanien (46.7 Mio. Einwohner)}
+    
+  \includegraphics[width=.8\textwidth]{Austria.png}\\[1em]
+  {Szenario für Österreich (8.85 Mio. Einwohner)}
+                  
+  \includegraphics[width=.8\textwidth]{Hubei.png}\\[1em]
+  {Szenario für China, Provinz Hubei (58.5 Mio. Einwohner)}
 \end{center}
-\end{figure}
+
 
 \end{document}

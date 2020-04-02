@@ -23,15 +23,15 @@ saveData();
 ## end main
 
 sub extractData {
-  my $land=shift;
+  my ($land,$token)=@_;
   my (@l,@in,@out);
-  @in=grep(/$land/i,@ddata);
+  @in=grep(/$token/i,@ddata);
   @l=split(/,/,$in[0],5);
   push(@out,$land."[dead]:[".$l[4]."];");
-  @in=grep(/$land/i,@cdata);
+  @in=grep(/$token/i,@cdata);
   @l=split(/,/,$in[0],5);
   push(@out,$land."[infected]:[".$l[4]."];");
-  @in=grep(/$land/i,@rdata);
+  @in=grep(/$token/i,@rdata);
   @l=split(/,/,$in[0],5);
   push(@out,$land."[recovered]:[".$l[4]."];");
   return "/* ====== Data for $land ======= */\n".
@@ -40,10 +40,13 @@ sub extractData {
 
 sub saveData {
   open(FH,">BasicData.txt");
-  print FH extractData("Germany");
-  print FH extractData("Italy");
-  print FH extractData("Spain");
-  print FH extractData("Austria");
+  print FH extractData("Germany","Germany");
+  print FH extractData("Italy","Italy");
+  print FH extractData("Spain","Spain");
+  print FH extractData("Austria","Austria");
+  print FH extractData("China","Hubei,China");
+  print FH extractData("UK","United Kingdom,55");
+  print FH extractData("France","France,46");
   close FH
 }
 
