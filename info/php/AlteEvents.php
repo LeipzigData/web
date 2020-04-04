@@ -1,6 +1,6 @@
 <?php 
 
-require_once("lib/EasyRdf.php");
+require_once("../lib/EasyRdf.php");
 
 function alteEvents() {  
   EasyRdf_Namespace::set('ical', 'http://www.w3.org/2002/12/cal/ical#');

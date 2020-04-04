@@ -17,7 +17,7 @@ function pageHeader() {
 
     <title>Leipzig Data Demonstration Site</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     
   </head>
 <!-- end header -->
@@ -66,9 +66,9 @@ function pageFooter() {
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     
   </body>
 </html>';

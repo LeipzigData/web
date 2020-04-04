@@ -47,6 +47,7 @@ sub saveData {
   print FH extractData("China","Hubei,China");
   print FH extractData("UK","United Kingdom,55");
   print FH extractData("France","France,46");
+  print FH extractData("Sweden","Sweden");
   close FH
 }
 

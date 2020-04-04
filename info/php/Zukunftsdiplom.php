@@ -1,6 +1,6 @@
 <?php 
 
-require_once("lib/EasyRdf.php");
+require_once("../lib/EasyRdf.php");
 
 // --- Die main Funktion
 

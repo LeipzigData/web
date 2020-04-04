@@ -2,7 +2,7 @@
 
 /* changed to lib/EasyRdf.php and CONSTRUCT query */
 
-require_once("lib/EasyRdf.php");
+require_once("../lib/EasyRdf.php");
 
 // --------------- MINT-Orte --------------------------------------
 

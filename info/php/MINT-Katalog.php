@@ -7,7 +7,7 @@ last modified: 2019-10-16
 
  */
 
-require_once("lib/EasyRdf.php");
+require_once("../lib/EasyRdf.php");
 
 function multiline($a) {
     return str_replace("\n", " <br/>", $a);

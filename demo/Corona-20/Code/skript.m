@@ -114,3 +114,22 @@ createPlot(l,2*10^5);
 l:getData(UK);
 getFittingFunctions(l,20);
 createPlot(l,5*10^4);
+
+/* ==== Sweden, 66.44 Mio Einwohner ===== */
+
+l:getData(Sweden);
+getFittingFunctions(l,5);
+createPlot(l,5*10^4);
+
+/* Logistic curve */ 
+
+l(t):=A/(B+exp(-t*C));
+
+define(dl(t),diff(l(t),t));
+
+Ist Lösung der Bernoullischen Differentialgleichung 
+dl(t) = (B*C/A)*l(t)*(A/B-l(t));
+
+mit k = B*C/A, G = A/B, 
+siehe https://de.wikipedia.org/wiki/Logistische_Funktion 
+https://www.stochastik-in-der-schule.de/sisonline/struktur/Jahrgang30-2010/Heft%201/2010-1_Engel.pdf
