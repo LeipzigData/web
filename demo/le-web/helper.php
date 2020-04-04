@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../../lib/EasyRdf.php';
 
 function getDatum($d) {
 // Verwandelt 2019-08-11T15:00:00.000+02:00 in Lesbares

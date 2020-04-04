@@ -2,11 +2,12 @@
 
 ## Grundsätzliches
 
-Die Applikation greift auf die RDF REST API der "Leipziger Ecken" zu, um von
-dort relevante Informationen zu extrahieren, die sich am Vorbild der NDL-API
-orientieren.  Dazu werden zunächst mit `make` die vier Datenquellen über die
-API ausgelesen und in einer einzigen RDF-Datei `Data.json`im RDF/JSON Format
-gespeichert, als Basis für alle weiteren Transformationen.
+Die Applikation greift auf einen Dump `Data.json` der RDF/JSON REST API der
+"Leipziger Ecken" zu, der im Verzeichnis `Transform/leipziger-ecken` des
+github LD-Repos `Tools` erzeugt und hierher gespiegelt wird.
+
+Von dort werden relevante Informationen extrahiert, die sich am Vorbild der
+NDL-API orientieren.
 
 ## Abhängigenkeiten
 

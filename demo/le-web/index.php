@@ -16,12 +16,13 @@ $content='
 Stadtteilplattform, deren Daten ebenfalls über eine API ausgelesen werden
 können. </p>
 
-<p>Auf dieser Webpräsenz werden eine Reihe prototypischer Anwendungen gezeigt,
-die auf der Basis diser öffentlichen Schnittstelle erstellt wurden.  Es geht
-dabei nicht um Schönheit, sondern darum, die prinzipiellen Möglichkeiten einer
-solchen Schnittstelle zu demonstrieren.  Der Quellcode der Anwendungen ist im
-<a href="https://github.com/LeipzigData/web">github Repo</a> des Leipzig Data
-Projekts zu finden.  </p>
+<p>Hier sind einige Demo-Anwendungen zusammengetragen, die aktuell auf einem
+RDF/JSON Dump <a href="Data.json">Data.json</a> aufsetzen, der regelmäßig aus
+der API erzeugt wird.  Es geht dabei nicht um Schönheit, sondern darum, die
+prinzipiellen Möglichkeiten einer solchen Schnittstelle zu demonstrieren.  Der
+Quellcode der Anwendungen ist
+im <a href="https://github.com/LeipzigData/web">github Repo</a> des Leipzig
+Data Projekts zu finden.  </p>
 
 </div> </div>
 
