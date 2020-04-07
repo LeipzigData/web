@@ -10,7 +10,7 @@
 
 \title{Analyse der Coronastatistiken} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 2. April 2020}
+\date{Version vom 7. April 2020}
 
 \begin{document}
 \maketitle
@@ -148,9 +148,9 @@ Bedeutung:
 \item $2A$ -- Zahl der am Ende insgesamt betroffenen Personen. 
 \end{itemize}
 
-Auf der Basis der Daten vom 02.04.2020 lassen sich folgende Szenarien (!) für
-die Länder Deutschland, Italien, Spanien und Österreich erstellen, siehe auch
-die Abbildungen.
+Auf der Basis der Daten vom 07.04.2020 lassen sich folgende Szenarien (!) für
+die Länder Deutschland, Italien, Spanien, Österreich und Schweden erstellen,
+siehe auch die Abbildungen.
 
 Alles begann in der chinesischen Provinz Hubei (mit 58.5 Mio. Einwohnern hat
 sie eine mit Italien vergleichbare Einwohnerzahl).  Auch die dortige
@@ -161,21 +161,25 @@ Entwicklung ist dargestellt.
     & \multicolumn{1}{|c|}{$m$} & \multicolumn{1}{|c|}{$s$}
     & \multicolumn{1}{|c|}{$A$} \\\hline
     \multicolumn{4}{|c|}{\bf Deutschland}\\\hline
-    infected   & 93.76 & 14.22 &  82866\\
-    recovered  & 90.72 &  5.53 &  11767\\
-    dead       & 97.73 & 11.19 &   1848\\\hline
+    infected   & 91.42 & 13.28 &  65811\\
+    recovered  & 91.97 &  6.11 &  15154\\
+    dead       & 97.54 & 10.99 &   1820\\\hline
     \multicolumn{4}{|c|}{\bf Italien}\\\hline
-    infected   & 85.37 & 14.75 &  73032\\
-    recovered  & 93.61 & 18.12 &  19179\\
-    dead       & 89.39 & 15.18 &  10923\\\hline
+    infected   & 86.24 & 15.17 &  77746\\
+    recovered  & 92.91 & 17.70 &  18404\\
+    dead       & 88.91 & 14.85 &  10548\\\hline
     \multicolumn{4}{|c|}{\bf Spanien}\\\hline
-    infected   & 89.69 & 11.61 &  80836\\
-    recovered  & \multicolumn{3}{|c|}{bad fitting}\\
-    dead       & 94.05 & 12.04 &  10789\\\hline
+    infected   & 89.71 & 11.61 &  81387\\
+    recovered  &113.59 & 20.14 & 158580\\
+    dead       & 92.00 & 11.02 &   8598\\\hline
     \multicolumn{4}{|c|}{\bf Österreich}\\\hline
-    infected   & 90.04 & 12.59 &   8085\\
-    recovered  & 108.53& 13.07 &  21802\\
-    dead       & 217.57& 49.79 & 535166\\\hline
+    infected   & 87.22 & 11.39 &   6074\\
+    recovered  & 98.59 & 10.16 &   4336\\
+    dead       & 93.17 & 12.34 &    180\\\hline
+    \multicolumn{4}{|c|}{\bf Schweden}\\\hline
+    infected   & 97.62 & 19.25 &   6923\\
+    recovered  &103.71 & 16.41 &   2106\\
+    dead       & 93.69 &  8.98 &    347\\\hline
     \multicolumn{4}{|c|}{\bf China, Provinz Hubei}\\\hline
     infected   & 41.46 & 13.23 &  26029\\
     recovered  & \multicolumn{3}{|c|}{bad fitting}\\
@@ -186,7 +190,7 @@ Natürlich müsste am Ende die Zahl der Infizierten mit der Summe der Zahlen der
 Genesenen und der Verstorbenen übereinstimmen.  Die Schätzungen sind von einer
 solchen Invarianzforderung weit entfernt, was ein Licht auf die prognostische
 Qualität der Schätzungen für die weitere Zukunft (drei bis vier Wochen, also
-30 Tage) wirft.  Die Ergebnisse für Österreich zeigen, dass selbst einem ohne
+30 Tage) wirft.  Weitere Ergebnisse zeigen, dass selbst einem ohne
 Fehlermeldung zurückgegebenen Fitting nicht zu trauen ist und die Güte des
 Fittings genauer analysiert werden muss.  Die Ergebnisse für die Provinz Hubei
 legen nahe, dass das verwendete Datenmodell für die Schätzung generell wenig
@@ -199,11 +203,15 @@ Generell ist ein Modell auf der Basis einer \emph{Logistischen Funktion} die
 anerkanntere Form der Modellierung der Ausbreitung einer Infektion, siehe dazu
 den entsprechenden Wikipedia-Eintrag.  Diese lassen sich aber deutlich
 schlechter schätzen als Funktionen, die sich wie oben auf einfache Weise auf
-einen polynomialen Zusammenhang reduzieren lassen. 
+einen polynomialen Zusammenhang reduzieren lassen.  Siehe hierzu aber die
+Arbeit von (Engel 2010) und die Modellierung mit \textsc{GeoGebra} in
+(Elschenbroich 2020).
 
 \section{Literatur}
 
 \begin{itemize}
+\item Hans-Jürgen Elschenbroich. Corona: Mathematik \& Modellbildung.\\
+  \url{https://www.geogebra.org/m/cfammtpe}.  2020.
 \item Joachim Engel. Parameterschätzen in logistischen Wachstumsmodellen.
   Stochastik in der Schule 30 (2010) 1, S. 13–18.
 \item Hans-Gert Gräbe. Computeralgebra im Abitur. Reihe „Eagle Starthilfe“.
@@ -227,6 +235,9 @@ einen polynomialen Zusammenhang reduzieren lassen.
 
   \includegraphics[width=.8\textwidth]{Spain.png}\\[1em]
   {Szenario für Spanien (46.7 Mio. Einwohner)}
+    
+  \includegraphics[width=.8\textwidth]{Sweden.png}\\[1em]
+  {Szenario für Schweden (66.4 Mio. Einwohner)}
     
   \includegraphics[width=.8\textwidth]{Austria.png}\\[1em]
   {Szenario für Österreich (8.85 Mio. Einwohner)}
