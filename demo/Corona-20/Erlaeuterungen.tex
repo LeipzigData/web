@@ -61,9 +61,9 @@ Länder in einem Array mit drei Einträgen (infected, recovered, dead)
 gespeichert, die im Maxima-Skript \texttt{skript.m}\footnote{Dies ist eine
   reine Textdatei mit Code-Schnipseln, die nicht für den Batchbetrieb
   konzipiert ist.} in einer Funktion \texttt{getland(Land)} zunächst einmal zu
-Paaren $(t,y_t)$ ergänzt werden, wobei $t$ für den Tag des Jahres 2020 
-($1=01.01.2020$) und $y_t$ für die Zahl der Fälle aus dem jeweiligen Record
-stehen.
+Paaren $(t,y_t)$ ergänzt werden, wobei $t$ für den Tag des Jahres 2020
+($1=01.01.2020$, \textbf{Tag 100 ist also Donnerstag der 9. April}) und $y_t$
+für die Zahl der Fälle aus dem jeweiligen Record stehen.
 
 \section{Fitting}
 
@@ -110,9 +110,10 @@ berechnen. Dafür müssen aber vorher Datenpunkte aussortiert werden, wo $d_t=0$
 ist.
 
 Generell kann es sinnvoll sein, für ein gutes Fitting Datenpunkte unterhalb
-einer Schwelle auszusortieren. Eine solche Schwelle ist als weiterer Parameter
-im Skript in der Funktion \texttt{FittingDelta} vorgesehen. Für die meisten
-Datensätze ist die Schwelle 50 eine gute Wahl.
+einer Schwelle auszusortieren. Eine solche Schwelle $S$ ist als weiterer
+Parameter im Skript in der Funktion \texttt{FittingDelta(G,S)} vorgesehen. Für
+die meisten Datensätze ist die Schwelle 50 eine gute Wahl. $G$ ist die Liste
+$(t,y_t)$ der zu fittenden Datenpunkte.
 
 Details sind im Skript \texttt{skript.m} zu finden.
 
@@ -123,12 +124,13 @@ mit dem CAS Maxima nicht erfolgreich zu Ende bringen.
 
 Die Rechnungen werden für jedes der Länder nun wie folgt ausgeführt:
 \begin{enumerate}
-\item Fasse mit \texttt{getData} die drei Datensätze für das Land als Tripel
-  von Listen $(t,y_t)$ zusammen. 
-\item Berechne für jeden der drei Datensätze mit \texttt{getFittingFunctions}
-  das Fitting auf $(t,\log(d_t))$ gegen die Funktion $g(t)$ und verwende die
-  berechneten drei Fittings, um Funktionen $h_1(t)$ (für infected), $h_2(t)$
-  (für recovered) und $h_3(t)$ (für dead) zu schätzen.
+\item Fasse mit \texttt{l:getData(Land)} die drei Datensätze für das Land als
+  Tripel von Listen $(t,y_t)$ zusammen.
+\item Berechne für jeden der drei Datensätze mit
+  \texttt{getFittingFunctions(l,S)} das Fitting auf $(t,\log(d_t))$ gegen die
+  Funktion $g(t)$ und verwende die berechneten drei Fittings, um Funktionen
+  $h_1(t)$ (für infected), $h_2(t)$ (für recovered) und $h_3(t)$ (für dead) zu
+  schätzen.
 \item Erzeuge daraus einen Plot, welcher die Datenpunkte und die drei Kurven
   in verschiedenen Farben (rot für infected, grün für recovered, blau für
   dead) ausgibt.  
@@ -154,7 +156,8 @@ siehe auch die Abbildungen.
 
 Alles begann in der chinesischen Provinz Hubei (mit 58.5 Mio. Einwohnern hat
 sie eine mit Italien vergleichbare Einwohnerzahl).  Auch die dortige
-Entwicklung ist dargestellt.
+Entwicklung ist dargestellt\footnote{Maxima hängt sich bei der Berechnung
+  dieses Fittings allerdings schnell auf.}.
 
 \begin{center}
   \begin{tabular}{|l|r|r|r|}\hline
@@ -226,6 +229,50 @@ Funktionen, die sich wie oben auf einfache Weise auf einen polynomialen
 Zusammenhang reduzieren lassen, da sie inhärent transzendent sind.  Siehe
 hierzu aber die Arbeit von (Engel 2010) und die Modellierung mit
 \textsc{GeoGebra} in (Elschenbroich 2020).
+
+\section{Die „Verdoppelungsdebatte“}
+
+In den letzten Tagen (Anfang April 2020) kommt eine Diskussion hoch, dass man
+die rigiden Beschränkungen erst aufheben könne, wenn „die Verdopplungszeit 
+der Infektionen größer als 14 Tage“ sei. 
+
+So meldet zum Beispiel der Deutschlandfunk am 04.04.2020\footnote{\raggedright
+  \url{https://www.deutschlandfunk.de/covid19-verdopplungszeit-der-coronavirus-infektionen-in.1939.de.html?drn:news_id=1117169}}
+\begin{quote}
+  Die Verdopplungszeit der Ausbreitung von Coronavirus-Infektionen in
+  Deutsch"|land hat sich in den vergangenen Tagen verlangsamt.
+
+  Für ganz Deutschland liegt sie nun bei 11{,}2 Tagen. Die Lage in den
+  Bundesländern ist unterschiedlich. In den großen Flächenländern liegt die
+  Verdopplungszeit in Nordrhein-Westfalen bei 13{,}1 Tagen, in
+  Baden-Württemberg bei 12{,}5 Tagen und in Bayern bei 9{,}7 Tagen. In Berlin
+  sind es inzwischen 12{,}8 Tage, in Hamburg 12{,}4. Im Saarland hingegen
+  liegt die Verdoppelungszeit bei 5{,}5 Tagen, in Sachsen bei 11{,}0 Tagen.
+\end{quote}
+Auch wenn dies nicht immer deutlich wird, bezieht sich die Verdopplungszeit
+$v_t$ auf die kumulierten Daten und steigt deshalb bereits durch die schiere
+Masse der Infizierten.  Ist $y(t)=mt+n$ ein linearer Zusammenhang, so ergibt
+sich $v_t=\frac{y(t)}{m}$. Für einen annähernd linearen Zusammenhang kann man
+also $v_t=\frac{y(t)}{y'(t)}$ als Schätzung nehmen.  Die Zahl lässt sich auch
+aus unseren Daten leicht berechnen: Ist $y_t$ die kumulierte Zahl der
+Infizierten am Tag $t$ und $d_t$ die Zahl der Neuinfektionen, so ist nach
+$v_t=\frac{y_t}{d_t}$ Tagen eine Verdopplung der Infizierten erreicht, die
+Zuwachsrate $d_t$ über diesen Zeitraum als konstant vorausgesetzt.  Beide
+Datenreihen hatten wir schon oben extrahiert, so dass wir eine einfache
+Funktion \texttt{doublePlot(Land)} schreiben können, um die folgenden Plots zu
+erzeugen:
+\begin{center}  
+  \begin{minipage}{.33\textwidth}\centering
+    \includegraphics[width=\textwidth]{Italy-DP.png}\\[1em] {Italien}
+  \end{minipage}\hfill
+  \begin{minipage}{.33\textwidth}\centering
+    \includegraphics[width=\textwidth]{Germany-DP.png}\\[1em] {Deutschland}
+  \end{minipage}\hfill
+  \begin{minipage}{.33\textwidth}\centering
+    \includegraphics[width=\textwidth]{Austria-DP.png}\\[1em] {Österreich}
+  \end{minipage}
+\end{center}
+
 
 \section{Literatur}
 

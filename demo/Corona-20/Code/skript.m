@@ -59,6 +59,17 @@ createPlot(l,max):=block([G1,G2,G3],
   [color, red, red, green, green, blue, blue])
 )$
 
+doublePlot(Land):=block([l,G,G1,G2,G3,G4],
+  l:getData(Land),
+  G:sublist(first(l),lambda([u],second(u)>5)),
+  G1:map(first,G),
+  G2:map(second,G),
+  G3:Delta(G2)+.01, /* to avoid division by zero */
+  G4:map(lambda([u1,u2,u3],[u1,u2/u3]),G1,G2,G3),
+  plot2d([[discrete, G4]], [t,0,200], [y,0,30], [style, points])
+  )$
+  
+
 plotDoubling(h):=block([dh:diff(h,t)],
   plot2d(h/dh,[t,70,130],[y,0,30]))$
 
@@ -161,3 +172,4 @@ M:apply('matrix,first(G));
 
 define(l1(t),subst(r=1,l(t)));
 est:lsquares_estimates(M,[t,y],y=l1(t),[K,C]);
+
