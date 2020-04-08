@@ -49,7 +49,7 @@ getFittingFunctions(l,tr):=block([G,est],
   define(h3(t),subst(float(first(est)),h(t))),
   [h1(t),h2(t),h3(t)])$
 
-/* ====== Functions to compute the Fittings =============== */
+/* ====== Functions to plot the Results =============== */
 
 createPlot(l,max):=block([G1,G2,G3],
   G1:l[1], G2:l[2], G3:l[3],
@@ -59,11 +59,17 @@ createPlot(l,max):=block([G1,G2,G3],
   [color, red, red, green, green, blue, blue])
 )$
 
+plotDoubling(h):=block([dh:diff(h,t)],
+  plot2d(h/dh,[t,70,130],[y,0,30]))$
+
 /* ==== Italy, 60.48 Mio Einwohner ===== */
 
 l:getData(Italy);
 getFittingFunctions(l,50);
 createPlot(l,2*10^5);
+
+plotDoubling(h1(t));
+
 
 /* ==== Spain, 46.66 Mio Einwohner ===== */
 
@@ -138,13 +144,20 @@ createPlot(l,2*10^4);
 
 /* Logistic curve */ 
 
-l(t):=A/(B+exp(-t*C));
-
+l(t):=K/(1+C*exp(-r*t));
 define(dl(t),diff(l(t),t));
+define(ddl(t),diff(l(t),t,2));
 
-Ist Lösung der Bernoullischen Differentialgleichung 
-dl(t) = (B*C/A)*l(t)*(A/B-l(t));
+u:[l(t),dl(t),ddl(t)];
+u0:subst([K=1,C=12,r=2],u);
+plot2d(u0,[t,-5,5],[legend, false]);
 
-mit k = B*C/A, G = A/B, 
-siehe https://de.wikipedia.org/wiki/Logistische_Funktion 
-https://www.stochastik-in-der-schule.de/sisonline/struktur/Jahrgang30-2010/Heft%201/2010-1_Engel.pdf
+sys:[l(0)=0.1,l(1)=0.2,l(2)=0.6];
+sol:solve(sys,[K,C,r]);
+
+Funzt auch nicht.
+G:getData(Germany);
+M:apply('matrix,first(G));
+
+define(l1(t),subst(r=1,l(t)));
+est:lsquares_estimates(M,[t,y],y=l1(t),[K,C]);

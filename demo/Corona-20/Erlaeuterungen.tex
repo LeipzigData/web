@@ -10,7 +10,7 @@
 
 \title{Analyse der Coronastatistiken} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 7. April 2020}
+\date{Version vom 8. April 2020}
 
 \begin{document}
 \maketitle
@@ -199,13 +199,33 @@ geschätzt wird und für die Zahl der Genesenen kein brauchbares Fitting
 gefunden wird, obwohl sich die Zahlen in Bereichen bewegen, wie sie auch für
 europäische Länder charakteristisch sind.
 
-Generell ist ein Modell auf der Basis einer \emph{Logistischen Funktion} die
-anerkanntere Form der Modellierung der Ausbreitung einer Infektion, siehe dazu
-den entsprechenden Wikipedia-Eintrag.  Diese lassen sich aber deutlich
-schlechter schätzen als Funktionen, die sich wie oben auf einfache Weise auf
-einen polynomialen Zusammenhang reduzieren lassen.  Siehe hierzu aber die
-Arbeit von (Engel 2010) und die Modellierung mit \textsc{GeoGebra} in
-(Elschenbroich 2020).
+\section{Logistische Funktion}
+
+Generell ist ein Modell auf der Basis einer \emph{Logistischen Funktion}
+\begin{gather*}
+  u(t)=\frac{K}{1+C\m\exp(-rt)}
+\end{gather*}
+die anerkanntere Form der Modellierung der Ausbreitung einer Infektion, siehe
+dazu den entsprechenden Wikipedia-Eintrag. 
+\begin{center}
+  \includegraphics[width=.8\textwidth]{LC.png}\\[1em]
+  \begin{quote}
+    {Logistische Kurve $u(t)=\frac{1}{1+12\exp(-2t)}$ (blau) sowie deren erste
+      (rot) und zweite Ableitung (grün) Ableitung}
+  \end{quote}
+\end{center}
+$K$ steht dabei für die Sättigungsgrenze $\lim_{t\to\infty}{u(t)}$ und $C$ ist
+üblicherweise als $C=\frac{K}{u(0)}-1$ angeschrieben, was sich unmittelbar aus
+der Umstellung der Formel für $u(0)$ nach $C$ ergibt. Der Wendepunkt dieser
+Funktion und damit das Maximum der ersten Ableitung liegt als Nullstelle der
+zweiten Ableitung bei $t_0=\frac{\log(C)}{r}$, was sich unmittelbar mit Maxima
+berechnen lässt.
+
+Derartige Funktionen lassen sich aber deutlich schlechter schätzen als
+Funktionen, die sich wie oben auf einfache Weise auf einen polynomialen
+Zusammenhang reduzieren lassen, da sie inhärent transzendent sind.  Siehe
+hierzu aber die Arbeit von (Engel 2010) und die Modellierung mit
+\textsc{GeoGebra} in (Elschenbroich 2020).
 
 \section{Literatur}
 
