@@ -155,21 +155,66 @@ createPlot(l,2*10^4);
 
 /* Logistic curve */ 
 
-l(t):=K/(1+C*exp(-r*t));
-define(dl(t),diff(l(t),t));
-define(ddl(t),diff(l(t),t,2));
+l(t):=K/(1+exp(c-r*t));
 
-u:[l(t),dl(t),ddl(t)];
-u0:subst([K=1,C=12,r=2],u);
-plot2d(u0,[t,-5,5],[legend, false]);
+lFit(l,K0):=block([G,G1,M,est,m],
+  G:sublist(l,lambda([u],second(u)>10)),
+  G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
+  M:apply('matrix,float(G1)),
+  est:lsquares_estimates(M,[t,y],y=c-r*t,[c,r]),
+  m:float(subst(first(est),c/r)),
+  define(l1(t),subst(append([K=K0],float(first(est))),l(t))),
+  m)$
 
-sys:[l(0)=0.1,l(1)=0.2,l(2)=0.6];
-sol:solve(sys,[K,C,r]);
+createLPlot(G,max):=
+  plot2d([[discrete, G], l1(t)],
+  [t,0,200], [y,0,max],
+  [style, points, lines], [legend, false],
+  [color, red, blue])$
 
-Funzt auch nicht.
-G:getData(Germany);
-M:apply('matrix,first(G));
+/* Computations */ 
 
-define(l1(t),subst(r=1,l(t)));
-est:lsquares_estimates(M,[t,y],y=l1(t),[K,C]);
+l:getData(China);
+G:sublist(first(l),lambda([u],second(u)>10));
+K0:7*10^4;
+lFit(G,K0);
+createLPlot(G,2*10^5);
 
+c-r*t = 4.664470054049377 - 0.10337267051424 t
+c/r = 45.12285530445715
+
+l:getData(Italy);
+G:sublist(first(l),lambda([u],second(u)>10));
+K0:1.45*10^5;
+lFit(G,K0);
+createLPlot(G,2*10^5);
+
+c-r*t = 17.44514126980632 - 0.206524088851644 t
+c/r = 84.4702492905706
+
+l:getData(Germany);
+G:sublist(first(l),lambda([u],second(u)>10));
+K0:1.25*10^5;
+lFit(G,K0);
+createLPlot(G,2*10^5);
+
+c-r*t = 18.05781451219179 - 0.1981927723930733 t
+c/r = 91.11237657233002
+
+l:getData(Austria);
+G:sublist(first(l),lambda([u],second(u)>10));
+K0:1.3*10^4;
+lFit(G,K0);
+createLPlot(G,2*10^4);
+
+c-r*t = 23.05255151797806 - 0.2683512133395708 t
+c/r = 85.90440576397707
+
+l:getData(Spain);
+G:sublist(first(l),lambda([u],second(u)>10));
+K0:1.6*10^5;
+lFit(G,K0);
+createLPlot(G,2*10^5);
+
+c-r*t = 23.81533844331791 - 0.2693585413723537 t
+c/r = 88.41501116683081
