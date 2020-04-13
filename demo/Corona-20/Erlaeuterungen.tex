@@ -10,7 +10,7 @@
 
 \title{Analyse der Coronastatistiken} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 9. April 2020}
+\date{Version vom 13. April 2020}
 
 \begin{document}
 \maketitle
@@ -20,7 +20,7 @@ Dieser Text bezieht sich auf die im Verzeichnis
 
 \section{Datenbasis}
 
-Als Datenbasis werden die von der John Hopkins Universität (JHU) als
+Als Datenbasis werden die von der Johns Hopkins Universität (JHU) als
 Excel-Datei veröffentlichten Daten\footnote{Siehe deren github-Projekt
   \url{https://github.com/CSSEGISandData/COVID-19}.} zur Entwicklung der
 weltweit registrierten Covid-19-Fälle verwendet. Die Statistik listet pro Land
@@ -117,9 +117,6 @@ $(t,y_t)$ der zu fittenden Datenpunkte.
 
 Details sind im Skript \texttt{skript.m} zu finden.
 
-Weitere Versuche, etwa mit einer Schar von Logistik-Funktionen, lassen sich
-mit dem CAS Maxima nicht erfolgreich zu Ende bringen. 
-
 \section{Ergebnisse}
 
 Die Rechnungen werden für jedes der Länder nun wie folgt ausgeführt:
@@ -150,7 +147,7 @@ Bedeutung:
 \item $2A$ -- Zahl der am Ende insgesamt betroffenen Personen. 
 \end{itemize}
 
-Auf der Basis der Daten vom 07.04.2020 lassen sich folgende Szenarien (!) für
+Auf der Basis der Daten vom 13.04.2020 lassen sich folgende Szenarien (!) für
 die Länder Deutschland, Italien, Spanien, Österreich und Schweden erstellen,
 siehe auch die Abbildungen.
 
@@ -164,25 +161,25 @@ Entwicklung ist dargestellt\footnote{Maxima hängt sich bei der Berechnung
     & \multicolumn{1}{|c|}{$m$} & \multicolumn{1}{|c|}{$s$}
     & \multicolumn{1}{|c|}{$A$} \\\hline
     \multicolumn{4}{|c|}{\bf Deutschland}\\\hline
-    infected   & 91.42 & 13.28 &  65811\\
-    recovered  & 91.97 &  6.11 &  15154\\
-    dead       & 97.54 & 10.99 &   1820\\\hline
+    infected   & 91.94 & 13.51 &  68896\\
+    recovered  & 97.01 &  8.58 &  32967\\
+    dead       &103.11 & 14.80 &   3241\\\hline
     \multicolumn{4}{|c|}{\bf Italien}\\\hline
-    infected   & 86.24 & 15.17 &  77746\\
-    recovered  & 92.91 & 17.70 &  18404\\
-    dead       & 88.91 & 14.85 &  10548\\\hline
+    infected   & 88.34 & 16.30 &  87225\\
+    recovered  &101.35 & 21.97 &  31380\\
+    dead       & 90.31 & 16.07 &  11520\\\hline
     \multicolumn{4}{|c|}{\bf Spanien}\\\hline
-    infected   & 89.71 & 11.61 &  81387\\
-    recovered  &113.59 & 20.14 & 158580\\
-    dead       & 92.00 & 11.02 &   8598\\\hline
+    infected   & 91.11 & 12.32 &  90706\\
+    recovered  &101.77 & 15.78 &  54984\\
+    dead       & 93.33 & 11.88 &   9611\\\hline
     \multicolumn{4}{|c|}{\bf Österreich}\\\hline
-    infected   & 87.22 & 11.39 &   6074\\
-    recovered  & 98.59 & 10.16 &   4336\\
-    dead       & 93.17 & 12.34 &    180\\\hline
+    infected   & 88.55 & 12.09 &   6651\\
+    recovered  &100.02 & 10.68 &   5319\\
+    dead       & 98.62 & 17.12 &    294\\\hline
     \multicolumn{4}{|c|}{\bf Schweden}\\\hline
-    infected   & 97.62 & 19.25 &   6923\\
-    recovered  &103.71 & 16.41 &   2106\\
-    dead       & 93.69 &  8.98 &    347\\\hline
+    infected   &101.08 & 20.75 &   8870\\
+    recovered  &112.73 & 20.12 &   4402\\
+    dead       & 95.36 &  9.09 &    459\\\hline
     \multicolumn{4}{|c|}{\bf China, Provinz Hubei}\\\hline
     infected   & 41.46 & 13.23 &  26029\\
     recovered  & \multicolumn{3}{|c|}{bad fitting}\\
@@ -244,7 +241,7 @@ gefittete Kurve möglichst gut auf die Daten passt.
 Im Skript ist das Ganze in einer Funktion \texttt{lFit(G,K0)} implementiert,
 der eine Liste $G$ zu übergeben ist, in der vorab alle Datenpunkte mit $y_t\le
 10$ ausgefiltert werden.  Es ergeben sich folgende Schätzungen für die Zahl
-der infizierten Personen:
+der (in der Statistik erfassten) infizierten Personen (Stand 10.04.2020):
 \begin{center}
   \begin{tabular}{|l|c|c|c|c|}\hline
     Land & $K$ & $c$ & $r$ & $c/r$ \\\hline
@@ -256,13 +253,11 @@ der infizierten Personen:
   \end{tabular}
 \end{center}
 
-
-
 \section{Die „Verdoppelungsdebatte“}
 
-In den letzten Tagen (Anfang April 2020) kommt eine Diskussion hoch, dass man
-die rigiden Beschränkungen erst aufheben könne, wenn „die Verdopplungszeit 
-der Infektionen größer als 14 Tage“ sei. 
+Anfang April 2020 kommt eine Diskussion hoch, dass man die rigiden
+Beschränkungen erst aufheben könne, wenn „die Verdopplungszeit der Infektionen
+größer als 14 Tage“ sei.
 
 So meldet zum Beispiel der Deutschlandfunk am 04.04.2020\footnote{\raggedright
   \url{https://www.deutschlandfunk.de/covid19-verdopplungszeit-der-coronavirus-infektionen-in.1939.de.html?drn:news_id=1117169}}
@@ -286,9 +281,9 @@ aus unseren Daten leicht berechnen: Ist $y_t$ die kumulierte Zahl der
 Infizierten am Tag $t$ und $d_t$ die Zahl der Neuinfektionen, so ist nach
 $v_t=\frac{y_t}{d_t}$ Tagen eine Verdopplung der Infizierten erreicht, die
 Zuwachsrate $d_t$ über diesen Zeitraum als konstant vorausgesetzt.  Beide
-Datenreihen hatten wir schon oben extrahiert, so dass wir eine einfache
-Funktion \texttt{doublePlot(Land)} schreiben können, um die folgenden Plots zu
-erzeugen:
+Datenreihen (Stand 10.04.2020) hatten wir schon oben extrahiert, so dass wir
+eine einfache Funktion \texttt{doublePlot(Land)} schreiben können, um die
+folgenden Plots zu erzeugen:
 \begin{center}  
   \begin{minipage}{.33\textwidth}\centering
     \includegraphics[width=\textwidth]{Italy-DP.png}\\[1em] {Italien}
