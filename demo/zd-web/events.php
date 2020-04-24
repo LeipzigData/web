@@ -31,10 +31,12 @@ function theEvent($v) {
     $ort=$v["full_address"];
     $url=$v["info_url"];
     $von=$v["start_at"];
+    $goals=join(",", $v["goals"]);
     $out='
 <tr><td><a href="'.$src.'">'.$title.'</a></td><td>'
     .getDatum($von).'</td><td>'.$ort.'</td><td>'
-         .createLink($url,$url).'</td></tr>';
+         .createLink($url,$url).'</td><td>'
+         .$goals.'</td></tr>';
     return $out;
 }
 
@@ -43,7 +45,7 @@ $content='
 <h2 align="center">Die Events</h2>
 
 <table align="center" border="1">
-<tr><th>Titel</th><th>Datum</th><th>Ort</th><th>URL</th></tr>
+<tr><th>Titel</th><th>Datum</th><th>Ort</th><th>URL</th><th>Goals</th></tr>
 '.getEvents().'
 </table>
 </div>
