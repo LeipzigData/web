@@ -1,0 +1,128 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide,amsmath,ngerman,url,graphicx}
+\usepackage[utf8]{inputenc}
+\parskip4pt
+\parindent0pt
+
+\newcommand{\br}[1]{\left(#1\right)}
+\newcommand{\erf}{\mathrm{erf}}
+\newcommand{\m}{\cdot}
+
+\title{Rekonstruktion des Corona-Modells von Peter Fleißner} 
+\author{Hans-Gert Gräbe, Leipzig}
+\date{Version vom 22. Mai 2020}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  Peter Fleißner (Wien) hat umfangreiche eigene
+  Modellrechnungen\footnote{Siehe dazu
+    \url{http://peter.fleissner.org/Covid/Covid_Access.htm}} zur Dynamik der
+  Corona-Pandemie für Österreich veröffentlicht.  Anliegen dieses Texts ist
+  es, diese Modellierung nachzuvollziehen und mit den Daten abzugleichen, die
+  von der Johns Hopkins University (JHU) regelmäßig veröffentlicht und auf
+  github zur Verfügung gestellt werden.
+\end{abstract}
+
+\section{Fleißners Modell}
+
+Die Darstellung des Modells ist aus den beiliegenden Folien mit leichten
+sprachlichen Präzisierungen meinerseits übernommen. 
+
+Die Gesamtbevölkerung $B$ wird in vier Teile zerlegt: In aktuell Infizierte
+$i$ (ungleich der täglich erhobenen Maßzahl der positiv Getesteten $p$),
+Genesene $r$, die seit Beginn der Pandemie Verstorbenen $d$ und die
+ansteckbaren Personen $s$, die über die Bestandsgleichung $B=i+r+d+s$
+verbunden sind.
+
+Die aktuell Infizierten $i$ gehorchen folgender Logik: Ihre Zahl wird durch
+die Zahl der neu positiv Getesteten vermehrt ($\Delta(p)$) und durch die Zahl
+der Genesenen ($\Delta(r)$) und Verstorbenen ($\Delta(d)$) verringert.  Man
+könnte zur Veranschaulichung ein in der Systemdynamik übliches
+Badewannenmodell verwenden. Diese Badewanne ist allerdings keine gewöhnliche.
+Sie enthält nicht Wasser, sondern die aktuell Infizierten $i(t)$. Die
+Änderungsrate $\Delta(i)$ berechnet sich aus der täglichen Zuwachsrate
+$\alpha(t)$ der positiv Getesteten $p(t)$ (in summa also $\alpha(t)p(t)$) mal
+dem Anteil der noch nicht Angesteckten an den Ansteckbaren
+($1-\frac{p}{s}$). Zu Beginn ist dieser Wert gleich 1 und sinkt erst nach
+einem längeren Prozess der Durchseuchung.  Aus der Badewanne fließen pro Tag
+die Gestorbenen $\Delta(d)$ und die Genesenen $\Delta(r)$.  Damit ergeben sich
+die folgenden Beziehungen ($\dot{y}=\frac{d\,y(t)}{d\,t}$):
+\begin{align}
+  &i=p-r-d,\ s=B-p,\tag{1}\\
+  &\dot{p}=\alpha p\left(1-\frac{p}{s}\right),\tag{2}\\
+  &\dot{r}=\frac{i}{T_r},\tag{3}\\
+  &\dot{d}=\frac{i}{T_d}\tag{4}
+\intertext{sowie die Anfangsbedingungen}
+  B(0)&=8.9\cdot 10^6,\ p(0)=i(0)=100,\ r(0)=d(0)=0.\tag{5}
+\end{align}
+HGG: Die beiden Bedingungen in der ersten Zeile sind zusätzlich aufgenommen,
+die bei Fleißner aufgeführte weitere Bedingung
+$\Delta(i)=\Delta(p)-\Delta(r)-\Delta(s)$ ist damit entbehrlich. 
+
+Die Bevölkerung setzt sich aus der Zahl der Infizierten $i$, der Zahl der
+bisher Verstorbenen $d$, der Zahl der von der Infektion genesenen $r$ und der
+Zahl der Ansteckbaren $s$ zusammen. Die Bevölkerung wird für die Berechnung
+als konstant angenommen (diese Beschränkung kann leicht aufgehoben werden).
+Zusätzlich wird die einzige empirisch zugängliche Variable $p$ berechnet, die
+Zahl der positiv Getesteten.
+
+$T$ bedeuten die durchschnittlichen Verweildauern der Infizierten, bis sie
+sich entweder erholt haben ($T_r$) bzw. verstorben sind ($T_d$), ähnlich wie
+die Halbwertszeiten beim radioaktiven Zerfall. Nach der üblichen
+englischsprachigen Nomenklatur wäre mein Modell ein SPIRD-Modell (s für
+sustainable, p für positively tested, i für infected, r für recovered und d
+für death).
+
+Die einzige Quelle empirischer Daten für das Modell waren anfangs die
+täglichen Meldungen der Zahl der positiv Getesteten. Sie gehen in die
+Ansteckungsraten $\alpha(t)$ ein. Darüber hinaus bestimmt die zentrale
+Diffusionsgleichung das dynamische Geschehen und anfänglich grobe Annahmen
+über die Verweildauern und Übergangsraten (z.B. von den Infizierten zu den
+Genesenen). Die Anfangswerte (100 Infizierte) bestimmen auch im Modell die
+Ausgangssituation. Erst nach und nach gab es am Dashboard des Ministeriums
+auch Daten für die Toten, Genesenen, Belag der Spitals- und Intensivbetten und
+Infizierten.
+
+\section{Kritik der Fleißnerschen Modellierung}
+
+Der verwendete Modellierungsansatz einer \emph{Logistischen Kurve} wird in der
+deutschen Wikipedia wie folgt beschrieben: „Die logistische Funktion
+beschreibt den Zusammenhang zwischen der verstreichenden Zeit und einem
+Wachstum, beispielsweise ... (annähernd) der Verbreitung einer Krankheit im
+Rahmen einer Epidemie. Hierzu wird das Modell des exponentiellen Wachstums
+modifiziert durch eine sich mit dem Wachstum verbrauchende Ressource“.
+Er führt auf eine \emph{Bernoullische Differenzialgleichung}
+\begin{gather*}
+  f'(t)=k\,f(t)\,(G-f(t))
+\end{gather*}
+eines „verlangsamten“ exponentiellen Wachstums\footnote{$f'(t)=C\,f(t)$
+  beschreibt das exponentielle Wachstum $f(t)=\exp(C\,t)$, der
+  Proportionalitätsfaktor $C=k\,(G-f(t))$ nimmt mit der Zeit ab, womit sich
+  die Entwicklung verlangsamt. $-k\,f(t)^2$ wirkt dabei als Dämpfungsterm, aus
+  naheliegenden Gründen wird die Lösung $f(t)$ nach oben durch die
+  Grundgesamtheit $G$ beschränkt.}, das auf eine S-Kurve als Lösung
+hinausläuft.
+
+Fleissners Gleichung (2) müsste also in diesem Modell durch
+\begin{gather*}
+  \dot{p}=k\,p\,(B-p)=(kB)\,p\,\left(1-\frac{p}{B}\right)\tag{2a}
+\end{gather*}
+ersetzt werden. Unverständlich sind die Beziehungen (3) und (4), da eine
+Zustandsübergangsmodellierung $s\to i\to \{d,r\}$ in der Grundgesamtheit $B$
+vorgenommen wird. Wenn hier, wie beim radioaktiven Zerfall, mit
+Halbwertzeiten, also statistischen Übergangswahrscheinlichkeiten einzelner
+„Atome“ (hier also einzelne Menschen), so müsste hier eher auf $i(t-T_r)$ bzw.
+$i(t-T_d)$ Bezug genommen werden mit der Zusatzbedingung
+$i(t)=r(t+T_r)+d(t+T_d)$, da die Infizierten den Zustand nach der
+statistischen Verweildauer definitiv in eine der beiden Richtungen verlassen.
+Eine solche Invarianzbedingung fehlt im Modell, kann aber mit Blick auf die
+empirische Datenlage, in der drei Zeitreihen $(p,r,d)$ vorliegen, weggelassen
+werden.  
+
+\section{Modifizierte Modellierung}
+
+Zu ergänzen.
+
+\end{document}
