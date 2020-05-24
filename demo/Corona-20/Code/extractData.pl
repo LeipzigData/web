@@ -39,16 +39,23 @@ sub extractData {
 }
 
 sub saveData {
-  open(FH,">BasicData.txt");
-  print FH extractData("Germany","Germany");
-  print FH extractData("Italy","Italy");
-  print FH extractData("Spain","Spain");
-  print FH extractData("Austria","Austria");
-  print FH extractData("China","Hubei,China");
-  print FH extractData("UK","United Kingdom,55");
-  print FH extractData("France","France,46");
-  print FH extractData("Sweden","Sweden");
-  close FH
+  $_.= extractData("Germany","Germany");
+  $_.=extractData("Germany","Germany");
+  $_.=extractData("Italy","Italy");
+  $_.=extractData("Spain","Spain");
+  $_.=extractData("Austria","Austria");
+  $_.=extractData("China","Hubei,China");
+  $_.=extractData("UK","United Kingdom,55");
+  $_.=extractData("France","France,46");
+  $_.=extractData("Sweden","Sweden");
+  open(FH,">BasicData-Maxima.txt");
+  print FH $_;
+  close FH;
+  s/:\[/=\{/gs;
+  s/\];/\};/gs;
+  open(FH,">BasicData-Mathematica.txt");
+  print FH $_;
+  close FH;
 }
 
 

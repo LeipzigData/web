@@ -1,44 +1,43 @@
-batchload("BasicData-Maxima.txt");
-/* Mit der Datenfülle ist das lsquares mittlerweile überfordert */
-load("lsquares");
-f(t):=exp(c-((t-m)/s)^2);  /* Gauss distribution */
-g(t):=c-((t-m)/s)^2;       /* log of Gauss distribution */
-h(t):=0.8862*exp(c)*s*(erf((t-m)/s)+erf(m/s)); /* Error function */
+read("BasicData-Mathematica.txt");
+(* Mit der Datenfülle ist das lsquares mittlerweile überfordert *)
+f[t_]:=Exp[c-((t-m)/s)^2];  (* Gauss distribution *)
+g[t_]:=c-((t-m)/s)^2;       (* log of Gauss distribution *)
+h[t_]:=0.8862*Exp[c]*s*(Erf[(t-m)/s]+Erf[m/s]); (* Error function *)
 
-/* Extract increment list \Delta(S)=[s_i-s_{i-1},i=1..len(S)] from a list */
-Delta(l):=l-append([0],reverse(rest(reverse(l))))$
+(* Extract increment list \Delta(S)=[s_i-s_{i-1},i=1..len(S)] from a list *)
+Delta[l_]:=l-Prepend[l[[Range[1,Length[l]-1]]],0]
 
-/* Collect data for a given country into a single nested list */
-getData(Land):=block([u,I,R,D],
-  u:Land[infected],
-  I:makelist([i+21,u[i]],i,1,length(u)),
-  u:Land[recovered],
-  R:makelist([i+21,u[i]],i,1,length(u)),
-  u:Land[dead],
-  D:makelist([i+21,u[i]],i,1,length(u)),
-[I,R,D])$
-
-/* == Fitting procedure == */
+(* Collect data for a given country into a single nested list *)
+getData[Land_]:=Module[{u,I,R,D},
+  u=Land[infected];
+  I=Table[{i+21,u[[i]]},{i,1,Length[u]}];
+  u=Land[recovered];
+  R=Table[{i+21,u[[i]]},{i,1,Length[u]}];
+  u=Land[dead];
+  D=Table[{i+21,u[[i]]},{i,1,Length[u]}];
+  {I,R,D}]
+  
+(* == Fitting procedure == *)
 	 
-FittingDelta(G,tr):=block([G1,G2,G3,G4,G5],
-  /* tr is a lower threshold for data to be counted
-     from the list of increments */ 
-  /* Compute the Deltas */
-  G1:map("[",map(first,G),Delta(map(second,G))),
-  /* Filter out small entries */
+FittingDelta[G_,tr_]:=Module[{G1,G2,G3,G4,G5},
+  (* tr is a lower threshold for data to be counted
+     from the list of increments *) 
+  (* Compute the Deltas *)
+  G1=Thread[List[First/@G,#[[2]]&/@G//Delta]];
+  (* Filter out small entries *)
   G2:sublist(G1,lambda([u],second(u)>tr)),
-  /* Compute the log data */
+  (* Compute the log data *)
   G3:map(lambda([u],[first(u),float(log(second(u)))]),G2),
-  /* Compute the parameter estimation */
+  (* Compute the parameter estimation *)
   G4:apply('matrix,G3),
   lsquares_estimates(G4,[t,y],y=g(t),[c,s,m])
 )$
 
-/* ====== Functions to compute the Fittings =============== */
+(* ====== Functions to compute the Fittings =============== *)
 
 getFittingFunctions(l,tr):=block([G,est],
-  /* tr is a lower threshold for data to be counted
-     from the list of increments */ 
+  (* tr is a lower threshold for data to be counted
+     from the list of increments *) 
   G:l[1],
   est:FittingDelta(G,tr),
   define(h1(t),subst(float(first(est)),h(t))),
@@ -50,7 +49,7 @@ getFittingFunctions(l,tr):=block([G,est],
   define(h3(t),subst(float(first(est)),h(t))),
   [h1(t),h2(t),h3(t)])$
 
-/* ====== Functions to plot the Results =============== */
+(* ====== Functions to plot the Results =============== *)
 
 createPlot(l,max):=block([G1,G2,G3],
   G1:l[1], G2:l[2], G3:l[3],
@@ -65,7 +64,7 @@ doublePlot(Land):=block([l,G,G1,G2,G3,G4],
   G:sublist(first(l),lambda([u],second(u)>5)),
   G1:map(first,G),
   G2:map(second,G),
-  G3:Delta(G2)+.01, /* to avoid division by zero */
+  G3:Delta(G2)+.01, (* to avoid division by zero *)
   G4:map(lambda([u1,u2,u3],[u1,u2/u3]),G1,G2,G3),
   plot2d([[discrete, G4]], [t,0,200], [y,0,30], [style, points])
   )$
@@ -74,7 +73,7 @@ doublePlot(Land):=block([l,G,G1,G2,G3,G4],
 plotDoubling(h):=block([dh:diff(h,t)],
   plot2d(h/dh,[t,70,130],[y,0,30]))$
 
-/* ==== Italy, 60.48 Mio Einwohner ===== */
+(* ==== Italy, 60.48 Mio Einwohner ===== *)
 
 l:getData(Italy);
 getFittingFunctions(l,50);
@@ -83,7 +82,7 @@ createPlot(l,2*10^5);
 plotDoubling(h1(t));
 
 
-/* ==== Spain, 46.66 Mio Einwohner ===== */
+(* ==== Spain, 46.66 Mio Einwohner ===== *)
 
 l:getData(Spain);
 getFittingFunctions(l,50);
@@ -96,19 +95,19 @@ plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
 [style, points, lines, points, points, lines], [legend, false],
 [color, red, red, green, blue, blue]);
 
-/* ==== Germany, 82.79 Mio Einwohner ===== */
+(* ==== Germany, 82.79 Mio Einwohner ===== *)
 
 l:getData(Germany);
 getFittingFunctions(l,50);
 createPlot(l,2*10^5);
 
-/* ==== Austria, 8.822 Mio Einwohner ===== */
+(* ==== Austria, 8.822 Mio Einwohner ===== *)
 
 l:getData(Austria);
 getFittingFunctions(l,5);
 createPlot(l,2*10^4);
 
-/* ==== China, Hubei, 58.5 Mio Einwohner ===== */
+(* ==== China, Hubei, 58.5 Mio Einwohner ===== *)
 
 l:getData(China);
 getFittingFunctions(l,50);
@@ -121,7 +120,7 @@ plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
 [style, points, lines, points, points, lines], [legend, false],
 [color, red, red, green, blue, blue]);
 
-/* ==== France, 66.99 Mio Einwohner ===== */
+(* ==== France, 66.99 Mio Einwohner ===== *)
 
 l:getData(France);
 getFittingFunctions(l,50);
@@ -132,7 +131,7 @@ createPlot(l,2*10^5);
  0.3203119900052553), 50947.64199538224 (erf(0.04540867065261457 (t -
  118.8091224882208)) + 0.9999999999999765)]
 
-/* ==== United Kingdom, 66.44 Mio Einwohner ===== */
+(* ==== United Kingdom, 66.44 Mio Einwohner ===== *)
 
 l:getData(UK);
 getFittingFunctions(l,20);
@@ -143,7 +142,7 @@ createPlot(l,5*10^5);
  0.1624305375465112), 19200.65893214914 (erf(0.009570296374754914 (t -
  30.89260209000159)) + 0.3241363474127178)]
 
-/* ==== Sweden, 66.44 Mio Einwohner ===== */
+(* ==== Sweden, 66.44 Mio Einwohner ===== *)
 
 l:getData(Sweden);
 getFittingFunctions(l,5);
@@ -154,7 +153,7 @@ createPlot(l,2*10^4);
  347.3903236746284 (erf(0.1113184044913795 (t - 93.6891365970796)) + 1.0)]
 
 
-/* Logistic curve */ 
+(* Logistic curve *) 
 
 l(t):=K/(1+exp(c-r*t));
 
@@ -173,7 +172,7 @@ createLPlot(G,max):=
   [style, points, lines], [legend, false],
   [color, red, blue])$
 
-/* Computations */ 
+(* Computations *) 
 
 l:getData(China);
 G:sublist(first(l),lambda([u],second(u)>10));
