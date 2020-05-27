@@ -10,7 +10,7 @@
 
 \title{Rekonstruktion des Corona-Modells von Peter Fleißner} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 22. Mai 2020}
+\date{Version vom 27. Mai 2020}
 
 \begin{document}
 \maketitle
@@ -87,13 +87,14 @@ Infizierten.
 
 \section{Kritik der Fleißnerschen Modellierung}
 
+\paragraph{1.}
 Der verwendete Modellierungsansatz einer \emph{Logistischen Kurve} wird in der
 deutschen Wikipedia wie folgt beschrieben: „Die logistische Funktion
 beschreibt den Zusammenhang zwischen der verstreichenden Zeit und einem
 Wachstum, beispielsweise ... (annähernd) der Verbreitung einer Krankheit im
 Rahmen einer Epidemie. Hierzu wird das Modell des exponentiellen Wachstums
-modifiziert durch eine sich mit dem Wachstum verbrauchende Ressource“.
-Er führt auf eine \emph{Bernoullische Differenzialgleichung}
+modifiziert durch eine sich mit dem Wachstum verbrauchende Ressource“.  Er
+führt auf eine \emph{Bernoullische Differenzialgleichung}
 \begin{gather*}
   f'(t)=k\,f(t)\,(G-f(t))
 \end{gather*}
@@ -109,20 +110,47 @@ Fleissners Gleichung (2) müsste also in diesem Modell durch
 \begin{gather*}
   \dot{p}=k\,p\,(B-p)=(kB)\,p\,\left(1-\frac{p}{B}\right)\tag{2a}
 \end{gather*}
-ersetzt werden. Unverständlich sind die Beziehungen (3) und (4), da eine
+ersetzt werden mit $\alpha=kB$.  Die Lösung dieser Gleichung ist
+\begin{gather*}
+  p(t)=\frac{B}{1+C\,\exp(-\alpha t)}.
+\end{gather*}
+Der Höhepunkt der Infektionswelle ist bei $p(t)=\frac12 B$ erreicht, also zum
+Zeitpunkt $t=m$, für den $C\,\exp(-\alpha m)=1$ ist, woraus sich dieser Median
+als $m=\frac{\log(C)}{\alpha}$ berechnen lässt.  Wie in meinem ersten Paper
+ausgeführt, lassen sich die Parameter $C$ und $\alpha$ aus einer linearen
+Regression schätzen, wenn $B$ vorab gut geschätzt wurde.  $B$ ist aber der
+Sättigungswert der Kurve $p(t)$.
+
+\paragraph{2.}
+Weiterhin kann nicht die gesamte Bevölkerung als Referenzgröße
+$B$ genommen werden, da eine hohe Dunkelziffer (Schätzungen sprechen von einem
+Faktor 10 der nicht entdeckten Infektionen) zu berücksichtigen ist.  Statt
+dessen muss $B$ als die Zahl der final positiv Getesteten genommen werden.
+Diese Zahl muss aus dem Kurvenverlauf von $p(t)$ geschätzt werden.
+
+\paragraph{3.}
+Unverständlich sind die Beziehungen (3) und (4), da eine
 Zustandsübergangsmodellierung $s\to i\to \{d,r\}$ in der Grundgesamtheit $B$
-vorgenommen wird. Wenn hier, wie beim radioaktiven Zerfall, mit
-Halbwertzeiten, also statistischen Übergangswahrscheinlichkeiten einzelner
-„Atome“ (hier also einzelne Menschen), so müsste hier eher auf $i(t-T_r)$ bzw.
-$i(t-T_d)$ Bezug genommen werden mit der Zusatzbedingung
-$i(t)=r(t+T_r)+d(t+T_d)$, da die Infizierten den Zustand nach der
-statistischen Verweildauer definitiv in eine der beiden Richtungen verlassen.
-Eine solche Invarianzbedingung fehlt im Modell, kann aber mit Blick auf die
-empirische Datenlage, in der drei Zeitreihen $(p,r,d)$ vorliegen, weggelassen
-werden.  
+vorgenommen wird.  Die Aufteilung der nicht mehr Infizierten in Genesene und
+Tote ist nur unter zusätzlichen Annahmen über die Todesrate sinnvoll zu
+bestimmen, wobei hier zu berücksichtigen ist, dass in $d$ unter zivilisierten
+Verhältnissen sicher alle Corona-Toten erfasst sind, während $r$ mit einer
+massiven Dunkelziffer der nicht auffälligen Infektionen belastet ist.
+Allerdings sind im betrachteten Modell diese Zahlen insgesamt nicht relevant,
+wenn sich die Zahl der Neuinfektionen auf einem gewissen Level eingepegelt
+hat. 
 
-\section{Modifizierte Modellierung}
+Da andererseits die JHU-Daten Zahlenreihen für $(p,d,r)$ enthalten, kann die
+Zahl der aktuell Infizierten leicht als $i=p-d-r$ bestimmt werden.  Für die
+Bestimmung der durchschnittlichen Verweildauer $T$ in der Infektionsphase
+bieten sich zwei Bestimmungsverfahren an:
+\begin{itemize}
+\item Bei etwa gleichem Zu- und Abfluss von Infektionen ist $T\approx
+  i/\Delta(i)$.
+\item Es kann der Median $m_1$ für $p$ und der Median $m_2$ von $r+d$ nach
+  obiger Methode bestimmt werden. Dann ist $T=m_2-m_1$. 
+\end{itemize}
 
-Zu ergänzen.
+
 
 \end{document}

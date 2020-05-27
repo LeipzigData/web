@@ -60,6 +60,14 @@ createPlot(l,max):=block([G1,G2,G3],
   [color, red, red, green, green, blue, blue])
 )$
 
+createDataPlot(l,max):=block([G1,G2,G3],
+  G1:l[1], G2:l[2], G3:l[3],
+  plot2d([[discrete, G1], [discrete, G2], [discrete, G3]], 
+  [t,0,200], [y,0,max],
+  [style, points], [legend, false],
+  [color, red, green, blue])
+)$
+
 doublePlot(Land):=block([l,G,G1,G2,G3,G4],
   l:getData(Land),
   G:sublist(first(l),lambda([u],second(u)>5)),
@@ -107,6 +115,7 @@ createPlot(l,2*10^5);
 l:getData(Austria);
 getFittingFunctions(l,5);
 createPlot(l,2*10^4);
+createDataPlot(l,2*10^4);
 
 /* ==== China, Hubei, 58.5 Mio Einwohner ===== */
 
@@ -167,8 +176,8 @@ lFit(l,K0):=block([G,G1,M,est,m],
   define(l1(t),subst(append([K=K0],float(first(est))),l(t))),
   m)$
 
-createLPlot(G,max):=
-  plot2d([[discrete, G], l1(t)],
+createLPlot(G,F,max):=
+  plot2d([[discrete, G], F],
   [t,0,200], [y,0,max],
   [style, points, lines], [legend, false],
   [color, red, blue])$
@@ -179,16 +188,23 @@ l:getData(China);
 G:sublist(first(l),lambda([u],second(u)>10));
 K0:7*10^4;
 lFit(G,K0);
-createLPlot(G,2*10^5);
+createLPlot(G,l1(t),2*10^5);
+G1:map("[",map(first,G),Delta(map(second,G)));
+define(dl1(t),diff(l1(t),t));
+createLPlot(G1,dl1(t),2*10^4);
 
 c-r*t = 4.664470054049377 - 0.10337267051424 t
 c/r = 45.12285530445715
 
 l:getData(Italy);
 G:sublist(first(l),lambda([u],second(u)>10));
-K0:1.45*10^5;
+K0:3*10^5;
 lFit(G,K0);
-createLPlot(G,2*10^5);
+l1(t);
+createLPlot(G,l1(t),5*10^5);
+G1:map("[",map(first,G),Delta(map(second,G)));
+define(dl1(t),diff(l1(t),t));
+createLPlot(G1,dl1(t),2*10^4);
 
 c-r*t = 17.44514126980632 - 0.206524088851644 t
 c/r = 84.4702492905706
