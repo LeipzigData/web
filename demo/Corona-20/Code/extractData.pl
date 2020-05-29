@@ -22,7 +22,7 @@ saveData();
 
 ## end main
 
-sub extractData {
+sub extractData { # infected means positively tested
   my ($land,$token)=@_;
   my (@l,@in,@out);
   @in=grep(/$token/i,@ddata);

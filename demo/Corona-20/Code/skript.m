@@ -8,15 +8,23 @@ h(t):=0.8862*exp(c)*s*(erf((t-m)/s)+erf(m/s)); /* Error function */
 /* Extract increment list \Delta(S)=[s_i-s_{i-1},i=1..len(S)] from a list */
 Delta(l):=l-append([0],reverse(rest(reverse(l))))$
 
-/* Collect data for a given country into a single nested list */
-getData(Land):=block([u,I,R,D],
+/* Collect data for a given country into a single nested list
+infected means positively tested
+*/
+getData(Land):=block([u,v,T,I,R,D,RD],
   u:Land[infected],
-  I:makelist([i+21,u[i]],i,1,length(u)),
-  u:Land[recovered],
+  v:Delta(u),
+  T:makelist([i+21,u[i]],i,1,length(u)),
+  DT:makelist([i+21,v[i]],i,1,length(u)),
+  u:Land[recovered]+Land[dead],
+  v:Delta(u),
   R:makelist([i+21,u[i]],i,1,length(u)),
-  u:Land[dead],
-  D:makelist([i+21,u[i]],i,1,length(u)),
-[I,R,D])$
+  DR:makelist([i+21,v[i]],i,1,length(u)),
+  u:Land[infected]-Land[recovered]-Land[dead],
+  v:Delta(u),
+  I:makelist([i+21,u[i]],i,1,length(u)),
+  DI:makelist([i+21,v[i]],i,1,length(u)),
+[T,R,I,DT,DR,DI])$
 
 /* == Fitting procedure == */
 	 
@@ -162,13 +170,11 @@ createPlot(l,2*10^4);
  2105.520183190281 (erf(0.06093028393001039 (t - 103.7114286910084)) + 1.0),
  347.3903236746284 (erf(0.1113184044913795 (t - 93.6891365970796)) + 1.0)]
 
-
-/* Logistic curve */ 
+/* ############## Logistic curve ############### */ 
 
 l(t):=K/(1+exp(c-r*t));
 
-lFit(l,K0):=block([G,G1,M,est,m],
-  G:sublist(l,lambda([u],second(u)>10)),
+lFit(G,K0):=block([G1,M,est,m],
   G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
   M:apply('matrix,float(G1)),
   est:lsquares_estimates(M,[t,y],y=c-r*t,[c,r]),
@@ -182,13 +188,16 @@ createLPlot(G,F,max):=
   [style, points, lines], [legend, false],
   [color, red, blue])$
 
+selectData(l,von,bis):=
+  sublist(first(l),lambda([u],first(u)>von and first(u)<bis and second(u)>10));
+  
 /* Computations */ 
 
 l:getData(China);
-G:sublist(first(l),lambda([u],second(u)>10));
+G:selectData(l,80,130);
 K0:7*10^4;
 lFit(G,K0);
-createLPlot(G,l1(t),2*10^5);
+createLPlot(first(l),l1(t),2*10^5);
 G1:map("[",map(first,G),Delta(map(second,G)));
 define(dl1(t),diff(l1(t),t));
 createLPlot(G1,dl1(t),2*10^4);
@@ -235,3 +244,29 @@ createLPlot(G,2*10^5);
 
 c-r*t = 23.81533844331791 - 0.2693585413723537 t
 c/r = 88.41501116683081
+
+/* #### Dynamics of infected */ 
+
+plotInfected(l,max,c0,m0,s0):=block([G:l[4],f:subst([c=c0,s=s0,m=m0],f(t))],
+  plot2d([[discrete, G], f],
+  [t,0,200], [y,0,max],
+  [style, points, lines], [legend, false],
+  [color, blue, red]))$
+
+l:getData(Austria);
+plotInfected(l,10^4);
+
+l:getData(China);
+plotInfected(l,10^4,4.66,-0.1,5);
+
+/* #### Wie lange dauert das Recovering ungefähr? */
+
+findFirst(l,u):=part(sublist(l,lambda([x],second(x)>u)),1,1);
+findDiff(l,u):=findFirst(second(l),u)-findFirst(first(l),u);
+
+l:getData(Germany)$
+makelist(findDiff(l,1000*u),u,1,10);
+l:getData(China)$
+makelist(findDiff(l,1000*u),u,1,10);
+l:getData(Austria)$
+makelist(findDiff(l,1000*u),u,1,10);
