@@ -7,7 +7,7 @@ g(t):=c-((t-m)/s)^2;       /* log of Gauss distribution */
 h(t):=0.8862*exp(c)*s*(erf((t-m)/s)+erf(m/s)); /* Error function */
 
 /* Logistische Funktion und deren Ableitung */
-l(t):=K/(1+exp(c-r*t));
+l(t):=K/(1+exp(-r*(t-m)));
 define(dl(t),diff(l(t),t));
 
 /* Extract increment list \Delta(S)=[s_i-s_{i-1},i=1..len(S)] from a list */
@@ -30,6 +30,12 @@ getData(Land):=block([u,v,T,I,R,D,RD],
   I:makelist([i+21,u[i]],i,1,length(u)),
   DI:makelist([i+21,v[i]],i,1,length(u)),
 [T,R,I,DT,DR,DI])$
+
+selectData(l,von,bis):=
+  sublist(l,lambda([u],first(u)>von and first(u)<bis));
+
+/* Gleitender Durchschnitt */
+glD(l,k):= makelist(sum(l[j],j,i+1,i+k)/k,i,0,length(l)-k);
 
 /* == Fitting procedure == */
 	 
@@ -170,38 +176,41 @@ createPlot(l,2*10^4);
 
 /* ############## Logistic curve ############### */ 
 
-lFit(G,K0):=block([G1,M,est,m],
+lFit(G,K0):=block([G1,M,est],
   G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
   M:apply('matrix,float(G1)),
-  est:lsquares_estimates(M,[t,y],y=c-r*t,[c,r]),
-  m:float(subst(first(est),c/r)),
+  est:lsquares_estimates(M,[t,y],y=-r*(t-m),[m,r]),
   define(l1(t),subst(append([K=K0],float(first(est))),l(t))),
-  m)$
+  float(est))$
 
 createLPlot(G,F,max):=
   plot2d([[discrete, G], F],
   [t,0,200], [y,0,max],
   [style, points, lines], [legend, false],
   [color, red, blue])$
-
-selectData(l,von,bis):=
-  sublist(first(l),lambda([u],first(u)>von and first(u)<bis and second(u)>10));
   
 /* Computations */ 
 
 l:getData(China);
-G:selectData(l,80,130);
+G:selectData(l[1],22,62);
 K0:7*10^4;
-lFit(G,K0);
-createLPlot(first(l),l1(t),2*10^5);
-G1:map("[",map(first,G),Delta(map(second,G)));
+lFit(G,K0); /* [[m = 42.5123574904982, r = 0.2133141021473515]] */
+createLPlot(l[1],l1(t),10^5);
 define(dl1(t),diff(l1(t),t));
-createLPlot(G1,dl1(t),2*10^4);
-
-c-r*t = 4.664470054049377 - 0.10337267051424 t
-c/r = 45.12285530445715
+G1:l[4]; G2:glD(G1,7);
+createLPlot(G1,dl1(t),7*10^3);
 
 l:getData(Italy);
+G:selectData(l[1],40,100);
+K0:3*10^5;
+lFit(G,K0); /* [[m = 103.1491179494895, r = 0.05599300970794591]] */
+createLPlot(l[1],l1(t),5*10^5);
+define(dl1(t),diff(l1(t),t));
+G1:l[4]; G2:glD(G1,7);
+createLPlot(G1,dl1(t),7*10^3);
+
+
+
 G:sublist(first(l),lambda([u],second(u)>10));
 K0:3*10^5;
 lFit(G,K0);

@@ -10,12 +10,17 @@
 
 \title{Analyse der Coronastatistiken. Teil 1} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 13. April 2020}
+\date{Version vom 13. April 2020, mit kleinen Korrekturen vom 31. Mai 2020}
 
 \begin{document}
 \maketitle
 
-Dieser Text bezieht sich auf einer erste Version der im Verzeichnis
+Dieser Text bezieht sich auf eine erste Version\footnote{Nachtrag: Es wurden
+  bewusst nur kleine Korrekturen an dieser erste Version angebracht, um die
+  spezifische Situation einer unklaren Zukunft zu erhalten, auf die mit einer
+  ersten Parameterschätzung Ende März 2020 und einem Update am 13.04.2020
+  reagiert wurde. Der Wert der Schätzungen auf realen Daten wird im Teil 3
+  diskutiert.} der im Verzeichnis
 \url{http://leipzig-data.de/demo/Corona-20/Code} verfügbaren Materialien.
 
 \section{Datenbasis}
@@ -24,8 +29,9 @@ Als Datenbasis werden die von der Johns Hopkins Universität (JHU) als
 Excel-Datei veröffentlichten Daten\footnote{Siehe deren github-Projekt
   \url{https://github.com/CSSEGISandData/COVID-19}.} zur Entwicklung der
 weltweit registrierten Covid-19-Fälle verwendet. Die Statistik listet pro Land
-und Tag die kumulierte Zahl der Infizierten, der Genesenen und der Todesfälle
-auf.
+und Tag die kumulierte Zahl der positiv Getesteten\footnote{Nachtrag: statt
+  „Infizierte“, wie in der ersten Auf"|lage noch geschrieben.  Dies ist hier
+  konsequent an allen Stellen ersetzt.}, der Genesenen und der Todesfälle auf.
 
 Die Statistiken sind natürlich zu hinterfragen, da sich jedem Physiker die
 Haare sträuben würden, wenn die Debatte auf die messmethodische Grundlage
@@ -35,8 +41,8 @@ privaten (!)  JHU und deren enge Verflechtung mit dem „Datenadel“ aus dem
 Silicon Valley kann hinterfragt werden, siehe dazu (Rügemer 2020).  Spannend
 auf der anderen Seite, dass es genau dieser „Datenadel“ ist, der solche Daten
 zusammenträgt und der Allgemeinheit -- im Gegensatz etwa zu der im deutschen
-Sprachraum viel zitierten \url{https://statista.com} -- in einem
-maschinenlesbaren Format ohne Bezahlschranken zur Verfügung stellt.
+Sprachraum viel zitierten \url{https://statista.com} oder gar der WHO -- in
+einem maschinenlesbaren Format ohne Bezahlschranken zur Verfügung stellt.
 
 Eine solche kritische Würdigung muss diesem Text vorangestellt werden, um die
 folgenden Rechnungen ins rechte Licht zu rücken, denn sie sind nicht als
@@ -51,8 +57,11 @@ ist in meinem Buch (Gräbe 2018) genauer dargestellt.
 Zunächst muss das git Repo der JHU lokal geklont und der Pfad im Skript
 \texttt{extractData.pl} eingetragen werden.  Die Daten werden für ausgewählte
 Länder mit diesem Perl-Skript für die weitere Verarbeitung aufbereitet und in
-einer Datei \texttt{BasicData.txt} gespeichert, um dann mit dem freien CAS
-\emph{Maxima} weiterverarbeitet zu werden.
+einer Datei \texttt{BasicData.txt}\footnote{Nachtrag: Inzwischen in
+  \texttt{BasicData-Maxima.txt} umbenannt, da die Möglichkeiten des CAS
+  \emph{Maxima} zum nichtlinearen Fitting beschränkt sind und gelegentlich
+  meinen Laptop insgesamt zum Stillstand bringen.} gespeichert, um dann mit
+dem freien CAS \emph{Maxima} weiterverarbeitet zu werden.
 
 \section{Datentransformation}
 
@@ -60,9 +69,12 @@ In der Datei \texttt{BasicData.txt} sind die Daten für jedes der ausgewählten
 Länder in einem Array mit drei Einträgen (infected, recovered, dead)
 gespeichert, die im Maxima-Skript \texttt{skript.m}\footnote{Dies ist eine
   reine Textdatei mit Code-Schnipseln, die nicht für den Batchbetrieb
-  konzipiert ist.} in einer Funktion \texttt{getland(Land)} zunächst einmal zu
+  konzipiert ist.} in einer Funktion \texttt{getland(Land)}\footnote{Nachtrag:
+  Diese Funktion wurde inzwischen umgeschrieben und gibt nun eine größere
+  Menge von Datenreihen zurück, die für verschiedene Auswertungszwecke aus den
+  drei originalen Datenreihen der JHU gewonnen werden.} zunächst einmal zu
 Paaren $(t,y_t)$ ergänzt werden, wobei $t$ für den Tag des Jahres 2020
-($1=01.01.2020$, \textbf{Tag 100 ist also Donnerstag der 9. April}) und $y_t$
+($1=01.01.2020$, \textbf{Tag 100 ist also Donnerstag, der 9. April}) und $y_t$
 für die Zahl der Fälle aus dem jeweiligen Record stehen.
 
 \section{Fitting}
@@ -111,9 +123,12 @@ ist.
 
 Generell kann es sinnvoll sein, für ein gutes Fitting Datenpunkte unterhalb
 einer Schwelle auszusortieren. Eine solche Schwelle $S$ ist als weiterer
-Parameter im Skript in der Funktion \texttt{FittingDelta(G,S)} vorgesehen. Für
-die meisten Datensätze ist die Schwelle 50 eine gute Wahl. $G$ ist die Liste
-$(t,y_t)$ der zu fittenden Datenpunkte.
+Parameter im Skript in der Funktion
+\texttt{FittingDelta(G,S)}\footnote{Nachtrag: Mit der Änderung von
+  \texttt{getData(Land)} wurde auch diese Funktion verändert, da die
+  Datenreihen $(t,d_t)$ nun bereits in \texttt{getData(Land)} berechnet
+  werden.} vorgesehen. Für die meisten Datensätze ist die Schwelle 50 eine
+gute Wahl. $G$ ist die Liste $(t,y_t)$ der zu fittenden Datenpunkte.
 
 Details sind im Skript \texttt{skript.m} zu finden.
 
@@ -126,11 +141,11 @@ Die Rechnungen werden für jedes der Länder nun wie folgt ausgeführt:
 \item Berechne für jeden der drei Datensätze mit
   \texttt{getFittingFunctions(l,S)} das Fitting auf $(t,\log(d_t))$ gegen die
   Funktion $g(t)$ und verwende die berechneten drei Fittings, um Funktionen
-  $h_1(t)$ (für infected), $h_2(t)$ (für recovered) und $h_3(t)$ (für dead) zu
-  schätzen.
+  $h_1(t)$ (für positiv getestet), $h_2(t)$ (für genesen) und $h_3(t)$ (für
+  verstorben) zu schätzen.
 \item Erzeuge daraus einen Plot, welcher die Datenpunkte und die drei Kurven
-  in verschiedenen Farben (rot für infected, grün für recovered, blau für
-  dead) ausgibt.  
+  in verschiedenen Farben (rot für positiv getestet, grün für genesen, blau
+  für verstorben) ausgibt.
 \end{enumerate}
 Bei erfolgreichem Fitting ist eine gute Übereinstimmung der jeweiligen
 Kurve\footnote{Für $x=\frac{m}{s}\approx 10$ kann $\erf(x)=1$ gesetzt werden.
@@ -161,29 +176,29 @@ Entwicklung ist dargestellt\footnote{Maxima hängt sich bei der Berechnung
     & \multicolumn{1}{|c|}{$m$} & \multicolumn{1}{|c|}{$s$}
     & \multicolumn{1}{|c|}{$A$} \\\hline
     \multicolumn{4}{|c|}{\bf Deutschland}\\\hline
-    infected   & 91.94 & 13.51 &  68896\\
-    recovered  & 97.01 &  8.58 &  32967\\
-    dead       &103.11 & 14.80 &   3241\\\hline
+    positiv getestet   & 91.94 & 13.51 &  68896\\
+    genesen  & 97.01 &  8.58 &  32967\\
+    verstorben       &103.11 & 14.80 &   3241\\\hline
     \multicolumn{4}{|c|}{\bf Italien}\\\hline
-    infected   & 88.34 & 16.30 &  87225\\
-    recovered  &101.35 & 21.97 &  31380\\
-    dead       & 90.31 & 16.07 &  11520\\\hline
+    positiv getestet   & 88.34 & 16.30 &  87225\\
+    genesen  &101.35 & 21.97 &  31380\\
+    verstorben       & 90.31 & 16.07 &  11520\\\hline
     \multicolumn{4}{|c|}{\bf Spanien}\\\hline
-    infected   & 91.11 & 12.32 &  90706\\
-    recovered  &101.77 & 15.78 &  54984\\
-    dead       & 93.33 & 11.88 &   9611\\\hline
+    positiv getestet   & 91.11 & 12.32 &  90706\\
+    genesen  &101.77 & 15.78 &  54984\\
+    verstorben       & 93.33 & 11.88 &   9611\\\hline
     \multicolumn{4}{|c|}{\bf Österreich}\\\hline
-    infected   & 88.55 & 12.09 &   6651\\
-    recovered  &100.02 & 10.68 &   5319\\
-    dead       & 98.62 & 17.12 &    294\\\hline
+    positiv getestet   & 88.55 & 12.09 &   6651\\
+    genesen  &100.02 & 10.68 &   5319\\
+    verstorben       & 98.62 & 17.12 &    294\\\hline
     \multicolumn{4}{|c|}{\bf Schweden}\\\hline
-    infected   &101.08 & 20.75 &   8870\\
-    recovered  &112.73 & 20.12 &   4402\\
-    dead       & 95.36 &  9.09 &    459\\\hline
+    positiv getestet   &101.08 & 20.75 &   8870\\
+    genesen  &112.73 & 20.12 &   4402\\
+    verstorben       & 95.36 &  9.09 &    459\\\hline
     \multicolumn{4}{|c|}{\bf China, Provinz Hubei}\\\hline
-    infected   & 41.45 & 13.12 &  26139\\
-    recovered  & \multicolumn{3}{|c|}{bad fitting}\\
-    dead       & 46.74 & 15.72 &   1759\\\hline
+    positiv getestet   & 41.45 & 13.12 &  26139\\
+    genesen  & \multicolumn{3}{|c|}{bad fitting}\\
+    verstorben       & 46.74 & 15.72 &   1759\\\hline
   \end{tabular}
 \end{center}
 Natürlich müsste am Ende die Zahl der Infizierten mit der Summe der Zahlen der
@@ -215,23 +230,32 @@ europäische Länder charakteristisch sind.
 \section{Grafiken}
 
 \begin{center}
-  \includegraphics[width=.8\textwidth]{Germany.png}\\[1em]
-  {Szenario für Deutschland (82.9 Mio. Einwohner)}
+  \begin{minipage}{.48\textwidth}\centering
+  \includegraphics[width=\textwidth]{Germany.png}\\[1em]
+  {Szenario für Deutschland\\ (82.9 Mio. Einwohner)}
+  \end{minipage}\hfill
+  \begin{minipage}{.48\textwidth}\centering
+  \includegraphics[width=\textwidth]{Italy.png}\\[1em]
+  {Szenario für Italien\\ (60.4 Mio. Einwohner)}
+  \end{minipage}
   
-  \includegraphics[width=.8\textwidth]{Italy.png}\\[1em]
-  {Szenario für Italien (60.4 Mio. Einwohner)}
-
+  \begin{minipage}{.48\textwidth}\centering
   \includegraphics[width=.8\textwidth]{Spain.png}\\[1em]
-  {Szenario für Spanien (46.7 Mio. Einwohner)}
-    
+  {Szenario für Spanien\\ (46.7 Mio. Einwohner)}
+  \end{minipage}\hfill
+  \begin{minipage}{.48\textwidth}\centering
   \includegraphics[width=.8\textwidth]{Sweden.png}\\[1em]
-  {Szenario für Schweden (66.4 Mio. Einwohner)}
-    
+  {Szenario für Schweden\\ (66.4 Mio. Einwohner)}
+  \end{minipage}
+  
+  \begin{minipage}{.48\textwidth}\centering    
   \includegraphics[width=.8\textwidth]{Austria.png}\\[1em]
-  {Szenario für Österreich (8.85 Mio. Einwohner)}
-                  
+  {Szenario für Österreich\\ (8.85 Mio. Einwohner)}
+  \end{minipage}\hfill
+  \begin{minipage}{.48\textwidth}\centering                  
   \includegraphics[width=.8\textwidth]{Hubei.png}\\[1em]
-  {Szenario für China, Provinz Hubei (58.5 Mio. Einwohner)}
+  {Szenario für China, Provinz Hubei\\ (58.5 Mio. Einwohner)}
+  \end{minipage}
 \end{center}
 
 

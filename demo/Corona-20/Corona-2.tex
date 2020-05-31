@@ -10,7 +10,7 @@
 
 \title{Analyse der Coronastatistiken. Teil 2} 
 \author{Hans-Gert Gräbe, Leipzig}
-\date{Version vom 13. April 2020}
+\date{Version vom 31.05.2020}
 
 \begin{document}
 \maketitle
@@ -28,48 +28,52 @@ Generell ist ein Modell auf der Basis einer \emph{Logistischen Funktion}
 die anerkanntere Form der Modellierung der Ausbreitung einer Infektion, siehe
 dazu den entsprechenden Wikipedia-Eintrag. 
 \begin{center}
-  \includegraphics[width=.8\textwidth]{LC.png}\\[1em]
-  \begin{quote}
-    {Logistische Kurve $u(t)=\frac{1}{1+12\exp(-2t)}$ (blau) sowie deren erste
-      (rot) und zweite Ableitung (grün) Ableitung}
-  \end{quote}
+  \includegraphics[width=.8\textwidth]{LC.png}\\[1em] {Logistische Kurve
+    $u(t)=\frac{1}{1+12\exp(-2t)}$ (blau)\\ sowie deren erste (rot) und zweite
+    (grün) Ableitung}
 \end{center}
 $K$ steht dabei für die Sättigungsgrenze $\lim_{t\to\infty}{u(t)}$ und $C$ ist
 üblicherweise als $C=\frac{K}{u(0)}-1$ angeschrieben, was sich unmittelbar aus
 der Umstellung der Formel für $u(0)$ nach $C$ ergibt. Der Wendepunkt dieser
 Funktion und damit das Maximum der ersten Ableitung liegt als Nullstelle der
-zweiten Ableitung bei $t_0=\frac{\log(C)}{r}$, was sich unmittelbar mit Maxima
-berechnen lässt.  Dies ist gerade der Median der Kurve, sollte also mit dem
-oben berechneten $m$ zusammenfallen.  
+zweiten Ableitung bei $t_0$ mit $u(t_0)=\frac12\,K$. 
 
-Derartige Funktionen lassen sich aber deutlich schlechter schätzen als
-Funktionen, die sich wie oben auf einfache Weise auf einen polynomialen
-Zusammenhang reduzieren lassen, da sie inhärent transzendent sind.  Siehe
-hierzu aber die Arbeit von (Engel 2010) und die Modellierung mit
-\textsc{GeoGebra} in (Elschenbroich 2020).
+Derartige (inhärent transzendente) Funktionen lassen sich aber deutlich
+schlechter schätzen als Glockenkurven, die im Teil 1 dieser Reihe betrachtet
+wurden und sich durch Logarithmieren auf einfache Weise auf einen polynomialen
+Zusammenhang reduzieren lassen.  Siehe hierzu aber die Arbeit von (Engel 2010)
+und die Modellierung mit \textsc{GeoGebra} in (Elschenbroich 2020).
 
 In (Engel 2010) wird insbesondere darauf hingewiesen, dass sich mit einer
-guten Schätzung von $K$ die anderen beiden Parameter mit einem linearen
-Fitting bestimmen lassen. Wir setzen dazu $C=\exp(c)$, womit sich Formel
-$(L.1)$ zu
+guten Schätzung von $K$ die anderen beiden Parameter dann doch mit einem
+linearen Fitting bestimmen lassen.  Wir transformieren dazu (L.1) in die
+Formel 
 \begin{gather*}
-  \log\br{\frac{K}{u(t)}-1}=c-rt  \tag{L.2}
+  l(t)=\frac{K}{1+\exp(-r(t-m))},\tag{L.2}
+\end{gather*}
+indem $C=\exp(r m)$ ersetzt wird.  Weiter logarithmieren wir (L.2) und
+erhalten als neuen Schätzzusammenhang
+\begin{gather*}
+  \log\br{\frac{K}{l(t)}-1}=-r(t-m)  \tag{L.3}
 \end{gather*}
 umstellen lässt.  Der Parameter $K$ ist dabei manuell zu schätzen, so dass die
-gefittete Kurve möglichst gut auf die Daten passt.
+gefittete Kurve möglichst gut auf die Daten passt.  Wir verwenden $K\approx
+2A$ aus den Schätzungen der Modellierung im Teil 1.  Die Schätzung für $m$ als
+„Höhepunkt“ der Pandemiewelle kann dann mit den Schätzungen im Teil 1
+verglichen werden.
 
 Im Skript ist das Ganze in einer Funktion \texttt{lFit(G,K0)} implementiert,
 der eine Liste $G$ zu übergeben ist, in der vorab alle Datenpunkte mit $y_t\le
 10$ ausgefiltert werden.  Es ergeben sich folgende Schätzungen für die Zahl
 der (in der Statistik erfassten) infizierten Personen (Stand 10.04.2020):
 \begin{center}
-  \begin{tabular}{|l|c|c|c|c|}\hline
-    Land & $K$ & $c$ & $r$ & $c/r$ \\\hline
-    Deutschland & 125000 & 18.058 & 0.198 & 91.11\\
-    Italien & 145000 & 17.445 & 0.207 & 84.47\\
-    Österreich & 13000 & 23.053 & 0.268 & 85.90 \\
-    Spanien & 160000 & 23.815 & 0269 & 88.42 \\
-    China (Hebei) & 70000 & 4.664 & 0.103 & 45.12\\\hline
+  \begin{tabular}{|l|c|c|c|}\hline
+    Land & $K$ & $r$ & $m$ \\\hline
+    Deutschland & 125000 & 0.198 & 91.11\\
+    Italien & 145000 & 0.207 & 84.47\\
+    Österreich & 13000 & 0.268 & 85.90 \\
+    Spanien & 160000 & 0269 & 88.42 \\
+    China (Hebei) & 70000 & 0.103 & 45.12\\\hline
   \end{tabular}
 \end{center}
 
