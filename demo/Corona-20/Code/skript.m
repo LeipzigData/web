@@ -32,7 +32,7 @@ getData(Land):=block([u,v,T,I,R,D,RD],
 [T,R,I,DT,DR,DI])$
 
 selectData(l,von,bis):=
-  sublist(l,lambda([u],first(u)>von and first(u)<bis));
+  sublist(l,lambda([u],first(u)>von and first(u)<bis and second(u)>10));
 
 /* Gleitender Durchschnitt */
 glD(l,k):= makelist(sum(l[j],j,i+1,i+k)/k,i,0,length(l)-k);
@@ -79,16 +79,17 @@ createDataPlot(l,max):=block([G1,G2,G3],
   [color, red, green, blue])
 )$
 
-doublePlot(Land):=block([l,G,G1,G2,G3,G4],
+doublePlot(Land,max):=block([l,G,G1,G2,G3,G4],
   l:getData(Land),
   G:sublist(first(l),lambda([u],second(u)>5)),
   G1:map(first,G),
   G2:map(second,G),
   G3:Delta(G2)+.01, /* to avoid division by zero */
   G4:map(lambda([u1,u2,u3],[u1,u2/u3]),G1,G2,G3),
-  plot2d([[discrete, G4]], [t,0,200], [y,0,30], [style, points])
+  plot2d([[discrete, G4]], [t,0,200], [y,0,max], [style, points])
   )$
-  
+
+doublePlot(China,1000);
 
 plotDoubling(h):=block([dh:diff(h,t)],
   plot2d(h/dh,[t,70,130],[y,0,30]))$
@@ -192,63 +193,57 @@ createLPlot(G,F,max):=
 /* Computations */ 
 
 l:getData(China);
+G:selectData(l[1],30,100);
+K0:7*10^4;
+lFit(G,K0); /* [[m = 33.58032523260602, r = 0.07184843031845723]] */
+createLPlot(l[1],l1(t),10^5);
+define(l2(t),subst([K=K0,m=45.12,r=0.103],l(t)));
+plot2d([[discrete, G], l1(t), l2(t)],
+  [t,0,200], [y,0,10^5],
+  [style, points, lines, lines], [legend, false],
+  [color, red, blue, green])$
+
 G:selectData(l[1],22,62);
 K0:7*10^4;
 lFit(G,K0); /* [[m = 42.5123574904982, r = 0.2133141021473515]] */
 createLPlot(l[1],l1(t),10^5);
+
 define(dl1(t),diff(l1(t),t));
 G1:l[4]; G2:glD(G1,7);
 createLPlot(G1,dl1(t),7*10^3);
 
 l:getData(Italy);
-G:selectData(l[1],40,100);
-K0:3*10^5;
+G:selectData(l[1],70,120);
+K0:2.5*10^5;
 lFit(G,K0); /* [[m = 103.1491179494895, r = 0.05599300970794591]] */
 createLPlot(l[1],l1(t),5*10^5);
 define(dl1(t),diff(l1(t),t));
 G1:l[4]; G2:glD(G1,7);
 createLPlot(G1,dl1(t),7*10^3);
 
-
-
-G:sublist(first(l),lambda([u],second(u)>10));
-K0:3*10^5;
-lFit(G,K0);
-l1(t);
-createLPlot(G,l1(t),5*10^5);
-G1:map("[",map(first,G),Delta(map(second,G)));
-define(dl1(t),diff(l1(t),t));
-createLPlot(G1,dl1(t),2*10^4);
-
-c-r*t = 17.44514126980632 - 0.206524088851644 t
-c/r = 84.4702492905706
-
 l:getData(Germany);
-G:sublist(first(l),lambda([u],second(u)>10));
-K0:1.25*10^5;
-lFit(G,K0);
-createLPlot(G,2*10^5);
-
-c-r*t = 18.05781451219179 - 0.1981927723930733 t
-c/r = 91.11237657233002
+G:selectData(l[1],70,120);
+K0:2*10^5;
+lFit(G,K0); /* [[m = 100.3440737849612, r = 0.116398353523995]] */
+createLPlot(l[1],l1(t),2.5*10^5);
 
 l:getData(Austria);
-G:sublist(first(l),lambda([u],second(u)>10));
-K0:1.3*10^4;
-lFit(G,K0);
-createLPlot(G,2*10^4);
-
-c-r*t = 23.05255151797806 - 0.2683512133395708 t
-c/r = 85.90440576397707
+G:selectData(l[1],70,120);
+K0:1.8*10^4;
+lFit(G,K0); /* [[m = 95.29704641120715, r = 0.1156477748254564]] */
+createLPlot(l[1],l1(t),2*10^4);
 
 l:getData(Spain);
-G:sublist(first(l),lambda([u],second(u)>10));
-K0:1.6*10^5;
-lFit(G,K0);
-createLPlot(G,2*10^5);
+G:selectData(l[1],70,120);
+K0:2.7*10^5;
+lFit(G,K0); /* [[m = 100.8090116328231, r = 0.1179925484106326]] */ 
+createLPlot(l[1],l1(t),3*10^5);
 
-c-r*t = 23.81533844331791 - 0.2693585413723537 t
-c/r = 88.41501116683081
+l:getData(Sweden);
+G:selectData(l[1],100,150);
+K0:5*10^4;
+lFit(G,K0); /* [[m = 128.9620827373437, r = 0.04849480926061828]] */ 
+createLPlot(l[1],l1(t),6*10^4);
 
 /* #### Dynamics of infected */ 
 
