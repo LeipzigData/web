@@ -136,52 +136,6 @@ die durch entsprechende Parameteradjustierungen auf Daten bis zum Tag 143
   \end{minipage}
 \end{center}
 
-
-\section{Die „Verdoppelungsdebatte“}
-
-Anfang April 2020 kommt eine Diskussion hoch, dass man die rigiden
-Beschränkungen erst aufheben könne, wenn „die Verdopplungszeit der Infektionen
-größer als 14 Tage“ sei.  Maß kann auch hier nur die Zahl der positiv
-Getesteten sein. 
-
-So meldet zum Beispiel der Deutschlandfunk am 04.04.2020\footnote{\raggedright
-  \url{https://www.deutschlandfunk.de/covid19-verdopplungszeit-der-coronavirus-infektionen-in.1939.de.html?drn:news_id=1117169}}
-\begin{quote}
-  Die Verdopplungszeit der Ausbreitung von Coronavirus-Infektionen in
-  Deutsch"|land hat sich in den vergangenen Tagen verlangsamt.
-
-  Für ganz Deutschland liegt sie nun bei 11{,}2 Tagen. Die Lage in den
-  Bundesländern ist unterschiedlich. In den großen Flächenländern liegt die
-  Verdopplungszeit in Nordrhein-Westfalen bei 13{,}1 Tagen, in
-  Baden-Württemberg bei 12{,}5 Tagen und in Bayern bei 9{,}7 Tagen. In Berlin
-  sind es inzwischen 12{,}8 Tage, in Hamburg 12{,}4. Im Saarland hingegen
-  liegt die Verdoppelungszeit bei 5{,}5 Tagen, in Sachsen bei 11{,}0 Tagen.
-\end{quote}
-Auch wenn dies nicht immer deutlich wird, bezieht sich die Verdopplungszeit
-$v_t$ auf die kumulierten Daten und steigt deshalb bereits durch die schiere
-Masse der positiv Getesteten.  Ist $y(t)=mt+n$ ein linearer Zusammenhang, so
-ergibt sich $v_t=\frac{y(t)}{m}$. Für einen annähernd linearen Zusammenhang
-kann man also $v_t=\frac{y(t)}{y'(t)}$ als Schätzung nehmen.  Die Zahl lässt
-sich auch aus unseren Daten leicht berechnen: Ist $y_t$ die kumulierte Zahl
-der positiv Getesteten am Tag $t$ und $d_t$ die Zahl der (getesteten)
-Neuinfektionen, so ist nach $v_t=\frac{y_t}{d_t}$ Tagen eine Verdopplung der
-positv Getesteten erreicht, die Zuwachsrate $d_t$ über diesen Zeitraum als
-konstant vorausgesetzt.  Beide Datenreihen (Stand 10.04.2020) hatten wir schon
-oben extrahiert, so dass wir eine einfache Funktion \texttt{doublePlot(Land)}
-schreiben können, um die folgenden Plots zu erzeugen:
-\begin{center}  
-  \begin{minipage}{.33\textwidth}\centering
-    \includegraphics[width=\textwidth]{Italy-DP.png}\\[1em] {Italien}
-  \end{minipage}\hfill
-  \begin{minipage}{.33\textwidth}\centering
-    \includegraphics[width=\textwidth]{Germany-DP.png}\\[1em] {Deutschland}
-  \end{minipage}\hfill
-  \begin{minipage}{.33\textwidth}\centering
-    \includegraphics[width=\textwidth]{Austria-DP.png}\\[1em] {Österreich}
-  \end{minipage}
-\end{center}
-
-
 \section{Literatur}
 
 \begin{itemize}

@@ -279,3 +279,22 @@ l:getData(China)$
 makelist(findDiff(l,1000*u),u,1,10);
 l:getData(Austria)$
 makelist(findDiff(l,1000*u),u,1,10);
+
+/* #### Manfred Geilhaupt */
+
+l:getData(Germany);
+
+plot2d([[discrete, l[1]], [discrete, l[2]]],
+  [t,0,200], [y,0,2.5*10^5],
+  [style, points], [legend, false],
+  [color, red, green])$
+
+plot2d([[discrete, l[4]], [discrete, l[5]]],
+  [t,0,200], [y,0,12*10^3],
+  [style, points], [legend, false],
+  [color, red, green])$
+
+plot2d([[discrete, l[3]]],
+  [t,0,200], [y,0,8*10^4],
+  [style, points], [legend, false],
+  [color, red, green])$

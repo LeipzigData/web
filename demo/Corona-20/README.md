@@ -36,3 +36,22 @@ sowie eine Übersicht zu den Simulationsrechnungen von Peter Karl Fleißner zur
 Corona-Dynamik in Österreich (Stand Mai 2020, Folien aus einem Webinar bei
 transform.at)
 
+## Bilder
+
+Daten:
+- p(t) - die positiv Getesteten
+- r(t) - die Genesenen und Verstorbenen (kumuliert = g(t)+v(t))
+- i(t)=p(t)-r(t) - die aktuell noch Infizierten (unter den Getesteten)
+- Delta(f(t))=f(t)-f(t-1) - Zuwachs der Kurve f(t)
+
+Datenbasis JHU, Stand 28.05.2020
+- MG-1 = p(t) (rot) und r(t) (grün) für Deutschland
+- MG-2 = Delta(p(t)) (rot) und Delta(r(t)) (grün) für Deutschland
+- MG-3 = i(t) für Deutschland
+
+Fittings
+- Land = Fitting von p(t) gegen die Errorfunktion
+- Land-1 = Fitting von p(t) gegen die logarithmische Funktion, Schätzung
+  Anfang April 2020
+- Land-2 = Fitting von p(t) gegen die logarithmische Funktion, korrigierte
+  Schätzung mit anders geschätztem K_0 Ende Mai 2020
