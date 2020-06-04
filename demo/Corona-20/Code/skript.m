@@ -39,36 +39,23 @@ glD(l,k):= makelist(sum(l[j],j,i+1,i+k)/k,i,0,length(l)-k);
 
 /* == Fitting procedure == */
 	 
-FitData(G,tr):=block([G1,G2,G3],
+FitData(G,tr):=block([G1,G2,G3,est],
   /* G is already a Delta without zero values */
   G1:sublist(G,lambda([u],second(u)>tr)),
   G2:map(lambda([u],[first(u),float(log(second(u)))]),G1),
   /* Compute the parameter estimation */
   G3:apply('matrix,G2),
-  lsquares_estimates(G3,[t,y],y=g(t),[c,s,m])
+  est:lsquares_estimates(G3,[t,y],y=g(t),[c,s,m]),
+  float(est)
 )$
-
-/* ====== Functions to compute the Fittings =============== */
-
-getFittingFunctions(l,tr):=block([G,est1,est2],
-  /* tr is a lower threshold for data to be counted
-     from the list of increments */ 
-  G:l[4],
-  est1:FitData(G,tr),
-  define(h1(t),subst(float(first(est1)),h(t))),
-  G:l[5],
-  est2:FitData(G,tr),
-  define(h2(t),subst(float(first(est2)),h(t))),
-  [est1,est2])$
 
 /* ====== Functions to plot the Results =============== */
 
-createPlot(l,max):=block([G1,G2],
-  G1:l[1], G2:l[2], 
-  plot2d([[discrete, G1], h1(t), [discrete, G2], h2(t)], 
+createPlot(l,max):=block([G1:l[1]],
+  plot2d([[discrete, G1], h1(t), l1(t)], 
   [t,0,200], [y,0,max],
-  [style, points, lines], [legend, false],
-  [color, red, red, green, green])
+  [style, points, lines, lines], [legend, false],
+  [color, red, blue, green])
 )$
 
 createDataPlot(l,max):=block([G1,G2,G3],
@@ -97,40 +84,67 @@ plotDoubling(h):=block([dh:diff(h,t)],
 /* ==== Italy, 60.48 Mio Einwohner ===== */
 
 l:getData(Italy);
-getFittingFunctions(l,2000);
-createPlot(l,4*10^5);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:1.57*10^5;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
 
 /* ==== Spain, 46.66 Mio Einwohner ===== */
 
 l:getData(Spain);
-getFittingFunctions(l,4000);
-createPlot(l,4*10^5);
-est:FitData(l[4]); 
-
-getFittingFunctions(l,50);
-createPlot(l,2*10^5);
-
-G1:l[1]; G2:l[2]; G3:l[3];
-
-plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
-[t,0,200], [y,0,2*10^5],
-[style, points, lines, points, points, lines], [legend, false],
-[color, red, red, green, blue, blue]);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:1.71*10^5;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
 
 /* ==== Germany, 82.79 Mio Einwohner ===== */
 
 l:getData(Germany);
-getFittingFunctions(l,50);
-createPlot(l,2*10^5);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:1.36*10^5;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
 
 /* ==== Austria, 8.822 Mio Einwohner ===== */
 
 l:getData(Austria);
-getFittingFunctions(l,5);
-createPlot(l,2*10^4);
-createDataPlot(l,2*10^4);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:1.28*10^4;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^4);
 
 /* ==== China, Hubei, 58.5 Mio Einwohner ===== */
+
+l:getData(China);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:7*10^4;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
 
 l:getData(China);
 getFittingFunctions(l,50);
@@ -181,22 +195,27 @@ lFit(G,K0):=block([G1,M,est],
   G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
   M:apply('matrix,float(G1)),
   est:lsquares_estimates(M,[t,y],y=-r*(t-m),[m,r]),
-  define(l1(t),subst(append([K=K0],float(first(est))),l(t))),
   float(est))$
 
-createLPlot(G,F,max):=
-  plot2d([[discrete, G], F],
+createLPlot(G,F1,F2,max):=
+  plot2d([[discrete, G], F1, F2],
   [t,0,200], [y,0,max],
-  [style, points, lines], [legend, false],
-  [color, red, blue])$
+  [style, points, lines, lines], [legend, false],
+  [color, red, blue, green])$
   
 /* Computations */ 
 
 l:getData(China);
+G:selectData(l[4],30,100);
+est:FitData(G,50);
+define(l2(t),subst(est[1],h(t))); /* Errorfct. aus Teil 1 */
+
 G:selectData(l[1],30,100);
 K0:7*10^4;
 lFit(G,K0); /* [[m = 33.58032523260602, r = 0.07184843031845723]] */
-createLPlot(l[1],l1(t),10^5);
+
+createLPlot(l[1],l1(t),l2(t),10^5);
+
 define(l2(t),subst([K=K0,m=45.12,r=0.103],l(t)));
 plot2d([[discrete, G], l1(t), l2(t)],
   [t,0,200], [y,0,10^5],
