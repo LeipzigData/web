@@ -38,7 +38,8 @@ selectData(l,von,bis):=
 glD(l,k):= makelist(sum(l[j],j,i+1,i+k)/k,i,0,length(l)-k);
 
 /* == Fitting procedure == */
-	 
+
+/* Fit the Error function */
 FitData(G,tr):=block([G1,G2,G3,est],
   /* G is already a Delta without zero values */
   G1:sublist(G,lambda([u],second(u)>tr)),
@@ -46,8 +47,14 @@ FitData(G,tr):=block([G1,G2,G3,est],
   /* Compute the parameter estimation */
   G3:apply('matrix,G2),
   est:lsquares_estimates(G3,[t,y],y=g(t),[c,s,m]),
-  float(est)
-)$
+  float(est))$
+
+/* Fit the logistic function */
+lFit(G,K0):=block([G1,M,est],
+  G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
+  M:apply('matrix,float(G1)),
+  est:lsquares_estimates(M,[t,y],y=-r*(t-m),[m,r]),
+  float(est))$
 
 /* ====== Functions to plot the Results =============== */
 
@@ -94,6 +101,15 @@ est:lFit(G,K0);
 define(l1(t),subst(append([K=K0],first(est)),l(t)));
 createPlot(l,3*10^5);
 
+K0:2.50*10^5;
+G:selectData(l[1],70,120);
+est:lFit(G,K0); /* [[m = 98.01283671826718, r = 0.08389925162207596]] */
+define(h1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[1],100,140);
+est:lFit(G,K0); /* [[m = 91.55551413278553, r = 0.04971720291484013]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
+
 /* ==== Spain, 46.66 Mio Einwohner ===== */
 
 l:getData(Spain);
@@ -120,6 +136,15 @@ est:lFit(G,K0);
 define(l1(t),subst(append([K=K0],first(est)),l(t)));
 createPlot(l,3*10^5);
 
+K0:2.00*10^5;
+G:selectData(l[1],70,120);
+est:lFit(G,K0); /* [[m = 100.3440737849612, r = 0.116398353523995]] */
+define(h1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[1],100,140);
+est:lFit(G,K0); /* [[m = 86.97465162988513, r = 0.04118706120616364]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^5);
+
 /* ==== Austria, 8.822 Mio Einwohner ===== */
 
 l:getData(Austria);
@@ -130,6 +155,15 @@ define(h1(t),subst(est[1],h(t)));
 G:selectData(l[1],30,100);
 K0:1.28*10^4;
 est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,3*10^4);
+
+K0:1.8*10^4;
+G:selectData(l[1],70,120);
+est:lFit(G,K0); /* [[m = 95.29704641120715, r = 0.1156477748254564]] */
+define(h1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[1],100,140);
+est:lFit(G,K0); /* [[m = 54.56308240335213, r = 0.0266211630260425]] */
 define(l1(t),subst(append([K=K0],first(est)),l(t)));
 createPlot(l,3*10^4);
 
@@ -146,56 +180,64 @@ est:lFit(G,K0);
 define(l1(t),subst(append([K=K0],first(est)),l(t)));
 createPlot(l,3*10^5);
 
-l:getData(China);
-getFittingFunctions(l,50);
-createPlot(l,8*10^4);
-
-G1:l[1]; G2:l[2]; G3:l[3];
-
-plot2d([[discrete, G1], h1(t), [discrete, G2], [discrete, G3], h3(t)],
-[t,0,200], [y,0,8*10^4],
-[style, points, lines, points, points, lines], [legend, false],
-[color, red, red, green, blue, blue]);
-
 /* ==== France, 66.99 Mio Einwohner ===== */
 
 l:getData(France);
-getFittingFunctions(l,50);
-createPlot(l,2*10^5);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
 
-[77839.932039868 (erf(0.06166849415467176 (t - 96.50517888876705)) + 1.0),
- 237197.164126429 (erf(0.01607662632224975 (t - 18.1603116862914)) +
- 0.3203119900052553), 50947.64199538224 (erf(0.04540867065261457 (t -
- 118.8091224882208)) + 0.9999999999999765)]
+  [113777.4264476956, 95.0563011698473, 15.87565410295911]
 
 /* ==== United Kingdom, 66.44 Mio Einwohner ===== */
 
 l:getData(UK);
-getFittingFunctions(l,20);
-createPlot(l,5*10^5);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
 
-[196824.2306944786 (erf(0.05008601857991169 (t - 113.5467493522619)) + 1.0),
- 6709.57651974283 (erf(0.01204686689343318 (t - 12.03294609093242)) +
- 0.1624305375465112), 19200.65893214914 (erf(0.009570296374754914 (t -
- 30.89260209000159)) + 0.3241363474127178)]
+[249684.3017939618, 108.9794922481614, 18.66620412743644]
 
 /* ==== Sweden, 66.44 Mio Einwohner ===== */
 
 l:getData(Sweden);
-getFittingFunctions(l,5);
-createPlot(l,2*10^4);
+G:selectData(l[4],30,100);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
 
-[6923.227489073069 (erf(0.0519430314276525 (t - 97.61801045485334)) + 1.0),
- 2105.520183190281 (erf(0.06093028393001039 (t - 103.7114286910084)) + 1.0),
- 347.3903236746284 (erf(0.1113184044913795 (t - 93.6891365970796)) + 1.0)]
+[54401.90438304625, 20.08194639858018, 65.03143671223528]
+/* Wenig plausible Werte, in Schweden ging die Pandemie deutlich später los */
+
+G:selectData(l[4],80,120);
+est:FitData(G,20);
+float(subst(est[1],[sqrt(%pi)*exp(c)*s,m,s]));
+
+[24618.88759744044, 108.1046532440499, 23.30424957051567]
+
+define(h1(t),subst(est[1],h(t))); 
+G:selectData(l[1],30,100);
+K0:2.46*10^4;
+est:lFit(G,K0); 
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+createPlot(l,5*10^4);
+
+K0:5*10^4;
+G:selectData(l[1],70,120);
+est:lFit(G,K0); /* [[m = 161.7424036023588, r = 0.0738981860980454]] */
+define(h1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[1],100,140);
+est:lFit(G,K0); /* [[m = 236.0514878060304, r = 0.0308210722913995]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+
+createPlot(l,7*10^4);
+
+plot2d([[discrete, l[1]], h1(t), l1(t)], 
+  [t,0,400], [y,0,10^5],
+  [style, points, lines, lines], [legend, false],
+  [color, red, blue, green])$
+
 
 /* ############## Logistic curve ############### */ 
-
-lFit(G,K0):=block([G1,M,est],
-  G1:map(lambda([u,v],[u,log(K0/v-1)]),map(first,G),map(second,G)),
-  M:apply('matrix,float(G1)),
-  est:lsquares_estimates(M,[t,y],y=-r*(t-m),[m,r]),
-  float(est))$
 
 createLPlot(G,F1,F2,max):=
   plot2d([[discrete, G], F1, F2],

@@ -87,7 +87,8 @@ Siehe dazu die letzte Spalte sowie die beiden Diagramme.
     Spanien     & 90.57 & 12.12 & 171\,096 &110.14 & 0.158 & 234\,824\\
   China (Hubei) & 36.52 & 15.95 &  69\,772 & 33.58 & 0.007 &  68\,135\\\hline
   \end{tabular}
-
+  \vskip2em
+  
   \begin{minipage}{.48\textwidth}\centering
     \includegraphics[width=\textwidth]{China-1.png}\\[1em]
                     {Szenario für China (Hubei)}
@@ -112,15 +113,15 @@ Parameteradjustierungen auf Daten bis zum Tag 143 (22. Mai 2020) gewonnen
 wurden:
 \begin{center}
   \begin{tabular}{|l|c|c|c|c|c|}\hline
-    Land & $K$ & von & bis & $r$ & $m$ \\\hline
+    Land  & $K$ & von & bis & $r$ & $m$ \\\hline
     Deutschland & 200\,000 & 70 & 120 & 0.116 & 100.34\\
-    Italien & 250\,000 & 70 & 120 & 0.056 & 103.15\\
-    Österreich & 18\,000 & 70 & 120 & 0.116 & 95.30 \\
-    Spanien & 270\,000 & 70 & 120 & 0.118 & 100.81 \\
-    China (Hubei) & 70\,000 & 22 & 62 & 0.213 & 42.51\\
-    Schweden & 50\,000 & 100 & 150 & 0.048 & 128.96\\\hline
+    Italien     & 250\,000 & 70 & 120 & 0.083 &  98.01\\
+    Österreich  &  18\,000 & 70 & 120 & 0.116 &  95.30 \\
+    Spanien     & 270\,000 & 70 & 120 & 0.118 & 100.81 \\
+  China (Hubei) &  70\,000 & 22 &  62 & 0.213 &  42.51\\
+    Schweden    &  50\,000 &100 & 150 & 0.048 & 128.96\\\hline
   \end{tabular}
-  \vskip1em
+  \vskip2em
 
   \begin{minipage}{.3\textwidth}\centering
     \includegraphics[width=\textwidth]{Germany-2.png}\\[1em] {Deutschland}
@@ -145,7 +146,53 @@ wurden:
 In den Diagrammen ist die (etwas zeitversetzte) Abflachung der Kurven nach dem
 Lockdown in verschiedenen europäischen Ländern deutlich zu sehen, dessen
 Wirkung in das hier verwendete zeithomogene Modell natürlich nicht eingehen
-kann.  Dies bleibt gesondert zu untersuchen. 
+kann.  Wir können nur verschiedene Abschnitte der Kurve $p(t)$ nehmen, um die
+Bereiche vor dem Lockdown und nach dem Lockdown zu fitten, was hier im
+Vergleich für drei der oben untersuchten Länder ausgeführt ist.
+\begin{center}
+  \begin{tabular}{|l|c|c|c|c|c|}\hline
+    Land & $K$ & von & bis & $r$ & $m$ \\\hline
+    Deutschland & 200\,000 & 70 & 120 & 0.116 & 100.34\\
+    Deutschland & 200\,000 &100 & 140 & 0.041 &  86.97\\
+    Italien     & 250\,000 & 70 & 120 & 0.083 &  98.01\\
+    Italien     & 250\,000 &100 & 140 & 0.050 &  91.56\\
+    Österreich  &  18\,000 & 70 & 120 & 0.116 &  95.30 \\
+    Österreich  &  18\,000 &100 & 140 & 0.027 &  54.56 \\\hline
+  \end{tabular}
+  \vskip2em
+  
+  \begin{minipage}{.3\textwidth}\centering
+    \includegraphics[width=\textwidth]{Germany-3.png}\\[1em] {Deutschland}
+  \end{minipage}\hfill
+  \begin{minipage}{.3\textwidth}\centering
+    \includegraphics[width=\textwidth]{Italy-3.png}\\[1em] {Italien}
+  \end{minipage}\hfill
+  \begin{minipage}{.3\textwidth}\centering
+    \includegraphics[width=\textwidth]{Austria-3.png}\\[1em] {Österreich}
+  \end{minipage}
+\end{center}
+Besonders stark ist der Unterschied auf den österreichischen Daten zu
+bemerken.  Allein der Ausgang des „schwedischen Experiments“ ist noch schwer
+zu schätzen, da hier die Epidemie deutlich zeitversetzt begonnen hat und die
+Schätzer noch in größeren Bereichen schwanken. Allerdings gibt es hier
+(erwartungsgemäß, da kein Lockdown stattgefunden hat) keinen deutlichen
+Unterschied, wenn verschiedene Intervalle zu Grunde gelegt werden.  Der zweite
+Schätzer der logistischen Funktion nähert die Dynamik deutlich besser an, wie
+in der Gegenüberstellung mit den Daten zu erkennen ist.
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|}\hline
+    von & bis & $K$ & $m$ & $r$ \\\hline
+    \multicolumn{5}{|l|}{Schätzung der Fehlerfunktion}\\\hline
+    30 & 100 & 54\,401 &  20 & \\
+    80 & 120 & 24\,618 & 108 & \\\hline
+    \multicolumn{5}{|l|}{Schätzung der logistischen Funktion}\\\hline
+    70 & 120 & 50\,000 & 120 & 0.083 \\
+   100 & 140 & 50\,000 & 129 & 0.049 \\\hline
+  \end{tabular}
+
+  \includegraphics[width=.6\textwidth]{Sweden-3.png}\\[1em] {Schweden}
+\end{center}
+
 
 \section{Literatur}
 
