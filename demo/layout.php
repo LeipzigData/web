@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2019-08-05
+ * last update: 2020-06-05
  */
 
 function pageHeader() {
@@ -46,7 +46,8 @@ function pageNavbar() {
             <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
             <li><a href="zd-web">Zukunftsdiplom</a></li> 
             <li><a href="le-web">Leipziger Ecken</a></li> 
-            <li><a href="NachhaltigesLeipzig">Nachhaltiges Leipzig</a></li> 
+            <li><a href="bne-web">bne-sachsen.de</a></li> 
+            <!-- <li><a href="NachhaltigesLeipzig">Nachhaltiges Leipzig</a></li> -->
             <li><a href="Corona-20">Analyse von Corona-Daten</a></li> 
           </ul>
         </div><!-- navbar end -->
