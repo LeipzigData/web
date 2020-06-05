@@ -350,8 +350,21 @@ plot2d([[discrete, l[1]], [discrete, l[2]]],
   [style, points], [legend, false],
   [color, red, green])$
 
-plot2d([[discrete, l[4]], [discrete, l[5]]],
-  [t,0,200], [y,0,12*10^3],
+u:l[4];
+v:glD(u,14);
+
+plot2d([[discrete, u], [discrete, v]],
+  [t,0,200], [y,0,10^4],
+  [style, points], [legend, false],
+  [color, red, green])$
+
+plot2d([[discrete, l[3]], [discrete, l[4]]],
+  [t,0,200], [y,0,10^5],
+  [style, points], [legend, false],
+  [color, red, green])$
+
+plot2d([[discrete, l[3]], [discrete, l[4]]],
+  [t,0,200], [y,0,10^4],
   [style, points], [legend, false],
   [color, red, green])$
 

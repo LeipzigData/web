@@ -48,6 +48,8 @@ Datenbasis JHU, Stand 28.05.2020
 - MG-1 = p(t) (rot) und r(t) (grün) für Deutschland
 - MG-2 = Delta(p(t)) (rot) und Delta(r(t)) (grün) für Deutschland
 - MG-3 = i(t) für Deutschland
+- MG-4 = Vergleich i(t) (rot) und Delta(p(t)) (grün)
+- MG-4 = Vergleich u(t)=Delta(p(t)) (rot) und glD(u(t),14) 
 
 Fittings
 - Land = Fitting von p(t) gegen die Errorfunktion
@@ -55,3 +57,6 @@ Fittings
   Anfang April 2020
 - Land-2 = Fitting von p(t) gegen die logarithmische Funktion, korrigierte
   Schätzung mit anders geschätztem K_0 Ende Mai 2020
+- Land-3 = Fitting von p(t) gegen die logarithmische Funktion, es wurden zwei
+  verschiedene Datenintervalle gegenübergestellt (vor und nach Lockdown), Ende
+  Mai 2020
