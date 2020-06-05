@@ -38,8 +38,8 @@ function pageNavbar() {
 	<div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
-            <!-- <li><a href="angebote.php">Die Angebote</a></li>
-            <li><a href="akteure.php">Die Anbieter</a></li>-->
+            <li><a href="angebote.php">Die Angebote</a></li>
+            <!-- <li><a href="akteure.php">Die Anbieter</a></li>-->
             <li><a href="events.php">Die Events</a></li>
           </ul>
 	</div><!-- collapse end -->

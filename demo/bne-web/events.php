@@ -26,7 +26,12 @@ function theEvent($v) {
     $src="https://bne-sachsen.de/wp-json/content/events?p=$id";
     $title=$v["title"];
     $ort=getLocation($v);
+    $organizer=getOrganizer($v["organizer"]);
+    $kontakt=$v["author"];
+    $region=join(", ",$v["districts"]);
     $von=$v["start"];
+    $zielgruppe=getTargetGroup($v["target_group"]);
+    $topics=getTopics($v["topics"]);
     $beschreibung=$v["description"];
     $out='<h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
@@ -36,22 +41,12 @@ function theEvent($v) {
     if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
-    if (!empty($geo)) {
-        $out.='<li>Geokoordinaten im WKT-Format: '.$geo.'</li>';
-    }
-    if (!empty($veranstalter)) {
-        $out.='<li> <strong>Veranstalter: </strong>'
-            .createLink($va,$veranstalter).'</li>';
-    }
-    if (!empty($kontakt)) {
-        $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
-    }
-    if (!empty($zielgruppe)) {
-        $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
-    }
-    if (!empty($beschreibung)) {
-        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
-    }
+    $out.='<li> <strong>Region: </strong>'.$region.'</li>';
+    $out.='<li> <strong>Veranstalter: </strong>'.$organizer.'</li>';
+    $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
+    $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
+    $out.='<li> <strong>Topics:</strong> '.$topics.' </li>';
+    $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     if (!empty($url)) {
         $out.='<li>'.createLink($url,$url).'</li>';
     }

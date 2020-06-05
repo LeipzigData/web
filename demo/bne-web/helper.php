@@ -77,10 +77,49 @@ function displayPartner($v) {
 }
 
 function getLocation($v) {
+    if ($v["is_online_event"]) { return "Online-Event"; }
     $ort=$v["location"].' '.$v["additional_address"];
     $adresse=$v["street"].", ".$v["zip"]." ".$v["city"];
-    $kreis=$v["districts"];
     return $ort.
-        '<br/><strong>Adresse:</strong> '.$adresse.
-        '<br/><strong>Kreis:</strong> '.$kreis;
+        '<br/><strong>Adresse:</strong> '.$adresse;
+}
+
+function getTargetGroup($o) {
+    $a=join(", ",$o["extracurricular"]);
+    $b=join(", ",$o["school"]);
+    $out="";
+    if (!empty($a)) { $out.="<br/>außerschulisch: $a"; }
+    if (!empty($b)) { $out.="<br/>schulisch: $b"; }
+    return $out; 
+}
+
+function getContext($o) {
+    $a=$o["economic_aspect"];
+    $b=$o["ecological_aspect"];
+    $c=$o["social_aspect"];
+    $out="";
+    if (!empty($a)) { $out.="<br/>ökonomischer Aspekt: $a"; }
+    if (!empty($b)) { $out.="<br/>ökologischer Aspekt: $b"; }
+    if (!empty($c)) { $out.="<br/>sozialer Aspekt: $c"; }
+    return $out; 
+}
+
+function getTopics($o) {
+    $s=array();
+    foreach($o as $t) { $s[]=$t["name"]; }
+    return join(", ",$s); 
+}
+
+function getOrganizer($o) {
+    $name=$o['name'];
+    $adresse=$o['street'].", ".$o['zip']." ".$o['city'];
+    $phone=$o['phone'];
+    $email=$o['email'];
+    $web=$o['website'];
+    $out=$name;
+    if (!empty($o['city'])) { $out.="<br/>Adresse: $adresse"; }
+    if (!empty($phone)) { $out.="<br/>tel.: $phone"; }
+    if (!empty($email)) { $out.="<br/>email: $email"; }
+    if (!empty($web)) { $out.="<br/>web: ".createlink($web,$web); }
+    return $out;
 }
