@@ -25,6 +25,7 @@ function theEvent($v) {
     $id=$v["id"];
     $src="https://bne-sachsen.de/wp-json/content/events?p=$id";
     $title=$v["title"];
+    $pd=getDatum($v["date"]);
     $ort=getLocation($v);
     $organizer=getOrganizer($v["organizer"]);
     $kontakt=$v["author"];
@@ -35,6 +36,8 @@ function theEvent($v) {
     $beschreibung=$v["description"];
     $out='<h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
+    $out.='<li>Veröffentlicht am: '.$pd.'</li>';
+    $out.='<li>Ansprechpartner: '.$kontakt.'</li>';
     if (!empty($von)) {
         $out.='<li> <strong>Beginn:</strong> '.getDatum($von).' </li>';
     }
@@ -43,7 +46,6 @@ function theEvent($v) {
     }
     $out.='<li> <strong>Region: </strong>'.$region.'</li>';
     $out.='<li> <strong>Veranstalter: </strong>'.$organizer.'</li>';
-    $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
     $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     $out.='<li> <strong>Topics:</strong> '.$topics.' </li>';
     $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';

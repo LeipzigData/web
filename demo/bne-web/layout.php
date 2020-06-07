@@ -41,6 +41,8 @@ function pageNavbar() {
             <li><a href="angebote.php">Die Angebote</a></li>
             <!-- <li><a href="akteure.php">Die Anbieter</a></li>-->
             <li><a href="events.php">Die Events</a></li>
+            <li><a href="materialien.php">Die Materialien</a></li>
+            <li><a href="posts.php">Die Posts</a></li>
           </ul>
 	</div><!-- collapse end -->
       </div><!-- container end -->
