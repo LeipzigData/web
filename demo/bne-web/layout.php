@@ -39,10 +39,10 @@ function pageNavbar() {
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
             <li><a href="angebote.php">Die Angebote</a></li>
-            <!-- <li><a href="akteure.php">Die Anbieter</a></li>-->
             <li><a href="events.php">Die Events</a></li>
             <li><a href="materialien.php">Die Materialien</a></li>
-            <li><a href="posts.php">Die Posts</a></li>
+            <li><a href="posts.php">Die Mitteilungen</a></li>
+            <li><a href="akteure.php">Die Anbieter</a></li>
           </ul>
 	</div><!-- collapse end -->
       </div><!-- container end -->

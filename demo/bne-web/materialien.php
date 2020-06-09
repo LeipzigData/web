@@ -28,12 +28,14 @@ function theMaterial($v) {
     $kontakt=$v["author"];
     // $zielgruppe=getTargetGroup($v["target_group"]);
     $topics=getTopics($v["topics"]);
+    $organizer=getOrganizer($v["offerer"]);
     $beschreibung=$v["description"];
     $out='<h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
     $out.='<li>Veröffentlicht am: '.$pd.'</li>';
     $out.='<li>Ansprechpartner: '.$kontakt.'</li>';
     //$out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
+    $out.='<li> <strong>Anbieter: </strong>'.$organizer.'</li>';
     $out.='<li> <strong>Topics:</strong> '.$topics.' </li>';
     $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
     $out.='</ul></div>';
