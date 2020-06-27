@@ -248,63 +248,44 @@ createLPlot(G,F1,F2,max):=
 /* Computations */ 
 
 l:getData(China);
-G:selectData(l[4],30,100);
-est:FitData(G,50);
-define(l2(t),subst(est[1],h(t))); /* Errorfct. aus Teil 1 */
-
-G:selectData(l[1],30,100);
 K0:7*10^4;
-lFit(G,K0); /* [[m = 33.58032523260602, r = 0.07184843031845723]] */
-
+G:selectData(l[1],30,100);
+est:lFit(G,K0); /* [[m = 33.58032523260602, r = 0.07184843031845723]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[2],30,100);
+est:lFit(G,K0); /* [[m = 65.11708692759774, r = 0.1217529364825106]] */
+define(l2(t),subst(append([K=K0],first(est)),l(t)));
 createLPlot(l[1],l1(t),l2(t),10^5);
 
-define(l2(t),subst([K=K0,m=45.12,r=0.103],l(t)));
-plot2d([[discrete, G], l1(t), l2(t)],
-  [t,0,200], [y,0,10^5],
-  [style, points, lines, lines], [legend, false],
-  [color, red, blue, green])$
-
-G:selectData(l[1],22,62);
-K0:7*10^4;
-lFit(G,K0); /* [[m = 42.5123574904982, r = 0.2133141021473515]] */
-createLPlot(l[1],l1(t),10^5);
-
-define(dl1(t),diff(l1(t),t));
-G1:l[4]; G2:glD(G1,7);
-createLPlot(G1,dl1(t),7*10^3);
-
 l:getData(Italy);
-G:selectData(l[1],70,120);
 K0:2.5*10^5;
-lFit(G,K0); /* [[m = 103.1491179494895, r = 0.05599300970794591]] */
-createLPlot(l[1],l1(t),5*10^5);
-define(dl1(t),diff(l1(t),t));
-G1:l[4]; G2:glD(G1,7);
-createLPlot(G1,dl1(t),7*10^3);
+G:selectData(l[1],30,100);
+est:lFit(G,K0); /* [[m = 91.39257150127692, r = 0.1738698331978473]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[2],30,100);
+est:lFit(G,K0); /* [[m = 101.7892236843653, r = 0.176900690094231]] */
+define(l2(t),subst(append([K=K0],first(est)),l(t)));
+createLPlot(l[1],l1(t),l2(t),3*10^5);
 
 l:getData(Germany);
-G:selectData(l[1],70,120);
 K0:2*10^5;
-lFit(G,K0); /* [[m = 100.3440737849612, r = 0.116398353523995]] */
-createLPlot(l[1],l1(t),2.5*10^5);
-
-l:getData(Austria);
-G:selectData(l[1],70,120);
-K0:1.8*10^4;
-lFit(G,K0); /* [[m = 95.29704641120715, r = 0.1156477748254564]] */
-createLPlot(l[1],l1(t),2*10^4);
+G:selectData(l[1],30,100);
+est:lFit(G,K0); /* [[m = 91.39257150127692, r = 0.1738698331978473]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[2],30,100);
+est:lFit(G,K0); /* [[m = 108.7898911793164, r = 0.1950992509998804]] */
+define(l2(t),subst(append([K=K0],first(est)),l(t)));
+createLPlot(l[1],l1(t),l2(t),3*10^5);
 
 l:getData(Spain);
-G:selectData(l[1],70,120);
 K0:2.7*10^5;
-lFit(G,K0); /* [[m = 100.8090116328231, r = 0.1179925484106326]] */ 
-createLPlot(l[1],l1(t),3*10^5);
-
-l:getData(Sweden);
-G:selectData(l[1],100,150);
-K0:5*10^4;
-lFit(G,K0); /* [[m = 128.9620827373437, r = 0.04849480926061828]] */ 
-createLPlot(l[1],l1(t),6*10^4);
+G:selectData(l[1],30,100);
+est:lFit(G,K0); /* [[m = 93.06663263139868, r = 0.2396490503343044]] */
+define(l1(t),subst(append([K=K0],first(est)),l(t)));
+G:selectData(l[2],30,100);
+est:lFit(G,K0); /* [[m = 100.4909545691947, r = 0.2420645207693166]] */
+define(l2(t),subst(append([K=K0],first(est)),l(t)));
+createLPlot(l[1],l1(t),l2(t),3*10^5);
 
 /* #### Dynamics of infected */ 
 
@@ -333,20 +314,54 @@ plotInfected(l,10^4,4.66,-0.1,5);
 
 findFirst(l,u):=part(sublist(l,lambda([x],second(x)>u)),1,1);
 findDiff(l,u):=findFirst(second(l),u)-findFirst(first(l),u);
+mean(l):=float(apply("+",l)/length(l));
 
 l:getData(Germany)$
-makelist(findDiff(l,1000*u),u,1,10);
-l:getData(China)$
-makelist(findDiff(l,1000*u),u,1,10);
+createDataPlot(l,2*10^5);
+u:makelist(findDiff(l,10^4*u),u,5,15);
+mean(u);
+
+l:getData(Italy)$
+createDataPlot(l,3*10^5);
+u:makelist(findDiff(l,10^4*u),u,5,15);
+mean(u);
+
+l:getData(Spain)$
+createDataPlot(l,2*10^5);
+u:makelist(findDiff(l,10^4*u),u,5,15);
+mean(u);
+
 l:getData(Austria)$
-makelist(findDiff(l,1000*u),u,1,10);
+createDataPlot(l,2*10^4);
+u:makelist(findDiff(l,10^3*u),u,5,12);
+mean(u);
+
+/* #### R_0 */
+
+showRValue(Land):=block([l,u,u1,u2],
+  l:getData(Land),
+  u:map(lambda([u,v],[u[1],u[2]/(v[2]+.1)*18]),l[4],l[3]),
+  u1:sublist(u,lambda([u],u[1]>100)),
+  u2:glD(u1,7),
+  plot2d([[discrete, u1], [discrete, u2]],  
+  [t,120,400], [y,0,2],
+  [style, points, lines], [legend, false],
+  [color, blue, green])
+)$
+
+plot2d([[discrete, u3]],   
+  [t,0,300], [y,0,2*10^4],
+  [style, points], [legend, false],
+       [color, blue])$
+
+
 
 /* #### Manfred Geilhaupt */
 
 l:getData(Germany);
 
 plot2d([[discrete, l[1]], [discrete, l[2]]],
-  [t,0,200], [y,0,2.5*10^5],
+  [t,120,200], [y,0,2.5*10^5],
   [style, points], [legend, false],
   [color, red, green])$
 
@@ -370,3 +385,5 @@ plot2d([[discrete, u], [discrete, v]],
   [t,0,200], 
   [style, points, lines], [legend, false],
   [color, blue, red])$
+
+
