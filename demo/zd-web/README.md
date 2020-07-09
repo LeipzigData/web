@@ -14,13 +14,34 @@ zum Ende der jeweiligen Runde des Zukunftsdiploms einzuschicken ist, um das
 Zukunftsdiplom zu erhalten, wenn die Kriterien erfüllt sind.
 
 Veranstaltungen sind fest vorgegebenen Themenbereichen zugeordnet, die aus den
-Kategoien der jeweiligen Angebote in der NL inferiert werden.  Die
+Kategorien der jeweiligen Angebote in der NL inferiert werden.  Die
 entsprechende thematische Zuordnung ist derzeit fest in der Funktion
 `getThemes($a)` in der Datei `Zukunftsdiplom.php` über einfaches
 String-Matching eingebrannt.
 
 Die wichtigsten Codeteile aus dem Jahr 2018 sind im Verzeichnis `Code-2018` zu
 finden.
+
+Die Ausgabe greift auf drei lokale Dumps zu:
+
+* `Veranstalter.json` - in den Event-Daten ist der Veranstalter nur durch
+  seine Id angegeben, in diesem Dump sind die weiteren Informationen.
+* `Categories.json` - der zugeordnete Modul wird aus der first_root_category
+  extrahiert, zu der in den Event-Daten auch nur eine Id angegeben ist, die
+  sich allerdings auf die Kategorien in der NL-Datenbank bezieht. Über diese
+  Tabelle wird deren Name extrahiert, der in getThemes($c) dann einem unserer
+  Modulthemen zugeordnet wird.
+* Zukunftsdiplom.json - hier werden alle für das ZD relevanten Activities
+  rausgefiltert (d.h. wenn die Goals das Wort "Zukunfts-Diplom" enthalten).
+  Events (diese haben ein Datum) und andere Aktivitäten (diese haben kein
+  Datum) werden verschieden aggregiert. Bei anderen Aktivitäten wird
+  vorausgesetzt, dass es sich um Bildungsangebote handelt.  Das Erscheinen von
+  Aktivitäten in der Auflistung kann also direkt durch Setzen oder Entfernen
+  eines entsprechenden Goals in der NL-Datenbank gesteuert werden. 
+
+Der Ausgabezeitraum kann in `angebote.php` und `archiv.php` durch die Änderung
+der Start- und Enddaten modifiziert werden.
+
 
 ## Lokales Testen
 

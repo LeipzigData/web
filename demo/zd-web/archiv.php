@@ -8,11 +8,11 @@
 include_once("layout.php");
 include_once("Zukunftsdiplom.php");
 
-$startDate=date("Y-m-d",strtotime("01.04.2020"));
-$endDate=date("Y-m-d",strtotime("31.08.2020"));
+$startDate=date("Y-m-d",strtotime("19.07.2020"));
+$endDate=date("Y-m-d",strtotime("01.11.2020"));
 $content='
 <div class="container">
-<h2 align="center">Die vergangene Veranstaltungen des Monats</h2>
+<h2 align="center">Die bereits vergangenen Veranstaltungen</h2>
 Aktuelle Verantaltung finden Sie <a href="angebote.php">hier</a>.
 '.dasArchiv($startDate,$endDate).'
 </div>
