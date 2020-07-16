@@ -179,12 +179,13 @@ function displayBA($v,$users,$c,$t) {
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
     $title=$v["name"];
-    $beschreibung=$v["description"];
+    $angebotsart=$v["education_type"];
+    $kurzbeschreibung=$v["short_description"];
     $veranstalter=$users[$v["user_id"]]["name"];
     $kontakt=akteursKontakt($users[$v["user_id"]]);
     $ort=$v["full_address"];
     $geo=geoData($v);
-    $zielgruppe=$v["target_group"];
+    $zielgruppe=$v["target_group_selection"];
     $url=$v["info_url"];
     $goals=join(", ",$v["goals"]);
     $themes=getThemes($goals);
@@ -201,6 +202,9 @@ function displayBA($v,$users,$c,$t) {
         $out.='<li> <strong>Veranstalter: </strong>'
             .createLink($va,$veranstalter).'</li>';
     }
+    if (!empty($angebotsart)) {
+        $out.='<li><strong>Angebotsart:</strong> '.$angebotsart.'</li>';
+    }
     if (!empty($kontakt)) {
         $out.='<li>Ansprechpartner des Veranstalters: '.$kontakt.'</li>';
     }
@@ -208,8 +212,9 @@ function displayBA($v,$users,$c,$t) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
     }
     $out.='<li> <strong>Modul:</strong> '.$t.'</li>';
-    if (!empty($beschreibung)) {
-        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
+    if (!empty($kurzbeschreibung)) {
+        $out.='<li> <strong>Kurzbeschreibung:</strong> '
+            .$kurzbeschreibung.' </li>';
     }
     if (!empty($url)) {
         $out.='<li>'.createLink($url,$url).'</li>';
@@ -299,11 +304,46 @@ function displayService($v) {
     $id=$v["id"];
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $title=$v["name"];
-    $stype=$v["service_type"];
+    $vid=$v["user_id"];
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
+    $va="http://daten.nachhaltiges-leipzig.de/api/v1/users/$vid.json";
+    $angebotsart=$v["education_type"];
+    $kurzbeschreibung=$v["short_description"];
+    $ort=$v["full_address"];
+    $geo=geoData($v);
+    $zielgruppe=$v["target_group_selection"];
+    $url=$v["info_url"];
+    $goals=join(", ",$v["goals"]);
     $out='
-        <li> <a href="'.$src.'">'.$title.'</a>, Service Type '.$stype.'</li>';
-        return $out;
+<h3> <a href="'.$src.'">'.$title.'</a></h3>
+<div class="row"> <ul>';
+    if (!empty($ort)) {
+        $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
+    }
+    if (!empty($geo)) {
+        $out.='<li>Geokoordinaten im WKT-Format: '.$geo.'</li>';
+    }
+    if (!empty($vid)) {
+        $out.='<li> <strong>Veranstalter: </strong>'
+            .createLink($va,$vid).'</li>';
+    }
+    if (!empty($angebotsart)) {
+        $out.='<li><strong>Angebotsart:</strong> '.$angebotsart.'</li>';
+    }
+    if (!empty($zielgruppe)) {
+        $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
+    }
+    if (!empty($kurzbeschreibung)) {
+        $out.='<li> <strong>Kurzbeschreibung:</strong> '
+            .$kurzbeschreibung.' </li>';
+    }
+    if (!empty($url)) {
+        $out.='<li>'.createLink($url,$url).'</li>';
+    }
+    $out.='</dl></div>';
+    return $out;
 }
+    
 
 // --------  Veranstaltungsausfall
 

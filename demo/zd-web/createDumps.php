@@ -128,6 +128,14 @@ function createAdditionalDumps() {
     }
     jsonDump("Dumps/Stores.json",$s);
     // -----------------------------------
+}
+
+function createDumps() {
+    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    jsonDump("Dumps/activities.json",$res);
+    // -----------------------------------
     $s=array();
     foreach($res as $row) {
         if ($row["service_type"]=="Bildungsangebot") {
@@ -135,14 +143,6 @@ function createAdditionalDumps() {
         }
     }
     jsonDump("Dumps/Bildungsangebote.json",$s);
-    // -----------------------------------
-}
-
-function createDump() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
-    $string = file_get_contents($src);
-    $res = json_decode($string, true);
-    jsonDump("Dumps/activities.json",$res);
 }
 
 function jsonDump($fn,$s) {
@@ -164,7 +164,7 @@ function dumpCategories() {
 }
 
 // ---- test ----
-createDump();
+createDumps();
 createZDDumps();
 //dumpCategories();
 //createAdditionalDumps();

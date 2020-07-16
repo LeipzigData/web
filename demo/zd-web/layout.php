@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2019-08-03
+ * Last Update: 2020-07-16
  */
 
 function pageHeader() {
@@ -42,11 +42,11 @@ function pageNavbar() {
             <li><a href="zd.php">Zukunftsdiplom</a></li>
             <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="akteure.php">Die Anbieter</a></li>
+            <li><a href="bildungsangebote.php">Alle Bildungsangebote</a></li>
             <!-- <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
             <li><a href="events.php">Die Events</a></li>
             <li><a href="locations.php">Die Orte</a></li> 
-            <li><a href="gta.php">Die GTA-Angebote</a></li>
-            <li><a href="bildungsangebote.php">Die Bildungsangebote</a></li>
+            <li><a href="gta.php">Die GTA-Angebote</a></li> 
             <li><a href="service.php">Die Services</a></li>
             <li><a href="alleAkteure.php">Alle Akteure</a></li> 
             -->
