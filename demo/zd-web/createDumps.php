@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2019-02-18
- * Last Update: 2020-03-18
+ * Last Update: 2020-07-19
  */
 
 include_once("Zukunftsdiplom.php");
@@ -131,11 +131,13 @@ function createAdditionalDumps() {
 }
 
 function createDumps() {
+    // Dump aller Aktivitaeten in NL
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     jsonDump("Dumps/activities.json",$res);
     // -----------------------------------
+    // Dump nur der Bildungsangebote
     $s=array();
     foreach($res as $row) {
         if ($row["service_type"]=="Bildungsangebot") {
@@ -143,6 +145,12 @@ function createDumps() {
         }
     }
     jsonDump("Dumps/Bildungsangebote.json",$s);
+    // -----------------------------------
+    // Dump der Bildungsangebote bei bne-sachsen.de 
+    $src="https://bne-sachsen.de/wp-json/content/offers";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    jsonDump("Dumps/BNE-Offers.json",$res);
 }
 
 function jsonDump($fn,$s) {

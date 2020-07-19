@@ -187,8 +187,6 @@ function displayBA($v,$users,$c,$t) {
     $geo=geoData($v);
     $zielgruppe=$v["target_group_selection"];
     $url=$v["info_url"];
-    $goals=join(", ",$v["goals"]);
-    $themes=getThemes($goals);
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
@@ -244,8 +242,6 @@ function displayEvent($v,$users,$c,$t) {
     $url=$v["info_url"];
     $von=$v["start_at"];
     $bis=$v["end_at"];
-    $goals=join(", ",$v["goals"]);
-    $themes=getThemes($goals);
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
