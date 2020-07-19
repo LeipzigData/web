@@ -13,10 +13,10 @@ function pageHeader() {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Forum Nachhaltiges Leipzig - Zukunftsakademie"/>
+    <meta name="description" content="Leipzig Data Projekt und Zukunftsakademie"/>
     <meta name="author" content="Leipzig Data Project"/>
 
-    <title>Forum Nachhaltiges Leipzig - Zukunftsakademie</title>
+    <title>Leipzig Data Projekt und Zukunftsakademie</title>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -39,10 +39,10 @@ function pageNavbar() {
 	<div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
-            <li><a href="zd.php">Zukunftsdiplom</a></li>
-            <li><a href="angebote.php">Die Angebote</a></li>
-            <li><a href="akteure.php">Die Anbieter</a></li>
-            <li><a href="bildungsangebote.php">Alle Bildungsangebote</a></li>
+            <li><a href="zd.php">Das Zukunftsdiplom</a></li>
+            <li><a href="angebote.php">Die ZD-Angebote</a></li>
+            <li><a href="akteure.php">Die ZD-Anbieter</a></li>
+            <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
             <!-- <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
             <li><a href="events.php">Die Events</a></li>
             <li><a href="locations.php">Die Orte</a></li> 
@@ -59,7 +59,7 @@ function pageNavbar() {
 function generalContent() {
   return '
 <div class="container">
-  <h1 align="center">Forum Nachhaltiges Leipzig - Zukunftsakademie</h1>
+  <h1 align="center">Leipzig Data Projekt und Zukunftsakademie</h1>
 </div>
 ';
 }
@@ -69,6 +69,8 @@ function pageFooter() {
 
       <div class="container">
     <div class="footer">
+      <p class="text-muted">&copy;
+  <a href="https://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
       <p class="text-muted">&copy;
   <a href="https://zukunftsakademie-leipzig.de">Zukunftsakademie Leipzig
         e.V.</a> 2019-2020 </p>

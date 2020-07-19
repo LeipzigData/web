@@ -106,6 +106,9 @@ function displayOffer($a) {
     if (!empty($a["zielgruppe"])) {
         $out.='<li> <strong>Zielgruppe:</strong> '.$a["zielgruppe"].' </li>';
     }
+    if (!empty($a["goals"])) {
+        $out.='<li> <strong>Ziele:</strong> '.$a["goals"].' </li>';
+    }
     if (!empty($a["kurzbeschreibung"])) {
         $out.='<li> <strong>Kurzbeschreibung:</strong> '
             .$a["kurzbeschreibung"].' </li>';
@@ -130,8 +133,10 @@ $content='
 <div class="container">
 <h2 align="center">Bildungsangebote</h2>
 
-<p>Auf dieser Seite werden alle Einträge gelistet, die in die Kategorie
-"Bildungsangebote" fallen. </p>
+<p>Dies ist ein erster Versuch, die Bildungsangebote aus den Plattformen
+"Nachhaltiges Leipzig" und "BNE Sachsen" (nur die für Leipzig relevanten)
+trotz der deutlichen Differenzen in den Datenmodellen in einer Anzeige
+zusammenzuführen. </p>
 
 '.dieBildungsangebote().'
 </div>
