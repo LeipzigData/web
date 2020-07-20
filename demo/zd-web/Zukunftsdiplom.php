@@ -2,7 +2,7 @@
 /**
  * User: Hans-Gert Gräbe
  * Date: 2018-06-30
- * Last Update: 2020-03-18
+ * Last Update: 2020-07-20
  */
 
 // --- Hilfsfunktionen
@@ -118,8 +118,7 @@ function displayPartner($v) {
     return $out."</ul>";
 }
 
-function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
-    $currentDate=date("Y-m-d");
+function prepareOutput($startDate,$endDate) {
     $src="Dumps/Veranstalter.json";
     $string = file_get_contents($src);
     $users = json_decode($string, true);
@@ -134,20 +133,31 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
     foreach($res as $row) {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
-        if (faelltaus($row)) ;
-        else if ($row["type"]=="Event") {
-            if ($row["start_at"]>$currentDate && $archiv == false &&
-            $row["start_at"]<$endDate) {
-                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
-            }
-            else if ($row["start_at"]>$startDate && $archiv == true
-            && $row["start_at"]<$currentDate ){
-                $e[$row["start_at"]]=displayEvent($row,$users,$c,$t);
-            }
+        // if (faelltaus($row)) ;
+        if (($row["type"]=="Event") && $row["start_at"]>$startDate
+        && $row["start_at"]<$endDate ) {
+            $e["alle"][$row["start_at"]]=displayEvent($row,$users,$c,$t);
+            $e[$t][$row["start_at"]]=displayEvent($row,$users,$c,$t);
         }
-        else if ($archiv==false){
-            $b[]=displayBA($row,$users,$c,$t);
+        else {
+            $b["alle"][]=displayBA($row,$users,$c,$t);
+            $b[$t][]=displayBA($row,$users,$c,$t);
         }
+    }
+    $u=array();
+    $u["Events"]=$e;
+    $u["Bildungsangebote"]=$b;
+    return $u;
+}
+
+function dieVeranstaltungen($startDate,$endDate,$t) {
+    // $t steht für das Themengebiet, "alle" für alles
+    $u=prepareOutput($startDate,$endDate);
+    $b=$u["Bildungsangebote"][$t];
+    $e=array();
+    $currentDate=date("Y-m-d");
+    foreach($u["Events"][$t] as $key => $v) {
+        if ($key>=$currentDate) { $e[$key]=$v; }
     }
     ksort($e);
     $out="<h2> Die Bildungsangebote </h2> "
@@ -157,19 +167,37 @@ function dieVeranstaltungen($startDate,$endDate,$archiv=false) {
     return $out;
 }
 
-function dasArchiv($startDate,$endDate){
-    $out = dieVeranstaltungen($startDate,$endDate,true);
-    $out = str_replace("<h2> Die Bildungsangebote </h2>", "", $out);
-    $out = str_replace("Weitere", "Vergangene", $out);
-    return $out;
+function AngebotsUebersicht($startDate,$endDate) {
+    // $t steht für das Themengebiet, "alle" für alles
+    $u=prepareOutput($startDate,$endDate);
+    // Extrahiere alle Themen
+    $t=array();
+    foreach($u["Bildungsangebote"] as $key => $value) { $t[$key]=1; }
+    foreach($u["Events"] as $key => $value) { $t[$key]=1; }
+    unset($t["alle"]); // "alle" wird extra behandelt"
+    $a=array();
+    ksort($t);
+    foreach($t as $key => $value) {
+        $link="angebote.php?thema=$key";
+        $linktext=$key;
+        $a[]='<li>'.createLink($link,$linktext).'</li>';
+    }
+    $alle=createLink("angebote.php?thema=alle","Alle Angebote");
+    return '<h3> '.$alle.' </h3> 
+        <h3> Die Angebote nach Themen </h3> 
+        <ul>'.join($a,"\n").'</ul>';
 }
 
-function calculateArchivDate() {
-  $currentDate = date("Y-m-d");
-  if ($currentDate < date("Y-06-22")){
-    return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")-1));
-  }
-  return date("Y-m-d",mktime(0, 0,0 , 6, 22, date("Y")));
+function dasArchiv($startDate,$endDate){
+    // Nur Events und nicht nach Themen sortiert
+    $u=prepareOutput($startDate,$endDate);
+    $e=array();
+    $currentDate=date("Y-m-d");
+    foreach($u["Events"][$t] as $key => $v) {
+        if ($key<$currentDate) { $e[$key]=$v; }
+    }
+    ksort($e);
+    return join($e,"\n");
 }
 
 function displayBA($v,$users,$c,$t) {
@@ -396,5 +424,8 @@ function shortDisplay($v) {
 
 
 // ---- test ----
-// echo dieVeranstaltungen();
+//$startDate=date("Y-m-d",strtotime("19.07.2020"));
+//$endDate=date("Y-m-d",strtotime("01.11.2020"));
+//echo AngebotsUebersicht($startDate,$endDate); 
+// echo dieVeranstaltungen($startDate,$endDate,"alle");
 // echo diePartner();
