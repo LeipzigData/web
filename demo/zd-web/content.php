@@ -14,6 +14,6 @@ if ($action=="archiv") { echo dasArchiv($startDate,$endDate); }
 else if ($action=="meier") {
     echo "Das ist ein Parameter zum Testen der Verbindung\n";
 }
-else { echo dieVeranstaltungen($startDate,$endDate); }
+else { echo dieVeranstaltungen($startDate,$endDate,"alle"); }
 
 ?>
