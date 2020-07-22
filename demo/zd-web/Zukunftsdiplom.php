@@ -66,9 +66,8 @@ function getThemes($a) {
     if (strpos($a,"Ernährung")) { $m["Ernährung"]=1; }
     if (strpos($a,"Gärtnern")) { $m["Ernährung"]=1; }
     if (strpos($a,"Nachhaltiger Konsum")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Reparieren")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Wiederverwenden")) { $m["Nachhaltiger Konsum"]=1; }
-    if (strpos($a,"Recycling")) { $m["Nachhaltiger Konsum"]=1; }
+    if (strpos($a,"Nachhaltig Wirtschaften")) { $m["Technik, Energie, Mathematik"]=1; }
+    if (strpos($a,"Recycling")) { $m["Technik, Energie, Mathematik"]=1; }
     if (strpos($a,"Soziale Nachhaltigkeit")) { $m["Soziales und Kultur"]=1; }
     if (strpos($a,"Zusammenleben")) { $m["Soziales und Kultur"]=1; }
     if (strpos($a,"Kunst")) { $m["Soziales und Kultur"]=1; }
