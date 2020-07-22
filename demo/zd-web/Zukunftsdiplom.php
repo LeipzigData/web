@@ -133,8 +133,8 @@ function prepareOutput($startDate,$endDate) {
     foreach($res as $row) {
         $c=$cat[$row["first_root_category"]]["name"];
         $t=getThemes($c);
-        // if (faelltaus($row)) ;
-        if (($row["type"]=="Event") && $row["start_at"]>$startDate
+        if (faelltaus($row)) ;
+        else if (($row["type"]=="Event") && $row["start_at"]>$startDate
         && $row["start_at"]<$endDate ) {
             $e["alle"][$row["start_at"]]=displayEvent($row,$users,$c,$t);
             $e[$t][$row["start_at"]]=displayEvent($row,$users,$c,$t);

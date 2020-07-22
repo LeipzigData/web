@@ -35,7 +35,8 @@ if (defined('ABSPATH') ) {
     add_shortcode('zukunftsdiplom', 'zukunftsdiplom');
     add_shortcode('zd', 'zd');
 } else {
-    $s=array("action" => "meier"); echo htmlEnv(zd($s)); // for testing
+    //$s=array("action" => "meier"); echo htmlEnv(zd($s)); // for testing
+    echo htmlEnv(zukunftsdiplom()); // for testing
 }
 
 ?>
