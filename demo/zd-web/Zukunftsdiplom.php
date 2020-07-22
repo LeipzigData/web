@@ -139,7 +139,7 @@ function prepareOutput($startDate,$endDate) {
             $e["alle"][$row["start_at"]]=displayEvent($row,$users,$c,$t);
             $e[$t][$row["start_at"]]=displayEvent($row,$users,$c,$t);
         }
-        else {
+        else if ($row["type"]=="Service")  {
             $b["alle"][]=displayBA($row,$users,$c,$t);
             $b[$t][]=displayBA($row,$users,$c,$t);
         }
