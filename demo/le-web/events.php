@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2020-04-01
  * Last Update: 2020-04-02
  */
 
@@ -13,8 +12,13 @@ function getEvents($startDate) {
     setNamespace();
     $s=array();
     foreach ($graph->allOfType("ld:Event") as $v) {
-        if ($v->get("ical:dtstart")>$startDate) { $s[]=displayEvent($v); }
-    }    
+        $eventdate=$v->get("ical:dtstart");
+        $name=$v->get("rdfs:label");
+        if ($eventdate>$startDate) {
+            $s[$eventdate.$name]=displayEvent($v);
+        }
+    }
+    ksort($s);
     return join("\n",$s);
 }
 
@@ -45,7 +49,7 @@ function displayEvent($v) {
     return $out."</ul>";
 }
 
-$startDate="2020-01-01";
+$startDate="2020-10-01";
 $content='
 <div class="container">
 <h2 align="center">Die Events</h2>
