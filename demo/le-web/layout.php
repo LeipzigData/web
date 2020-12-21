@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-06-30
  * Last Update: 2019-08-03
  */
 

@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2020-04-01, Kopie von zd-web/index.php
  * Last Update: 2020-04-02
  */
 
