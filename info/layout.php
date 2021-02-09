@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2019-08-05
+ * last update: 2021-02-09
  */
 
 function pageHeader() {
@@ -41,7 +41,8 @@ function pageNavbar() {
             <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li>
             <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
             <li><a href="mint-md-katalog.php">MINT-MD-Katalog</a></li> 
-            <li><a href="gebaeudenavigator.php">Gebäudenavigator</a></li> 
+            <li><a href="gebaeudenavigator.php">Gebäudenavigator</a></li>
+            <li><a href="schools.php">Sächsische Schulen</a></li> 
           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
