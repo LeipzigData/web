@@ -19,8 +19,7 @@ Schuldatenbank</a> über deren <a href=
 "https://schuldatenbank.sachsen.de/docs/api.html">API</a> generiert.</p>
 
 <p> Die Daten sind in einer <a href="rdf/schools.json">lokalen json-Datei</a>
-gespeichert, aus der die folgende Übersicht generiert wird.  Der in einem
-Array "building" gespeicherte Teil wurde noch nicht weiter analysiert.</p> 
+gespeichert, aus der die folgende Übersicht generiert wird. </p> 
 
 <p>
 '.getSchools().'
