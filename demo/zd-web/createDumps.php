@@ -171,7 +171,7 @@ function dumpCategories() {
 }
 
 // ---- test ----
-//createDumps();
+createDumps();
 //createZDDumps();
 //dumpCategories();
 createAdditionalDumps();
