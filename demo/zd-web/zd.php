@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-06-07
  * Last Update: 2020-07-09
  */
 
@@ -13,9 +12,13 @@ $content='
 <div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
 <h3>Mach mit beim Zukunftsdiplom!</h3>
 
-<p><strong>Das Zukunftsdiplom 2020 läuft vom 19. Juli bis 1. November 2020
-angeboten. Der Zeitzaum wurde mit Blick auf die Corona-Beschränkungen
-angepasst.</strong></p>
+<p><strong>2021 kann aktuell mit Verweis auf fehlende Förderung das
+Zukunftsdiplom nicht angeboten werden.</strong></p>
+
+<p><strong>Das Zukunftsdiplom 2020 lief vom 19. Juli bis 1. November 2020.
+Der Zeitzaum wurde mit Blick auf die Corona-Beschränkungen angepasst.</strong>
+</p>
+
 
 <h3>Und so funktioniert das Zukunftsdiploms</h3>
 

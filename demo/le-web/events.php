@@ -49,7 +49,7 @@ function displayEvent($v) {
     return $out."</ul>";
 }
 
-$startDate="2020-10-01";
+$startDate="2021-01-01";
 $content='
 <div class="container">
 <h2 align="center">Die Events</h2>

@@ -1,14 +1,13 @@
 <?php 
 /**
  * User: Hans-Gert Gräbe
- * Date: 2019-02-18
- * Last Update: 2019-05-30
+ * Last Update: 2021-07-02
  */
 
 include_once("Zukunftsdiplom.php");
 
-function getData() { 
-    $string = file_get_contents('Dumps/Zukunftsdiplom.json');
+function getUser($file) { 
+    $string = file_get_contents($file);
     $res = json_decode($string, true);
     $s=array();
     $users=array();
@@ -64,6 +63,22 @@ function displayMyEvent($v) {
     return $out;
 }
 
+function checkFile($file) {
+    $string = file_get_contents($file);
+    $res = json_decode($string, true);
+    $s=array(); 
+    foreach($res as $row) {
+        if ($row["type"]=='Project') {
+            $id=$row["id"];
+            $uid=$row["user_id"];
+            $name=$row["name"];
+            $s[]="$id\n$uid\n$name\n=========";
+        }
+    }
+    return join("\n",$s);
+}
+
 
 // ---- test ----
-// $s=getData(); analyze($s);
+// $s=getUsers("Dumps/activities.json"); analyze($s);
+echo checkFile("Dumps/activities.json");

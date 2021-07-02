@@ -1,8 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-06-30
- * Last Update: 2020-07-20
+ * Last Update: 2021-05-12
  */
 
 // --- Hilfsfunktionen
@@ -50,7 +49,6 @@ function akteursKontakt($v) {
             .$v["organization_position"];
     }
 }
-
 
 // --- Die Hauptfunktionen
 

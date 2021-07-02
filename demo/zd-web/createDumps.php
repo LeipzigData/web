@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2019-02-18
  * Last Update: 2020-07-19
  */
 
@@ -92,7 +91,7 @@ function isZDListed($row) {
 }
 
 function createAdditionalDumps() {
-    $src="Dump/activities.json";
+    $src="Dumps/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     // -----------------------------------
@@ -172,7 +171,7 @@ function dumpCategories() {
 }
 
 // ---- test ----
-createDumps();
-createZDDumps();
+//createDumps();
+//createZDDumps();
 //dumpCategories();
-//createAdditionalDumps();
+createAdditionalDumps();

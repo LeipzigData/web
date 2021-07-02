@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-06-30
  * Last Update: 2020-07-16
  */
 
@@ -73,7 +72,7 @@ function pageFooter() {
   <a href="https://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
       <p class="text-muted">&copy;
   <a href="https://zukunftsakademie-leipzig.de">Zukunftsakademie Leipzig
-        e.V.</a> 2019-2020 </p>
+        e.V.</a> 2019-2021 </p>
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
