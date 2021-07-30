@@ -1,7 +1,7 @@
 <?php 
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2021-07-02
+ * Last Update: 2021-07-15
  */
 
 include_once("Zukunftsdiplom.php");
@@ -32,38 +32,24 @@ function analyze($s) {
 function displayMyEvent($v) {
     // ein Event
     $id=$v["id"];
-    $nr="1"; // temporär, bis die Sache mit den Themenbereichen geklärt ist.
     $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
     $title=$v["name"];
-    $beschreibung=$v["description"];
     $ort=$v["full_address"];
-    $zielgruppe=$v["target_group"];
-    $url=$v["info_url"];
-    $von=$v["start_at"];
-    $bis=$v["end_at"];
+    $region=$v["region"]["name"];
     $out='
 <h3> <a href="'.$src.'">'.$title.'</a></h3>
 <div class="row"> <ul>';
-    if (!empty($von)) {
-        $out.='<li> <strong>Beginn:</strong> '.getDatum($von).' </li>';
-    }
     if (!empty($ort)) {
         $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
     }
-    if (!empty($zielgruppe)) {
-        $out.='<li> <strong>Zielgruppe:</strong> '.$zielgruppe.' </li>';
-    }
-    if (!empty($beschreibung)) {
-        $out.='<li> <strong>Beschreibung:</strong> '.$beschreibung.' </li>';
-    }
-    if (!empty($url)) {
-        $out.='<li> <a href="'.$url.'">Link des Veranstalters</a> </li>';
+    if (!empty($region)) {
+        $out.='<li> <strong>Region:</strong> '.$region.' </li>';
     }
     $out.='</ul></div>';
     return $out;
 }
 
-function checkFile($file) {
+function checkProjects($file) {
     $string = file_get_contents($file);
     $res = json_decode($string, true);
     $s=array(); 
@@ -72,13 +58,30 @@ function checkFile($file) {
             $id=$row["id"];
             $uid=$row["user_id"];
             $name=$row["name"];
-            $s[]="$id\n$uid\n$name\n=========";
+            $region=$row["region"]["name"];
+            $s[]="$id\n$uid\n$name\n$region\n=========";
         }
     }
     return join("\n",$s);
 }
 
+function checkUsers($file) {
+    $string = file_get_contents($file);
+    $res = json_decode($string, true);
+    $s=array(); 
+    foreach($res as $row) {
+        $id=$row["id"];
+        $name=$row["name"];
+        $district=$row["district"];
+        //$s[]="$id\n$name\n$district\n=========";
+        $s[]="$district";
+    }
+    return join("\n",$s);
+}
+
+
 
 // ---- test ----
 // $s=getUsers("Dumps/activities.json"); analyze($s);
-echo checkFile("Dumps/activities.json");
+echo checkProjects("Dumps/activities.json");
+// echo checkUsers("https://daten.nachhaltiges-leipzig.de/api/v1/users.json");

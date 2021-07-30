@@ -1,7 +1,6 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2019-02-24
  * Last Update: 2020-07-19
  */
 
@@ -20,9 +19,9 @@ function getBA() {
         $s[]=normalizeNLService($row);
     }
     foreach($res2 as $row) {
-        if (strpos(join(", ",$row["districts"]),"Leipzig")) {
-            $s[]=normalizeBNEService($row);
-        }
+        //if (strpos(join(", ",$row["districts"]),"Leipzig")) {
+        $s[]=normalizeBNEService($row);
+        //}
     } 
     return $s;
 }
@@ -56,25 +55,23 @@ function normalizeBNEService($v) {
     $a["aid"]=$v["id"]; 
     $a["alink"]="https://bne-sachsen.de/wp-json/content/offers?p=".$v["id"];
     $a["title"]=$v["title"];
-    //$a["url"]=$v["info_url"];
+    $a["url"]=$v["link"];
     // Veranstalter
     $a["ansprechpartner"]=$v["author"];
-    //$a["vid"]=$v["user_id"];
-    //$a["vlink"]="http://daten.nachhaltiges-leipzig.de/api/v1/users/".$v["user_id"].".json";
     // Ort
     $a["ort"]="Nicht mit ausgeliefert"; //$v["full_address"];
     //$a["geo"]=geoData($v);
     // Beschreibung    
     //$a["angebotsart"]=$v["education_type"];
-    $a["kurzbeschreibung"]=$v["teaser_text"];
-    $s=array();
+    $a["kurzbeschreibung"]=$v["content"];
+    /* $s=array();
     foreach($v["target_group"]["extracurricular"] as $t) { $s[]=$t; }
     foreach($v["target_group"]["school"] as $t) { $s[]=$t; }
     $a["zielgruppe"]=join(", ",$s);
     $s=array();
     foreach($v["topics"] as $t) { $s[]=$t["name"]; }
     $a["goals"]=join(", ",$s);
-    $a["format"]=join(", ",$v["format"]);    
+    $a["format"]=join(", ",$v["format"]); */    
     return $a;
 }
     
