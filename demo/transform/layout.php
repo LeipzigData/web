@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2020-06-05
+ * last update: 2021-08-07
  */
 
 function pageHeader() {
@@ -15,7 +15,7 @@ function pageHeader() {
     <meta name="description" content="Leipzig Data Showroom"/>
     <meta name="author" content="Leipzig Data Project"/>
 
-    <title>Leipzig Data Showroom</title>
+    <title>BNE-Akteure in Sachsen</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     
@@ -38,18 +38,8 @@ function pageNavbar() {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 
-            <li><a href="Energie-13">Energiekarte</a></li> 
-            <!-- <li><a href="Jugendstadtplan">Jugendstadtplan</a></li> -->
-            <li><a href="Gentri-14">Das Gentri-Projekt</a></li> 
-            <!-- <li><a href="Event-Widget">Event-Widget</a></li> -->
-            <li><a href="IHR-15">Interaktiver Haushalt</a></li> 
-            <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
-            <!-- <li><a href="zd-web">Zukunftsdiplom</a></li> 
-            <li><a href="le-web">Leipziger Ecken</a></li> 
-            <li><a href="bne-web">bne-sachsen.de</a></li> --> 
-            <li><a href="transform">BNE-Akteure in Sachsen</a></li> 
-            <!-- <li><a href="Corona-20">Analyse von Corona-Daten</a></li> --> 
-          </ul>
+            <li><a href="akteure.php">Akteure</a></li> 
+           </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->
     </nav>';
@@ -58,14 +48,14 @@ function pageNavbar() {
 function generalContent() {
   return '
 <div class="container">
-  <h1 align="center">Showroom des Leipzig Data Projekts</h1>
+  <h1 align="center">BNE-Akteure und -Aktivitäten in Sachsen</h1>
 </div>
 ';
 }
 
 function pageFooter() {
   return '
-
+<hr/>
       <div class="container">
     <div class="footer">
         <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
@@ -82,5 +72,5 @@ function pageFooter() {
 }
 
 function showPage($content) {
-  return pageHeader().generalContent().pageNavbar().($content).pageFooter();
+  return pageHeader().pageNavbar().generalContent().($content).pageFooter();
 }
