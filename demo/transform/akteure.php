@@ -10,6 +10,14 @@
 require_once("helper.php");
 require_once("layout.php");
 
+function getNames($list) {
+    $a=array();
+    foreach($list as $v) {
+        $a[]=$v->get("rdfs:label");
+    }
+    return join(", ",$a);
+}
+
 function getAkteure() {
     setNamespaces();
     $graph = new \EasyRdf\Graph('http://leipzig-data.de/rdf/Akteure/');
@@ -40,18 +48,22 @@ function getAkteure() {
         $name=$v->get("rdfs:label");
         $url=$v->get("foaf:homepage");
         $source=$v->get("ld:hasSource");
-        $type=$v->get("ld:hasType");
-        if(!empty($type)) { $type=$type->get("rdfs:label"); }
+        $type=getNames($v->all("ld:hasType"));
         $address=$v->get("ld:hasFullAddress");
         $geo=$v->get("gsp:asWKT");
-        $region=$v->get("ld:inRegion");
-        if(!empty($region)) { $region=$region->get("rdfs:label"); }
+        $region=getNames($v->all("ld:inRegion"));
+        $categories=getNames($v->all("ld:hasCategory"));
+        $targets=getNames($v->all("ld:hasTargetGroup"));
+        $tags=getNames($v->all("ld:hasTag"));
         $a[createIndex($name)]='<h4>'.createLink($uri,$name).'</h4>
 <strong>Quelle:</strong> '.$source.'<br/>
 <strong>Akteurstyp:</strong> '.$type.'<br/>
 <strong>Adresse:</strong> '.$address.'<br/>
 <strong>Geokoordinaten:</strong> '.$geo.'<br/>
 <strong>Region:</strong> '.$region.'<br/>
+<strong>Kategorien:</strong> '.$categories.'<br/>
+<strong>Target-Gruppen:</strong> '.$targets.'<br/>
+<strong>Tags:</strong> '.$tags.'<br/>
 ';
     }
     ksort($a);
