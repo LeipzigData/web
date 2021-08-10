@@ -13,19 +13,40 @@ require_once("layout.php");
 function getAkteure() {
     setNamespaces();
     $graph = new \EasyRdf\Graph('http://leipzig-data.de/rdf/Akteure/');
-    $graph->parseFile('rdf/Akteure.rdf');
+    $graph->parseFile('rdf/NachhaltigesSachsen.rdf');
     //echo $graph->dump("turtle");
     $a=array();
-    foreach($graph->allOfType('ld:Akteur') as $v) {
+    foreach($graph->allOfType('nl:Akteur') as $v) {
+        $uri=$v->getURI();
         $name=$v->get("rdfs:label");
         $url=$v->get("foaf:homepage");
         $source=$v->get("ld:hasSource");
         $type=$v->get("ld:hasType");
-        $lid=$v->get("rdfs:isDefinedBy");
         $address=$v->get("ld:hasFullAddress");
         $geo=$v->get("gsp:asWKT");
         $region=join(", ",$v->all("ld:inRegion"));
-        $a[createIndex($name)]='<h4>'.createLink($lid,$name).'</h4>
+        $a[createIndex($name)]='<h4>'.createLink($uri,$name).'</h4>
+<strong>Quelle:</strong> '.$source.'<br/>
+<strong>Akteurstyp:</strong> '.$type.'<br/>
+<strong>Adresse:</strong> '.$address.'<br/>
+<strong>Geokoordinaten:</strong> '.$geo.'<br/>
+<strong>Region:</strong> '.$region.'<br/>
+';
+    }
+    $graph->parseFile('rdf/LeipzigerEcken.rdf');
+    //echo $graph->dump("turtle");
+    foreach($graph->allOfType('le:Akteur') as $v) {
+        $uri=$v->getURI();
+        $name=$v->get("rdfs:label");
+        $url=$v->get("foaf:homepage");
+        $source=$v->get("ld:hasSource");
+        $type=$v->get("ld:hasType");
+        if(!empty($type)) { $type=$type->get("rdfs:label"); }
+        $address=$v->get("ld:hasFullAddress");
+        $geo=$v->get("gsp:asWKT");
+        $region=$v->get("ld:inRegion");
+        if(!empty($region)) { $region=$region->get("rdfs:label"); }
+        $a[createIndex($name)]='<h4>'.createLink($uri,$name).'</h4>
 <strong>Quelle:</strong> '.$source.'<br/>
 <strong>Akteurstyp:</strong> '.$type.'<br/>
 <strong>Adresse:</strong> '.$address.'<br/>

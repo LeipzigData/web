@@ -18,6 +18,8 @@ function setNamespaces() {
     \EasyRdf\RdfNamespace::set('owl', 'http://www.w3.org/2002/07/owl#');
     \EasyRdf\RdfNamespace::set('skos', 'http://www.w3.org/2004/02/skos/core#');
     \EasyRdf\RdfNamespace::set('ld', 'http://leipzig-data.de/Data/Model/');
+    \EasyRdf\RdfNamespace::set('le', 'http://leipziger-ecken.de/Data/Model/');
+    \EasyRdf\RdfNamespace::set('nl', 'http://nachhaltiges-sachsen.de/Data/Model/');
 }
 
 function htmlEnv($out) 
