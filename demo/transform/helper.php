@@ -22,8 +22,7 @@ function setNamespaces() {
     \EasyRdf\RdfNamespace::set('nl', 'http://nachhaltiges-sachsen.de/Data/Model/');
 }
 
-function htmlEnv($out) 
-{
+function htmlEnv($out) {
     return '
 <HTML>
 <HEAD>
@@ -32,6 +31,14 @@ function htmlEnv($out)
 '.$out.'
 </BODY></HTML>
 ';
+}
+
+function getNames($list) {
+    $a=array();
+    foreach($list as $v) {
+        $a[]=$v->get("rdfs:label");
+    }
+    return join(", ",$a);
 }
 
 function fixEncoding($out) {
@@ -61,7 +68,7 @@ function createUniLink($url) {
 }
 
 function showDate($s) {
-    return date("D d M Y",strtotime($s));
+    return date("d M Y, h:i",strtotime($s));
 }
 
 function multiline($s) {

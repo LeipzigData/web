@@ -39,6 +39,7 @@ function pageNavbar() {
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 
             <li><a href="akteure.php">Akteure</a></li> 
+            <li><a href="events.php">Events (2021)</a></li> 
            </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->

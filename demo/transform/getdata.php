@@ -1,19 +1,16 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-01-07
  * LastUpdate: 2018-08-05
  */
 
 include_once("akteure.php");
-include_once("personen.php");
 include_once("activities.php");
 
 function main() {
     $what=$_GET['show'];
     $out='';
-    if ($what=='personen') { $out=getPersonen(); }
-    else if ($what=='akteure') { $out=getAkteure(); }
+    if ($what=='akteure') { $out=getAkteure(); }
     else if ($what=='ldakteure') { $out=getLDAkteure(); }
     else if ($what=='aktivitaeten') { $out=getAllActivities(); }
     else if ($what=='events') { $out=getEvents(); }

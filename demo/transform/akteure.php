@@ -1,22 +1,14 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2021-08-08
+ * Last Update: 2021-08-11
 
- * Darstellung der nach rdf/Akteure.rdf extrahierten Akteure. 
+ * Darstellung der Akteure aus den beteiligten Plattformen. 
 
  */
 
 require_once("helper.php");
 require_once("layout.php");
-
-function getNames($list) {
-    $a=array();
-    foreach($list as $v) {
-        $a[]=$v->get("rdfs:label");
-    }
-    return join(", ",$a);
-}
 
 function getAkteure() {
     setNamespaces();
@@ -80,9 +72,6 @@ $content='
 
 </div> 
 ';
-
-// zum Testen
-// echo getAllActivities();
 
 echo showpage($content);
 

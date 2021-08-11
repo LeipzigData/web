@@ -1,48 +1,49 @@
-# Erzeugung von RDF-Daten aus den APIs der verschiedenen Projekte
+# Präsentation der RDF-Daten aus den APIs der verschiedenen Plattformen
 
 ## Grundsätzliche Struktur des Verzeichnisses
 
-In diesem Verzeichnis sind verschiedene PHP-Transformationsroutinen
-zusammengestellt, die über die verfügbare REST-API (siehe die Beschreibung in
-der Datei *helper.php*) die Instanzen der Klassen *org:Organization*
-(Akteure), *foaf:Person* und *org:Membership* (Person, Rolle dieser Person
-beim Akteur) aus users.json sowie *nl:Activity* (Aktivitäten) und die
-Unterklassen **nl:Event**, **nl:Action**, **nl:Project**, **nl:Service**,
-**nl:Store** aus activities.json mit URIs im Namensraum-Präfix
-<http://nachhaltiges-leipzig.de/Data/> erzeugen und in verschiedenen
-RDF-Graphen zusammenfassen.
+In diesem Verzeichnis sind prototypisch verschiedene
+Präsentationsmöglichkeiten der Daten im Verzeichnis _rdf_ (diese wurden aus
+den APIs der einzelnen Plattformen gewonnen, siehe dazu das Verzeichnis
+_Transform_ im LD-Repo _Tools_) zusammengestellt.  Diese Daten realisieren ein
+__gemeinsames Datenmodell__ auf der Basis der verschiedenen Datenmodelle der
+einzelnen Plattformen, so weit dies möglich ist.
 
-Die entsprechenden Transformationen werden von den Scripten `activities.php`,
-`akteure.php` und `personen.php` ausgeführt und durch die gemeinsame Datei
-`helper.php` unterstützt, in der vor allem verschiedene Routinen zum
+Die entsprechenden Präsentationen werden von den Scripten `events.php`, und
+`akteure.php` aus den RDF-Daten zusammengestellt und durch die gemeinsame
+Datei `helper.php` unterstützt, in der vor allem verschiedene Routinen zum
 Adjustieren von Strings sowie zum Erstellen von Einträgen zusammengefasst
-sind, die immer wieder benötigt werden. `test.php` enthält einige Routinen zur
-Analyse der json-Dateien, die von der REST-API zurückgegeben werden.
+sind, die immer wieder benötigt werden. Die Dateien `index.php` und
+`layout.php` dienen dem Aufbau der Webseiten.
 
-Die Dateien `main.php` und `index.php` können verwendet werden, um die
-Transformationen auszuführen, wobei `index.php` das Ergebnis auf einer
-Webseite anzeigt, `main.php` dagegen die Transformationen als Turtle-Dateien
-in das Verzeichnis `../Daten` schreibt (Aufruf `php main.php` von der
-Kommandozeile aus).  `getdata.php` stellt diese Funktionalität als einfachen
-Webservice zur Verfügung, der etwa als `getdata.php?show=akteure` auch direkt
-aufgerufen werden kann.
+Die in `composer.json` definierten Abhängigkeiten müssen vorab über 
+```
+composer update
+```
+installiert werden. 
+
+Die weiteren Dateien sind aus einer Vorgängerversion übernommen und derzeit
+ohne Bedeutung.
 
 ## Namensschemata für lokale URIs
 
-Lokale URIs werden direkt aus den Primärschlüsseln (der Id) des entsprechenden
-Datensatzes erzeugt. Diese haben (bis auf Personen, deren Daten dem
-Namensschema von leipzig-data.de folgen, die Informationen werden auch
-Datenschutzgründen nur intern verwendet) grundsätzlich die Struktur
-`<Präfix>/<Typ>.<Id>`, wobei <Typ> \in {Person, Akteur, Activity} gilt.
+Als URI eines einzelnen Datensatzes mit direkter Referenz zur jeweiligen
+Plattform wird dessen API-Link verwendet, da hiermit die Linked-Data-Regel
+"upon HTTP request deliver a useful chunk of information" ansatzweise erfüllt
+wird.  Dies entspricht dem, was das Prädikat `rdfs:isDefinedBy` ausliefern
+würde.
 
-Dabei werden die Namensraumpräfixe
+Zu ergänzen: Was passiert, wenn Teile eines Datensatzes 
 
--  nl: <http://nachhaltiges-leipzig.de/Data/Model#> 
+Für Typen und Prädikate werden die Namensraumpräfixe
+
 -  ld: <http://leipzig-data.de/Data/Model/> 
+-  le: <http://leipziger-ecken.de/Data/Model/> 
+-  nl: <http://nachhaltiges-sachsen.de/Data/Model/> 
 
-für Datenstrukturen verwendet, die entweder spezifisch für
-`nachhaltiges-leipzig.de` oder für `leipzig-data.de` sind, sowie weitere
-verbreitete Ontologien wie
+verwendet, die spezifisch für die einzelnen Plattformen sind.  Die
+(zusätzlichen) Prädikate des gemeinsamen Datenmodells gehören zum Namensraum
+ld:.  Daneben werden (neben rdf: und rdfs:) weitere verbreitete Ontologien wie
 
 -  dct: <http://purl.org/dc/terms/>
 -  foaf: <http://xmlns.com/foaf/0.1/> 
@@ -52,7 +53,9 @@ verbreitete Ontologien wie
 
 eingesetzt.
 
-## Datenmodell und dessen Transformation. Die Grundklassen.
+## Datenmodell und dessen Transformation. 
+
+(Das Folgende ist zu überarbeiten)
 
 *activities* ist ein Obertyp zu verschiedenen Arten von Aktivitäten (Aktionen,
 Events, Projekte, Services, Stores), die mit dem Prädikat *nl:hasType* näher
@@ -66,9 +69,6 @@ Transformationsprozess über das Konzept org:Membership getrennt und über die
 RDF-Klassen nl:Akteur und foaf:Person auch in verschiedenen RDF-Graphen
 erfasst.  *akteure.php* stellt Routinen für gesonderte Dumps der Akteure und
 der Personen zur Verfügung.
-
-Genauere Informationen zu den Prädikaten der einzelnen Datentypen sind unter
-`../Dokumente/Betreiberkonzept.tex` zu finden.
 
 Transformationen:
 
