@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2021-08-07
+ * last update: 2021-08-20
  */
 
 function pageHeader() {
@@ -39,7 +39,8 @@ function pageNavbar() {
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li> 
             <li><a href="akteure.php">Akteure</a></li> 
-            <li><a href="events.php">Events (2021)</a></li> 
+            <li><a href="events.php">Events (nur 2021)</a></li> 
+            <li><a href="stores.php">Fair Trade Stores</a></li> 
            </ul>
         </div><!-- navbar end -->
       </div><!-- container end -->

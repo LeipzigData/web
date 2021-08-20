@@ -36,7 +36,7 @@ function htmlEnv($out) {
 function getNames($list) {
     $a=array();
     foreach($list as $v) {
-        $a[]=$v->get("rdfs:label");
+        $a[]=$v->get("rdfs:seeAlso")->get("rdfs:label");
     }
     return join(", ",$a);
 }

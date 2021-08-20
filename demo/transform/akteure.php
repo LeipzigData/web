@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2021-08-11
+ * Last Update: 2021-08-14
 
  * Darstellung der Akteure aus den beteiligten Plattformen. 
 
@@ -17,15 +17,16 @@ function getAkteure() {
     //echo $graph->dump("turtle");
     $a=array();
     foreach($graph->allOfType('nl:Akteur') as $v) {
-        $uri=$v->getURI();
+        //$uri=$v->getURI();
         $name=$v->get("rdfs:label");
         $url=$v->get("foaf:homepage");
         $source=$v->get("ld:hasSource");
+        $link=$v->get("rdfs:seeAlso");
         $type=$v->get("ld:hasType");
         $address=$v->get("ld:hasFullAddress");
         $geo=$v->get("gsp:asWKT");
         $region=join(", ",$v->all("ld:inRegion"));
-        $a[createIndex($name)]='<h4>'.createLink($uri,$name).'</h4>
+        $a[createIndex($name)]='<h4>'.createLink($link,$name).'</h4>
 <strong>Quelle:</strong> '.$source.'<br/>
 <strong>Akteurstyp:</strong> '.$type.'<br/>
 <strong>Adresse:</strong> '.$address.'<br/>
@@ -36,10 +37,11 @@ function getAkteure() {
     $graph->parseFile('rdf/LeipzigerEcken.rdf');
     //echo $graph->dump("turtle");
     foreach($graph->allOfType('le:Akteur') as $v) {
-        $uri=$v->getURI();
+        //$uri=$v->getURI();
         $name=$v->get("rdfs:label");
         $url=$v->get("foaf:homepage");
         $source=$v->get("ld:hasSource");
+        $link=$v->get("rdfs:seeAlso");
         $type=getNames($v->all("ld:hasType"));
         $address=$v->get("ld:hasFullAddress");
         $geo=$v->get("gsp:asWKT");
@@ -47,7 +49,7 @@ function getAkteure() {
         $categories=getNames($v->all("ld:hasCategory"));
         $targets=getNames($v->all("ld:hasTargetGroup"));
         $tags=getNames($v->all("ld:hasTag"));
-        $a[createIndex($name)]='<h4>'.createLink($uri,$name).'</h4>
+        $a[createIndex($name)]='<h4>'.createLink($link,$name).'</h4>
 <strong>Quelle:</strong> '.$source.'<br/>
 <strong>Akteurstyp:</strong> '.$type.'<br/>
 <strong>Adresse:</strong> '.$address.'<br/>
