@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2021-08-20
+ * Last Update: 2021-08-21
 
  * Darstellung der Fair Trade Shops aus NL
 
@@ -21,6 +21,7 @@ function getStores() {
         $name=$v->get("rdfs:label");
         $url=$v->get("foaf:homepage");
         $source=$v->get("ld:hasSource");
+        $akteur=getNames($v->all("ld:hasAkteur"));
         $link=$v->get("rdfs:seeAlso");
         $address=$v->get("ld:hasFullAddress");
         $geo=$v->get("gsp:asWKT");
@@ -32,6 +33,7 @@ function getStores() {
 <strong>Quelle:</strong> '.$source.'<br/>
 <strong>Adresse:</strong> '.$address.'<br/>
 <strong>Geokoordinaten:</strong> '.$geo.'<br/>
+<strong>Akteur:</strong> '.$akteur.'<br/>
 <strong>Region:</strong> '.$region.'<br/>
 <strong>Produkte:</strong> '.$produkte.'<br/>
 <strong>Kategorien:</strong> '.$kategorien.'<br/>

@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2020-06-05
+ * last update: 2020-08-21
  */
 
 function pageHeader() {
@@ -44,10 +44,10 @@ function pageNavbar() {
             <!-- <li><a href="Event-Widget">Event-Widget</a></li> -->
             <li><a href="IHR-15">Interaktiver Haushalt</a></li> 
             <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
-            <!-- <li><a href="zd-web">Zukunftsdiplom</a></li> 
-            <li><a href="le-web">Leipziger Ecken</a></li> 
+            <li><a href="zd-web">Zukunftsdiplom</a></li> 
+            <!-- <li><a href="le-web">Leipziger Ecken</a></li> 
             <li><a href="bne-web">bne-sachsen.de</a></li> --> 
-            <li><a href="transform">BNE-Akteure in Sachsen</a></li> 
+            <li><a href="transform">BNE-Aktivitäten</a></li> 
             <!-- <li><a href="Corona-20">Analyse von Corona-Daten</a></li> --> 
           </ul>
         </div><!-- navbar end -->

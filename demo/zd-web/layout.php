@@ -41,9 +41,9 @@ function pageNavbar() {
             <li><a href="zd.php">Das Zukunftsdiplom</a></li>
             <li><a href="angebote.php">Die ZD-Angebote</a></li>
             <li><a href="akteure.php">Die ZD-Anbieter</a></li>
-            <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
+            <!-- <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
             <li><a href="service.php">Die Services</a></li>
-            <!-- <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
+            <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
             <li><a href="events.php">Die Events</a></li>
             <li><a href="locations.php">Die Orte</a></li> 
             <li><a href="gta.php">Die GTA-Angebote</a></li> 
