@@ -87,10 +87,6 @@ sub loaddata {
   $out.=createLoadCommand("http://leipzig-data.de/Data/Unternehmen/","Unternehmen.ttl");
   $out.=createLoadCommand("http://leipzig-data.de/Data/Vereine/","Vereine.ttl");
   $out.=createLoadCommand("http://leipzig-data.de/Data/WeitereAdressen/","WeitereAdressen.ttl");
-  #$out.=createLoadCommand("http://leipziger-ecken.de/Data/Akteure/","LE-Akteure.ttl");
-  #$out.=createLoadCommand("http://leipziger-ecken.de/Data/Adressen/","LE-Adressen.ttl");
-  #$out.=createLoadCommand("http://nachhaltiges-leipzig.de/Data/Activities/","NL-Activities.ttl");
-  #$out.=createLoadCommand("http://nachhaltiges-leipzig.de/Data/Akteure/","NL-Akteure.ttl");
   $out.=createLoadCommand("http://nachhaltiges-leipzig.de/Data/MINT-Preistraeger-2019/","MINT-Preistraeger-2019.ttl");
   $out.=createLoadCommand("http://nachhaltiges-leipzig.de/Data/MINT-Preistraeger-2020/","MINT-Preistraeger-2020.ttl");
   return $out;
