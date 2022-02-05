@@ -44,7 +44,8 @@ function pageNavbar() {
             <li><a href="Gentri-14">Das Gentri-Projekt</a></li> 
             <!-- <li><a href="Event-Widget">Event-Widget</a></li> -->
             <li><a href="IHR-15">Interaktiver Haushalt</a></li> 
-            <li><a href="MINT-15">MINT-Orte in Leipzig</a></li> 
+            <li><a href="mint-15.php">MINT-Orte in Leipzig</a></li> 
+            <li><a href="nachgeradelt.php">Nachgeradelt</a></li> 
             <li><a href="zd-web">Zukunftsdiplom</a></li> 
             <!-- <li><a href="le-web">Leipziger Ecken</a></li> 
             <li><a href="bne-web">bne-sachsen.de</a></li> --> 
