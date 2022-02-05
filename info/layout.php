@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2021-02-09
+ * last update: 2022-02-05
  */
 
 function pageHeader() {
@@ -17,7 +17,7 @@ function pageHeader() {
 
     <title>Leipzig Data Demonstration Site</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     
   </head>
 <!-- end header -->
@@ -37,7 +37,8 @@ function pageNavbar() {
 	</button>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Startseite</a></li> 
+            <li><a href="../index.php">Startseite LD</a></li> 
+            <li><a href="index.php">Startseite Demonstrator</a></li> 
             <!-- <li><a href="mint-personen.php">MINT-Personen in Leipzig</a></li> -->
             <li><a href="mint-katalog.php">MINT-Katalog</a></li> 
             <li><a href="mint-md-katalog.php">MINT-MD-Katalog</a></li> 
@@ -52,7 +53,7 @@ function pageNavbar() {
 function generalContent() {
   return '
 <div class="container">
-  <h1 align="center">Demonstations-Site des Leipzig Data Projekts</h1>
+  <h1 align="center">Demonstrator des Leipzig Data Projekts</h1>
 </div>
 ';
 }
@@ -67,9 +68,9 @@ function pageFooter() {
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     
   </body>
 </html>';

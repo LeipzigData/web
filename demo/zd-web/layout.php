@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2020-07-16
+ * Last Update: 2022-02-05
  */
 
 function pageHeader() {
@@ -17,7 +17,7 @@ function pageHeader() {
 
     <title>Leipzig Data Projekt und Zukunftsakademie</title>
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
 
   </head>
 <!-- end header -->
@@ -76,9 +76,9 @@ function pageFooter() {
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
-    <script src="../js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
   </body>
 </html>';

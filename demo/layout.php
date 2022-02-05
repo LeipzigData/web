@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * last update: 2020-08-21
+ * last update: 2022-02-05
  */
 
 function pageHeader() {
@@ -12,12 +12,12 @@ function pageHeader() {
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Leipzig Data Showroom"/>
-    <meta name="author" content="Leipzig Data Project"/>
+    <meta name="description" content="Leipzig Data Projects"/>
+    <meta name="author" content="Leipzig Data Team"/>
 
-    <title>Leipzig Data Showroom</title>
+    <title>Leipzig Data Projects</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     
   </head>
 <!-- end header -->
@@ -37,7 +37,8 @@ function pageNavbar() {
 	</button>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Startseite</a></li> 
+            <li><a href="../index.php">Startseite LD</a></li> 
+            <li><a href="index.php">Startseite Präsentationen</a></li> 
             <li><a href="Energie-13">Energiekarte</a></li> 
             <!-- <li><a href="Jugendstadtplan">Jugendstadtplan</a></li> -->
             <li><a href="Gentri-14">Das Gentri-Projekt</a></li> 
@@ -58,7 +59,7 @@ function pageNavbar() {
 function generalContent() {
   return '
 <div class="container">
-  <h1 align="center">Showroom des Leipzig Data Projekts</h1>
+  <h1 align="center">Leipzig Data Projektpräsentationen</h1>
 </div>
 ';
 }
@@ -73,9 +74,9 @@ function pageFooter() {
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     
   </body>
 </html>';

@@ -9,7 +9,7 @@ include_once("layout.php");
 $content='      
 <div class="container">
 <div class="row">
-<div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
+<div  class="col-lg-2 col-sm-1"></div><div  class="col-lg-8 col-sm-10">
 
 <p>Hier wird demonstriert, welche Art von Webseiten sich aus den im Rahmen des
 Leipzig Data Projekts zusammengetragenen RDF-Quellen mit kleinen PHP-Skripten
@@ -23,7 +23,7 @@ href="https://github.com/LeipzigData/web"
 >https://github.com/LeipzigData/web</a> verfügbar. </p> 
 </div>
 
-<div class="col-lg-3 col-sm-1"> </div> </div>
+<div class="col-lg-2 col-sm-1"> </div> </div>
 
 ';
 echo showPage($content);
