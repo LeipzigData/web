@@ -37,7 +37,9 @@ function pageNavbar() {
 	</button>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Startseite</a></li> 
+            <li><a href="index.php">Startseite</a></li>
+            <li><a href="https://leipzigdata.github.io">Das Leipzig Data
+		Projekt Wiki</a></li>
             <li><a href="demo/index.php">LD Präsentationen</a></li> 
             <li><a href="info/index.php">LD Demonstrator</a></li> 
           </ul>
