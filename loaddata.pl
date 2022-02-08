@@ -1,7 +1,7 @@
 ##################################
 #
 # author: graebe
-# lastModified: 2020-07-05
+# lastModified: 2022-02-08
 
 # Changes:
 
@@ -16,7 +16,7 @@
 # purpose: load data into the local Virtuoso store
 # usage: perl loaddata.pl | isql-vt 1111 dba <YourSecretPassword>
 
-my $RDFData="/local/home/graebe/lokaleGitRepos/RDFData";
+my $RDFData="/local/home/leipzigdata/lokaleGitRepos/RDFData";
 #my $RDFData="/home/graebe/git/LD/RDFData";
 # print cleardata();
 print loaddata();
