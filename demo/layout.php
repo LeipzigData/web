@@ -68,12 +68,18 @@ function generalContent() {
 function pageFooter() {
   return '
 
-      <div class="container">
-    <div class="footer">
-        <p class="text-muted">&copy; <a href="http://leipzig-data.de">Leipzig Data Projekt</a> seit 2015 </p>
-        <p class="text-left">Leipzig Data gehört zum <a href="http://leipzig-data.de/impressum/">Netzprojekt</a> an der Universität Leipzig, dessen <a href="http://leipzig-data.de/impressum/">Datenschutzregeln</a> auch hier Anwendung finden. </p>
-      </div>
-    </div>
+<div class="container">
+  <div class="footer">
+    <p class="text-muted">&copy;
+      <a href="http://leipzig-data.de">Leipzig Data Projekt</a> seit 2012 </p>
+
+    <p class="text-left">Leipzig Data gehört
+      zum <a href="https://leipzigdata.github.io/Impressum">Netzprojekt</a> an
+      der Universität Leipzig, dessen
+      <a href="https://leipzigdata.github.io/Impressum">Datenschutzregeln</a>
+      auch hier Anwendung finden. </p>
+  </div>
+</div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
     <script src="../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
