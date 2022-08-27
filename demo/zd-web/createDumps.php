@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2020-07-19
+ * Last Update: 2022-08-27
  */
 
 include_once("Zukunftsdiplom.php");
@@ -20,7 +20,7 @@ function showTargetGroups() {
 }
 
 function showCategories() {
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/categories.json";
+    $src="http://daten.nachhaltiges-sachsen.de/api/v1/categories.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
@@ -71,7 +71,7 @@ function createZDDumps() {
 function getUsers($s) {
     $a=array();
     foreach($s as $id) {
-        $src="http://daten.nachhaltiges-leipzig.de/api/v1/users/$id.json";
+        $src="http://daten.nachhaltiges-sachsen.de/api/v1/users/$id.json";
         $string = file_get_contents($src);
         $res = json_decode($string, true);
         $a[$id]=$res;
@@ -131,7 +131,7 @@ function createAdditionalDumps() {
 
 function createDumps() {
     // Dump aller Aktivitaeten in NL
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities.json";
+    $src="http://daten.nachhaltiges-sachsen.de/api/v1/activities.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     jsonDump("Dumps/activities.json",$res);
@@ -145,7 +145,24 @@ function createDumps() {
     }
     jsonDump("Dumps/Bildungsangebote.json",$s);
     // -----------------------------------
-    // Dump der Bildungsangebote bei bne-sachsen.de 
+    // Dump der Akteure
+    $src="http://daten.nachhaltiges-sachsen.de/api/v1/users.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    jsonDump("Dumps/Veranstalter.json",$res);
+}
+
+function createDumpBNESachsen() {
+    // Dump der Bildungsangebote bei bne-sachsen.de
+    /* Weitere APIs:
+       https://bne-sachsen.de/wp-json/content/posts
+       https://bne-sachsen.de/wp-json/content/events
+       https://bne-sachsen.de/wp-json/content/materials
+
+       Zugriff auf einzelnen Datensatz über dessen guid, etwa
+       https://bne-sachsen.de/wp-json/content/materials?p=14245
+
+    */
     $src="https://bne-sachsen.de/wp-json/content/offers";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
@@ -174,4 +191,4 @@ function dumpCategories() {
 createDumps();
 //createZDDumps();
 //dumpCategories();
-createAdditionalDumps();
+//createAdditionalDumps();
