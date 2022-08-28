@@ -79,9 +79,23 @@ function checkUsers($file) {
     return '<table border="2">'.join("\n",$s).'</table>';
 }
 
+function checkLocations($file) {
+    $string = file_get_contents($file);
+    $res = json_decode($string, true);
+    $s=array(); 
+    foreach($res as $row) {
+        $id=$row["id"];
+        $name=$row["name"];
+        $adresse=$row["zip"].' '.$row["city"].', '.$row["street"];
+        $s[]="<tr><td>$id</td><td>$name</td><td>$adresse</td></tr>";
+    }
+    return '<table border="2">'.join("\n",$s).'</table>';
+}
+
 
 
 // ---- test ----
 // $s=getUsers("Dumps/activities.json"); analyze($s);
 // echo checkProjects("Dumps/activities.json");
-echo checkUsers("Dumps/users.json");
+//echo checkUsers("Dumps/users.json");
+echo checkLocations("Dumps/locations.json");

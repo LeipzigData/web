@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2022-02-05
+ * Last Update: 2022-08-28
  */
 
 function pageHeader() {
@@ -39,16 +39,14 @@ function pageNavbar() {
           <ul class="nav navbar-nav">
             <li><a href="index.php">Startseite</a></li>
             <li><a href="zd.php">Das Zukunftsdiplom</a></li>
-            <li><a href="angebote.php">Die ZD-Angebote</a></li>
-            <li><a href="akteure.php">Die ZD-Anbieter</a></li>
-            <!-- <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
+            <!-- <li><a href="angebote.php">Die ZD-Angebote</a></li>
+            <li><a href="akteure.php">Die ZD-Anbieter</a></li> -->
+            <li><a href="alleAkteure.php">Alle Akteure</a></li> 
+            <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
             <li><a href="service.php">Die Services</a></li>
-            <li><a href="ausfall.php">Ausfallende Veranstaltungen</a></li>
             <li><a href="events.php">Die Events</a></li>
             <li><a href="locations.php">Die Orte</a></li> 
-            <li><a href="gta.php">Die GTA-Angebote</a></li> 
-            <li><a href="alleAkteure.php">Alle Akteure</a></li> 
-            -->
+            <!-- <li><a href="gta.php">Die GTA-Angebote</a></li> -->
           </ul>
 	</div><!-- collapse end -->
       </div><!-- container end -->

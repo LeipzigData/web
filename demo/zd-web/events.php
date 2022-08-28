@@ -1,9 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Date: 2018-06-07
- * Last Update: 2020-03-21
- * --> gänzlich neu
+ * Last Update: 2022-08-28
  */
 
 include_once("layout.php");
@@ -44,7 +42,7 @@ $content='
 <div class="container">
 <h2 align="center">Die Events</h2>
 
-<table align="center" border="1">
+<table class="table table-bordered" align="center">
 <tr><th>Titel</th><th>Datum</th><th>Ort</th><th>URL</th><th>Goals</th></tr>
 '.getEvents().'
 </table>

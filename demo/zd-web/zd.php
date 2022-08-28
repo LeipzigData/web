@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2020-07-09
+ * Last Update: 2022-08-28
  */
 
 include_once("layout.php");
@@ -12,8 +12,8 @@ $content='
 <div  class="col-lg-3 col-sm-1"></div><div  class="col-lg-6 col-sm-10">
 <h3>Mach mit beim Zukunftsdiplom!</h3>
 
-<p><strong>2021 kann aktuell mit Verweis auf fehlende Förderung das
-Zukunftsdiplom nicht angeboten werden.</strong></p>
+<p><strong>2021 und 2022 konnte mit Verweis auf fehlende Förderung sowie die
+Pandemielage das Zukunftsdiplom nicht angeboten werden.</strong></p>
 
 <p><strong>Das Zukunftsdiplom 2020 lief vom 19. Juli bis 1. November 2020.
 Der Zeitzaum wurde mit Blick auf die Corona-Beschränkungen angepasst.</strong>

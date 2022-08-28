@@ -1,40 +1,38 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2019-07-22
+ * Last Update: 2021-08-28
  */
 
 include_once("layout.php");
 include_once("Zukunftsdiplom.php");
 
-function recordService($s,$v) {
-    $title=$v["name"];
-    $a=$s[$title];
-    if (empty($a)) { $a=array();}
-    $a["user"][$v["user_id"]]=1;
-    $a["id"][$v["id"]]=1;
-    $s[$title]=$a;
-    return $s;
+function getUser($uid) {
+    $string = file_get_contents("http://daten.nachhaltiges-leipzig.de/api/v1/users/$uid.json");
+    $res = json_decode($string, true);
+    return $res["name"];
 }
 
 function getServices() {
     $src="Dumps/activities.json";
+    $base="http://daten.nachhaltiges-leipzig.de/api/v1";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
     $s=array();
     foreach($res as $row) {
-        if ($row["type"]=="Service") {$s=recordService($s,$row);}
+        if ($row["type"]=="Service") {
+            $id=$row["id"];
+            $uid=$row["user_id"];
+            $name=$row["name"];
+            $user=getUser($uid);
+            $s[$name]='<tr><td>'.createLink("$base/activities/$id.json",$name).'</td><td>'
+                .createLink("$base/users/$uid.json",$user).'</td></tr>';
+        }
     }
     ksort($s);
-    $a=array();
-    foreach($s as $key => $value) {
-        $ids=join(", ",array_keys($s[$key]["id"]));
-        $users=join(", ",array_keys($s[$key]["user"]));
-        $a[]='<tr><td>'.$key.'</td><td>'.$ids.'</td><td>'.$users.'</td></tr>';
-    }
-    return '<table align="center" border="1">
-<tr><th>Name der Veranstaltung</th><th>Id der Veranstaltung</th><th>Id des Veranstalters</th></tr>'
-    .join("\n",$a).'</table>';
+    return '<table class="table table-sm table-bordered">
+<tr><th>Name der Veranstaltung</th><th>Veranstalter</th></tr>'
+    .join("\n",$s).'</table>';
 }
 
 $content='
@@ -42,7 +40,10 @@ $content='
 <h2 align="center">Die Services</h2>
 
 <p>Auf dieser Seite werden alle Einträge gelistet, die in die Kategorie
-"Services" fallen. </p>
+"Services" fallen. Die Links verweisen jeweils auf die Detaileinträge in der
+NDS-Datenbank.  Der Seitenaufbau dauert etwas länger, da die User über
+einzelne JSON-Abrufe gefunden werden.  Das kann man durch eine Verbesserung
+der verwendeten Datenstrukturen noch optimieren. </p>
 
 '.getServices().'
 </div>
