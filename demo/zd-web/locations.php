@@ -40,7 +40,7 @@ $content='
 <div class="container">
 <h2 align="center">Die Orte</h2>
 
-<table align="center" border="1">
+<table class="table table-bordered" align="center">
 <tr><th>Name</th><th>Adresse</th><th>PLZ</th><th>Ort</th><th>Straße</th><th>Nr.</th></tr>
 '.getLocations().'
 </table>

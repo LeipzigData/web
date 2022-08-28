@@ -14,7 +14,7 @@ function getEvents() {
     $s;
     foreach($res as $row) {
         if ($row["type"]=="Event") {
-            $s[$row["start_at"]]=theEvent($row);
+            $s[$row["start_at"].$row["id"]]=theEvent($row);
         }
     }
     ksort($s);
@@ -31,10 +31,10 @@ function theEvent($v) {
     $von=$v["start_at"];
     $goals=join(",", $v["goals"]);
     $out='
-<tr><td><a href="'.$src.'">'.$title.'</a></td><td>'
-    .getDatum($von).'</td><td>'.$ort.'</td><td>'
-         .createLink($url,$url).'</td><td>'
-         .$goals.'</td></tr>';
+<tr><td>'.createLink($src,$title).'</a></td><td>'
+    .$von.'</td><td>'.$ort.'</td><td>'
+    .createLink($url,$url).'</td><td>'
+    .$goals.'</td></tr>';
     return $out;
 }
 
@@ -42,8 +42,10 @@ $content='
 <div class="container">
 <h2 align="center">Die Events</h2>
 
+<p>Bei einer Reihe von Events ist nicht angegeben, wann diese stattfinden.  
+
 <table class="table table-bordered" align="center">
-<tr><th>Titel</th><th>Datum</th><th>Ort</th><th>URL</th><th>Goals</th></tr>
+<tr><th>Titel</th><th>Wann?</th><th>Ort</th><th>URL</th><th>Goals</th></tr>
 '.getEvents().'
 </table>
 </div>

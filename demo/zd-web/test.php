@@ -92,10 +92,28 @@ function checkLocations($file) {
     return '<table border="2">'.join("\n",$s).'</table>';
 }
 
+function checkEvents($file) {
+    $string = file_get_contents($file);
+    $res = json_decode($string, true);
+    $s=array(); 
+    foreach($res as $row) {
+        if ($row["type"]=="Event") {
+            $id=$row["id"];
+            $url="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";           
+            $name=$row["name"];
+            $beginn=$row["start_at"];
+            $s[]='<tr><td>'.createLink($url,$name).'</td><td>'
+                .$beginn.'</td></tr>';
+        }
+    }
+    return '<table class="table table-bordered">'.join("\n",$s).'</table>';
+}
+
 
 
 // ---- test ----
 // $s=getUsers("Dumps/activities.json"); analyze($s);
 // echo checkProjects("Dumps/activities.json");
-//echo checkUsers("Dumps/users.json");
-echo checkLocations("Dumps/locations.json");
+// echo checkUsers("Dumps/users.json");
+// echo checkLocations("Dumps/locations.json");
+echo checkEvents("Dumps/activities.json");
