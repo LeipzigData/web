@@ -1,7 +1,7 @@
 <?php
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2022-08-27
+ * Last Update: 2022-08-28
  */
 
 include_once("Zukunftsdiplom.php");
@@ -149,7 +149,13 @@ function createDumps() {
     $src="http://daten.nachhaltiges-sachsen.de/api/v1/users.json";
     $string = file_get_contents($src);
     $res = json_decode($string, true);
-    jsonDump("Dumps/Veranstalter.json",$res);
+    jsonDump("Dumps/users.json",$res);
+    // -----------------------------------
+    // Dump der Locations
+    $src="http://daten.nachhaltiges-sachsen.de/api/v1/locations.json";
+    $string = file_get_contents($src);
+    $res = json_decode($string, true);
+    jsonDump("Dumps/locations.json",$res);
 }
 
 function createDumpBNESachsen() {

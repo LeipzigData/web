@@ -1,7 +1,7 @@
 <?php 
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2021-07-15
+ * Last Update: 2022-08-28
  */
 
 include_once("Zukunftsdiplom.php");
@@ -72,16 +72,16 @@ function checkUsers($file) {
     foreach($res as $row) {
         $id=$row["id"];
         $name=$row["name"];
-        $district=$row["district"];
-        //$s[]="$id\n$name\n$district\n=========";
-        $s[]="$district";
+        $geo="fehlt";
+        if (isset($row["latlng"])) {$geo=join(", ",$row["latlng"]);}
+        $s[]="<tr><td>$id</td><td>$name</td><td>$geo</td></tr>";
     }
-    return join("\n",$s);
+    return '<table border="2">'.join("\n",$s).'</table>';
 }
 
 
 
 // ---- test ----
 // $s=getUsers("Dumps/activities.json"); analyze($s);
-echo checkProjects("Dumps/activities.json");
-// echo checkUsers("https://daten.nachhaltiges-leipzig.de/api/v1/users.json");
+// echo checkProjects("Dumps/activities.json");
+echo checkUsers("Dumps/users.json");
