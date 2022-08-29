@@ -1,7 +1,7 @@
 <?php 
 /**
  * User: Hans-Gert Gräbe
- * Last Update: 2022-08-28
+ * Last Update: 2022-08-29
  */
 
 include_once("Zukunftsdiplom.php");
@@ -28,26 +28,6 @@ function analyze($s) {
     }
     print_r($a);
 }   
-
-function displayMyEvent($v) {
-    // ein Event
-    $id=$v["id"];
-    $src="http://daten.nachhaltiges-leipzig.de/api/v1/activities/$id.json";
-    $title=$v["name"];
-    $ort=$v["full_address"];
-    $region=$v["region"]["name"];
-    $out='
-<h3> <a href="'.$src.'">'.$title.'</a></h3>
-<div class="row"> <ul>';
-    if (!empty($ort)) {
-        $out.='<li> <strong>Ort:</strong> '.$ort.' </li>';
-    }
-    if (!empty($region)) {
-        $out.='<li> <strong>Region:</strong> '.$region.' </li>';
-    }
-    $out.='</ul></div>';
-    return $out;
-}
 
 function checkProjects($file) {
     $string = file_get_contents($file);
@@ -76,7 +56,7 @@ function checkUsers($file) {
         if (isset($row["latlng"])) {$geo=join(", ",$row["latlng"]);}
         $s[]="<tr><td>$id</td><td>$name</td><td>$geo</td></tr>";
     }
-    return '<table border="2">'.join("\n",$s).'</table>';
+    return '<table class="table table-bordered">'.join("\n",$s).'</table>';
 }
 
 function checkLocations($file) {
@@ -89,7 +69,7 @@ function checkLocations($file) {
         $adresse=$row["zip"].' '.$row["city"].', '.$row["street"];
         $s[]="<tr><td>$id</td><td>$name</td><td>$adresse</td></tr>";
     }
-    return '<table border="2">'.join("\n",$s).'</table>';
+    return '<table  class="table table-bordered">'.join("\n",$s).'</table>';
 }
 
 function checkEvents($file) {
@@ -109,6 +89,16 @@ function checkEvents($file) {
     return '<table class="table table-bordered">'.join("\n",$s).'</table>';
 }
 
+function countEntries($file) {
+    $string = file_get_contents($file);
+    $res = json_decode($string, true);
+    $s=array(); 
+    foreach($res as $row) {
+        $s[$row['published']]++;
+    }
+    print_r($s); 
+}
+
 
 
 // ---- test ----
@@ -116,4 +106,5 @@ function checkEvents($file) {
 // echo checkProjects("Dumps/activities.json");
 // echo checkUsers("Dumps/users.json");
 // echo checkLocations("Dumps/locations.json");
-echo checkEvents("Dumps/activities.json");
+// echo checkEvents("Dumps/activities.json");
+echo countEntries("Dumps/activities.json");
