@@ -17,7 +17,7 @@ function pageHeader() {
 
     <title>Forum Nachhaltiges Leipzig - bne-sachsen.de</title>
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
 
   </head>
 <!-- end header -->
@@ -37,12 +37,12 @@ function pageNavbar() {
 	</button>
 	<div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Startseite</a></li>
+            <!-- <li><a href="index.php">Startseite</a></li>
             <li><a href="angebote.php">Die Angebote</a></li>
             <li><a href="events.php">Die Events</a></li>
-            <li><a href="materialien.php">Die Materialien</a></li>
+            <li><a href="materialien.php">Die Materialien</a></li> -->
             <li><a href="posts.php">Die Mitteilungen</a></li>
-            <li><a href="akteure.php">Die Anbieter</a></li>
+            <!-- <li><a href="akteure.php">Die Anbieter</a></li> -->
           </ul>
 	</div><!-- collapse end -->
       </div><!-- container end -->
@@ -68,9 +68,9 @@ function pageFooter() {
       </div>
     </div>
     <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
-    <script src="../js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
   </body>
 </html>';

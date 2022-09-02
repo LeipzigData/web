@@ -42,7 +42,6 @@ function pageNavbar() {
             <!-- <li><a href="angebote.php">Die ZD-Angebote</a></li>
             <li><a href="akteure.php">Die ZD-Anbieter</a></li> -->
             <li><a href="alleAkteure.php">Alle Akteure</a></li> 
-            <li><a href="bildungsangebote.php">Bildungsangebote</a></li>
             <li><a href="service.php">Die Services</a></li>
             <li><a href="events.php">Die Events</a></li>
             <li><a href="locations.php">Die Orte</a></li> 

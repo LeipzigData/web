@@ -94,7 +94,10 @@ function countEntries($file) {
     $res = json_decode($string, true);
     $s=array(); 
     foreach($res as $row) {
-        $s[$row['published']]++;
+        $s[$row['organization_type']]++;
+        if (!isset($row['organization_type'])) {
+            echo $row['id'].'/'.$row['name']."\n";
+        }
     }
     print_r($s); 
 }
@@ -107,4 +110,4 @@ function countEntries($file) {
 // echo checkUsers("Dumps/users.json");
 // echo checkLocations("Dumps/locations.json");
 // echo checkEvents("Dumps/activities.json");
-echo countEntries("Dumps/activities.json");
+echo countEntries("Dumps/users.json");
